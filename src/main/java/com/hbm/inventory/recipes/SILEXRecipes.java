@@ -102,8 +102,8 @@ public class SILEXRecipes {
 		itemTranslation.put(new ComparableStack(ModItems.powder_lapis), new ComparableStack(Items.dye, 1, 4));
 		recipes.put(new ComparableStack(Items.dye, 1, 4), new SILEXRecipe(100, 100 ,1)
 				.addOut(new ItemStack(ModItems.sulfur), 4)
-				.addOut(new ItemStack(ModItems.powder_aluminium), 2)
-				.addOut(new ItemStack(ModItems.powder_cobalt), 4)
+				.addOut(new ItemStack(ModItems.powder_aluminium), 3)
+				.addOut(new ItemStack(ModItems.powder_cobalt), 3)
 				);
 
 		recipes.put(new ComparableStack(ModItems.fluid_icon, 1, Fluids.DEATH.getID()), new SILEXRecipe(1000, 1000, 5)
