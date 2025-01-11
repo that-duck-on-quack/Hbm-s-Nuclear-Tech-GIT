@@ -35,7 +35,7 @@ public class SILEXRecipes {
 		dictTranslation.put(U.dust(), U.ingot());
 		recipes.put(U.ingot(), new SILEXRecipe(900, 100, EnumWavelengths.VISIBLE)
 				.addOut(new ItemStack(ModItems.nugget_u235), 1)
-				.addOut(new ItemStack(ModItems.nugget_u238), 11)
+				.addOut(new ItemStack(ModItems.nugget_u238), 99)
 				);
 
 		recipes.put(new ComparableStack(ModItems.ingot_pu_mix), new SILEXRecipe(900, 100, 2)
