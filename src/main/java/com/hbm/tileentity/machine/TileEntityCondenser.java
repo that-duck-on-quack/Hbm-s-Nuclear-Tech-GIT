@@ -24,20 +24,22 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 
 	public int age = 0;
 	public FluidTank[] tanks;
-	
+
 	public int waterTimer = 0;
 	protected int throughput;
 
 	public boolean vacuumOptimised = false;
-	
+
 	//Configurable values
 	public static int inputTankSize = 100;
 	public static int outputTankSize = 100;
+	public static int evTankSize = 50;
 
 	public TileEntityCondenser() {
-		tanks = new FluidTank[2];
+		tanks = new FluidTank[3];
 		tanks[0] = new FluidTank(Fluids.SPENTSTEAM, inputTankSize);
-		tanks[1] = new FluidTank(Fluids.WATER, outputTankSize);
+		tanks[1] = new FluidTank(Fluids.GASSYWATER, outputTankSize);
+		tanks[2] = new FluidTank(Fluids.WATER, evTankSize);
 	}
 
 	@Override
@@ -49,41 +51,43 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 	public void readIfPresent(JsonObject obj) {
 		inputTankSize = IConfigurableMachine.grab(obj, "I:inputTankSize", inputTankSize);
 		outputTankSize = IConfigurableMachine.grab(obj, "I:outputTankSize", outputTankSize);
+		evTankSize = IConfigurableMachine.grab(obj, "I:evTankSize", evTankSize);
 	}
 
 	@Override
 	public void writeConfig(JsonWriter writer) throws IOException {
 		writer.name("I:inputTankSize").value(inputTankSize);
 		writer.name("I:outputTankSize").value(outputTankSize);
+		writer.name("I:evTankSize").value(evTankSize);
 	}
 
 
-	
+
 	@Override
 	public void updateEntity() {
-		
+
 		if(!worldObj.isRemote) {
-			
+
 			age++;
-			if(age >= 2) {
-				age = 0;
-			}
-			
+			if(age >= 2) {age = 0;}
+
 			NBTTagCompound data = new NBTTagCompound();
-			this.tanks[0].writeToNBT(data, "0");
-			
+			this.tanks[0].writeToNBT(data, "tank" + 0);
+			this.tanks[2].writeToNBT(data, "tank" + 2);
+
 			if(this.waterTimer > 0)
 				this.waterTimer--;
 
 			int convert = Math.min(tanks[0].getFill(), tanks[1].getMaxFill() - tanks[1].getFill());
 			this.throughput = convert;
-			
-			if(extraCondition(convert)) {
+
+			if(tanks[2].getFill() > convert/2 && extraCondition(convert)) {
 				tanks[0].setFill(tanks[0].getFill() - convert);
-				
+				tanks[2].setFill(tanks[2].getFill() - convert/2);
+
 				if(convert > 0)
 					this.waterTimer = 20;
-				
+
 				int light = this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, this.xCoord, this.yCoord, this.zCoord);
 
 				boolean shouldEvaporate = TomSaveData.forWorld(worldObj).fire > 1e-5 && light > 7;
@@ -91,50 +95,54 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 					CBT_Atmosphere atmosphere = CelestialBody.getTrait(worldObj, CBT_Atmosphere.class);
 					if(CelestialBody.inOrbit(worldObj) || atmosphere == null || atmosphere.getPressure() < 0.01) shouldEvaporate = true;
 				}
-				
+
 				if(shouldEvaporate) { // Make both steam and water evaporate during firestorms and in vacuums
 					tanks[1].setFill(tanks[1].getFill() - convert);
 				} else {
 					tanks[1].setFill(tanks[1].getFill() + convert);
 				}
-				
+
 				postConvert(convert);
 			}
-			
-			this.tanks[1].writeToNBT(data, "1");
-			
+
+			this.tanks[1].writeToNBT(data, "tank" + 1);
+
 			this.subscribeToAllAround(tanks[0].getTankType(), this);
+			this.subscribeToAllAround(tanks[2].getTankType(), this);
 			this.sendFluidToAll(tanks[1], this);
-			
+
 			data.setByte("timer", (byte) this.waterTimer);
 			packExtra(data);
 			INBTPacketReceiver.networkPack(this, data, 150);
 		}
 	}
-	
+
 	public void packExtra(NBTTagCompound data) { }
 	public boolean extraCondition(int convert) { return true; }
 	public void postConvert(int convert) { }
 
 	@Override
 	public void networkUnpack(NBTTagCompound nbt) {
-		this.tanks[0].readFromNBT(nbt, "0");
-		this.tanks[1].readFromNBT(nbt, "1");
+		this.tanks[0].readFromNBT(nbt, "tank" + 0);
+		this.tanks[1].readFromNBT(nbt, "tank" + 1);
+		this.tanks[2].readFromNBT(nbt, "tank" + 2);
 		this.waterTimer = nbt.getByte("timer");
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		tanks[0].readFromNBT(nbt, "water");
-		tanks[1].readFromNBT(nbt, "steam");
+		tanks[0].readFromNBT(nbt, "tank" + 0);
+		tanks[1].readFromNBT(nbt, "tank" + 1);
+		tanks[2].readFromNBT(nbt, "tank" + 2);
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		tanks[0].writeToNBT(nbt, "water");
-		tanks[1].writeToNBT(nbt, "steam");
+		tanks[0].writeToNBT(nbt, "tank" + 0);
+		tanks[1].writeToNBT(nbt, "tank" + 1);
+		tanks[2].writeToNBT(nbt, "tank" + 2);
 	}
 
 	@Override
@@ -143,8 +151,8 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 	}
 
 	@Override
-	public FluidTank[] getReceivingTanks() {
-		return new FluidTank[] {tanks [0]};
+	public FluidTank[] getReceivingTanks()  {
+		return new FluidTank[] {tanks[0], tanks[2]};
 	}
 
 	@Override

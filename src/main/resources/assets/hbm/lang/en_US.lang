@@ -1492,6 +1492,7 @@ hbmfluid.neon=Neon Gas
 hbmfluid.amat=Antimatter
 hbmfluid.ammonia=Ammonia
 hbmfluid.air=Compressed Air
+hbmfluid.gassywater=Gassy Water
 hbmfluid.aromatics=Aromatic Hydrocarbons
 hbmfluid.aschrab=Antischrabidium
 hbmfluid.balefire=BF Rocket Fuel
