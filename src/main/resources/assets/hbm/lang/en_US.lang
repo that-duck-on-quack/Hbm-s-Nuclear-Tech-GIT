@@ -1682,6 +1682,9 @@ hbmfluid.smilk=Strawberry Milk
 hbmfluid.milk=Milk
 hbmfluid.scutterblood=Scutterblood
 
+//HBM hard fluids
+hbmfluid.RESIN=Resin
+
 hbmpseudofluid.none=Empty
 hbmpseudofluid.heuf6=Highly Enriched UF6
 hbmpseudofluid.meuf6=Medium Enriched UF6
@@ -1693,7 +1696,6 @@ hbmpseudofluid.mud=Poisonous Sludge Gas
 hbmpseudofluid.minsole=Heavy Mineral Slurry
 hbmpseudofluid.minsolee=Seperated Mineral Slurry
 
-hbmpseudofluid.RESIN=resin
 
 hbmmat.actinium227=Actinium-227
 hbmmat.advancedalloy=Advanced Alloy
