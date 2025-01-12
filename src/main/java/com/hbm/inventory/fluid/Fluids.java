@@ -516,7 +516,7 @@ public class Fluids {
 		GASEOUS_PLUTONIUM_BROMIDE =		new FluidType("GASEOUS_PLUTONIUM_BROMIDE",		0x4C4C4C, 0, 0, 0, EnumSymbol.NONE).setTemp(2600).addTraits(GASEOUS, NOCON, NOID, new FT_Rocket(2000, 700_000));
 		GASEOUS_SCHRABIDIUM_BROMIDE =	new FluidType("GASEOUS_SCHRABIDIUM_BROMIDE",		0x006B6B, 0, 0, 0, EnumSymbol.NONE).setTemp(3000).addTraits(GASEOUS, NOCON, NOID, new FT_Rocket(3000, 700_000));
 		GASEOUS_THORIUM_BROMIDE =		new FluidType("GASEOUS_THORIUM_BROMIDE",		0x7A5542, 0, 0, 0, EnumSymbol.NONE).setTemp(2300).addTraits(GASEOUS, NOCON, NOID, new FT_Rocket(1300, 700_000));
-		RESIN =					 new FLuidType("RESIN",		0xFF5733, 0,1,0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE)
+		RESIN =					 new FLuidType("RESIN",		0xFF5733, 0,1,0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
 
 		// ^ ^ ^ ^ ^ ^ ^ ^
 		//ADD NEW FLUIDS HERE
