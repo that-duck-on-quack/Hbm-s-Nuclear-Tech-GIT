@@ -524,6 +524,11 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.inputItems(
 				new ComparableStack(Blocks.log, 1, 3))
 			.outputFluids(new FluidStack(Fluids.RESIN, 100)));
+
+		recipes.add(new ChemRecipe(1004,"RESINBALL" 60)
+				.inputFluids(
+					new FluidStack(Fluid.RESIN,500))
+				.outputItems(new ItemStack(ModItems.ball_resin,1)));
 	}
 
 	public static void registerOtherOil() {
