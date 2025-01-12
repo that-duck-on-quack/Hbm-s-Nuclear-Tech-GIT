@@ -1688,6 +1688,7 @@ hbmfluid.resin=Resin
 hbmfluid.dirty_water=Dirty Water
 //HBM hard chem recipes
 chem.RESINPRODUCTION=Resin Production
+chem.RESINBALL=Resin Solidification
 
 hbmpseudofluid.none=Empty
 hbmpseudofluid.heuf6=Highly Enriched UF6

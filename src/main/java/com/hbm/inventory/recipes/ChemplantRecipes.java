@@ -530,7 +530,7 @@ public class ChemplantRecipes extends SerializableRecipe {
 
 
 
-		
+
 		recipes.add(new ChemRecipe(1101,"RESINBALL", 60)
 				.inputFluids(new FluidStack(Fluids.RESIN,500))
 				.inputItems(new ComparableStack(ModItems.sulfur, 2))
