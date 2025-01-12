@@ -38,6 +38,7 @@ public class Fluids {
 
 	public static FluidType NONE;
 	public static FluidType WATER;
+	public static FluidType GASSYWATER;
 	public static FluidType STEAM;
 	public static FluidType HOTSTEAM;
 	public static FluidType SUPERHOTSTEAM;
@@ -518,6 +519,8 @@ public class Fluids {
 		GASEOUS_THORIUM_BROMIDE =		new FluidType("GASEOUS_THORIUM_BROMIDE",		0x7A5542, 0, 0, 0, EnumSymbol.NONE).setTemp(2300).addTraits(GASEOUS, NOCON, NOID, new FT_Rocket(1300, 700_000));
 		RESIN =					 new FluidType("RESIN",		0xFFBF00, 0,1,0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
 
+		GASEOUS_THORIUM_BROMIDE =	new FluidType("GASEOUS_THORIUM_BROMIDE",		0x7A5542, 0, 0, 0, EnumSymbol.NONE).setTemp(2300).addTraits(GASEOUS, NOCON, NOID, new FT_Rocket(1300, 700_000));
+		GASSYWATER = new FluidType("GASSYWATER", 0x305082, 0, 0, 0, EnumSymbol.NONE).setTemp(85).addTraits(LIQUID, UNSIPHONABLE);
 		// ^ ^ ^ ^ ^ ^ ^ ^
 		//ADD NEW FLUIDS HERE
 
@@ -528,7 +531,7 @@ public class Fluids {
 
 		//AND DON'T FORGET THE META DOWN HERE
 		// V V V V V V V V
-
+		metaOrder.add(GASSYWATER);
 		//null
 		metaOrder.add(NONE);
 		//vanilla
@@ -752,6 +755,7 @@ public class Fluids {
 
 		//HBM_hard fluids
 		metaOrder.add(RESIN);
+
 
 		//ANY INTERNAL RENAMING MUST BE REFLECTED HERE - DON'T FORGET TO CHANGE: LANG FILES + TYPE'S STRING ID + NAME OF TANK/GUI TEXTURE FILES!
 		// V
