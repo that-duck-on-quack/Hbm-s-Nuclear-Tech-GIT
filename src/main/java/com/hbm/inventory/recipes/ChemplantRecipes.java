@@ -521,7 +521,7 @@ public class ChemplantRecipes extends SerializableRecipe {
 				.outputFluids(new FluidStack(Fluids.CHLOROMETHANE, 1000)));
 
 		recipes.add(new ChemRecipe(1003, "RESINPRODUCTION", 200)
-			.inputs(
+			.inputItems(
 				new ComparableStack(Blocks.log, 1, 3))
 			.outputFluids(new FluidStack(Fluids.RESIN, 100)));
 	}
