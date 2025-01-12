@@ -29,6 +29,7 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 	protected int throughput;
 
 	public boolean vacuumOptimised = false;
+	public boolean heatExchanging = true;
 
 	//Configurable values
 	public static int inputTankSize = 100;
@@ -61,8 +62,6 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 		writer.name("I:evTankSize").value(evTankSize);
 	}
 
-
-
 	@Override
 	public void updateEntity() {
 
@@ -73,7 +72,7 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 
 			NBTTagCompound data = new NBTTagCompound();
 			this.tanks[0].writeToNBT(data, "tank" + 0);
-			this.tanks[2].writeToNBT(data, "tank" + 2);
+
 
 			if(this.waterTimer > 0)
 				this.waterTimer--;
@@ -81,9 +80,8 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 			int convert = Math.min(tanks[0].getFill(), tanks[1].getMaxFill() - tanks[1].getFill());
 			this.throughput = convert;
 
-			if(tanks[2].getFill() > convert/2 && extraCondition(convert)) {
+			if(extraCondition(convert)) {
 				tanks[0].setFill(tanks[0].getFill() - convert);
-				tanks[2].setFill(tanks[2].getFill() - convert/2);
 
 				if(convert > 0)
 					this.waterTimer = 20;
@@ -98,17 +96,25 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 
 				if(shouldEvaporate) { // Make both steam and water evaporate during firestorms and in vacuums
 					tanks[1].setFill(tanks[1].getFill() - convert);
-				} else {
+				} else if(heatExchanging && tanks[2].getFill() > convert/2){
+					tanks[1].setFill(tanks[1].getFill() + convert);
+					tanks[2].setFill(tanks[2].getFill() - convert/2);
+				}
+				else if(!heatExchanging)
+				{
 					tanks[1].setFill(tanks[1].getFill() + convert);
 				}
+
 
 				postConvert(convert);
 			}
 
 			this.tanks[1].writeToNBT(data, "tank" + 1);
-
+			if(heatExchanging){
+				this.subscribeToAllAround(tanks[2].getTankType(), this);
+				this.tanks[2].writeToNBT(data, "tank" + 2);
+			}
 			this.subscribeToAllAround(tanks[0].getTankType(), this);
-			this.subscribeToAllAround(tanks[2].getTankType(), this);
 			this.sendFluidToAll(tanks[1], this);
 
 			data.setByte("timer", (byte) this.waterTimer);
@@ -125,24 +131,30 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 	public void networkUnpack(NBTTagCompound nbt) {
 		this.tanks[0].readFromNBT(nbt, "tank" + 0);
 		this.tanks[1].readFromNBT(nbt, "tank" + 1);
-		this.tanks[2].readFromNBT(nbt, "tank" + 2);
+		if(heatExchanging){
+			this.tanks[2].readFromNBT(nbt, "tank" + 2);
+		}
 		this.waterTimer = nbt.getByte("timer");
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		tanks[0].readFromNBT(nbt, "tank" + 0);
-		tanks[1].readFromNBT(nbt, "tank" + 1);
-		tanks[2].readFromNBT(nbt, "tank" + 2);
+		tanks[0].readFromNBT(nbt, "0");
+		tanks[1].readFromNBT(nbt, "1");
+		if(heatExchanging){
+			tanks[2].readFromNBT(nbt, "2");
+		}
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		tanks[0].writeToNBT(nbt, "tank" + 0);
-		tanks[1].writeToNBT(nbt, "tank" + 1);
-		tanks[2].writeToNBT(nbt, "tank" + 2);
+		tanks[0].writeToNBT(nbt, "0");
+		tanks[1].writeToNBT(nbt, "1");
+		if(heatExchanging){
+			tanks[2].writeToNBT(nbt, "2");
+		}
 	}
 
 	@Override
@@ -152,7 +164,12 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 
 	@Override
 	public FluidTank[] getReceivingTanks()  {
-		return new FluidTank[] {tanks[0], tanks[2]};
+		if(heatExchanging){
+			return new FluidTank[] {tanks[0], tanks[2]};
+		}
+		else{
+			return new FluidTank[] {tanks[0]};
+		}
 	}
 
 	@Override
