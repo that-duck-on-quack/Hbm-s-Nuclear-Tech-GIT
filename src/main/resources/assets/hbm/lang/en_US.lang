@@ -1684,6 +1684,8 @@ hbmfluid.scutterblood=Scutterblood
 
 //HBM hard fluids
 hbmfluid.resin=Resin
+//HBM hard chem recipes
+chem.RESINPRODUCTION=Resin Production
 
 hbmpseudofluid.none=Empty
 hbmpseudofluid.heuf6=Highly Enriched UF6
