@@ -1683,7 +1683,7 @@ hbmfluid.milk=Milk
 hbmfluid.scutterblood=Scutterblood
 
 //HBM hard fluids
-hbmfluid.RESIN=Resin
+hbmfluid.resin=Resin
 
 hbmpseudofluid.none=Empty
 hbmpseudofluid.heuf6=Highly Enriched UF6
