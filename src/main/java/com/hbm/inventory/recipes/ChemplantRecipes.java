@@ -520,10 +520,14 @@ public class ChemplantRecipes extends SerializableRecipe {
 				.inputFluids(new FluidStack(Fluids.GAS, 750), new FluidStack(Fluids.CHLORINE, 250))
 				.outputFluids(new FluidStack(Fluids.CHLOROMETHANE, 1000)));
 
-		recipes.add(new ChemRecipe(1003, "RESINPRODUCTION", 200)
+		recipes.add(new ChemRecipe(1100, "RESINPRODUCTION", 200)
 			.inputItems(
 				new ComparableStack(Blocks.log, 1, 3))
 			.outputFluids(new FluidStack(Fluids.RESIN, 100)));
+
+		recipes.add(new ChemRecipe(1101,"RESINBALL", 60)
+				.inputFluids(new FluidStack(Fluids.RESIN,500))
+				.outputItems(new ItemStack(ModItems.ball_resin,1)));
 	}
 
 	public static void registerOtherOil() {
