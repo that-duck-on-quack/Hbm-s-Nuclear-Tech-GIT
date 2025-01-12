@@ -1684,6 +1684,7 @@ hbmfluid.scutterblood=Scutterblood
 
 //HBM hard fluids
 hbmfluid.resin=Resin
+hbmfluid.dirty_water=Dirty Water
 //HBM hard chem recipes
 chem.RESINPRODUCTION=Resin Production
 
