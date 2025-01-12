@@ -38,6 +38,7 @@ public class Fluids {
 
 	public static FluidType NONE;
 	public static FluidType WATER;
+	public static FluidType AERATEDWATER;
 	public static FluidType STEAM;
 	public static FluidType HOTSTEAM;
 	public static FluidType SUPERHOTSTEAM;
@@ -517,7 +518,8 @@ public class Fluids {
 		GASEOUS_PLUTONIUM_BROMIDE =		new FluidType("GASEOUS_PLUTONIUM_BROMIDE",		0x4C4C4C, 0, 0, 0, EnumSymbol.NONE).setTemp(2600).addTraits(GASEOUS, NOCON, NOID, new FT_Rocket(2000, 700_000));
 		GASEOUS_SCHRABIDIUM_BROMIDE =	new FluidType("GASEOUS_SCHRABIDIUM_BROMIDE",		0x006B6B, 0, 0, 0, EnumSymbol.NONE).setTemp(3000).addTraits(GASEOUS, NOCON, NOID, new FT_Rocket(3000, 700_000));
 		GASEOUS_THORIUM_BROMIDE =		new FluidType("GASEOUS_THORIUM_BROMIDE",		0x7A5542, 0, 0, 0, EnumSymbol.NONE).setTemp(2300).addTraits(GASEOUS, NOCON, NOID, new FT_Rocket(1300, 700_000));
-		RESIN =					new FluidType("RESIN",		0xFFBF00, 0,1,0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
+		RESIN =					 new FluidType("RESIN",		0xFFBF00, 0,1,0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
+		AERATEDWATER = new FluidType("AERATEDWATER", 0x305082, 0, 0, 0, EnumSymbol.NONE).setTemp(85).addTraits(LIQUID, UNSIPHONABLE);
 		DIRTY_WATER =			new FluidType("DIRTY_WATER", 0x3333FF, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
 		// ^ ^ ^ ^ ^ ^ ^ ^
 		//ADD NEW FLUIDS HERE
@@ -753,6 +755,7 @@ public class Fluids {
 
 		//HBM_hard fluids
 		metaOrder.add(RESIN);
+		metaOrder.add(AERATEDWATER);
 		metaOrder.add(DIRTY_WATER);
 
 		//ANY INTERNAL RENAMING MUST BE REFLECTED HERE - DON'T FORGET TO CHANGE: LANG FILES + TYPE'S STRING ID + NAME OF TANK/GUI TEXTURE FILES!
