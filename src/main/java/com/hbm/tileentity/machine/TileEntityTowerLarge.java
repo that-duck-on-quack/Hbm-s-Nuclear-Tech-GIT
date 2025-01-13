@@ -57,8 +57,8 @@ public class TileEntityTowerLarge extends TileEntityCondenser {
 		super.updateEntity();
 
 		if(worldObj.isRemote) {
-
-			if(GeneralConfig.enableSteamParticles && (this.waterTimer > 0 && this.worldObj.getTotalWorldTime() % 4 == 0)) {
+			int convert = Math.min(tanks[0].getFill(), tanks[1].getMaxFill() - tanks[1].getFill());
+			if(GeneralConfig.enableSteamParticles && (this.waterTimer > 0 && this.worldObj.getTotalWorldTime() % 4 == 0 && this.tanks[2].getFill() > convert/2)) {
 				NBTTagCompound data = new NBTTagCompound();
 				data.setString("type", "tower");
 				data.setFloat("lift", 0.5F);
