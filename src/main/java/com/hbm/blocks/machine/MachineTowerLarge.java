@@ -27,13 +27,13 @@ public class MachineTowerLarge extends BlockDummyable implements ILookOverlay {
 
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int meta) {
-		
+
 		if(meta >= 12)
 			return new TileEntityTowerLarge();
-		
+
 		if(meta >= 8)
 			return new TileEntityProxyCombo(false, false, true);
-		
+
 		return null;
 	}
 
@@ -50,10 +50,10 @@ public class MachineTowerLarge extends BlockDummyable implements ILookOverlay {
 	@Override
 	public void fillSpace(World world, int x, int y, int z, ForgeDirection dir, int o) {
 		super.fillSpace(world, x, y, z, dir, o);
-		
+
 		x = x + dir.offsetX * o;
 		z = z + dir.offsetZ * o;
-		
+
 		for(int i = 2; i <= 6; i++) {
 			ForgeDirection dr2 = ForgeDirection.getOrientation(i);
 			ForgeDirection rot = dr2.getRotation(ForgeDirection.UP);
@@ -87,7 +87,7 @@ public class MachineTowerLarge extends BlockDummyable implements ILookOverlay {
 		}
 
 		for(int i = 0; i < tower.tanks.length; i++)
-			text.add((i < 1 ? (EnumChatFormatting.GREEN + "-> ") : (EnumChatFormatting.RED + "<- ")) + EnumChatFormatting.RESET + tower.tanks[i].getTankType().getLocalizedName() + ": " + tower.tanks[i].getFill() + "/" + tower.tanks[i].getMaxFill() + "mB");
+			text.add((i < 1 || i == 2 ? (EnumChatFormatting.GREEN + "-> ") : (EnumChatFormatting.RED + "<- ")) + EnumChatFormatting.RESET + tower.tanks[i].getTankType().getLocalizedName() + ": " + tower.tanks[i].getFill() + "/" + tower.tanks[i].getMaxFill() + "mB");
 
 		ILookOverlay.printGeneric(event, I18nUtil.resolveKey(getUnlocalizedName() + ".name"), 0xffff00, 0x404000, text);
 	}
