@@ -507,7 +507,7 @@ public abstract class TileEntityRBMKBase extends TileEntityLoadedBase implements
 		PacketDispatcher.wrapper.sendToAllAround(new AuxParticlePacketNT(data, avgX + 0.5, yCoord + 1, avgZ + 0.5), new TargetPoint(worldObj.provider.dimensionId,avgX + 0.5, yCoord + 1, avgZ + 0.5, 250));
 		MainRegistry.proxy.effectNT(data);
 
-		worldObj.createExplosion(null, avgX, yCoord, avgZ, 50F, true);
+		worldObj.createExplosion(null, avgX, yCoord, avgZ, 75F, true);
 		worldObj.playSoundEffect(avgX + 0.5, yCoord + 1, avgZ + 0.5, "hbm:block.rbmk_explosion", 50.0F, 1.0F);
 
 		List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class,
