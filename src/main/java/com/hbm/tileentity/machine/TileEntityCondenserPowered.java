@@ -19,11 +19,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityCondenserPowered extends TileEntityCondenser implements IEnergyReceiverMK2 {
-	
+
 	public long power;
 	public float spin;
 	public float lastSpin;
-	
+
 	//Configurable values
 	public static long maxPower = 10_000_000;
 	public static int inputTankSizeP = 1_000_000;
@@ -33,10 +33,11 @@ public class TileEntityCondenserPowered extends TileEntityCondenser implements I
 	public TileEntityCondenserPowered() {
 		tanks = new FluidTank[2];
 		tanks[0] = new FluidTank(Fluids.SPENTSTEAM, inputTankSizeP);
-		tanks[1] = new FluidTank(Fluids.WATER, outputTankSizeP);
+		tanks[1] = new FluidTank(Fluids.AERATEDWATER, outputTankSizeP);
 		vacuumOptimised = true;
+		heatExchanging = false;
 	}
-	
+
 	@Override
 	public String getConfigName() {
 		return "condenserPowered";
@@ -60,19 +61,19 @@ public class TileEntityCondenserPowered extends TileEntityCondenser implements I
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		
+
 		if(worldObj.isRemote) {
-			
+
 			this.lastSpin = this.spin;
-			
+
 			if(this.waterTimer > 0) {
 				this.spin += 30F;
-				
+
 				if(this.spin >= 360F) {
 					this.spin -= 360F;
 					this.lastSpin -= 360F;
 				}
-				
+
 				if(worldObj.getTotalWorldTime() % 4 == 0) {
 					ForgeDirection dir = ForgeDirection.getOrientation(this.getBlockMetadata() - 10);
 					worldObj.spawnParticle("cloud", xCoord + 0.5 + dir.offsetX * 1.5, yCoord + 1.5, zCoord + 0.5 + dir.offsetZ * 1.5, dir.offsetX * 0.1, 0, dir.offsetZ * 0.1);
@@ -86,7 +87,7 @@ public class TileEntityCondenserPowered extends TileEntityCondenser implements I
 	public void packExtra(NBTTagCompound data) {
 		data.setLong("power", power);
 	}
-	
+
 	@Override
 	public boolean extraCondition(int convert) {
 		return power >= convert * 10;
@@ -101,25 +102,25 @@ public class TileEntityCondenserPowered extends TileEntityCondenser implements I
 	@Override
 	public void networkUnpack(NBTTagCompound nbt) {
 		this.power = nbt.getLong("power");
-		this.tanks[0].readFromNBT(nbt, "0");
-		this.tanks[1].readFromNBT(nbt, "1");
+		this.tanks[0].readFromNBT(nbt, "tank" + 0);
+		this.tanks[1].readFromNBT(nbt, "tank" + 1);
 		this.waterTimer = nbt.getByte("timer");
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		this.power = nbt.getLong("power");
-		tanks[0].readFromNBT(nbt, "water");
-		tanks[1].readFromNBT(nbt, "steam");
+		tanks[0].readFromNBT(nbt, "0");
+		tanks[1].readFromNBT(nbt, "1");
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setLong("power", power);
-		tanks[0].writeToNBT(nbt, "water");
-		tanks[1].writeToNBT(nbt, "steam");
+		tanks[0].writeToNBT(nbt, "0");
+		tanks[1].writeToNBT(nbt, "1");
 	}
 
 	@Override
@@ -136,12 +137,12 @@ public class TileEntityCondenserPowered extends TileEntityCondenser implements I
 			this.sendFluid(this.tanks[1], worldObj, pos.getX(), pos.getY(), pos.getZ(), pos.getDir());
 		}
 	}
-	
+
 	public DirPos[] getConPos() {
-		
+
 		ForgeDirection dir = ForgeDirection.getOrientation(this.getBlockMetadata() - 10);
 		ForgeDirection rot = dir.getRotation(ForgeDirection.UP);
-		
+
 		return new DirPos[] {
 				new DirPos(xCoord + rot.offsetX * 4, yCoord + 1, zCoord + rot.offsetZ * 4, rot),
 				new DirPos(xCoord - rot.offsetX * 4, yCoord + 1, zCoord - rot.offsetZ * 4, rot.getOpposite()),
@@ -151,12 +152,12 @@ public class TileEntityCondenserPowered extends TileEntityCondenser implements I
 				new DirPos(xCoord - dir.offsetX * 2 + rot.offsetX, yCoord + 1, zCoord - dir.offsetZ * 2 + rot.offsetZ, dir.getOpposite())
 		};
 	}
-	
+
 	AxisAlignedBB bb = null;
-	
+
 	@Override
 	public AxisAlignedBB getRenderBoundingBox() {
-		
+
 		if(bb == null) {
 			bb = AxisAlignedBB.getBoundingBox(
 					xCoord - 3,
@@ -167,10 +168,10 @@ public class TileEntityCondenserPowered extends TileEntityCondenser implements I
 					zCoord + 4
 					);
 		}
-		
+
 		return bb;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public double getMaxRenderDistanceSquared() {

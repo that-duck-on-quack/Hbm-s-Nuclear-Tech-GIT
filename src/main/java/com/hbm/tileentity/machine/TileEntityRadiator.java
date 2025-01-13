@@ -17,15 +17,16 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityRadiator extends TileEntityCondenser {
-	
+
 	public static int inputTankSize = 500;
 	public static int outputTankSize = 500;
 
 	public TileEntityRadiator() {
 		tanks = new FluidTank[2];
 		tanks[0] = new FluidTank(Fluids.SPENTSTEAM, inputTankSize);
-		tanks[1] = new FluidTank(Fluids.WATER, outputTankSize);
+		tanks[1] = new FluidTank(Fluids.AERATEDWATER, outputTankSize);
 		vacuumOptimised = true;
+		heatExchanging = false;
 	}
 
 	@Override
@@ -66,12 +67,12 @@ public class TileEntityRadiator extends TileEntityCondenser {
 		this.sendFluid(this.tanks[1], worldObj, xCoord - dir.offsetX - rot.offsetX, yCoord + 1, zCoord - dir.offsetZ - rot.offsetZ, dir);
 		this.sendFluid(this.tanks[1], worldObj, xCoord - dir.offsetX - rot.offsetX, yCoord - 1, zCoord - dir.offsetZ - rot.offsetZ, dir);
 	}
-	
+
 	AxisAlignedBB bb = null;
-	
+
 	@Override
 	public AxisAlignedBB getRenderBoundingBox() {
-		
+
 		if(bb == null) {
 			bb = AxisAlignedBB.getBoundingBox(
 				xCoord - 20,
@@ -82,14 +83,14 @@ public class TileEntityRadiator extends TileEntityCondenser {
 				zCoord + 21
 			);
 		}
-		
+
 		return bb;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public double getMaxRenderDistanceSquared() {
 		return 65536.0D;
 	}
-	
+
 }

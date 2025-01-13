@@ -535,6 +535,10 @@ public class ChemplantRecipes extends SerializableRecipe {
 				.inputFluids(new FluidStack(Fluids.RESIN,500))
 				.inputItems(new ComparableStack(ModItems.sulfur, 2))
 				.outputItems(new ItemStack(ModItems.ball_resin,1)));
+
+		recipes.add(new ChemRecipe(1112,"DEAERATION", 3)
+                .inputFluids(new FluidStack(Fluids.AERATEDWATER,250), new FluidStack(Fluids.STEAM, 250))
+                .outputFluids(new FluidStack(Fluids.WATER, 500)));
 	}
 
 	public static void registerOtherOil() {

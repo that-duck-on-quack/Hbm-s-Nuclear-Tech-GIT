@@ -30,6 +30,7 @@ public class TileEntityTowerSmall extends TileEntityCondenser {
 		tanks[0] = new FluidTank(Fluids.SPENTSTEAM, inputTankSizeTS);
 		tanks[1] = new FluidTank(Fluids.AERATEDWATER, outputTankSizeTS);
 		tanks[2] = new FluidTank(Fluids.WATER, evTankSizeTS);
+		heatExchanging = true;
 	}
 
 	@Override
