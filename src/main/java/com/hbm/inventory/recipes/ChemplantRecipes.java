@@ -525,8 +525,15 @@ public class ChemplantRecipes extends SerializableRecipe {
 				//new ComparableStack(Blocks.log, 1, 3))
 			//.outputFluids(new FluidStack(Fluids.RESIN, 100)));
 
+
+
+
+
+
+
 		recipes.add(new ChemRecipe(1101,"RESINBALL", 60)
 				.inputFluids(new FluidStack(Fluids.RESIN,500))
+				.inputItems(new ComparableStack(ModItems.sulfur, 2))
 				.outputItems(new ItemStack(ModItems.ball_resin,1)));
 
 		recipes.add(new ChemRecipe(1112,"DEAERATION", 3)
