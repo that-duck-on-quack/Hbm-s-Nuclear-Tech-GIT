@@ -36,8 +36,8 @@ public class BiomeGenMoon extends BiomeGenBaseCelestial {
 
 	@Override
 	public float getSpawningChance() {
-        return 0.008F;
-    }
+		return 0.008F;
+	}
 
 	@Override
 	public void genTerrainBlocks(World world, Random rand, Block[] blocks, byte[] meta, int x, int z, double noise) {

@@ -2,6 +2,8 @@
 
 Hi, i am memeing things into existence, dont mind me! im just the bent fork at the end of the table -JamesH_2
 
+Oh, us? We're the fun police, we're taking the fun away from the Spork by making it harder :D
+
 [NTM Space on Modrinth](https://modrinth.com/mod/ntmspace)
 
 [NTM on CurseForge](https://minecraft.curseforge.com/projects/hbms-nuclear-tech-mod?gameCategorySlug=mc-mods&projectID=235439)
