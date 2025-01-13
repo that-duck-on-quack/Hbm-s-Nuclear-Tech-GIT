@@ -782,7 +782,7 @@ public class CraftingManager {
 
 		//hbm hard stuff
 
-		addRecipeAuto(new ItemStack(ModItems.crude_circuit,1), new Object[]{"WCW", "WBW", "WCW", "W", CU.wireFine(), "C", ModItems.crude_cap, "B", ModItems.crude_pcb});
+		addRecipeAuto(new ItemStack(ModItems.crude_circuit), new Object[] { "#C#","VPV","#C#", 'P', ModItems.crude_pcb,'C', ModItems.crude_cap, '#', CU.wireFine(),'V', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.VACUUM_TUBE)});
 
 		addRecipeAuto(new ItemStack(ModItems.upgrade_nullifier, 1), new Object[] { "SPS", "PUP", "SPS", 'S', STEEL.plate(), 'P', ModItems.powder_fire, 'U', ModItems.upgrade_template });
 		addRecipeAuto(new ItemStack(ModItems.upgrade_smelter, 1), new Object[] { "PHP", "CUC", "DTD", 'P', CU.plate(), 'H', Blocks.hopper, 'C', ModItems.coil_tungsten, 'U', ModItems.upgrade_template, 'D', ModItems.coil_copper, 'T', ModBlocks.machine_transformer });
