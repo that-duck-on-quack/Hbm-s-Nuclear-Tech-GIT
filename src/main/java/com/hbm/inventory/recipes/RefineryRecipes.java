@@ -15,6 +15,10 @@ import com.hbm.util.ItemStackUtil;
 import com.hbm.util.Tuple.Quartet;
 import com.hbm.util.Tuple.Quintet;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class RefineryRecipes {
@@ -43,17 +47,23 @@ public class RefineryRecipes {
 	public static final int vac_frac_light = 20;
 	public static final int vac_frac_sour = 15;
 
+	//hbm hard stuff
+	public static final int Oil_frack = 80;
+	public static final int coaloil_frack = 10;
+	public static final int water_frack = 7;
+	public static final int oreslop_frack =3;
+
 	private static Map<FluidType, Quintet<FluidStack, FluidStack, FluidStack, FluidStack, ItemStack>> refinery = new HashMap();
 	private static Map<FluidType, Quartet<FluidStack, FluidStack, FluidStack, FluidStack>> vacuum = new HashMap();
-	
+
 	public static HashMap<Object, Object[]> getRefineryRecipe() {
 
 		HashMap<Object, Object[]> recipes = new HashMap<Object, Object[]>();
-		
+
 		for(Entry<FluidType, Quintet<FluidStack, FluidStack, FluidStack, FluidStack, ItemStack>> recipe : refinery.entrySet()) {
-			
+
 			Quintet<FluidStack, FluidStack, FluidStack, FluidStack, ItemStack> fluids = recipe.getValue();
-			
+
 			recipes.put(ItemFluidIcon.make(recipe.getKey(), 1000),
 					new ItemStack[] {
 							ItemFluidIcon.make(fluids.getV().type, fluids.getV().fill * 10),
@@ -62,18 +72,18 @@ public class RefineryRecipes {
 							ItemFluidIcon.make(fluids.getY().type, fluids.getY().fill * 10),
 							ItemStackUtil.carefulCopy(fluids.getZ()) });
 		}
-		
+
 		return recipes;
 	}
-	
+
 	public static HashMap getVacuumRecipe() {
 
 		HashMap<Object, Object[]> recipes = new HashMap<Object, Object[]>();
-		
+
 		for(Entry<FluidType, Quartet<FluidStack, FluidStack, FluidStack, FluidStack>> recipe : vacuum.entrySet()) {
-			
+
 			Quartet<FluidStack, FluidStack, FluidStack, FluidStack> fluids = recipe.getValue();
-			
+
 			recipes.put(ItemFluidIcon.make(recipe.getKey(), 1000, 2),
 					new ItemStack[] {
 							ItemFluidIcon.make(fluids.getW().type, fluids.getW().fill * 10),
@@ -81,10 +91,10 @@ public class RefineryRecipes {
 							ItemFluidIcon.make(fluids.getY().type, fluids.getY().fill * 10),
 							ItemFluidIcon.make(fluids.getZ().type, fluids.getZ().fill * 10) });
 		}
-		
+
 		return recipes;
 	}
-	
+
 	public static void registerRefinery() {
 		refinery.put(Fluids.HOTOIL, new Quintet(
 				new FluidStack(Fluids.HEAVYOIL,		oil_frac_heavy),
@@ -115,6 +125,15 @@ public class RefineryRecipes {
 				DictFrame.fromOne(ModItems.oil_tar, EnumTarType.PARAFFIN)
 				));
 
+		//hbm hard stuff
+		refinery.put(Fluids.OSLURRY, new Quintet(
+			new FluidStack(Fluids.OIL, Oil_frack),
+			new FluidStack(Fluids.COALOIL, coaloil_frack),
+			new FluidStack(Fluids.WATER, water_frack),
+			new FluidStack(Fluids.SLOP, oreslop_frack),
+			new ItemStack(Blocks.gravel)
+			));
+
 		vacuum.put(Fluids.OIL, new Quartet(
 				new FluidStack(Fluids.HEAVYOIL_VACUUM,	vac_frac_heavy),
 				new FluidStack(Fluids.REFORMATE,		vac_frac_reform),
@@ -128,11 +147,11 @@ public class RefineryRecipes {
 				new FluidStack(Fluids.REFORMGAS,		vac_frac_sour)
 				));
 	}
-	
+
 	public static Quintet<FluidStack, FluidStack, FluidStack, FluidStack, ItemStack> getRefinery(FluidType oil) {
 		return refinery.get(oil);
 	}
-	
+
 	public static Quartet<FluidStack, FluidStack, FluidStack, FluidStack> getVacuum(FluidType oil) {
 		return vacuum.get(oil);
 	}
