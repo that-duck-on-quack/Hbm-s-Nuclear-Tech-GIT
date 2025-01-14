@@ -6,8 +6,13 @@ import api.hbm.fluid.IPipeNet;
 import com.hbm.blocks.ModBlocks;
 import com.hbm.blocks.machine.rbmk.RBMKBase;
 import com.hbm.entity.effect.EntitySpear;
+import com.hbm.explosion.vanillant.ExplosionVNT;
+import com.hbm.explosion.vanillant.standard.BlockAllocatorStandard;
+import com.hbm.explosion.vanillant.standard.BlockProcessorStandard;
+import com.hbm.particle.helper.ExplosionCreator;
 import com.hbm.entity.projectile.EntityRBMKDebris;
 import com.hbm.entity.projectile.EntityRBMKDebris.DebrisType;
+import com.hbm.explosion.ExplosionNukeGeneric;
 import com.hbm.main.MainRegistry;
 import com.hbm.packet.PacketDispatcher;
 import com.hbm.packet.toclient.AuxParticlePacketNT;
@@ -507,7 +512,11 @@ public abstract class TileEntityRBMKBase extends TileEntityLoadedBase implements
 		PacketDispatcher.wrapper.sendToAllAround(new AuxParticlePacketNT(data, avgX + 0.5, yCoord + 1, avgZ + 0.5), new TargetPoint(worldObj.provider.dimensionId,avgX + 0.5, yCoord + 1, avgZ + 0.5, 250));
 		MainRegistry.proxy.effectNT(data);
 
-		worldObj.createExplosion(null, avgX+0.5, yCoord+2, avgZ+0.5, 150F, true);
+		ExplosionVNT xnt = new ExplosionVNT(worldObj, avgX+0.5, this.yCoord, avgZ+0.5, 92F);
+		xnt.setBlockAllocator(new BlockAllocatorStandard(32));
+		xnt.setBlockProcessor(new BlockProcessorStandard().setNoDrop());
+		xnt.explode();
+		ExplosionCreator.composeEffectSmall(worldObj, this.xCoord, this.yCoord, this.zCoord);
 		worldObj.playSoundEffect(avgX + 0.5, yCoord + 1, avgZ + 0.5, "hbm:block.rbmk_explosion", 50.0F, 1.0F);
 
 		List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class,
