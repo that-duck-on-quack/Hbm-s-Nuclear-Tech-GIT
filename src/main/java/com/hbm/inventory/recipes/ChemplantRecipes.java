@@ -520,25 +520,22 @@ public class ChemplantRecipes extends SerializableRecipe {
 				.inputFluids(new FluidStack(Fluids.GAS, 750), new FluidStack(Fluids.CHLORINE, 250))
 				.outputFluids(new FluidStack(Fluids.CHLOROMETHANE, 1000)));
 
-		//recipes.add(new ChemRecipe(1100, "RESINPRODUCTION", 200)
-			//.inputItems(
-				//new ComparableStack(Blocks.log, 1, 3))
-			//.outputFluids(new FluidStack(Fluids.RESIN, 100)));
-
-
-
-
-
-
-
+		//hbm hard stuff
 		recipes.add(new ChemRecipe(1101,"RESINBALL", 60)
 				.inputFluids(new FluidStack(Fluids.RESIN,500))
 				.inputItems(new ComparableStack(ModItems.sulfur, 2))
 				.outputItems(new ItemStack(ModItems.ball_resin,1)));
 
-		recipes.add(new ChemRecipe(1112,"DEAERATION", 3)
+		recipes.add(new ChemRecipe(1102,"DEAERATION", 3)
                 .inputFluids(new FluidStack(Fluids.AERATEDWATER,1000), new FluidStack(Fluids.STEAM, 250))
                 .outputFluids(new FluidStack(Fluids.WATER, 1000)));
+
+		recipes.add(new ChemRecipe(1103, "CCH",200)
+			.inputFluids(new FluidStack(Fluids.WATER,2000), new FluidStack(Fluids.COALCREOSOTE, 1000))
+			.inputItems(new ComparableStack(ModItems.calcium_carbide, 3))
+			.outputFluids(new FluidStack(Fluids.ACETYLENE,850),new FluidStack(Fluids.RECLAIMED,150))
+			.outputItems(new ItemStack(ModItems.dust,3))
+		);
 	}
 
 	public static void registerOtherOil() {
