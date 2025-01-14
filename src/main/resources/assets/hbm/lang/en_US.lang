@@ -1687,6 +1687,10 @@ hbmfluid.resin=Resin
 hbmfluid.aeratedwater=Aerated Water
 hbmfluid.dirty_water=Dirty Water
 hbmfluid.oslurry=Oil Slurry
+hbmfluid.propyne=Propyne
+hbmfluid.butyne=Butyne
+hbmfluid.ethylene=Ethylene
+hbmfluid.acetylene=Acetylene
 //HBM hard chem recipes
 chem.RESINPRODUCTION=Resin Production
 chem.RESINBALL=Resin Solidification
