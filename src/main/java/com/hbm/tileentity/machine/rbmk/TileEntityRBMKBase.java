@@ -512,7 +512,7 @@ public abstract class TileEntityRBMKBase extends TileEntityLoadedBase implements
 		PacketDispatcher.wrapper.sendToAllAround(new AuxParticlePacketNT(data, avgX + 0.5, yCoord + 1, avgZ + 0.5), new TargetPoint(worldObj.provider.dimensionId,avgX + 0.5, yCoord + 1, avgZ + 0.5, 250));
 		MainRegistry.proxy.effectNT(data);
 
-		ExplosionVNT xnt = new ExplosionVNT(worldObj, avgX+0.5, this.yCoord, avgZ+0.5, 92F);
+		ExplosionVNT xnt = new ExplosionVNT(worldObj, avgX+0.5, this.yCoord+0.5, avgZ+0.5, 105F);
 		xnt.setBlockAllocator(new BlockAllocatorStandard(32));
 		xnt.setBlockProcessor(new BlockProcessorStandard().setNoDrop());
 		xnt.explode();
