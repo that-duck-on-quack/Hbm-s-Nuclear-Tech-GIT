@@ -18,10 +18,12 @@ import com.hbm.inventory.RecipesCommon.ComparableStack;
 import com.hbm.inventory.RecipesCommon.OreDictStack;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.recipes.loader.SerializableRecipe;
+import com.hbm.items.ItemEnums;
 import com.hbm.items.ModItems;
 import com.hbm.main.MainRegistry;
 
 
+import cpw.mods.fml.common.Mod;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -521,6 +523,8 @@ public class ChemplantRecipes extends SerializableRecipe {
 				.outputFluids(new FluidStack(Fluids.CHLOROMETHANE, 1000)));
 
 		//hbm hard stuff
+
+
 		recipes.add(new ChemRecipe(1101,"RESINBALL", 60)
 				.inputFluids(new FluidStack(Fluids.RESIN,500))
 				.inputItems(new ComparableStack(ModItems.sulfur, 2))
@@ -530,7 +534,12 @@ public class ChemplantRecipes extends SerializableRecipe {
                 .inputFluids(new FluidStack(Fluids.AERATEDWATER,1000), new FluidStack(Fluids.STEAM, 250))
                 .outputFluids(new FluidStack(Fluids.WATER, 1000)));
 
-		recipes.add(new ChemRecipe(1103, "CCH",200)
+		recipes.add(new ChemRecipe(1103,"DSLURPROD", 200)
+			.inputFluids(new FluidStack(Fluids.SULFURIC_ACID,1000))
+			.inputItems(new ComparableStack(DictFrame.fromOne(ModItems.chunk_ore, ItemEnums.EnumChunkType.RARE)))
+			.outputFluids(new FluidStack(Fluids.DSHSLURRY, 100)));
+
+		recipes.add(new ChemRecipe(1104, "CCH",200)
 			.inputFluids(new FluidStack(Fluids.WATER,2000), new FluidStack(Fluids.COALCREOSOTE, 1000))
 			.inputItems(new ComparableStack(ModItems.calcium_carbide, 3))
 			.outputFluids(new FluidStack(Fluids.ACETYLENE,850),new FluidStack(Fluids.RECLAIMED,150))

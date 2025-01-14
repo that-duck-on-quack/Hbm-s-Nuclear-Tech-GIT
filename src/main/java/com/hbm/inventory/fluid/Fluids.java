@@ -240,6 +240,7 @@ public class Fluids {
 	public static FluidType BUTYNE;
 	public static FluidType	ETHYLENE;
 	public static FluidType ACETYLENE;
+	public static FluidType DSHSLURRY;
 
 	//morkite would be like a gravelly oil. it would be a goopy liquidized gravel.
 	//point being, if the crystals were melted down and the liquid extracted
@@ -529,6 +530,7 @@ public class Fluids {
 		AERATEDWATER = new FluidType("AERATEDWATER", 0x305082, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
 		DIRTY_WATER =			new FluidType("DIRTY_WATER", 0x3333FF, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
 		OSLURRY = new FluidType("OSLURRY", 0x4A1C0F, 0, 0, 0, EnumSymbol.NONE).addTraits(new FT_Flammable(15), LIQUID, VISCOUS, P_OIL);
+		DSHSLURRY = new FluidType("DSHSLURRY", 0xD63B27, 0, 0, 0, EnumSymbol.ACID).addTraits(LIQUID, new FT_Corrosive(25));
 		PROPYNE = new FluidType("PROPYNE", 0x7F7F7F, 1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
 		BUTYNE = new FluidType("BUTYNE",0xFFFF00,1,4,1,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
 		ETHYLENE = new FluidType("ETHYLENE",0xddf7ff, 1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
@@ -770,6 +772,7 @@ public class Fluids {
 		metaOrder.add(AERATEDWATER);
 		metaOrder.add(DIRTY_WATER);
 		metaOrder.add(OSLURRY);
+		metaOrder.add(DSHSLURRY);
 		metaOrder.add(PROPYNE);
 		metaOrder.add(BUTYNE);
 		metaOrder.add(ETHYLENE);
