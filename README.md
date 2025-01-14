@@ -4,13 +4,15 @@ Hi, i am memeing things into existence, dont mind me! im just the bent fork at t
 
 Oh, us? We're the fun police, we're taking the fun away from this :D -cherlyte, Blankbutnot
 
-[NTM Space on Modrinth](https://modrinth.com/mod/ntmspace)
+TL;DR: This fork (of a fork) makes certain game elements harder, adds more stuff (which makes the mod harder) and implements new mechanics (which makes the mod harder :D)
 
-[NTM on CurseForge](https://minecraft.curseforge.com/projects/hbms-nuclear-tech-mod?gameCategorySlug=mc-mods&projectID=235439)
+[NTM Space (Original) on Modrinth](https://modrinth.com/mod/ntmspace)
 
-[Official NTM Wiki](https://nucleartech.wiki/wiki/Main_Page)
+[NTM (Original) on CurseForge](https://minecraft.curseforge.com/projects/hbms-nuclear-tech-mod?gameCategorySlug=mc-mods&projectID=235439)
 
-[Bobcat's Blog (the blag)](https://hbmmods.github.io/), you can find lengthy yapping, upcoming features and some secrets here.
+[Official (Original) NTM Wiki](https://nucleartech.wiki/wiki/Main_Page)
+
+[Bobcat's Blog (the blag) (Original? i dunno)](https://hbmmods.github.io/), you can find lengthy yapping, upcoming features and some secrets here.
 
 **This is for 1.7.10!** For 1.12, check out these projects:
 
