@@ -236,6 +236,7 @@ public class Fluids {
 	public static FluidType OSLURRY;
 	public static FluidType DIRTY_WATER;
 	public static FluidType AERATEDWATER;
+	public static FluidType DSHSLURRY;
 
 	//morkite would be like a gravelly oil. it would be a goopy liquidized gravel.
 	//point being, if the crystals were melted down and the liquid extracted
@@ -525,6 +526,7 @@ public class Fluids {
 		AERATEDWATER = new FluidType("AERATEDWATER", 0x305082, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
 		DIRTY_WATER =			new FluidType("DIRTY_WATER", 0x3333FF, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
 		OSLURRY = new FluidType("OSLURRY", 0x4A1C0F, 0, 0, 0, EnumSymbol.NONE).addTraits(new FT_Flammable(15), LIQUID, VISCOUS, P_OIL);
+		DSHSLURRY = new FluidType("DSHSLURRY", 0xD63B27, 0, 0, 0, EnumSymbol.ACID).addTraits(LIQUID, new FT_Corrosive(25));
 		// ^ ^ ^ ^ ^ ^ ^ ^
 		//ADD NEW FLUIDS HERE
 
@@ -762,6 +764,7 @@ public class Fluids {
 		metaOrder.add(AERATEDWATER);
 		metaOrder.add(DIRTY_WATER);
 		metaOrder.add(OSLURRY);
+		metaOrder.add(DSHSLURRY);
 
 		//ANY INTERNAL RENAMING MUST BE REFLECTED HERE - DON'T FORGET TO CHANGE: LANG FILES + TYPE'S STRING ID + NAME OF TANK/GUI TEXTURE FILES!
 		// V

@@ -18,10 +18,12 @@ import com.hbm.inventory.RecipesCommon.ComparableStack;
 import com.hbm.inventory.RecipesCommon.OreDictStack;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.recipes.loader.SerializableRecipe;
+import com.hbm.items.ItemEnums;
 import com.hbm.items.ModItems;
 import com.hbm.main.MainRegistry;
 
 
+import cpw.mods.fml.common.Mod;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -525,12 +527,6 @@ public class ChemplantRecipes extends SerializableRecipe {
 				//new ComparableStack(Blocks.log, 1, 3))
 			//.outputFluids(new FluidStack(Fluids.RESIN, 100)));
 
-
-
-
-
-
-
 		recipes.add(new ChemRecipe(1101,"RESINBALL", 60)
 				.inputFluids(new FluidStack(Fluids.RESIN,500))
 				.inputItems(new ComparableStack(ModItems.sulfur, 2))
@@ -539,6 +535,11 @@ public class ChemplantRecipes extends SerializableRecipe {
 		recipes.add(new ChemRecipe(1112,"DEAERATION", 3)
                 .inputFluids(new FluidStack(Fluids.AERATEDWATER,1000), new FluidStack(Fluids.STEAM, 250))
                 .outputFluids(new FluidStack(Fluids.WATER, 1000)));
+
+		recipes.add(new ChemRecipe(1113,"DSLURPROD", 200)
+			.inputFluids(new FluidStack(Fluids.SULFURIC_ACID,1000))
+			.inputItems(new ComparableStack(DictFrame.fromOne(ModItems.chunk_ore, ItemEnums.EnumChunkType.RARE)))
+			.outputFluids(new FluidStack(Fluids.DSHSLURRY, 100)));
 	}
 
 	public static void registerOtherOil() {
