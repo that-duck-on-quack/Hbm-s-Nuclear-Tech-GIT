@@ -1686,6 +1686,10 @@ hbmfluid.scutterblood=Scutterblood
 hbmfluid.resin=Resin
 hbmfluid.aeratedwater=Aerated Water
 hbmfluid.dirty_water=Dirty Water
+hbmfluid.propyne=Propyne
+hbmfluid.butyne=Butyne
+hbmfluid.ethylene=Ethylene
+hbmfluid.acetylene=Acetylene
 hbmfluid.oslurry=Oil Slurry
 hbmfluid.dshslurry=Acidic Desh Mixture
 //HBM Hard Pseudo-Fluids
@@ -1696,10 +1700,10 @@ chem.RESINBALL=Resin Solidification
 chem.DEAERATION=Water Deaeration
 chem.DSLURPROD=Rare Earth Acidification
 //HBM items
-item.crude_circuit.name=Crude Circuit
-item.crude_cap.name=Crude Capacitor
-item.crude_pcb.name=Crude Circuit Board
-item.tungsten_hammer.name= ungsten Hammer
+item.crude_circuit.name= Crude Circuit
+item.crude_cap.name= Crude Capacitor
+item.crude_pcb.name= Crude Circuit Board
+item.tungsten_hammer.name= Tungsten Hammer
 
 hbmpseudofluid.none=Empty
 hbmpseudofluid.heuf6=Highly Enriched UF6
