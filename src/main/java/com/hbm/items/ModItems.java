@@ -2484,6 +2484,7 @@ public class ModItems {
 	public static Item crude_circuit;
 	public static Item crude_cap;
 	public static Item crude_pcb;
+	public static Item tungsten_hammer;
 
 	public static void initializeItem()
 	{
@@ -5581,7 +5582,7 @@ public class ModItems {
 		crude_circuit = new Item().setUnlocalizedName("crude_circuit").setTextureName(RefStrings.MODID + ":crude_circuit");
 		crude_cap = new Item().setUnlocalizedName("crude_cap").setTextureName(RefStrings.MODID + ":crude_cap");
 		crude_pcb = new Item().setUnlocalizedName("crude_pcb").setTextureName(RefStrings.MODID + ":crude_pcb");
-
+		tungsten_hammer = new ItemToolAbility(7F, -0.2, MainRegistry.tMatSteel, EnumToolType.PICKAXE).setMaxDamage(100).setMaxStackSize(1).setContainerItem(ModItems.tungsten_hammer).setUnlocalizedName("tungsten_hammer").setTextureName(RefStrings.MODID + ":tungsten_hammer");
 
 
 	}
@@ -8009,6 +8010,7 @@ public class ModItems {
 		GameRegistry.registerItem(crude_circuit, crude_circuit.getUnlocalizedName());
 		GameRegistry.registerItem(crude_cap,crude_cap.getUnlocalizedName());
 		GameRegistry.registerItem(crude_pcb,crude_pcb.getUnlocalizedName());
+		GameRegistry.registerItem(tungsten_hammer,tungsten_hammer.getUnlocalizedName());
 	}
 
 	public static void addRemap(String unloc, Item item, Enum sub) {

@@ -1694,6 +1694,7 @@ chem.DEAERATION= Water Deaeration
 item.crude_circuit.name= Crude Circuit
 item.crude_cap.name= Crude Capacitor
 item.crude_pcb.name= Crude Circuit Board
+item.tungsten_hammer.name= Tungsten Hammer
 
 hbmpseudofluid.none=Empty
 hbmpseudofluid.heuf6=Highly Enriched UF6
