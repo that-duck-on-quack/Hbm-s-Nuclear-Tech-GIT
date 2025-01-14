@@ -1492,7 +1492,6 @@ hbmfluid.neon=Neon Gas
 hbmfluid.amat=Antimatter
 hbmfluid.ammonia=Ammonia
 hbmfluid.air=Compressed Air
-hbmfluid.aeratedwater=Aerated Water
 hbmfluid.aromatics=Aromatic Hydrocarbons
 hbmfluid.aschrab=Antischrabidium
 hbmfluid.balefire=BF Rocket Fuel
@@ -1685,7 +1684,9 @@ hbmfluid.scutterblood=Scutterblood
 
 //HBM hard fluids
 hbmfluid.resin=Resin
+hbmfluid.aeratedwater=Aerated Water
 hbmfluid.dirty_water=Dirty Water
+hbmfluid.oslurry= Oil Slurry
 //HBM hard chem recipes
 chem.RESINPRODUCTION=Resin Production
 chem.RESINBALL=Resin Solidification
