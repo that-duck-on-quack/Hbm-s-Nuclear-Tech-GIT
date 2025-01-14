@@ -1686,7 +1686,7 @@ hbmfluid.scutterblood=Scutterblood
 hbmfluid.resin=Resin
 hbmfluid.aeratedwater=Aerated Water
 hbmfluid.dirty_water=Dirty Water
-hbmfluid.oslurry= Oil Slurry
+hbmfluid.oslurry=Oil Slurry
 //HBM hard chem recipes
 chem.RESINPRODUCTION=Resin Production
 chem.RESINBALL=Resin Solidification
