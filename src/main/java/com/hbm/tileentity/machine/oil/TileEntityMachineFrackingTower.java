@@ -48,9 +48,9 @@ public class TileEntityMachineFrackingTower extends TileEntityOilDrillBase {
 	public TileEntityMachineFrackingTower() {
 		super();
 		tanks = new FluidTank[3];
-		tanks[0] = new FluidTank(Fluids.OIL, 64_000);
+		tanks[0] = new FluidTank(Fluids.OSLURRY, 64_000);
 		tanks[1] = new FluidTank(Fluids.GAS, 64_000);
-		tanks[2] = new FluidTank(Fluids.OSLURRY, 64_000);
+		tanks[2] = new FluidTank(Fluids.FRACKSOL, 64_000);
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class TileEntityMachineFrackingTower extends TileEntityOilDrillBase {
 
 		if(b == ModBlocks.ore_oil) {
 			if(meta == SolarSystem.Body.DUNA.ordinal()) {
-				tanks[0].setTankType(Fluids.OIL);
+				tanks[0].setTankType(Fluids.OSLURRY);
 
 				oil = oilPerDunaDeposit;
 				gas = gasPerDepositMin + worldObj.rand.nextInt(gasPerDepositMax - gasPerDepositMin + 1);
@@ -123,7 +123,7 @@ public class TileEntityMachineFrackingTower extends TileEntityOilDrillBase {
 					worldObj.setBlock(x, y, z, ModBlocks.ore_oil_empty, meta, 3);
 				}
 			} else if(meta == SolarSystem.Body.LAYTHE.ordinal()) {
-				tanks[0].setTankType(Fluids.OIL_DS);
+				tanks[0].setTankType(Fluids.OSLURRY);
 
 				oil = oilPerDeposit;
 				gas = gasPerDepositMin + worldObj.rand.nextInt(gasPerDepositMax - gasPerDepositMin + 1);
@@ -132,7 +132,7 @@ public class TileEntityMachineFrackingTower extends TileEntityOilDrillBase {
 					worldObj.setBlock(x, y, z, ModBlocks.ore_oil_empty, meta, 3);
 				}
 			} else {
-				tanks[0].setTankType(Fluids.OIL);
+				tanks[0].setTankType(Fluids.OSLURRY);
 
 				oil = oilPerDeposit;
 				gas = gasPerDepositMin + worldObj.rand.nextInt(gasPerDepositMax - gasPerDepositMin + 1);
