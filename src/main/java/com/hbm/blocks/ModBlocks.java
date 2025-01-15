@@ -1361,6 +1361,9 @@ public class ModBlocks {
 	public static Block orbital_station_computer;
 	public static Block propulsion_creative;
 
+	//NTM Hard Stuff
+
+
 	public static Material materialGas = new MaterialGas();
 
 	private static void initializeBlock() {
@@ -1850,7 +1853,7 @@ public class ModBlocks {
 		crop_coffee = new BlockCrop().setBlockName("crop_coffee").setStepSound(Block.soundTypeGrass).setHardness(0.0F).setBlockTextureName(RefStrings.MODID + ":coffee");
 		crop_tea = new BlockCrop().setBlockName("crop_tea").setStepSound(Block.soundTypeGrass).setHardness(0.0F).setBlockTextureName(RefStrings.MODID + ":tea");
 		vine_phosphor = new BlockHangingVine(thick_foliage).setBlockName("vine_phosphor").setCreativeTab(MainRegistry.blockTab).setStepSound(Block.soundTypeGrass).setHardness(0.5F);
-		
+
 		waste_earth = new WasteEarth(Material.ground, true).setBlockName("waste_earth").setStepSound(Block.soundTypeGrass).setCreativeTab(MainRegistry.blockTab).setHardness(0.6F).setBlockTextureName(RefStrings.MODID + ":waste_earth");
 		waste_mycelium = new WasteEarth(Material.ground, true).setBlockName("waste_mycelium").setStepSound(Block.soundTypeGrass).setLightLevel(1F).setCreativeTab(MainRegistry.blockTab).setHardness(0.6F).setBlockTextureName(RefStrings.MODID + ":waste_mycelium_side");
 		waste_trinitite = new BlockStepEffect(Material.sand).noFortune().setBlockName("waste_trinitite").setStepSound(Block.soundTypeSand).setCreativeTab(MainRegistry.blockTab).setHardness(0.5F).setResistance(2.5F).setBlockTextureName(RefStrings.MODID + ":waste_trinitite");
@@ -2038,7 +2041,7 @@ public class ModBlocks {
 		pa_quadrupole = new BlockPAQuadrupole().setStepSound(Block.soundTypeMetal).setBlockName("pa_quadrupole").setHardness(5.0F).setResistance(10.0F);
 		pa_dipole = new BlockPADipole().setStepSound(Block.soundTypeMetal).setBlockName("pa_dipole").setHardness(5.0F).setResistance(10.0F);
 		pa_detector = new BlockPADetector().setStepSound(Block.soundTypeMetal).setBlockName("pa_detector").setHardness(5.0F).setResistance(10.0F);
-		
+
 		machine_electric_furnace_off = new MachineElectricFurnace(false).setBlockName("machine_electric_furnace_off").setHardness(5.0F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab);
 		machine_electric_furnace_on = new MachineElectricFurnace(true).setBlockName("machine_electric_furnace_on").setHardness(5.0F).setLightLevel(1.0F).setResistance(10.0F);
 		machine_arc_furnace_off = new MachineArcFurnace(false).setBlockName("machine_arc_furnace_off").setHardness(5.0F).setResistance(10.0F);
@@ -2617,6 +2620,8 @@ public class ModBlocks {
 		orbital_station_port = new BlockOrbitalStation(Material.iron).setBlockName("orbital_station_port").setHardness(1.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel");
 		orbital_station_computer = new BlockOrbitalStationComputer(Material.iron).setBlockName("orbital_station_computer").setHardness(1.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel");
 		propulsion_creative = new BlockStationPropulsionCreative(Material.iron).setBlockName("propulsion_creative").setHardness(1.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel");
+
+		// NTM Hard Stuff
 	}
 
 	private static void registerBlock() {
@@ -3855,6 +3860,9 @@ public class ModBlocks {
 		register(orbital_station_port);
 		register(orbital_station_computer);
 		register(propulsion_creative);
+
+		//NTM Hard Stuff
+
 	}
 
 	private static void register(Block b) {

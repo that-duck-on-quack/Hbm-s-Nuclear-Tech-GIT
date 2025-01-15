@@ -85,7 +85,7 @@ public class ResourceManager {
 	public static final IModelCustom alkyl = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/alkylation_unit.obj")).asVBO();
 	public static final IModelCustom milk_reformer = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/milker.obj"));
 	public static final IModelCustom cryo_distill = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/cryo_distill.obj"));
-	
+
 	//Space
 	public static final IModelCustom solarp = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/solar_panel.obj")).asVBO();
 	public static final IModelCustom stardar = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/antenna.obj")).asVBO();
@@ -516,7 +516,7 @@ public class ResourceManager {
 	public static final ResourceLocation compressor_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/compressor.png");
 	public static final ResourceLocation coker_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/coker.png");
 	public static final ResourceLocation pyrooven_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/pyrooven.png");
-	public static final ResourceLocation alkyl_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/alkylation_unit.png"); 
+	public static final ResourceLocation alkyl_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/alkylation_unit.png");
 
 	public static final ResourceLocation milk_reformer_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/milker.png");
 
@@ -614,7 +614,7 @@ public class ResourceManager {
 
 	//Solderer
 	public static final ResourceLocation soldering_station_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/soldering_station.png");
-	
+
 	public static final ResourceLocation vac_cir_station_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/vacuum_solderer.png");
 
 	//Arc Furnace
@@ -1497,7 +1497,7 @@ public class ResourceManager {
 	public static final ResourceLocation mp_t_20_solid_tex = new ResourceLocation(RefStrings.MODID, "textures/models/missile_parts/thrusters/mp_t_20_solid.png");
 	public static final ResourceLocation mp_t_20_solid_multi_tex = new ResourceLocation(RefStrings.MODID, "textures/models/missile_parts/thrusters/mp_t_20_solid_multi.png");
 	public static final ResourceLocation mp_t_20_solid_multier_tex = new ResourceLocation(RefStrings.MODID, "textures/models/missile_parts/thrusters/mp_t_20_solid_multier.png");
-	
+
 	public static final ResourceLocation mp_t_20_azide_tex = new ResourceLocation(RefStrings.MODID, "textures/models/missile_parts/thrusters/mp_t_20_hydrazine.png");
 
 	public static final ResourceLocation mp_s_10_flat_tex = new ResourceLocation(RefStrings.MODID, "textures/models/missile_parts/stability/mp_s_10_flat.png");
@@ -1704,6 +1704,11 @@ public class ResourceManager {
 	public static final IModelCustom deb_zirnox_element = AdvancedModelLoader.loadModel(new ResourceLocation(RefStrings.MODID, "models/zirnox/deb_element.obj"));
 	public static final IModelCustom deb_zirnox_exchanger = AdvancedModelLoader.loadModel(new ResourceLocation(RefStrings.MODID, "models/zirnox/deb_exchanger.obj"));
 	public static final IModelCustom deb_zirnox_shrapnel = AdvancedModelLoader.loadModel(new ResourceLocation(RefStrings.MODID, "models/zirnox/deb_shrapnel.obj"));
+
+	//NTM Hard Stuff
+	// public static final IModelCustom template = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/your/path/template.obj")).asVBO();
+	// public static final ResourceLocation template_tex = new ResourceLocation(RefStrings.MODID, "textures/models/your/path/here/template.png");
+
 
 	public static final NBTStructure martian = new NBTStructure(new ResourceLocation(RefStrings.MODID, "structures/martian-base.nbt"));
 
