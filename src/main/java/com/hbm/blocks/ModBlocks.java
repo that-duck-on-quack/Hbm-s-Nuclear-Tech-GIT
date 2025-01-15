@@ -1213,7 +1213,7 @@ public class ModBlocks {
 	public static Block rail_large_buffer;
 	public static Block rail_large_switch;
 	public static Block rail_large_switch_flipped;
-
+	
 	public static Block statue_elb_f;
 
 	public static Block cheater_virus;
@@ -1340,9 +1340,6 @@ public class ModBlocks {
 	public static Block orbital_station_port;
 	public static Block orbital_station_computer;
 	public static Block propulsion_creative;
-
-	//NTM Hard Stuff
-	public static Block testfunny;
 
 	public static Material materialGas = new MaterialGas();
 
@@ -2593,10 +2590,6 @@ public class ModBlocks {
 		orbital_station_port = new BlockOrbitalStation(Material.iron).setBlockName("orbital_station_port").setHardness(1.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel");
 		orbital_station_computer = new BlockOrbitalStationComputer(Material.iron).setBlockName("orbital_station_computer").setHardness(1.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel");
 		propulsion_creative = new BlockStationPropulsionCreative(Material.iron).setBlockName("propulsion_creative").setHardness(1.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel");
-
-		//NTM Hard Stuff
-		// blockname = new BlockFunction(Material.iron).setBlockName("blockname").setHardness(hardness).setCreativeTab(MainRegistry.TAB).setBlockTextureName(RefStrings.MODID + ":blockname"); <-- set texture to ":block_steel" if multiblock.
-		testfunny = new MachineTestFunny(Material.iron).setBlockName("testfunny").setHardness(1.0F).setCreativeTab(MainRegistry.nukeTab).setBlockTextureName(RefStrings.MODID + ":testfunny");
 	}
 
 	private static void registerBlock() {
@@ -2726,7 +2719,7 @@ public class ModBlocks {
 		//Secret
 		register(stone_keyhole);
 		register(stone_keyhole_meta);
-
+		
 		//Resource-bearing Stones
 		register(stone_resource);
 		register(stalagmite);
@@ -3833,9 +3826,6 @@ public class ModBlocks {
 		register(orbital_station_port);
 		register(orbital_station_computer);
 		register(propulsion_creative);
-
-		// NTM Hard Stuff
-		GameRegistry.registerBlock(testfunny, testfunny.getUnlocalizedName());
 	}
 
 	private static void register(Block b) {
