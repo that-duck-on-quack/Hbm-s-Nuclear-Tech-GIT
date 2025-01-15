@@ -128,6 +128,9 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 	public void serialize(ByteBuf buf) {
 		this.tanks[0].serialize(buf);
 		this.tanks[1].serialize(buf);
+		if(heatExchanging){
+			this.tanks[2].serialize(buf);
+		}
 		buf.writeByte(this.waterTimer);
 	}
 
@@ -135,6 +138,9 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 	public void deserialize(ByteBuf buf) {
 		this.tanks[0].deserialize(buf);
 		this.tanks[1].deserialize(buf);
+		if(heatExchanging){
+			this.tanks[2].deserialize(buf);
+		}
 		this.waterTimer = buf.readByte();
 	}
 
