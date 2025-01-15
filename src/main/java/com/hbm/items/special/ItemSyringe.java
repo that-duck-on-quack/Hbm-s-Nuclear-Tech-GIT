@@ -287,14 +287,13 @@ public class ItemSyringe extends Item {
 				if(!fillable.acceptsFluid(Fluids.KEROSENE, jetpack))
 					return stack;
 				
-				fillable.tryFill(Fluids.KEROSENE, 1000, jetpack);
+				if(fillable.tryFill(Fluids.KEROSENE, 1000, jetpack) < 1000) {
+					world.playSoundAtEntity(player, "hbm:item.jetpackTank", 1.0F, 1.0F);
+					stack.stackSize--;
+				}
 				
 				if(jetpack.getItem() != player.inventory.armorInventory[2].getItem())
 					ArmorModHandler.applyMod(player.inventory.armorInventory[2], jetpack);
-
-				world.playSoundAtEntity(player, "hbm:item.jetpackTank", 1.0F, 1.0F);
-
-				stack.stackSize--;
 			}
 		}
 
@@ -312,13 +311,12 @@ public class ItemSyringe extends Item {
 					if(!fillable.acceptsFluid(Fluids.OXYGEN, tankStack))
 						return stack;
 					
-					fillable.tryFill(Fluids.OXYGEN, 1000, tankStack);
-
-					ArmorModHandler.applyMod(player.inventory.armorInventory[3], tankStack);
+					if(fillable.tryFill(Fluids.OXYGEN, 1000, tankStack) < 1000) {
+						world.playSoundAtEntity(player, "hbm:item.jetpackTank", 1.0F, 1.0F);
+						stack.stackSize--;
+					}
 					
-					world.playSoundAtEntity(player, "hbm:item.jetpackTank", 1.0F, 1.0F);
-	
-					stack.stackSize--;
+					ArmorModHandler.applyMod(player.inventory.armorInventory[3], tankStack);
 				}
 			}
 		}

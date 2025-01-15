@@ -112,7 +112,7 @@ public class TileEntityMachineGasDock extends TileEntityMachineBase implements I
 	
 	private void updateConnections() {
 		for(DirPos pos : getConPos()) {
-			for(int i = 0; i < tanks.length; i++) {
+			for(int i = 1; i < tanks.length; i++) {
 				if(tanks[i].getTankType() != Fluids.NONE) {
 					trySubscribe(tanks[i].getTankType(), worldObj, pos.getX(), pos.getY(), pos.getZ(), pos.getDir());
 				}
@@ -121,17 +121,17 @@ public class TileEntityMachineGasDock extends TileEntityMachineBase implements I
 	}
 	
 	private void collectGas() {
-		if(tanks[1].getFill() < 100) return;
+		if(tanks[1].getFill() < 500) return;
 		if(tanks[2].getFill() < 500) return;
 		if(tanks[0].getFill() + 8000 > tanks[0].getMaxFill()) return;
 
-		tanks[1].setFill(tanks[1].getFill() - 100);		
+		tanks[1].setFill(tanks[1].getFill() - 500);		
 		tanks[2].setFill(tanks[2].getFill() - 500);
 		tanks[0].setFill(tanks[0].getFill() + 8000);
 	}
 	
 	private boolean hasFuel() {
-		return tanks[1].getFill() >= 100 && tanks[2].getFill() >= 500;
+		return tanks[1].getFill() >= 500 && tanks[2].getFill() >= 500;
 	}
 
 	@Override

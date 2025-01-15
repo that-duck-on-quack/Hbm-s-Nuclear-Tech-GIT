@@ -8,6 +8,8 @@ import com.hbm.dim.dres.GenLayerDres.GenLayerDiversifyDres;
 import com.hbm.dim.dres.GenLayerDres.GenLayerDresBasins;
 import com.hbm.dim.dres.GenLayerDres.GenLayerDresBiomes;
 import com.hbm.dim.dres.GenLayerDres.GenLayerDresPlains;
+import com.hbm.inventory.FluidStack;
+import com.hbm.inventory.fluid.Fluids;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -40,6 +42,16 @@ public class WorldProviderDres extends WorldProviderCelestial {
 	@Override
 	public Block getStone() {
 		return ModBlocks.dres_rock;
+	}
+
+	@Override
+	public boolean hasIce() {
+		return true;
+	}
+
+	@Override
+	public FluidStack getBedrockAcid() {
+		return new FluidStack(Fluids.NITRIC_ACID, 500);
 	}
 
 	private static BiomeGenLayers createBiomeGenerators(long seed) {

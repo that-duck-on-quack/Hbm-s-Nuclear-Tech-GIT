@@ -7,6 +7,7 @@ import com.hbm.dim.trait.CBT_Atmosphere;
 import com.hbm.dim.trait.CBT_Atmosphere.FluidEntry;
 import com.hbm.dim.trait.CelestialBodyTrait.CBT_Destroyed;
 import com.hbm.handler.atmosphere.ChunkAtmosphereManager;
+import com.hbm.inventory.FluidStack;
 import com.hbm.inventory.fluid.Fluids;
 
 import cpw.mods.fml.relauncher.Side;
@@ -38,6 +39,16 @@ public abstract class WorldProviderCelestial extends WorldProvider {
 	// Ore gen will attempt to replace this block with ores
 	public Block getStone() {
 		return Blocks.stone;
+	}
+
+	// What fluid is required to extract new bedrock ores
+	public FluidStack getBedrockAcid() {
+		return null;
+	}
+
+	// Should we generate bedrock ice
+	public boolean hasIce() {
+		return false;
 	}
 
 	public boolean hasLife() {

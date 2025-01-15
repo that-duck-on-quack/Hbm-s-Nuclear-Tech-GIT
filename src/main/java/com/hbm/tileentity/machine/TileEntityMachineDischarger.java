@@ -1,21 +1,15 @@
 package com.hbm.tileentity.machine;
 
-import com.hbm.config.VersatileConfig;
 import com.hbm.entity.effect.EntityCloudFleija;
 import com.hbm.entity.logic.EntityNukeExplosionMK3;
 import com.hbm.inventory.OreDictManager;
 import com.hbm.inventory.container.ContainerMachineDischarger;
 import com.hbm.inventory.gui.GUIMachineDischarger;
-import com.hbm.inventory.recipes.BreederRecipes;
 
 import com.hbm.inventory.recipes.MachineRecipes;
 import com.hbm.items.ModItems;
-import com.hbm.items.machine.ItemCapacitor;
 import com.hbm.lib.Library;
 import com.hbm.main.MainRegistry;
-import com.hbm.packet.toclient.AuxElectricityPacket;
-import com.hbm.packet.PacketDispatcher;
-import com.hbm.render.tileentity.RenderTurretMaxwell;
 import com.hbm.sound.AudioWrapper;
 import com.hbm.tileentity.IGUIProvider;
 import com.hbm.tileentity.IPersistentNBT;
@@ -23,16 +17,14 @@ import com.hbm.tileentity.TileEntityMachineBase;
 
 import api.hbm.energymk2.IBatteryItem;
 import api.hbm.energymk2.IEnergyProviderMK2;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.gui.GuiScreen;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityMachineDischarger extends TileEntityMachineBase implements IEnergyProviderMK2, IGUIProvider, IPersistentNBT {
 
@@ -96,18 +88,20 @@ public class TileEntityMachineDischarger extends TileEntityMachineBase implement
 		nbt.setInteger("process", process);
 		nbt.setInteger("temp", temp);
 	}
+
 	@Override
 	public int getInventoryStackLimit() {
 		return 1;
 	}
+
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemStack) {
 		slots[i] = itemStack;
 		if(itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
 			itemStack.stackSize = getInventoryStackLimit();
 		}
-		
 	}
+
 	@Override
 	public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
 		return p_94128_1_ == 0 ? slots_bottom : (p_94128_1_ == 1 ? slots_top : slots_side);
@@ -146,20 +140,21 @@ public class TileEntityMachineDischarger extends TileEntityMachineBase implement
 
 	public boolean canProcess() {
 		//please PLEASE tell me how i can do better ffs
-			if (temp <= 20 && slots[0] != null && MachineRecipes.mODE(slots[0], OreDictManager.SA326.ingot())) {
-				return true;
-			}
-			
-			if (temp <= 20 && slots[0] != null && MachineRecipes.mODE(slots[0], OreDictManager.U233.ingot())) {
-				return true;
-			}
-			
-			if (temp <= 20 && slots[0] != null && slots[0].getItem() == ModItems.ingot_electronium) {
-				return true;
-			}
-			if (temp <= 20 && slots[0] != null && slots[0].getItem() == ModItems.battery_creative) {
-				return true;
-			}
+		if (temp <= 20 && slots[0] != null && MachineRecipes.mODE(slots[0], OreDictManager.SA326.ingot())) {
+			return true;
+		}
+		
+		if (temp <= 20 && slots[0] != null && MachineRecipes.mODE(slots[0], OreDictManager.U233.ingot())) {
+			return true;
+		}
+		
+		if (temp <= 20 && slots[0] != null && slots[0].getItem() == ModItems.ingot_electronium) {
+			return true;
+		}
+		if (temp <= 20 && slots[0] != null && slots[0].getItem() == ModItems.battery_creative) {
+			return true;
+		}
+
 		return false;
 	}
 
@@ -204,16 +199,15 @@ public class TileEntityMachineDischarger extends TileEntityMachineBase implement
 					worldObj.spawnEntityInWorld(cloud);
 				}		
 			}
-			this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "ambient.weather.thunder", 10000.0F,
-					0.8F + this.worldObj.rand.nextFloat() * 0.2F);
-			}
+			this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "ambient.weather.thunder", 10000.0F, 0.8F + this.worldObj.rand.nextFloat() * 0.2F);
+		}
 
 	}
 
 	@Override
 	public void updateEntity() {
 
-		if (!worldObj.isRemote) {
+		if(!worldObj.isRemote) {
 			
 			power = Library.chargeItemsFromTE(slots, 1, power, maxPower);
 
@@ -232,29 +226,27 @@ public class TileEntityMachineDischarger extends TileEntityMachineBase implement
 				}
 				
 			}
-
-			NBTTagCompound data = new NBTTagCompound();
-			data.setLong("power", power);
-			data.setInteger("progress", process);
-			data.setInteger("temp", temp);
-			this.networkPack(data, 50);
-			PacketDispatcher.wrapper.sendToAllAround(new AuxElectricityPacket(xCoord, yCoord, zCoord, power), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 50));
 			
 			if(temp > 20) {
-			if(worldObj.getTotalWorldTime() % 7 == 0)
-				this.worldObj.playSoundEffect(this.xCoord, this.yCoord + 11, this.zCoord, "random.fizz", 0.5F, 0.5F);
-			data.setString("type", "tower");
-			data.setFloat("lift", 0.1F);
-			data.setFloat("base", 0.3F);
-			data.setFloat("max", 1F);
-			data.setInteger("life", 20 + worldObj.rand.nextInt(20));
+				if(worldObj.getTotalWorldTime() % 7 == 0) {
+					this.worldObj.playSoundEffect(this.xCoord, this.yCoord + 11, this.zCoord, "random.fizz", 0.5F, 0.5F);
+				}
 
-			data.setDouble("posX", xCoord + 0.5 + worldObj.rand.nextDouble() - 0.5);
-			data.setDouble("posZ", zCoord + 0.5 + worldObj.rand.nextDouble() -0.5);
-			data.setDouble("posY", yCoord + 1);
-			
-			MainRegistry.proxy.effectNT(data);
-		}	
+				NBTTagCompound data = new NBTTagCompound();
+				data.setString("type", "tower");
+				data.setFloat("lift", 0.1F);
+				data.setFloat("base", 0.3F);
+				data.setFloat("max", 1F);
+				data.setInteger("life", 20 + worldObj.rand.nextInt(20));
+
+				data.setDouble("posX", xCoord + 0.5 + worldObj.rand.nextDouble() - 0.5);
+				data.setDouble("posZ", zCoord + 0.5 + worldObj.rand.nextDouble() -0.5);
+				data.setDouble("posY", yCoord + 1);
+				
+				MainRegistry.proxy.effectNT(data);
+			}
+
+			this.networkPackNT(50);
 		} else {
 
 			if(process > 0) {
@@ -299,13 +291,19 @@ public class TileEntityMachineDischarger extends TileEntityMachineBase implement
 			audio = null;
 		}
 	}
-	
-	@Override
-	public void networkUnpack(NBTTagCompound data) {
 
-		this.power = data.getLong("power");
-		this.process = data.getInteger("progress");
-		this.temp = data.getInteger("temp");
+	@Override
+	public void serialize(ByteBuf buf) {
+		buf.writeLong(power);
+		buf.writeInt(process);
+		buf.writeInt(temp);
+	}
+
+	@Override
+	public void deserialize(ByteBuf buf) {
+		power = buf.readLong();
+		process = buf.readInt();
+		temp = buf.readInt();
 	}
 
 	@Override

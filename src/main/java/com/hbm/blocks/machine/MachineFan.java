@@ -6,10 +6,13 @@ import com.hbm.blocks.ITooltipProvider;
 import com.hbm.dim.trait.CBT_Atmosphere;
 import com.hbm.handler.atmosphere.ChunkAtmosphereManager;
 import com.hbm.handler.atmosphere.IBlockSealable;
+import com.hbm.packet.PacketDispatcher;
+import com.hbm.packet.toclient.BufPacket;
 import com.hbm.tileentity.IBufPacketReceiver;
 
 import api.hbm.block.IBlowable;
 import api.hbm.block.IToolable;
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
@@ -91,7 +94,7 @@ public class MachineFan extends BlockContainer implements IToolable, ITooltipPro
 
 					// update when changing and every 3 seconds
 					if(prevHasAtmosphere != hasAtmosphere || worldObj.getTotalWorldTime() % 60 == 0) {
-						sendStandard(150);
+						PacketDispatcher.wrapper.sendToAllAround(new BufPacket(xCoord, yCoord, zCoord, this), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 150));
 					}
 				}
 

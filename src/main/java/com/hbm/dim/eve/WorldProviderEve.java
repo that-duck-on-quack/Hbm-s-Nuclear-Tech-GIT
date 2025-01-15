@@ -6,6 +6,8 @@ import com.hbm.dim.WorldProviderCelestial;
 import com.hbm.dim.WorldChunkManagerCelestial.BiomeGenLayers;
 import com.hbm.dim.eve.GenLayerEve.GenLayerEveBiomes;
 import com.hbm.dim.eve.GenLayerEve.GenLayerEveRiverMix;
+import com.hbm.inventory.FluidStack;
+import com.hbm.inventory.fluid.Fluids;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -112,6 +114,11 @@ public class WorldProviderEve extends WorldProviderCelestial {
 	@Override
 	public Block getStone() {
 		return ModBlocks.eve_rock;
+	}
+
+	@Override
+	public FluidStack getBedrockAcid() {
+		return new FluidStack(Fluids.KMnO4, 500);
 	}
 
 	private static BiomeGenLayers createBiomeGenerators(long seed) {

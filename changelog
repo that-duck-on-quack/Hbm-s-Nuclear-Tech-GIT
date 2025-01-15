@@ -1,16 +1,22 @@
+Includes the performance update and all latest bugfixes from upstream NTMain - see [X5202](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5202) and [X5209](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5209)
+
 ## Added
-* HTR-F4 Fusion Plasma Thruster
-  * Utilises plasma generated within a Plasma Heater as a potent thruster fuel
-  * Set the plasma type in the heater before placing the thruster to automatically set the plasma type
-* Double barrel shotgun (from [X5193](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5193))
-  * Special weapon, spawns as part of certain loot pools
-  * Uses the new 10 gauge caliber
-  * Will reload after each shot, however it is not belt-fed, if ammo is depleted, the next reload must be triggered manually
+* All new bedrock ore processing!
+  * Utilises the new system in NTMain, rebalanced and reworked for space!
+  * Drilling raw bedrock on Eve requires potassium permanganate, and Dres requires nitric acid
 
 ## Changed
-* HTR-3 renamed to LPW-3N, which can now also use all new nuclear fuels which all function as PWR coolants. a Fluid ID can be used to change fuel types
-* Removed the old casing items
-* Reduced the flicker on the autoshotgun's holo sights
+* Rotary furnace now needs a breathable atmosphere to operate
+* Filters on conveyor ejectors/sorters/etc can now filter on bedrock ore grades, so if you want to filter on crumbs you don't have to add every single crumb type (of which there are _many_ more now!)
+* Raw bedrock ore densities are now unique per seed + dimension, before it was identical over _every_ world AND dimension
+  * This means the upstream change that ore taken from the creative tab "...now has the stats of the position the player is in..." won't work (server/client sync issue, the client does not know world seed!). Instead, it'll be a perfectly average ore (1.0 in all stats)
+* /ntmstations tp command can now teleport you to planetary drives too, making saving the location of your builds in creative a breeze
+* Config option added to disable mun cows
+* Oxygen and jetpack tanks now stack to 16 and won't be consumed if your PLSS or jetpack is full
 
 ## Fixed
-* All fixes from upstream NTM - [X5193](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5193)
+* All fixes from upstream NTM
+* Certain rocket parts no longer render beyond their inventory slot
+* HTR-3 and HTR-F4 issues fixed, and extra tooltips added to make it easier to understand how to fuel and operate them
+* Rockets and drop pods now gravity turn to the east when launching
+* Fix DNT Nano Suit not showing that it is compatible with the PLSS

@@ -1,12 +1,13 @@
 package com.hbm.tileentity.machine;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.hbm.blocks.ModBlocks;
 import com.hbm.dim.trait.CBT_Atmosphere;
 import com.hbm.handler.atmosphere.ChunkAtmosphereManager;
+import com.hbm.inventory.UpgradeManagerNT;
 import com.hbm.inventory.RecipesCommon.AStack;
-import com.hbm.inventory.UpgradeManager;
 import com.hbm.inventory.container.ContainerVacuumCircuit;
 import com.hbm.inventory.gui.GUIVacuumCircuit;
 import com.hbm.inventory.recipes.VacuumCircuitRecipes;
@@ -46,6 +47,8 @@ public class TileEntityMachineVacuumCircuit extends TileEntityMachineBase implem
 	public ItemStack display;
 
 	public boolean canOperate = true;
+
+	public UpgradeManagerNT upgradeManager = new UpgradeManagerNT();
 	
 	public TileEntityMachineVacuumCircuit() {
 		super(8);
@@ -77,10 +80,12 @@ public class TileEntityMachineVacuumCircuit extends TileEntityMachineBase implem
 			this.updateConnections();
 			recipe = VacuumCircuitRecipes.getRecipe(new ItemStack[] {slots[0], slots[1], slots[2], slots[3]});
 			long intendedMaxPower;
+
 			
-			UpgradeManager.eval(slots, 6, 7);
-			int redLevel = Math.min(UpgradeManager.getLevel(UpgradeType.SPEED), 3);
-			int blueLevel = Math.min(UpgradeManager.getLevel(UpgradeType.POWER), 3);
+
+			upgradeManager.checkSlots(this, slots, 4, 4);
+			int redLevel = upgradeManager.getLevel(UpgradeType.SPEED);
+			int blueLevel = upgradeManager.getLevel(UpgradeType.POWER);
 			
 			if(recipe != null) {
 				this.processTime = recipe.duration - (recipe.duration * redLevel / 6) + (recipe.duration * blueLevel / 3);
@@ -323,10 +328,11 @@ public class TileEntityMachineVacuumCircuit extends TileEntityMachineBase implem
 	}
 
 	@Override
-	public int getMaxLevel(UpgradeType type) {
-		if(type == UpgradeType.SPEED) return 3;
-		if(type == UpgradeType.POWER) return 3;
-		return 0;
+	public HashMap<UpgradeType, Integer> getValidUpgrades() {
+		HashMap<UpgradeType, Integer> upgrades = new HashMap<>();
+		upgrades.put(UpgradeType.SPEED, 3);
+		upgrades.put(UpgradeType.POWER, 3);
+		return upgrades;
 	}
 
 }
