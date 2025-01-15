@@ -175,6 +175,10 @@ public class ArmorDNT extends ArmorFSBPowered {
 
 		list.add("Charge: " + BobMathUtil.getShortNumber(getCharge(stack)) + " / " + BobMathUtil.getShortNumber(this.getMaxCharge(stack)));
 
+		if(canSeal) {
+			list.add(EnumChatFormatting.BLUE + "" + I18n.format("armor.canSeal"));
+		}
+
 		list.add(EnumChatFormatting.GOLD + I18nUtil.resolveKey("armor.fullSetBonus"));
 
 		if(!effects.isEmpty()) {

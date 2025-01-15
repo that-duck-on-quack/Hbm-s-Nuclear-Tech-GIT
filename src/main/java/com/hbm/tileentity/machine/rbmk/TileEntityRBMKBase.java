@@ -12,21 +12,24 @@ import com.hbm.explosion.vanillant.standard.BlockProcessorStandard;
 import com.hbm.particle.helper.ExplosionCreator;
 import com.hbm.entity.projectile.EntityRBMKDebris;
 import com.hbm.entity.projectile.EntityRBMKDebris.DebrisType;
+import com.hbm.handler.neutron.NeutronNodeWorld;
+import com.hbm.handler.neutron.RBMKNeutronHandler.RBMKType;
 import com.hbm.explosion.ExplosionNukeGeneric;
 import com.hbm.main.MainRegistry;
 import com.hbm.packet.PacketDispatcher;
 import com.hbm.packet.toclient.AuxParticlePacketNT;
-import com.hbm.packet.toclient.NBTPacket;
 import com.hbm.saveddata.TomSaveData;
-import com.hbm.tileentity.INBTPacketReceiver;
+import com.hbm.tileentity.IBufPacketReceiver;
 import com.hbm.tileentity.IOverpressurable;
 import com.hbm.tileentity.TileEntityLoadedBase;
 import com.hbm.tileentity.machine.rbmk.TileEntityRBMKConsole.ColumnType;
 import com.hbm.util.Compat;
 import com.hbm.util.I18nUtil;
+import com.hbm.util.fauxpointtwelve.BlockPos;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -43,14 +46,19 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
-import java.util.*;
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * Base class for all RBMK components, active or passive. Handles heat and the explosion sequence
  * @author hbm
  *
  */
-public abstract class TileEntityRBMKBase extends TileEntityLoadedBase implements INBTPacketReceiver {
+public abstract class TileEntityRBMKBase extends TileEntityLoadedBase implements IBufPacketReceiver {
 
 	public double heat;
 
@@ -114,9 +122,7 @@ public abstract class TileEntityRBMKBase extends TileEntityLoadedBase implements
 			coolPassively();
 			this.worldObj.theProfiler.endSection();
 
-			NBTTagCompound data = new NBTTagCompound();
-			this.writeToNBT(data);
-			this.networkPack(data, trackingRange());
+			this.networkPackNT(trackingRange());
 		}
 	}
 
@@ -153,6 +159,9 @@ public abstract class TileEntityRBMKBase extends TileEntityLoadedBase implements
 	 * Moves heat to neighboring parts, if possible, in a relatively fair manner
 	 */
 	private void moveHeat() {
+
+		if(heat == 20 && RBMKDials.getReasimBoilers(worldObj))
+			return;
 
 		List<TileEntityRBMKBase> rec = new ArrayList();
 		rec.add(this);
@@ -218,6 +227,13 @@ public abstract class TileEntityRBMKBase extends TileEntityLoadedBase implements
 	}
 
 	@Override
+	public void invalidate() {
+		super.invalidate();
+
+		NeutronNodeWorld.removeNode(new BlockPos(this)); // woo-fucking-hoo!!!
+	}
+
+	@Override
 	public void markDirty() {
 
 		if(this.worldObj != null) {
@@ -238,6 +254,10 @@ public abstract class TileEntityRBMKBase extends TileEntityLoadedBase implements
 
 		if(heat < 20)
 			heat = 20D;
+	}
+
+	public RBMKType getRBMKType() {
+		return RBMKType.OTHER;
 	}
 
 	protected static boolean diag = false;
@@ -266,19 +286,18 @@ public abstract class TileEntityRBMKBase extends TileEntityLoadedBase implements
 		nbt.setInteger("steam", this.steam);
 	}
 
-	public void networkPack(NBTTagCompound nbt, int range) {
-
-		diag = true;
-		if(!worldObj.isRemote)
-			PacketDispatcher.wrapper.sendToAllAround(new NBTPacket(nbt, xCoord, yCoord, zCoord), new TargetPoint(this.worldObj.provider.dimensionId, xCoord, yCoord, zCoord, range));
-		diag = false;
+	@Override
+	public void serialize(ByteBuf buf) {
+		buf.writeDouble(this.heat);
+		buf.writeInt(this.water);
+		buf.writeInt(this.steam);
 	}
 
-	public void networkUnpack(NBTTagCompound nbt) {
-
-		diag = true;
-		this.readFromNBT(nbt);
-		diag = false;
+	@Override
+	public void deserialize(ByteBuf buf) {
+		this.heat = buf.readDouble();
+		this.water = buf.readInt();
+		this.steam = buf.readInt();
 	}
 
 	public void getDiagData(NBTTagCompound nbt) {
@@ -315,6 +334,7 @@ public abstract class TileEntityRBMKBase extends TileEntityLoadedBase implements
 		exceptions.add("z");
 		exceptions.add("items");
 		exceptions.add("id");
+		exceptions.add("muffled");
 
 		String title = "Dump of Ordered Data Diagnostic (DODD)";
 		mc.fontRenderer.drawString(title, pX + 1, pZ - 19, 0x006000);

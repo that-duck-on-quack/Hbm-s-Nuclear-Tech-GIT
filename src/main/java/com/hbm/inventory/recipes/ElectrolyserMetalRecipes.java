@@ -22,7 +22,8 @@ import com.hbm.items.machine.ItemScraps;
 import com.hbm.items.special.ItemBedrockOreNew;
 import com.hbm.items.special.ItemBedrockOreNew.BedrockOreGrade;
 import com.hbm.items.special.ItemBedrockOreNew.BedrockOreOutput;
-import com.hbm.items.special.ItemBedrockOreNew.BedrockOreType;
+import com.hbm.items.special.ItemBedrockOreNew.CelestialBedrockOre;
+import com.hbm.items.special.ItemBedrockOreNew.CelestialBedrockOreType;
 import com.hbm.util.ItemStackUtil;
 
 import com.hbm.util.Tuple.*;
@@ -30,7 +31,7 @@ import net.minecraft.item.ItemStack;
 
 public class ElectrolyserMetalRecipes extends SerializableRecipe {
 
-	public static HashMap<AStack, ElectrolysisMetalRecipe> recipes = new HashMap();
+	public static HashMap<AStack, ElectrolysisMetalRecipe> recipes = new HashMap<>();
 
 	@Override
 	public void registerDefaults() {
@@ -131,23 +132,14 @@ public class ElectrolyserMetalRecipes extends SerializableRecipe {
 				new ItemStack(ModItems.powder_copper, 4),
 				new ItemStack(ModItems.powder_lithium_tiny, 3)));
 
-		for(BedrockOreType type : BedrockOreType.values()) {
+		for(CelestialBedrockOreType type : CelestialBedrockOre.getAllTypes()) {
 			ArrayList<Pair<Object, Integer>> productsF = new ArrayList<>();
-			productsF.add(new Pair(type.primary1, 8));
-			productsF.add(new Pair(type.primary2, 4));
-			productsF.add(new Pair(ItemBedrockOreNew.make(BedrockOreGrade.CRUMBS, type), 3));
+			productsF.add(new Pair(type.primary, 12));
+			productsF.add(new Pair(ItemBedrockOreNew.make(BedrockOreGrade.CRUMBS, type), 1));
 			recipes.put(new ComparableStack(ItemBedrockOreNew.make(BedrockOreGrade.PRIMARY_FIRST, type)), makeBedrockOreProduct(productsF));
 
-			ArrayList<Pair<Object, Integer>> productsS = new ArrayList<>();
-			productsS.add(new Pair(type.primary1, 4));
-			productsS.add(new Pair(type.primary2, 8));
-			productsS.add(new Pair(ItemBedrockOreNew.make(BedrockOreGrade.CRUMBS, type),3));
-
-			recipes.put(new ComparableStack(ItemBedrockOreNew.make(BedrockOreGrade.PRIMARY_SECOND, type)), makeBedrockOreProduct(productsS));
-
 			ArrayList<Pair<Object, Integer>> productsC = new ArrayList<>();
-			productsC.add(new Pair(type.primary1, 2));
-			productsC.add(new Pair(type.primary2, 2));
+			productsC.add(new Pair(type.primary, 4));
 
 			recipes.put(new ComparableStack(ItemBedrockOreNew.make(BedrockOreGrade.CRUMBS, type)), makeBedrockOreProduct(productsC));
 		}

@@ -1,21 +1,20 @@
 package com.hbm.tileentity.machine;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.hbm.blocks.ModBlocks;
-import com.hbm.inventory.UpgradeManager;
+import com.hbm.inventory.UpgradeManagerNT;
 import com.hbm.inventory.container.ContainerMachineEPress;
 import com.hbm.inventory.gui.GUIMachineEPress;
 import com.hbm.inventory.recipes.PressRecipes;
 import com.hbm.items.machine.ItemMachineUpgrade.UpgradeType;
 import com.hbm.items.machine.ItemStamp;
 import com.hbm.lib.Library;
-import com.hbm.packet.toclient.AuxElectricityPacket;
-import com.hbm.packet.PacketDispatcher;
-//import com.hbm.packet.TEPressPacket;
 import com.hbm.tileentity.IGUIProvider;
 import com.hbm.tileentity.IUpgradeInfoProvider;
 import com.hbm.tileentity.TileEntityMachineBase;
+import com.hbm.util.BufferUtil;
 import com.hbm.util.CompatEnergyControl;
 import com.hbm.util.I18nUtil;
 
@@ -23,6 +22,7 @@ import api.hbm.energymk2.IEnergyReceiverMK2;
 import api.hbm.tile.IInfoProviderEC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -45,9 +45,11 @@ public class TileEntityMachineEPress extends TileEntityMachineBase implements IE
 	public final static int maxPress = 200;
 	boolean isRetracting = false;
 	private int delay;
-	
+
 	public ItemStack syncStack;
-	
+
+	public UpgradeManagerNT upgradeManager = new UpgradeManagerNT();
+
 	public TileEntityMachineEPress() {
 		super(5);
 	}
@@ -56,40 +58,40 @@ public class TileEntityMachineEPress extends TileEntityMachineBase implements IE
 	public String getName() {
 		return "container.epress";
 	}
-	
+
 	@Override
 	public void updateEntity() {
-		
+
 		if(!worldObj.isRemote) {
-			
+
 			this.updateConnections();
 			power = Library.chargeTEFromItems(slots, 0, power, maxPower);
-			
+
 			boolean canProcess = this.canProcess();
-			
+
 			if((canProcess || this.isRetracting || this.delay > 0) && power >= 100) {
-				
+
 				power -= 100;
-				
+
 				if(delay <= 0) {
-					
-					UpgradeManager.eval(slots, 4, 4);
-					int speed = 1 + Math.min(3, UpgradeManager.getLevel(UpgradeType.SPEED));
-					
+
+					upgradeManager.checkSlots(this, slots, 4, 4);
+					int speed = 1 + upgradeManager.getLevel(UpgradeType.SPEED);
+
 					int stampSpeed = this.isRetracting ? 20 : 45;
 					stampSpeed *= (1D + (double) speed / 4D);
-					
+
 					if(this.isRetracting) {
 						this.press -= stampSpeed;
-						
+
 						if(this.press <= 0) {
 							this.isRetracting = false;
 							this.delay = 5 - speed + 1;
 						}
 					} else if(canProcess) {
 						this.press += stampSpeed;
-						
-						if(this.press >= this.maxPress) {
+
+						if(this.press >= maxPress) {
 							this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "hbm:block.pressOperate", getVolume(1.5F), 1.0F);
 							ItemStack output = PressRecipes.getOutput(slots[2], slots[1]);
 							if(slots[3] == null) {
@@ -98,17 +100,17 @@ public class TileEntityMachineEPress extends TileEntityMachineBase implements IE
 								slots[3].stackSize += output.stackSize;
 							}
 							this.decrStackSize(2, 1);
-							
+
 							if(slots[1].getMaxDamage() != 0) {
 								slots[1].setItemDamage(slots[1].getItemDamage() + 1);
 								if(slots[1].getItemDamage() >= slots[1].getMaxDamage()) {
 									slots[1] = null;
 								}
 							}
-							
+
 							this.isRetracting = true;
 							this.delay = 5 - speed + 1;
-							
+
 							this.markDirty();
 						}
 					} else if(this.press > 0){
@@ -118,23 +120,14 @@ public class TileEntityMachineEPress extends TileEntityMachineBase implements IE
 					delay--;
 				}
 			}
-			
-			NBTTagCompound data = new NBTTagCompound();
-			data.setLong("power", power);
-			data.setInteger("press", press);
-			if(slots[2] != null) {
-				NBTTagCompound stack = new NBTTagCompound();
-				slots[2].writeToNBT(stack);
-				data.setTag("stack", stack);
-			}
-			
-			this.networkPack(data, 50);
-			
+
+			this.networkPackNT(50);
+
 		} else {
-			
+
 			// approach-based interpolation, GO!
 			this.lastPress = this.renderPress;
-			
+
 			if(this.turnProgress > 0) {
 				this.renderPress = this.renderPress + ((this.syncPress - this.renderPress) / (double) this.turnProgress);
 				--this.turnProgress;
@@ -143,52 +136,58 @@ public class TileEntityMachineEPress extends TileEntityMachineBase implements IE
 			}
 		}
 	}
-	
+
 	@Override
-	public void networkUnpack(NBTTagCompound nbt) {
-		super.networkUnpack(nbt);
-		
-		this.power = nbt.getLong("power");
-		this.syncPress = nbt.getInteger("press");
-		
-		if(nbt.hasKey("stack")) {
-			NBTTagCompound stack = nbt.getCompoundTag("stack");
-			this.syncStack = ItemStack.loadItemStackFromNBT(stack);
-		} else {
-			this.syncStack = null;
-		}
-		
+	public void serialize(ByteBuf buf) {
+		super.serialize(buf);
+		buf.writeLong(power);
+		buf.writeInt(press);
+		if (slots[2] == null)
+			buf.writeShort(-1); // indicate that the NBT doesn't actually exist to avoid null pointer errors.
+		else
+			BufferUtil.writeNBT(buf, slots[2].stackTagCompound);
+	}
+
+	@Override
+	public void deserialize(ByteBuf buf) {
+		super.deserialize(buf);
+		this.power = buf.readLong();
+		this.syncPress = buf.readInt();
+
+		NBTTagCompound stack = BufferUtil.readNBT(buf);
+		this.syncStack = ItemStack.loadItemStackFromNBT(stack);
+
 		this.turnProgress = 2;
 	}
-	
+
 	public boolean canProcess() {
 		if(power < 100) return false;
 		if(slots[1] == null || slots[2] == null) return false;
-		
+
 		ItemStack output = PressRecipes.getOutput(slots[2], slots[1]);
-		
+
 		if(output == null) return false;
-		
+
 		if(slots[3] == null) return true;
 		if(slots[3].stackSize + output.stackSize <= slots[3].getMaxStackSize() && slots[3].getItem() == output.getItem() && slots[3].getItemDamage() == output.getItemDamage()) return true;
 		return false;
 	}
-	
+
 	private void updateConnections() {
-		
+
 		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 			this.trySubscribe(worldObj, xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, dir);
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		
+
 		if(stack.getItem() instanceof ItemStamp)
 			return i == 1;
-		
+
 		return i == 2;
 	}
-	
+
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {
 		return new int[] { 1, 2, 3 };
@@ -203,16 +202,16 @@ public class TileEntityMachineEPress extends TileEntityMachineBase implements IE
 	public boolean canExtractItem(int i, ItemStack itemStack, int j) {
 		return i == 3;
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		
+
 		press = nbt.getInteger("press");
 		power = nbt.getInteger("power");
 		isRetracting = nbt.getBoolean("ret");
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
@@ -225,7 +224,7 @@ public class TileEntityMachineEPress extends TileEntityMachineBase implements IE
 	@Override
 	public void setPower(long i) {
 		power = i;
-		
+
 	}
 
 	@Override
@@ -237,19 +236,19 @@ public class TileEntityMachineEPress extends TileEntityMachineBase implements IE
 	public long getMaxPower() {
 		return maxPower;
 	}
-	
+
 	AxisAlignedBB aabb;
-	
+
 	@Override
 	public AxisAlignedBB getRenderBoundingBox() {
-		
+
 		if(aabb != null)
 			return aabb;
-		
+
 		aabb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 3, zCoord + 1);
 		return aabb;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public double getMaxRenderDistanceSquared() {
@@ -276,14 +275,15 @@ public class TileEntityMachineEPress extends TileEntityMachineBase implements IE
 	public void provideInfo(UpgradeType type, int level, List<String> info, boolean extendedInfo) {
 		info.add(IUpgradeInfoProvider.getStandardLabel(ModBlocks.machine_epress));
 		if(type == UpgradeType.SPEED) {
-			info.add(EnumChatFormatting.GREEN + I18nUtil.resolveKey(this.KEY_DELAY, "-" + (50 * level / 3) + "%"));
+			info.add(EnumChatFormatting.GREEN + I18nUtil.resolveKey(KEY_DELAY, "-" + (50 * level / 3) + "%"));
 		}
 	}
 
 	@Override
-	public int getMaxLevel(UpgradeType type) {
-		if(type == UpgradeType.SPEED) return 3;
-		return 0;
+	public HashMap<UpgradeType, Integer> getValidUpgrades() {
+		HashMap<UpgradeType, Integer> upgrades = new HashMap<>();
+		upgrades.put(UpgradeType.SPEED, 3);
+		return upgrades;
 	}
 
 	@Override
