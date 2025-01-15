@@ -133,6 +133,42 @@ public class RefineryRecipes {
 			new FluidStack(Fluids.SLOP, oreslop_frack),
 			new ItemStack(Blocks.gravel)
 			));
+		refinery.put(Fluids.LIGHTOIL_CRACK, new Quintet(
+			new FluidStack(Fluids.TOULENE,12),
+			new FluidStack(Fluids.BENZENE,60),
+			new FluidStack(Fluids.BUTENE,24),
+			new FluidStack(Fluids.ETHANE,4),
+			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRACK)
+		));
+		refinery.put(Fluids.NAPHTHA_CRACK, new Quintet(
+			new FluidStack(Fluids.TOULENE,15),
+			new FluidStack(Fluids.PROPANE,5),
+			new FluidStack(Fluids.ETHANE,15),
+			new FluidStack(Fluids.ETHYLENE,65),
+			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRACK)
+		));
+		refinery.put(Fluids.NAPHTHA_CRACK, new Quintet(
+			new FluidStack(Fluids.NAPHTHA,15),
+			new FluidStack(Fluids.PROPANE,5),
+			new FluidStack(Fluids.ETHANE,15),
+			new FluidStack(Fluids.ETHYLENE,65),
+			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRACK)
+		));
+		refinery.put(Fluids.LIGHTOIL, new Quintet(
+			new FluidStack(Fluids.NAPHTHA,50),
+			new FluidStack(Fluids.KEROSENE,30),
+			new FluidStack(Fluids.ETHANE,5),
+			new FluidStack(Fluids.PETROLEUM,15),
+			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRUDE)
+		));
+		refinery.put(Fluids.NAPHTHA, new Quintet(
+			new FluidStack(Fluids.BUTANE,45),
+			new FluidStack(Fluids.PROPANE,35),
+			new FluidStack(Fluids.ETHANE,5),
+			new FluidStack(Fluids.PETROLEUM,15),
+			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRUDE)
+		));
+
 
 		vacuum.put(Fluids.OIL, new Quartet(
 				new FluidStack(Fluids.HEAVYOIL_VACUUM,	vac_frac_heavy),

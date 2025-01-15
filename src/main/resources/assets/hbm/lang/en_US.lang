@@ -1698,7 +1698,7 @@ hbmfluid.ethylene=Ethylene
 hbmfluid.acetylene=Acetylene
 hbmfluid.oslurry=Oil Slurry
 hbmfluid.dshslurry=Acidic Desh Mixture
-hbmfluid.toluene=Toluene
+hbmfluid.toulene=Toulene
 hbmfluid.benzene=Benzene
 hbmfluid.butene=Butene
 hbmfluid.ethane=Ethane
@@ -1707,6 +1707,9 @@ hbmfluid.octane=Octane
 hbmfluid.styrene=Styrene
 hbmfluid.butadiene=Butadiene
 hbmfluid.vinyl_chloride=Vinyl Chloride
+hbmfluid.butane= Butane
+hbmfluid.phenol= Phenol
+hbmfluid.acetone= Acetone
 //HBM Hard Pseudo-Fluids
 hbmpseudofluid.dslurry=Acidic Desh Mixture
 //HBM hard chem recipes

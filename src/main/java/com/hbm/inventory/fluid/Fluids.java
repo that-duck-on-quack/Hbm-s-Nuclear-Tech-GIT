@@ -237,11 +237,13 @@ public class Fluids {
 	public static FluidType OSLURRY;
 	public static FluidType DIRTY_WATER;
 	public static FluidType AERATEDWATER;
+	public static FluidType DSHSLURRY;
+
+	//hbm hard oils
 	public static FluidType PROPYNE;
 	public static FluidType BUTYNE;
 	public static FluidType	ETHYLENE;
 	public static FluidType ACETYLENE;
-	public static FluidType DSHSLURRY;
 	public static FluidType TOULENE;
 	public static FluidType BENZENE;
 	public static FluidType	BUTENE;
@@ -251,6 +253,10 @@ public class Fluids {
 	public static FluidType STYRENE;
 	public static FluidType BUTADIENE;
 	public static FluidType VINYL_CHLORIDE;
+	public static FluidType BUTANE;
+	public static FluidType ACETONE;
+	public static FluidType PHENOL;
+
 
 	//morkite would be like a gravelly oil. it would be a goopy liquidized gravel.
 	//point being, if the crystals were melted down and the liquid extracted
@@ -554,6 +560,9 @@ public class Fluids {
 		STYRENE= new FluidType("STYRENE",0xF08080,2,3,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
 		BUTADIENE = new FluidType("BUTADIENE",0xFFDAB9,2,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
 		VINYL_CHLORIDE = new FluidType("VINYL_CHLORIDE",0xC0C0C0,3,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
+		BUTANE = new FluidType("BUTANE",0xFFD700,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
+		ACETONE = new FluidType("ACETONE", 0xFFB6C1,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
+		PHENOL = new FluidType("PHENOL",0xDDA0DD,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
 		// ^ ^ ^ ^ ^ ^ ^ ^
 
 		//ADD NEW FLUIDS HERE
@@ -806,6 +815,9 @@ public class Fluids {
 		metaOrder.add(STYRENE);
 		metaOrder.add(BUTADIENE);
 		metaOrder.add(VINYL_CHLORIDE);
+		metaOrder.add(BUTANE);
+		metaOrder.add(ACETONE);
+		metaOrder.add(PHENOL);
 		//ANY INTERNAL RENAMING MUST BE REFLECTED HERE - DON'T FORGET TO CHANGE: LANG FILES + TYPE'S STRING ID + NAME OF TANK/GUI TEXTURE FILES!
 		// V
 

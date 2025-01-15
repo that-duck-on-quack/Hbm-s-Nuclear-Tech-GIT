@@ -59,7 +59,7 @@ public class CrackingRecipes extends SerializableRecipe {
 		cracking.put(Fluids.TEKTOAIR,				new Pair(new FluidStack(Fluids.METHANOL,	tekto_crack_atmo),		new FluidStack(Fluids.AROMATICS,	tekto_crack_hydride)));
 		cracking.put(Fluids.ELBOWGREASE,			new Pair(new FluidStack(Fluids.MERCURY,	70),					new FluidStack(Fluids.SOURGAS,	50)));
 		cracking.put(Fluids.MORKINE,				new Pair(new FluidStack(Fluids.METHANOL,	40),				new FluidStack(Fluids.REFORMGAS,	20)));
-		cracking.put(Fluids.NAPHTHA_CRACK,  		new Pair(new FluidStack(Fluids.ETHYLENE, 60),					new FluidStack(Fluids.PETROLEUM, 40)));
+		cracking.put(Fluids.PETROLEUM, 				new Pair(new FluidStack(Fluids.BUTANE,50),						new FluidStack(Fluids.PROPANE,50)));
 	}
 
 	public static Pair<FluidStack, FluidStack> getCracking(FluidType oil) {
