@@ -29,6 +29,7 @@ import com.hbm.inventory.fluid.trait.FT_Toxin.*;
 import com.hbm.render.util.EnumSymbol;
 import com.hbm.util.ArmorRegistry.HazardClass;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
@@ -241,6 +242,15 @@ public class Fluids {
 	public static FluidType	ETHYLENE;
 	public static FluidType ACETYLENE;
 	public static FluidType DSHSLURRY;
+	public static FluidType TOULENE;
+	public static FluidType BENZENE;
+	public static FluidType	BUTENE;
+	public static FluidType ETHANE;
+	public static FluidType PROPANE;
+	public static FluidType OCTANE;
+	public static FluidType STYRENE;
+	public static FluidType BUTADIENE;
+	public static FluidType VINYL_CHLORIDE;
 
 	//morkite would be like a gravelly oil. it would be a goopy liquidized gravel.
 	//point being, if the crystals were melted down and the liquid extracted
@@ -535,7 +545,17 @@ public class Fluids {
 		BUTYNE = new FluidType("BUTYNE",0xFFFF00,1,4,1,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
 		ETHYLENE = new FluidType("ETHYLENE",0xddf7ff, 1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
 		ACETYLENE = new FluidType("ACETYLENE",0xFFA500,1,4,3,EnumSymbol.ASPHYXIANT).addTraits(new FT_Flammable(1000),GASEOUS);
+		TOULENE = new FluidType("TOULENE", 0xFFCC80, 2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
+		BENZENE = new FluidType("BENZENE", 0xFFC0CB,3,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
+		BUTENE = new FluidType("BUTENE",0xFFD700,1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
+		ETHANE = new FluidType("ETHANE",0x87CEFA,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
+		PROPANE = new FluidType("PROPANE",0x4682B4,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
+		OCTANE = new FluidType("OCTANE",0xFFA500,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
+		STYRENE= new FluidType("STYRENE",0xF08080,2,3,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
+		BUTADIENE = new FluidType("BUTADIENE",0xFFDAB9,2,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
+		VINYL_CHLORIDE = new FluidType("VINYL_CHLORIDE",0xC0C0C0,3,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
 		// ^ ^ ^ ^ ^ ^ ^ ^
+
 		//ADD NEW FLUIDS HERE
 
 		File folder = MainRegistry.configHbmDir;
@@ -777,7 +797,15 @@ public class Fluids {
 		metaOrder.add(BUTYNE);
 		metaOrder.add(ETHYLENE);
 		metaOrder.add(ACETYLENE);
-
+		metaOrder.add(TOULENE);
+		metaOrder.add(BENZENE);
+		metaOrder.add(BUTENE);
+		metaOrder.add(ETHANE);
+		metaOrder.add(PROPANE);
+		metaOrder.add(OCTANE);
+		metaOrder.add(STYRENE);
+		metaOrder.add(BUTADIENE);
+		metaOrder.add(VINYL_CHLORIDE);
 		//ANY INTERNAL RENAMING MUST BE REFLECTED HERE - DON'T FORGET TO CHANGE: LANG FILES + TYPE'S STRING ID + NAME OF TANK/GUI TEXTURE FILES!
 		// V
 
