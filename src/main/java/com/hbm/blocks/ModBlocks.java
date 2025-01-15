@@ -1343,7 +1343,6 @@ public class ModBlocks {
 
 	//NTM Hard Stuff
 	public static Block testfunny;
-	public static Block bftrigonome;
 
 	public static Material materialGas = new MaterialGas();
 
@@ -2598,7 +2597,6 @@ public class ModBlocks {
 		//NTM Hard Stuff
 		// blockname = new BlockFunction(Material.iron).setBlockName("blockname").setHardness(hardness).setCreativeTab(MainRegistry.TAB).setBlockTextureName(RefStrings.MODID + ":blockname"); <-- set texture to ":block_steel" if multiblock.
 		testfunny = new MachineTestFunny(Material.iron).setBlockName("testfunny").setHardness(1.0F).setCreativeTab(MainRegistry.nukeTab).setBlockTextureName(RefStrings.MODID + ":testfunny");
-		bftrigonome = new MachineBFTrigonome(Material.iron).setBlockName("bftrigonome").setHardness(1.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel");
 	}
 
 	private static void registerBlock() {
@@ -3838,7 +3836,6 @@ public class ModBlocks {
 
 		// NTM Hard Stuff
 		GameRegistry.registerBlock(testfunny, testfunny.getUnlocalizedName());
-		register(bftrigonome);
 	}
 
 	private static void register(Block b) {
