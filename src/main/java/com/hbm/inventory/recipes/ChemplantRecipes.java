@@ -20,7 +20,9 @@ import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.recipes.loader.SerializableRecipe;
 import com.hbm.items.ItemEnums;
 import com.hbm.items.ModItems;
+import com.hbm.items.machine.ItemCircuit;
 import com.hbm.main.MainRegistry;
+import com.hbm.items.machine.ItemCircuit.EnumCircuitType;
 
 
 import cpw.mods.fml.common.Mod;
@@ -560,6 +562,11 @@ public class ChemplantRecipes extends SerializableRecipe {
 		recipes.add(new ChemRecipe(1108, "ETHYLENE", 200)
 			.inputFluids(new FluidStack(Fluids.ETHANE, 500), new FluidStack(Fluids.OXYGEN, 1000))
 			.outputFluids(new FluidStack(Fluids.ETHYLENE,500))
+		);
+		recipes.add(new ChemRecipe(1109,"CircuitBoard",60)  //fcukkk you :D
+			.inputFluids(new FluidStack(Fluids.RESIN,100))
+			.inputItems(new ComparableStack(ModItems.plate_polymer, 1),  new OreDictStack(CU.wireFine(), 2))
+			.outputItems(new ItemStack(ModItems.circuit, 2, EnumCircuitType.PCB.ordinal()))
 		);
 
 
