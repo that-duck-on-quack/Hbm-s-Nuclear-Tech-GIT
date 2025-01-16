@@ -442,6 +442,8 @@ public class ClientProxy extends ServerProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVaultDoor.class, new RenderVaultDoor());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlastDoor.class, new RenderBlastDoor());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDoorGeneric.class, new RenderDoorGeneric());
+		//NTM Hard Stuff
+
 	}
 
 	@Override
@@ -993,20 +995,20 @@ public class ClientProxy extends ServerProxy {
 		}
 
 		if("missileContrailf".equals(type)) {
-			
+
 			if(Vec3.createVectorHelper(player.posX - x, player.posY - y, player.posZ - z).lengthVector() > 350) return;
-			
+
 			float scale = data.hasKey("scale") ? data.getFloat("scale") : 1F;
 			double mX = data.getDouble("moX");
 			double mY = data.getDouble("moY");
 			double mZ = data.getDouble("moZ");
-			
+
 			/*ParticleContrail contrail = new ParticleContrail(man, world, x, y, z, 0, 0, 0, scale);
 			contrail.motionX = mX;
 			contrail.motionY = mY;
 			contrail.motionZ = mZ;
 			Minecraft.getMinecraft().effectRenderer.addEffect(contrail);*/
-			
+
 			ParticleRocketFusion fx = new ParticleRocketFusion(man, world, x, y, z).setScale(scale);
 			fx.motionX = mX;
 			fx.motionY = mY;
@@ -1016,20 +1018,20 @@ public class ClientProxy extends ServerProxy {
 		}
 
 		if("missileContrailbf".equals(type)) {
-			
+
 			if(Vec3.createVectorHelper(player.posX - x, player.posY - y, player.posZ - z).lengthVector() > 350) return;
-			
+
 			float scale = data.hasKey("scale") ? data.getFloat("scale") : 1F;
 			double mX = data.getDouble("moX");
 			double mY = data.getDouble("moY");
 			double mZ = data.getDouble("moZ");
-			
+
 			/*ParticleContrail contrail = new ParticleContrail(man, world, x, y, z, 0, 0, 0, scale);
 			contrail.motionX = mX;
 			contrail.motionY = mY;
 			contrail.motionZ = mZ;
 			Minecraft.getMinecraft().effectRenderer.addEffect(contrail);*/
-			
+
 			ParticleRocketBF fx = new ParticleRocketBF(man, world, x, y, z).setScale(scale);
 			fx.motionX = mX;
 			fx.motionY = mY;
@@ -1039,20 +1041,20 @@ public class ClientProxy extends ServerProxy {
 		}
 
 		if("missileContrailMUD".equals(type)) {
-			
+
 			if(Vec3.createVectorHelper(player.posX - x, player.posY - y, player.posZ - z).lengthVector() > 350) return;
-			
+
 			float scale = data.hasKey("scale") ? data.getFloat("scale") : 1F;
 			double mX = data.getDouble("moX");
 			double mY = data.getDouble("moY");
 			double mZ = data.getDouble("moZ");
-			
+
 			/*ParticleContrail contrail = new ParticleContrail(man, world, x, y, z, 0, 0, 0, scale);
 			contrail.motionX = mX;
 			contrail.motionY = mY;
 			contrail.motionZ = mZ;
 			Minecraft.getMinecraft().effectRenderer.addEffect(contrail);*/
-			
+
 			ParticleRocketMUD fx = new ParticleRocketMUD(man, world, x, y, z).setScale(scale);
 			fx.motionX = mX;
 			fx.motionY = mY;
@@ -1062,20 +1064,20 @@ public class ClientProxy extends ServerProxy {
 		}
 
 		if("missileContrailSCH".equals(type)) {
-			
+
 			if(Vec3.createVectorHelper(player.posX - x, player.posY - y, player.posZ - z).lengthVector() > 350) return;
-			
+
 			float scale = data.hasKey("scale") ? data.getFloat("scale") : 1F;
 			double mX = data.getDouble("moX");
 			double mY = data.getDouble("moY");
 			double mZ = data.getDouble("moZ");
-			
+
 			/*ParticleContrail contrail = new ParticleContrail(man, world, x, y, z, 0, 0, 0, scale);
 			contrail.motionX = mX;
 			contrail.motionY = mY;
 			contrail.motionZ = mZ;
 			Minecraft.getMinecraft().effectRenderer.addEffect(contrail);*/
-			
+
 			ParticleRocketSCH fx = new ParticleRocketSCH(man, world, x, y, z).setScale(scale);
 			fx.motionX = mX;
 			fx.motionY = mY;
@@ -1085,20 +1087,20 @@ public class ClientProxy extends ServerProxy {
 		}
 
 		if("missileContrailUP".equals(type)) {
-			
+
 			if(Vec3.createVectorHelper(player.posX - x, player.posY - y, player.posZ - z).lengthVector() > 350) return;
-			
+
 			float scale = data.hasKey("scale") ? data.getFloat("scale") : 1F;
 			double mX = data.getDouble("moX");
 			double mY = data.getDouble("moY");
 			double mZ = data.getDouble("moZ");
-			
+
 			/*ParticleContrail contrail = new ParticleContrail(man, world, x, y, z, 0, 0, 0, scale);
 			contrail.motionX = mX;
 			contrail.motionY = mY;
 			contrail.motionZ = mZ;
 			Minecraft.getMinecraft().effectRenderer.addEffect(contrail);*/
-			
+
 			ParticleRocketUP fx = new ParticleRocketUP(man, world, x, y, z).setScale(scale);
 			fx.motionX = mX;
 			fx.motionY = mY;
@@ -1887,12 +1889,12 @@ public class ClientProxy extends ServerProxy {
 
 			EntityFX fx = new net.minecraft.client.particle.EntityCritFX(world, x, y, z, mX, mY, mZ);
 			fx.nextTextureIndexX();
-				
+
 			if(data.hasKey("color")) {
 				Color color = new Color(data.getInteger("color"));
 				fx.setRBGColorF(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F);
 			}
-				
+
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);
 		}
 
@@ -2139,7 +2141,7 @@ public class ClientProxy extends ServerProxy {
 			for(int i = 0; i < ejector.getAmount(); i++) {
 				ejector.spawnCasing(man, casingConfig, world, x, y, z, data.getFloat("pitch"), data.getFloat("yaw"), data.getBoolean("crouched"));
 			}
-			
+
 		}
 		if("radSmoke".equals(type)) {
 			ParticleRadiationFog contrail = new ParticleRadiationFog(man, world, x, y, z);
@@ -2269,7 +2271,7 @@ public class ClientProxy extends ServerProxy {
 	public boolean getImpact(World world) {
 		return ImpactWorldHandler.getImpactForClient(world);
 	}
-	
+
 	@Override
 	public void playSoundClient(double x, double y, double z, String sound, float volume, float pitch) {
 		Minecraft.getMinecraft().getSoundHandler().playSound(new PositionedSoundRecord(new ResourceLocation(sound), volume, pitch, (float) x, (float) y, (float) z));
