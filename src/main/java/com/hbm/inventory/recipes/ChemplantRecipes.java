@@ -114,8 +114,8 @@ public class ChemplantRecipes extends SerializableRecipe {
 				.outputItems(new ItemStack(ModItems.ingot_polymer)));
 		recipes.add(new ChemRecipe(81, "BAKELITE", 100)
 				.inputFluids(
-						new FluidStack(Fluids.AROMATICS, 500, GeneralConfig.enable528 ? 1 : 0),
-						new FluidStack(Fluids.PETROLEUM, 500, GeneralConfig.enable528 ? 1 : 0))
+						new FluidStack(Fluids.BENZENE, 500, GeneralConfig.enable528 ? 1 : 0),
+						new FluidStack(Fluids.BUTENE, 500, GeneralConfig.enable528 ? 1 : 0))
 				.outputItems(new ItemStack(ModItems.ingot_bakelite)));
 		recipes.add(new ChemRecipe(82, "RUBBER", 100)
 						.inputItems(new OreDictStack(S.dust()))
@@ -557,6 +557,11 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.inputFluids(new FluidStack(Fluids.ETHYLENE, 1000), new FluidStack(Fluids.CHLORINE, 2000))
 			.outputFluids(new FluidStack(Fluids.VINYL_CHLORIDE, 1000), new FluidStack(Fluids.HCL, 250))
 		);
+		recipes.add(new ChemRecipe(1108, "ETHYLENE", 200)
+			.inputFluids(new FluidStack(Fluids.ETHANE, 500), new FluidStack(Fluids.OXYGEN, 1000))
+			.outputFluids(new FluidStack(Fluids.ETHYLENE,500))
+		);
+
 
 
 	}

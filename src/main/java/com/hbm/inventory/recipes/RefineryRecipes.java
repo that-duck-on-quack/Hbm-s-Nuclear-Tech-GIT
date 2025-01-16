@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.hbm.blocks.ModBlocks;
 import com.hbm.inventory.FluidStack;
 import com.hbm.inventory.OreDictManager.DictFrame;
 import com.hbm.inventory.fluid.FluidType;
@@ -140,18 +141,18 @@ public class RefineryRecipes {
 			new FluidStack(Fluids.ETHANE,4),
 			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRACK)
 		));
+		//refinery.put(Fluids.NAPHTHA_CRACK, new Quintet(
+			//new FluidStack(Fluids.TOULENE,15),
+			//new FluidStack(Fluids.PROPANE,5),
+			//new FluidStack(Fluids.ETHANE,15),
+			//new FluidStack(Fluids.ETHYLENE,65),
+			//DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRACK)
+		//));
 		refinery.put(Fluids.NAPHTHA_CRACK, new Quintet(
-			new FluidStack(Fluids.TOULENE,15),
+			new FluidStack(Fluids.GASOLINE,30),
 			new FluidStack(Fluids.PROPANE,5),
-			new FluidStack(Fluids.ETHANE,15),
-			new FluidStack(Fluids.ETHYLENE,65),
-			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRACK)
-		));
-		refinery.put(Fluids.NAPHTHA_CRACK, new Quintet(
-			new FluidStack(Fluids.NAPHTHA,15),
-			new FluidStack(Fluids.PROPANE,5),
-			new FluidStack(Fluids.ETHANE,15),
-			new FluidStack(Fluids.ETHYLENE,65),
+			new FluidStack(Fluids.ETHANE,10),
+			new FluidStack(Fluids.ETHYLENE,55),
 			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRACK)
 		));
 		refinery.put(Fluids.LIGHTOIL, new Quintet(
@@ -162,11 +163,18 @@ public class RefineryRecipes {
 			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRUDE)
 		));
 		refinery.put(Fluids.NAPHTHA, new Quintet(
-			new FluidStack(Fluids.BUTANE,45),
-			new FluidStack(Fluids.PROPANE,35),
-			new FluidStack(Fluids.ETHANE,5),
-			new FluidStack(Fluids.PETROLEUM,15),
+			new FluidStack(Fluids.GASOLINE,50),
+			new FluidStack(Fluids.BUTENE,15),
+			new FluidStack(Fluids.ETHANE,10),
+			new FluidStack(Fluids.PETROLEUM,25),
 			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRUDE)
+		));
+		refinery.put(Fluids.HEAVYOIL, new Quintet(
+			new FluidStack(Fluids.LIGHTOIL, 50),
+			new FluidStack(Fluids.NAPHTHA, 30),
+			new FluidStack(Fluids.BUTADIENE, 10),
+			new FluidStack(Fluids.BITUMEN, 10),
+			new ItemStack(ModBlocks.asphalt,1)
 		));
 
 
