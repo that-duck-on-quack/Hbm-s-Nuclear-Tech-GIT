@@ -256,6 +256,7 @@ public class Fluids {
 	public static FluidType BUTANE;
 	public static FluidType ACETONE;
 	public static FluidType PHENOL;
+	public static FluidType EPOXY;
 
 
 	//morkite would be like a gravelly oil. it would be a goopy liquidized gravel.
@@ -563,6 +564,7 @@ public class Fluids {
 		BUTANE = new FluidType("BUTANE",0xFFD700,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
 		ACETONE = new FluidType("ACETONE", 0xFFB6C1,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
 		PHENOL = new FluidType("PHENOL",0xDDA0DD,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
+		EPOXY = new FluidType("EPOXY",0xFFFFFF,0,0,0, EnumSymbol.NONE).addTraits(VISCOUS);
 		// ^ ^ ^ ^ ^ ^ ^ ^
 
 		//ADD NEW FLUIDS HERE
@@ -818,6 +820,7 @@ public class Fluids {
 		metaOrder.add(BUTANE);
 		metaOrder.add(ACETONE);
 		metaOrder.add(PHENOL);
+		metaOrder.add(EPOXY);
 		//ANY INTERNAL RENAMING MUST BE REFLECTED HERE - DON'T FORGET TO CHANGE: LANG FILES + TYPE'S STRING ID + NAME OF TANK/GUI TEXTURE FILES!
 		// V
 

@@ -108,23 +108,38 @@ public class ChemplantRecipes extends SerializableRecipe {
 		recipes.add(new ChemRecipe(92, "SOLVENT", 50)
 				.inputFluids(new FluidStack(Fluids.NAPHTHA, 500), new FluidStack(Fluids.AROMATICS, 500))
 				.outputFluids(new FluidStack(Fluids.SOLVENT, 1000)));
-		recipes.add(new ChemRecipe(43, "POLYMER", 100)
+		recipes.add(new ChemRecipe(43, "POLYMER2", 100)
 				.inputItems(
 						new OreDictStack(ANY_COAL_COKE.dust(), 2),
 						new OreDictStack(F.dust()))
 				.inputFluids(new FluidStack(Fluids.POLYTHYLENE, 500, GeneralConfig.enable528 ? 1 : 0))
 				.outputItems(new ItemStack(ModItems.ingot_polymer)));
+		recipes.add(new ChemRecipe(43, "POLYMER", 100)
+				.inputItems(
+					new OreDictStack(ANY_COAL_COKE.dust(), 2),
+					new OreDictStack(F.dust()))
+				.inputFluids(new FluidStack(Fluids.PETROLEUM, 3000, GeneralConfig.enable528 ? 1 : 0))
 		recipes.add(new ChemRecipe(81, "BAKELITE", 100)
 				.inputFluids(
-						new FluidStack(Fluids.BENZENE, 500, GeneralConfig.enable528 ? 1 : 0),
-						new FluidStack(Fluids.BUTENE, 500, GeneralConfig.enable528 ? 1 : 0))
+						new FluidStack(Fluids.PETROLEUM, 2000, GeneralConfig.enable528 ? 1 : 0),
+						new FluidStack(Fluids.AROMATICS, 2000, GeneralConfig.enable528 ? 1 : 0))
 				.outputItems(new ItemStack(ModItems.ingot_bakelite)));
+		recipes.add(new ChemRecipe(81, "BAKELITE2", 100)
+			.inputFluids(
+				new FluidStack(Fluids.BENZENE, 500, GeneralConfig.enable528 ? 1 : 0),
+				new FluidStack(Fluids.BUTENE, 500, GeneralConfig.enable528 ? 1 : 0))
+			.outputItems(new ItemStack(ModItems.ingot_bakelite)));
 		recipes.add(new ChemRecipe(82, "RUBBER", 100)
 						.inputItems(new OreDictStack(S.dust()))
 				.inputFluids(
 						new FluidStack(Fluids.STYRENE, 500),
 						new FluidStack(Fluids.BUTADIENE,500))
 				.outputItems(new ItemStack(ModItems.ingot_rubber)));
+		recipes.add(new ChemRecipe(82, "RUBBER2", 100)
+			.inputItems(new OreDictStack(S.dust(),2))
+			.inputFluids(
+				new FluidStack(Fluids.UNSATURATEDS, 2000))
+			.outputItems(new ItemStack(ModItems.ingot_rubber)));
 		/*recipes.add(new ChemRecipe(94, "PET", 100)
 				.inputItems(new OreDictStack(AL.dust()))
 				.inputFluids(
@@ -563,10 +578,14 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.inputFluids(new FluidStack(Fluids.ETHANE, 500), new FluidStack(Fluids.OXYGEN, 1000))
 			.outputFluids(new FluidStack(Fluids.ETHYLENE,500))
 		);
-		recipes.add(new ChemRecipe(1109,"CircuitBoard",60)  //fcukkk you :D
+		recipes.add(new ChemRecipe(1109,"CIRCUITBOARD",60)  //fcukkk you :D
 			.inputFluids(new FluidStack(Fluids.RESIN,100))
 			.inputItems(new ComparableStack(ModItems.plate_polymer, 1),  new OreDictStack(CU.wireFine(), 2))
 			.outputItems(new ItemStack(ModItems.circuit, 2, EnumCircuitType.PCB.ordinal()))
+		);
+		recipes.add(new ChemRecipe(1110,"EPOXY",300)
+			.inputFluids(new FluidStack(Fluids.ACETONE,500), new FluidStack(Fluids.PHENOL,500))
+			.outputFluids(new FluidStack(Fluids.EPOXY, 500))
 		);
 
 
