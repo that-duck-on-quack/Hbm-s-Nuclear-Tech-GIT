@@ -583,7 +583,7 @@ public class ChemplantRecipes extends SerializableRecipe {
 		recipes.add(new ChemRecipe(1109,"CIRCUITBOARD",60)  //fcukkk you :D
 			.inputFluids(new FluidStack(Fluids.RESIN,100))
 			.inputItems(new ComparableStack(ModItems.plate_polymer, 1),  new OreDictStack(CU.wireFine(), 2))
-			.outputItems(new ItemStack(ModItems.circuit, 2, EnumCircuitType.PCB.ordinal()))
+			.outputItems(new ItemStack(ModItems.circuit, 1, EnumCircuitType.PCB.ordinal()))
 		);
 		recipes.add(new ChemRecipe(1110,"EPOXY",300)
 			.inputFluids(new FluidStack(Fluids.ACETONE,500), new FluidStack(Fluids.PHENOL,500))
@@ -592,6 +592,11 @@ public class ChemplantRecipes extends SerializableRecipe {
 		recipes.add(new ChemRecipe(1116,"OCTANEGASOLINE",300)
 			.inputFluids(new FluidStack(Fluids.OCTANE,100),new FluidStack(Fluids.GASOLINE,1000))
 			.outputFluids(new FluidStack(Fluids.OCTANEGASOLINE,1000))
+		);
+		recipes.add(new ChemRecipe(1109,"CIRCUITBOARD2",20)  //fcukkk you but less
+			.inputFluids(new FluidStack(Fluids.PHENOL,100))
+			.inputItems(new ComparableStack(ModItems.plate_polymer, 1),  new OreDictStack(CU.wireFine(), 2))
+			.outputItems(new ItemStack(ModItems.circuit, 2, EnumCircuitType.PCB.ordinal()))
 		);
 
 
