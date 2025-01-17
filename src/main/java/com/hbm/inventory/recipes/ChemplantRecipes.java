@@ -593,7 +593,7 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.inputFluids(new FluidStack(Fluids.OCTANE,100),new FluidStack(Fluids.GASOLINE,1000))
 			.outputFluids(new FluidStack(Fluids.OCTANEGASOLINE,1000))
 		);
-		recipes.add(new ChemRecipe(1109,"CIRCUITBOARD2",20)  //fcukkk you but less
+		recipes.add(new ChemRecipe(1117,"CIRCUITBOARD2",20)  //fcukkk you but less
 			.inputFluids(new FluidStack(Fluids.PHENOL,100))
 			.inputItems(new ComparableStack(ModItems.plate_polymer, 1),  new OreDictStack(CU.wireFine(), 2))
 			.outputItems(new ItemStack(ModItems.circuit, 2, EnumCircuitType.PCB.ordinal()))
