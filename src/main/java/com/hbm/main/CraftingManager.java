@@ -784,12 +784,13 @@ public class CraftingManager {
 		addRecipeAuto(new ItemStack(ModItems.crude_circuit), new Object[] { "#C#","VPV","#C#", 'P', ModItems.crude_pcb,'C', ModItems.crude_cap, '#', CU.wireFine(),'V', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.VACUUM_TUBE)});
 		addRecipeAuto(new ItemStack(ModItems.crude_cap), new  Object[] {" # ","PLP"," # ", '#', CU.wireFine(),'P', Items.paper, 'L', PB.dust()});
 		addRecipeAuto(new ItemStack(ModItems.crude_pcb), new Object[] {" # "," P "," # ", '#', CU.wireFine(), 'P', KEY_PLANKS});
-		addRecipeAuto(new ItemStack(ModItems.plate_iron), new Object[]{" # "," # ",'#', Items.iron_ingot});
-		addRecipeAuto(new ItemStack(ModItems.plate_copper), new Object[]{" # "," # ",'#', CU.ingot()});
-		addRecipeAuto(new ItemStack(ModItems.plate_aluminium), new Object[]{" # "," # ",'#', AL.ingot()});
-		addShapelessAuto(new ItemStack(ModItems.wire_fine, 2, Mats.MAT_COPPER.id), new Object[]{ModItems.plate_copper});
-		addShapelessAuto(new ItemStack(ModItems.wire_fine, 2, Mats.MAT_IRON.id), new Object[]{ModItems.plate_iron});
-		addShapelessAuto(new ItemStack(ModItems.wire_fine, 2, Mats.MAT_ALUMINIUM.id), new Object[]{ModItems.plate_aluminium});
+		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_COPPER.id), new Object[]{ModItems.plate_copper});
+		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_IRON.id), new Object[]{ModItems.plate_iron});
+		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_ALUMINIUM.id), new Object[]{ModItems.plate_aluminium});
+		addShapelessAuto(new ItemStack(ModItems.plate_aluminium),new Object[]{AL.ingot(),AL.ingot()});
+		addShapelessAuto(new ItemStack(ModItems.plate_copper),new Object[]{AL.ingot(),CU.ingot()});
+		addShapelessAuto(new ItemStack(ModItems.plate_iron),new Object[]{AL.ingot(),Items.iron_ingot});
+		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_MINGRADE.id), new Object[]{MINGRADE.ingot()});
 
 		addRecipeAuto(new ItemStack(ModItems.upgrade_nullifier, 1), new Object[] { "SPS", "PUP", "SPS", 'S', STEEL.plate(), 'P', ModItems.powder_fire, 'U', ModItems.upgrade_template });
 		addRecipeAuto(new ItemStack(ModItems.upgrade_smelter, 1), new Object[] { "PHP", "CUC", "DTD", 'P', CU.plate(), 'H', Blocks.hopper, 'C', ModItems.coil_tungsten, 'U', ModItems.upgrade_template, 'D', ModItems.coil_copper, 'T', ModBlocks.machine_transformer });
