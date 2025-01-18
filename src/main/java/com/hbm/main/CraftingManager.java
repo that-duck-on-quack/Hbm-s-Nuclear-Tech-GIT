@@ -788,8 +788,8 @@ public class CraftingManager {
 		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_IRON.id), new Object[]{ModItems.plate_iron});
 		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_ALUMINIUM.id), new Object[]{ModItems.plate_aluminium});
 		addShapelessAuto(new ItemStack(ModItems.plate_aluminium),new Object[]{AL.ingot(),AL.ingot()});
-		addShapelessAuto(new ItemStack(ModItems.plate_copper),new Object[]{AL.ingot(),CU.ingot()});
-		addShapelessAuto(new ItemStack(ModItems.plate_iron),new Object[]{AL.ingot(),Items.iron_ingot});
+		addShapelessAuto(new ItemStack(ModItems.plate_copper),new Object[]{CU.ingot(),CU.ingot()});
+		addShapelessAuto(new ItemStack(ModItems.plate_iron),new Object[]{Items.iron_ingot,Items.iron_ingot});
 		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_MINGRADE.id), new Object[]{MINGRADE.ingot()});
 
 		addRecipeAuto(new ItemStack(ModItems.upgrade_nullifier, 1), new Object[] { "SPS", "PUP", "SPS", 'S', STEEL.plate(), 'P', ModItems.powder_fire, 'U', ModItems.upgrade_template });
