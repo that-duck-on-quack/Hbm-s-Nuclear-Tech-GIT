@@ -2,22 +2,21 @@ package com.hbm.blocks.machine;
 
 import com.hbm.blocks.BlockDummyable;
 import com.hbm.tileentity.TileEntityProxyCombo;
-import com.hbm.tileentity.machine.TileEntityMachineDriveProcessor;
-
+import com.hbm.tileentity.machine.TileEntityMachineLaserBoi;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class MachineDriveProcessor extends BlockDummyable {
+public class MachineLaserBoi extends BlockDummyable {
 
-	public MachineDriveProcessor(Material mat) {
+	public MachineLaserBoi(Material mat) {
 		super(mat);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		if(meta >= 12) return new TileEntityMachineDriveProcessor();
+		if(meta >= 12) return new TileEntityMachineLaserBoi();
 		return new TileEntityProxyCombo(true, true, false); // no need for extra atm, it's just two blocks
 	}
 

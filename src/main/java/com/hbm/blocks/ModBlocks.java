@@ -1362,6 +1362,7 @@ public class ModBlocks {
 	public static Block propulsion_creative;
 
 	//NTM Hard Stuff
+	public static Block machine_laserboi;
 
 
 	public static Material materialGas = new MaterialGas();
@@ -2622,6 +2623,11 @@ public class ModBlocks {
 		propulsion_creative = new BlockStationPropulsionCreative(Material.iron).setBlockName("propulsion_creative").setHardness(1.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel");
 
 		// NTM Hard Stuff
+
+		machine_laserboi = new MachineLaserBoi(Material.iron).setBlockName("machine_laserboi").setHardness(1.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel_machine");
+
+
+
 	}
 
 	private static void registerBlock() {
@@ -3862,6 +3868,8 @@ public class ModBlocks {
 		register(propulsion_creative);
 
 		//NTM Hard Stuff
+
+		register(machine_laserboi);
 
 	}
 

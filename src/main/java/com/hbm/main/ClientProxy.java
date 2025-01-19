@@ -443,7 +443,7 @@ public class ClientProxy extends ServerProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlastDoor.class, new RenderBlastDoor());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDoorGeneric.class, new RenderDoorGeneric());
 		//NTM Hard Stuff
-
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineLaserBoi.class, new RenderLaserBoi());
 	}
 
 	@Override

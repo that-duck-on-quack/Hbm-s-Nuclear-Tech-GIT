@@ -1708,7 +1708,9 @@ public class ResourceManager {
 	//NTM Hard Stuff
 	// public static final IModelCustom template = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/your/path/template.obj")).asVBO();
 	// public static final ResourceLocation template_tex = new ResourceLocation(RefStrings.MODID, "textures/models/your/path/here/template.png");
-
+	public static final ResourceLocation  LaserBoi_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/LaserBoi.png");
+	//broken idk why kill me now
+	public static final IModelCustom LaserBoi =  new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/LaserBoi.obj")).asVBO();
 
 	public static final NBTStructure martian = new NBTStructure(new ResourceLocation(RefStrings.MODID, "structures/martian-base.nbt"));
 
