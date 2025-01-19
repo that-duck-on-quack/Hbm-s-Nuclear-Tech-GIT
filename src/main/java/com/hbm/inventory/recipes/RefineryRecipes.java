@@ -176,6 +176,20 @@ public class RefineryRecipes {
 			new FluidStack(Fluids.BITUMEN, 10),
 			new ItemStack(ModBlocks.asphalt,1)
 		));
+		refinery.put(Fluids.WOODOIL, new Quintet(
+			new FluidStack(Fluids.ETHANOL,5),
+			new FluidStack(Fluids.BENZENE,50),
+			new FluidStack(Fluids.TOULENE,25),
+			new FluidStack(Fluids.PHENOL,20),
+			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.WOOD)
+		));
+		refinery.put(Fluids.COALOIL, new Quintet(
+			new FluidStack(Fluids.LIGHTOIL,10),
+			new FluidStack(Fluids.PETROLEUM,15),
+			new FluidStack(Fluids.HEAVYOIL,20),
+			new FluidStack(Fluids.BITUMEN,45),
+			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.COAL)
+		));
 
 
 		vacuum.put(Fluids.OIL, new Quartet(

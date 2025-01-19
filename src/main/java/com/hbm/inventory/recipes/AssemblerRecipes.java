@@ -608,7 +608,7 @@ public class AssemblerRecipes extends SerializableRecipe {
 
 		makeRecipe(new ComparableStack(ModBlocks.reactor_zirnox, 1), new AStack[] {
 				!exp ? new OreDictStack(STEEL.shell(), 4) : new OreDictStack(STEEL.heavyComp(), 1),
-				new OreDictStack(STEEL.pipe(), 8),
+				new OreDictStack(STAINLESS.pipe(), 8),
 				new OreDictStack(B.ingot(), 8),
 				new OreDictStack(GRAPHITE.ingot(), 16),
 				new OreDictStack(RUBBER.ingot(), 16),
@@ -931,9 +931,9 @@ public class AssemblerRecipes extends SerializableRecipe {
 				new ComparableStack(ModItems.circuit, 16, EnumCircuitType.BASIC)
 			}, 400);
 		makeRecipe(new ComparableStack(ModBlocks.machine_solar, 1), new AStack[] {
-				new OreDictStack(STAINLESS.plate(), 4),
-				new ComparableStack(ModItems.photo_panel, 4),
-				new OreDictStack(ANY_PLASTIC.ingot(), 2),
+				new OreDictStack(STEEL.plate(), 4),
+				new ComparableStack(ModItems.photo_panel, 8),
+				new OreDictStack(ANY_RUBBER.ingot(), 2),
 				new OreDictStack(MINGRADE.wireFine(), 8),
 			}, 200);
 		makeRecipe(new ComparableStack(ModBlocks.machine_chemfac, 1), new AStack[] {
