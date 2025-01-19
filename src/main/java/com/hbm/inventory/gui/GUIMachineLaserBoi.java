@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GUIMachineLaserBoi extends GuiInfoContainer {
 
-	private static ResourceLocation texture = new ResourceLocation(RefStrings.MODID + ":textures/gui/gui_transmutator.png");
+	private static ResourceLocation texture = new ResourceLocation(RefStrings.MODID + ":textures/gui/gui_LaserBoi.png");
 	private TileEntityMachineLaserBoi diFurnace;
 
 	public GUIMachineLaserBoi(InventoryPlayer invPlayer, TileEntityMachineLaserBoi tedf) {

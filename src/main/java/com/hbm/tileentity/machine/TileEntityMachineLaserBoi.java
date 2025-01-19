@@ -35,6 +35,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	public long power = 0;
 	public int process = 0;
 	public static final long maxPower = 10000;
+	public static final int baseprocess = 100;
 	public static final int processSpeed = 60;
 
 	private AudioWrapper audio;
@@ -58,7 +59,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 					return true;
 				break;
 			case 2:
-				if (stack.getItem() == ModItems.laser_crystal_co2 || stack.getItem() == ModItems.laser_crystal_bismuth)
+				if (stack.getItem() == ModItems.laser_crystal_co2 || stack.getItem() == ModItems.laser_crystal_co2 || stack.getItem() == ModItems.laser_crystal_iron || stack.getItem() == ModItems.laser_crystal_digamma || stack.getItem() == ModItems.laser_crystal_dnt || stack.getItem() == ModItems.laser_crystal_cmb)
 					return true;
 				break;
 			case 3:
@@ -68,6 +69,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 		}
 		return false;
 	}
+
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
@@ -92,7 +94,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	@Override
 	public boolean canExtractItem(int i, ItemStack stack, int j) {
 
-		if(stack.getItem() == ModItems.laser_crystal_co2 || stack.getItem() ==ModItems.laser_crystal_co2) return false;
+		if(stack.getItem() == ModItems.laser_crystal_co2 || stack.getItem() == ModItems.laser_crystal_bismuth || stack.getItem() == ModItems.laser_crystal_iron || stack.getItem() == ModItems.laser_crystal_digamma || stack.getItem() == ModItems.laser_crystal_dnt || stack.getItem() == ModItems.laser_crystal_cmb) return false;
 
 		if(i == 1) {
 			return true;
@@ -116,9 +118,9 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	}
 
 	public boolean canProcess() {
-		if (power >= 4990 && slots[0] != null && MachineRecipes.mODE(slots[0], OreDictManager.SI.billet()) && slots[2] != null
-			&& (slots[2].getItem() == ModItems.laser_crystal_bismuth || slots[2].getItem() == ModItems.laser_crystal_co2)
-			&& (slots[1] == null || (slots[1] != null && 64 < slots[1].getMaxStackSize()))) {
+		if (power >= 4999 && slots[0] != null && MachineRecipes.mODE(slots[0], OreDictManager.SI.billet()) && slots[2] != null
+			&& (slots[2].getItem() == ModItems.laser_crystal_bismuth || slots[2].getItem() == ModItems.laser_crystal_co2 || slots[2].getItem() == ModItems.laser_crystal_cmb|| slots[2].getItem() == ModItems.laser_crystal_digamma|| slots[2].getItem() == ModItems.laser_crystal_dnt|| slots[2].getItem() == ModItems.laser_crystal_iron)
+			&& (slots[1] == null || (slots[1] != null  && slots[1].stackSize < 64 ))) {
 			return true;
 		}
 		return false;
@@ -136,7 +138,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 
 		if (process >= processSpeed) {
 
-			power = 0;
+			power = power-5000;
 			process = 0;
 
 			slots[0].stackSize--;
@@ -148,9 +150,6 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 				slots[1] = OreDictManager.DictFrame.fromOne(ModItems.circuit, EnumCircuitType.SILICON);
 			} else {
 				slots[1].stackSize++;
-			}
-			if (slots[2] != null && slots[2].getItem() == ModItems.laser_crystal_co2) {
-				slots[2].setItemDamage(slots[2].getItemDamage() + 1);
 			}
 
 			this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "ambient.weather.thunder", 10000.0F,
