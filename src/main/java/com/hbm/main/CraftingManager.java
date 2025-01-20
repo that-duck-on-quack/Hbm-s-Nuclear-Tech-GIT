@@ -294,7 +294,6 @@ public class CraftingManager {
 		addRecipeAuto(new ItemStack(ModBlocks.machine_autocrafter, 1), new Object[] { "SCS", "MWM", "SCS", 'S', STEEL.plate(), 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.VACUUM_TUBE), 'M', ModItems.motor, 'W', Blocks.crafting_table });
 		addRecipeAuto(new ItemStack(ModBlocks.machine_funnel, 1), new Object[] { "S S", "SRS", " S ", 'S', STEEL.ingot(), 'R', REDSTONE.dust() });
 		addRecipeAuto(new ItemStack(ModBlocks.machine_waste_drum, 1), new Object[] { "LRL", "BRB", "LRL", 'L', PB.ingot(), 'B', Blocks.iron_bars, 'R', ModItems.rod_quad_empty });
-		addRecipeAuto(new ItemStack(ModBlocks.machine_press, 1), new Object[] { "IRI", "IPI", "IBI", 'I', IRON.ingot(), 'R', Blocks.furnace, 'B', IRON.block(), 'P', Blocks.piston });
 		addRecipeAuto(new ItemStack(ModBlocks.machine_ammo_press, 1), new Object[] { "IPI", "C C", "SSS", 'I', IRON.ingot(), 'P', Blocks.piston, 'C', CU.ingot(), 'S', Blocks.stone });
 		addRecipeAuto(new ItemStack(ModBlocks.machine_siren, 1), new Object[] { "SIS", "ICI", "SRS", 'S', STEEL.plate(), 'I', ANY_RUBBER.ingot(), 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.VACUUM_TUBE), 'R', REDSTONE.dust() });
 		addRecipeAuto(new ItemStack(ModBlocks.machine_microwave, 1), new Object[] { "III", "SGM", "IDI", 'I', ModItems.plate_polymer, 'S', STEEL.plate(), 'G', KEY_ANYPANE, 'M', ModItems.magnetron, 'D', ModItems.motor });
@@ -361,11 +360,6 @@ public class CraftingManager {
 		Item[] bricks = new Item[] {Items.brick, Items.netherbrick};
 
 		for(Item brick : bricks) {
-			addRecipeAuto(new ItemStack(ModItems.stamp_stone_flat, 1), new Object[] { "III", "SSS", 'I', brick, 'S', "stone" });
-			addRecipeAuto(new ItemStack(ModItems.stamp_iron_flat, 1), new Object[] { "III", "SSS", 'I', brick, 'S', IRON.ingot() });
-			addRecipeAuto(new ItemStack(ModItems.stamp_steel_flat, 1), new Object[] { "III", "SSS", 'I', brick, 'S', STEEL.ingot() });
-			addRecipeAuto(new ItemStack(ModItems.stamp_titanium_flat, 1), new Object[] { "III", "SSS", 'I', brick, 'S', TI.ingot() });
-			addRecipeAuto(new ItemStack(ModItems.stamp_obsidian_flat, 1), new Object[] { "III", "SSS", 'I', brick, 'S', Blocks.obsidian });
 			addRecipeAuto(new ItemStack(ModItems.stamp_desh_flat, 1), new Object[] { "BDB", "DSD", "BDB", 'B', brick, 'D', DESH.ingot(), 'S', FERRO.ingot() });
 		}
 
@@ -781,16 +775,31 @@ public class CraftingManager {
 
 		//hbm hard stuff
 
-		addRecipeAuto(new ItemStack(ModItems.crude_circuit), new Object[] { "#C#","VPV","#C#", 'P', ModItems.crude_pcb,'C', ModItems.crude_cap, '#', CU.wireFine(),'V', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.VACUUM_TUBE)});
-		addRecipeAuto(new ItemStack(ModItems.crude_cap), new  Object[] {" # ","PLP"," # ", '#', CU.wireFine(),'P', Items.paper, 'L', PB.dust()});
-		addRecipeAuto(new ItemStack(ModItems.crude_pcb), new Object[] {" # "," P "," # ", '#', CU.wireFine(), 'P', KEY_PLANKS});
-		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_COPPER.id), new Object[]{ModItems.plate_copper});
-		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_IRON.id), new Object[]{ModItems.plate_iron});
-		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_ALUMINIUM.id), new Object[]{ModItems.plate_aluminium});
-		addShapelessAuto(new ItemStack(ModItems.plate_aluminium),new Object[]{AL.ingot(),AL.ingot()});
-		addShapelessAuto(new ItemStack(ModItems.plate_copper),new Object[]{CU.ingot(),CU.ingot()});
-		addShapelessAuto(new ItemStack(ModItems.plate_iron),new Object[]{Items.iron_ingot,Items.iron_ingot});
-		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_MINGRADE.id), new Object[]{MINGRADE.ingot()});
+		addRecipeAuto(new ItemStack(ModItems.crude_circuit), "#C#","VPV","#C#", 'P', ModItems.crude_pcb,'C', ModItems.crude_cap, '#', CU.wireFine(),'V', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.VACUUM_TUBE));
+		addRecipeAuto(new ItemStack(ModItems.crude_cap), " # ","PLP"," # ", '#', CU.wireFine(),'P', Items.paper, 'L', PB.dust());
+		addRecipeAuto(new ItemStack(ModItems.crude_pcb), " # "," P "," # ", '#', CU.wireFine(), 'P', KEY_PLANKS);
+		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_COPPER.id), ModItems.plate_copper);
+		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_IRON.id), ModItems.plate_iron);
+		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_ALUMINIUM.id), ModItems.plate_aluminium);
+		addShapelessAuto(new ItemStack(ModItems.plate_aluminium), AL.ingot(),AL.ingot());
+		addShapelessAuto(new ItemStack(ModItems.plate_copper), CU.ingot(),CU.ingot());
+		addShapelessAuto(new ItemStack(ModItems.plate_iron), Items.iron_ingot,Items.iron_ingot);
+		addShapelessAuto(new ItemStack(ModItems.wire_fine, 4, Mats.MAT_MINGRADE.id), MINGRADE.ingot());
+		addRecipeAuto(new ItemStack(ModItems.briquette), " # ","# #"," # ", '#', ModItems.powder_coal);
+		addRecipeAuto(new ItemStack(ModItems.briquette,1,1), " # ","# #"," # ", '#', ModItems.powder_lignite);
+		addRecipeAuto(new ItemStack(ModItems.briquette,1,2), " # ","# #"," # ", '#', ModItems.powder_sawdust);
+		addShapelessAuto(new ItemStack(ModItems.ingot_graphite),new ItemStack(ModItems.briquette, 9, OreDictionary.WILDCARD_VALUE));
+		addRecipeAuto(new ItemStack(ModItems.biomass_compressed), " # ","# #"," # ", '#', ModItems.biomass);
+
+		//Book pages
+		addShapelessAuto(new ItemStack(ModItems.page_of_), Items.paper, "dye", new ItemStack(ModItems.stamp_book));
+		addShapelessAuto(new ItemStack(ModItems.page_of_,1,1), Items.paper, "dye", new ItemStack(ModItems.stamp_book, 1, 1));
+		addShapelessAuto(new ItemStack(ModItems.page_of_,1,2), Items.paper, "dye", new ItemStack(ModItems.stamp_book, 1, 2));
+		addShapelessAuto(new ItemStack(ModItems.page_of_,1,3), Items.paper, "dye", new ItemStack(ModItems.stamp_book, 1, 3));
+		addShapelessAuto(new ItemStack(ModItems.page_of_,1,4), Items.paper, "dye", new ItemStack(ModItems.stamp_book,1,4));
+		addShapelessAuto(new ItemStack(ModItems.page_of_,1,5), Items.paper, "dye", new ItemStack(ModItems.stamp_book,1,5));
+		addShapelessAuto(new ItemStack(ModItems.page_of_,1,6), Items.paper, "dye", new ItemStack(ModItems.stamp_book,1,6));
+		addShapelessAuto(new ItemStack(ModItems.page_of_,1,7), Items.paper, "dye", new ItemStack(ModItems.stamp_book,1,7));
 
 		addRecipeAuto(new ItemStack(ModItems.upgrade_nullifier, 1), new Object[] { "SPS", "PUP", "SPS", 'S', STEEL.plate(), 'P', ModItems.powder_fire, 'U', ModItems.upgrade_template });
 		addRecipeAuto(new ItemStack(ModItems.upgrade_smelter, 1), new Object[] { "PHP", "CUC", "DTD", 'P', CU.plate(), 'H', Blocks.hopper, 'C', ModItems.coil_tungsten, 'U', ModItems.upgrade_template, 'D', ModItems.coil_copper, 'T', ModBlocks.machine_transformer });
