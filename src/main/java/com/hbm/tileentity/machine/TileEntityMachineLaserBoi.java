@@ -34,7 +34,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 
 	public long power = 0;
 	public int process = 0;
-	public static final long maxPower = 10000;
+	public static final long maxPower = 100000;
 	public static final int baseprocess = 100;
 	public static final int processSpeed = 60;
 
@@ -118,9 +118,9 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	}
 
 	public boolean canProcess() {
-		if (power >= 4999 && slots[0] != null && MachineRecipes.mODE(slots[0], OreDictManager.SI.billet()) && slots[2] != null
+		if ( slots[0] != null && (MachineRecipes.mODE(slots[0], OreDictManager.SI.billet()) || MachineRecipes.mODE(slots[0], OreDictManager.GAAS.billet()) ) && slots[2] != null
 			&& (slots[2].getItem() == ModItems.laser_crystal_bismuth || slots[2].getItem() == ModItems.laser_crystal_co2 || slots[2].getItem() == ModItems.laser_crystal_cmb|| slots[2].getItem() == ModItems.laser_crystal_digamma|| slots[2].getItem() == ModItems.laser_crystal_dnt|| slots[2].getItem() == ModItems.laser_crystal_iron)
-			&& (slots[1] == null || (slots[1] != null  && slots[1].stackSize < 64 ))) {
+			&& (slots[1].stackSize == 0)) {
 			return true;
 		}
 		return false;
@@ -135,21 +135,26 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 
 	public void process() {
 		process++;
+		power=power-1000;
 
 		if (process >= processSpeed) {
 
-			power = power-5000;
 			process = 0;
+
+			if (slots[1] == null && slots[0].getItem() == ModItems.billet_silicon) {
+				slots[1] = OreDictManager.DictFrame.fromOne(ModItems.circuit, EnumCircuitType.SILICON);
+			} else if (slots[1] != null && slots[0].getItem() == ModItems.billet_silicon) {
+				slots[1].stackSize++;
+			}
+			if (slots[1] == null && slots[0].getItem() == ModItems.billet_gaas) {
+				slots[1] = OreDictManager.DictFrame.fromOne(ModItems.circuit, EnumCircuitType.GAAS);
+			}  else if (slots[1] != null && slots[0].getItem() == ModItems.billet_gaas) {
+				slots[1].stackSize++;
+			}
 
 			slots[0].stackSize--;
 			if (slots[0].stackSize <= 0) {
 				slots[0] = null;
-			}
-
-			if (slots[1] == null) {
-				slots[1] = OreDictManager.DictFrame.fromOne(ModItems.circuit, EnumCircuitType.SILICON);
-			} else {
-				slots[1].stackSize++;
 			}
 
 			this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "ambient.weather.thunder", 10000.0F,
