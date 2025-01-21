@@ -118,9 +118,9 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	}
 
 	public boolean canProcess() {
-		if ( slots[0] != null && (MachineRecipes.mODE(slots[0], OreDictManager.SI.billet()) || MachineRecipes.mODE(slots[0], OreDictManager.GAAS.billet()) ) && slots[2] != null
+		if ( slots[0] != null && slots[2] != null&& (MachineRecipes.mODE(slots[0], OreDictManager.SI.billet()) || MachineRecipes.mODE(slots[0], OreDictManager.GAAS.billet()) ) && slots[2] != null
 			&& (slots[2].getItem() == ModItems.laser_crystal_bismuth || slots[2].getItem() == ModItems.laser_crystal_co2 || slots[2].getItem() == ModItems.laser_crystal_cmb|| slots[2].getItem() == ModItems.laser_crystal_digamma|| slots[2].getItem() == ModItems.laser_crystal_dnt|| slots[2].getItem() == ModItems.laser_crystal_iron)
-			&& slots[1] == null) {
+			&& (slots[1] == null) && (power > 0) ) {
 			return true;
 		}
 		return false;
