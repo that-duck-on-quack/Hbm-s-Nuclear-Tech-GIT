@@ -28,8 +28,6 @@ import com.hbm.inventory.fluid.trait.FT_Heatable.HeatingType;
 import com.hbm.inventory.fluid.trait.FT_Toxin.*;
 import com.hbm.render.util.EnumSymbol;
 import com.hbm.util.ArmorRegistry.HazardClass;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
@@ -289,9 +287,9 @@ public class Fluids {
 
 	public static final HashBiMap<String, FluidType> renameMapping = HashBiMap.create();
 
-	public static List<FluidType> customFluids = new ArrayList();
+	public static List<FluidType> customFluids = new ArrayList<>();
 
-	private static final HashMap<Integer, FluidType> idMapping = new HashMap();
+	private static final HashMap<Integer, FluidType> idMapping = new HashMap<>();
 	private static final HashMap<String, FluidType> nameMapping = new HashMap();
 	protected static final List<FluidType> registerOrder = new ArrayList();
 	protected static final List<FluidType> metaOrder = new ArrayList();

@@ -5,6 +5,7 @@ import com.hbm.blocks.ModBlocks;
 import com.hbm.main.ResourceManager;
 import com.hbm.render.item.ItemRenderBase;
 
+import com.hbm.tileentity.machine.TileEntityMachineLaserBoi;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -15,8 +16,8 @@ public class RenderLaserBoi extends TileEntitySpecialRenderer implements IItemRe
 
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float interp) {
-		//if(!(te instanceof TileEntityMachineLaserBoi)) return;
-		//TileEntityMachineLaserBoi processor = (TileEntityMachineLaserBoi) te;
+		if(!(te instanceof TileEntityMachineLaserBoi)) return;
+		TileEntityMachineLaserBoi processor = (TileEntityMachineLaserBoi) te;
 
 		GL11.glPushMatrix();
 		{
@@ -34,11 +35,13 @@ public class RenderLaserBoi extends TileEntitySpecialRenderer implements IItemRe
 			case 5: GL11.glRotatef(270, 0F, 1F, 0F); break;
 			}
 
-			bindTexture(ResourceManager.LaserBoi_tex);
-			ResourceManager.LaserBoi.renderAll();
+			bindTexture(ResourceManager.engraver_tex);
+			ResourceManager.engraver.renderPart("Base1");
+			ResourceManager.engraver.renderPart("Stack1");
+			ResourceManager.engraver.renderPart("Laser1");
 
-			//if(processor.hasDrive)
-				//ResourceManager.drive_processor.renderPart("Drive");
+			if(processor.isProcessing())
+				ResourceManager.engraver.renderPart("Targetw1");
 
 			GL11.glShadeModel(GL11.GL_FLAT);
 
@@ -57,8 +60,8 @@ public class RenderLaserBoi extends TileEntitySpecialRenderer implements IItemRe
 				GL11.glTranslated(0.5, 0, 0);
 				GL11.glShadeModel(GL11.GL_SMOOTH);
 
-				bindTexture(ResourceManager.LaserBoi_tex);
-				ResourceManager.LaserBoi.renderAll();
+				bindTexture(ResourceManager.engraver_tex);
+				ResourceManager.engraver.renderAll();
 
 				GL11.glShadeModel(GL11.GL_FLAT);
 			}
