@@ -169,22 +169,24 @@ public class ChemplantRecipes extends SerializableRecipe {
 						new FluidStack(Fluids.OXYGEN, 4000, GeneralConfig.enable528 ? 2 : 0))
 				.outputItems(new ItemStack(ModItems.ingot_pvc, 2)));
 		recipes.add(new ChemRecipe(89, "DYNAMITE", 50)
+				.inputFluids(new FluidStack(Fluids.TOULENE,100))
 				.inputItems(
 						new ComparableStack(Items.sugar),
 						new OreDictStack(KNO.dust()),
 						new OreDictStack("sand"))
+
 				.outputItems(new ItemStack(ModItems.ball_dynamite, 2)));
 		recipes.add(new ChemRecipe(83, "TNT", 150)
 				.inputItems(new OreDictStack(KNO.dust()))
 				.inputFluids(new FluidStack(Fluids.TOULENE, 500, GeneralConfig.enable528 ? 1 : 0))
 				.outputItems(new ItemStack(ModItems.ball_tnt, 2)));
 		recipes.add(new ChemRecipe(95, "TATB", 50)
-				.inputItems(new ComparableStack(ModItems.ball_tnt))
-				.inputFluids(new FluidStack(Fluids.SOURGAS, 200, 1), new FluidStack(Fluids.NITRIC_ACID, 10))
+				.inputItems(new ComparableStack(ModItems.ball_tnt), new ComparableStack(ModItems.ingot_c4))
+				.inputFluids(new FluidStack(Fluids.SOURGAS, 200, 1), new FluidStack(Fluids.BENZENE, 10))
 				.outputItems(new ItemStack(ModItems.ball_tatb)));
 		recipes.add(new ChemRecipe(84, "C4", 150)
 				.inputItems(new OreDictStack(KNO.dust()))
-				.inputFluids(new FluidStack(Fluids.UNSATURATEDS, 500, GeneralConfig.enable528 ? 1 : 0))
+				.inputFluids(new FluidStack(Fluids.TOULENE, 500), new FluidStack(Fluids.POLYTHYLENE,10))
 				.outputItems(new ItemStack(ModItems.ingot_c4, 4)));
 		//44, formerly deuterium
 		//45, formerly steam
@@ -214,14 +216,8 @@ public class ChemplantRecipes extends SerializableRecipe {
 				.inputFluids(new FluidStack(Fluids.PEROXIDE, 2000))
 				.outputFluids(new FluidStack(Fluids.SAS3, 1000)));
 		recipes.add(new ChemRecipe(53, "CORDITE", 40)
-				.inputItems(
-						new OreDictStack(KNO.dust(), 2),
-						new OreDictStack(KEY_PLANKS),
-						new ComparableStack(Items.sugar))
-				.inputFluids(
-						(GeneralConfig.enableLBSM && GeneralConfig.enableLBSMSimpleChemsitry) ?
-								new FluidStack(Fluids.HEATINGOIL, 200) :
-								new FluidStack(Fluids.TOULENE, 200))
+				.inputItems(new ComparableStack(ModItems.powder_sawdust))
+				.inputFluids(new FluidStack(Fluids.TOULENE, 200))
 				.outputItems(new ItemStack(ModItems.cordite, 4)));
 		recipes.add(new ChemRecipe(54, "KEVLAR", 40)
 				.inputItems(
@@ -577,7 +573,7 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.outputFluids(new FluidStack(Fluids.VINYL_CHLORIDE, 1000), new FluidStack(Fluids.HCL, 250))
 		);
 		recipes.add(new ChemRecipe(1108, "ETHYLENE", 200)
-			.inputFluids(new FluidStack(Fluids.ETHANE, 500), new FluidStack(Fluids.OXYGEN, 1000))
+			.inputFluids(new FluidStack(Fluids.ETHANE, 500), new FluidStack(Fluids.STEAM, 1000))
 			.outputFluids(new FluidStack(Fluids.ETHYLENE,500))
 		);
 		recipes.add(new ChemRecipe(1109,"CIRCUITBOARD",60)  //fcukkk you :D
@@ -598,6 +594,17 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.inputItems(new ComparableStack(ModItems.plate_polymer, 1),  new OreDictStack(CU.wireFine(), 2))
 			.outputItems(new ItemStack(ModItems.circuit, 2, EnumCircuitType.PCB.ordinal()))
 		);
+		recipes.add(new ChemRecipe(1118,"semtex_production",1200)
+			.inputFluids(new FluidStack(Fluids.NITRIC_ACID,100))
+			.inputItems(new ComparableStack(ModItems.powder_semtex_mix),new ComparableStack(ModItems.ingot_c4))
+		);
+		recipes.add(new ChemRecipe(1119,"ACETONE",300)
+			.inputFluids(new FluidStack(Fluids.BENZENE,500), new FluidStack(Fluids.OXYGEN,1000) )
+			.outputFluids(new FluidStack(Fluids.ACETONE,500), new FluidStack(Fluids.WATER,500))
+		);
+
+
+
 
 
 

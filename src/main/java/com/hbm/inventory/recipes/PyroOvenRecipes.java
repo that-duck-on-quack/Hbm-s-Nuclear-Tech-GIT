@@ -20,6 +20,7 @@ import com.hbm.inventory.fluid.FluidType;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.fluid.trait.FT_Flammable;
 import com.hbm.inventory.recipes.loader.SerializableRecipe;
+import com.hbm.items.ItemEnums;
 import com.hbm.items.ItemEnums.EnumAshType;
 import com.hbm.items.ModItems;
 import com.hbm.items.machine.ItemFluidIcon;
@@ -121,7 +122,33 @@ public class PyroOvenRecipes extends SerializableRecipe {
 				.in(new FluidStack(GAS_COKER, 4_000))
 				.out(new FluidStack(Fluids.REFORMGAS, 100)));
 
+
+
 		//hbm hard stuff
+		recipes.add(new PyroOvenRecipe(2400)
+			.in(new OreDictStack(KEY_LOG,20))
+			.out(new ItemStack(Items.coal, 20 ,1)).out(new FluidStack(WOODOIL,100))
+		);
+		recipes.add(new PyroOvenRecipe(1200)
+			.in(new OreDictStack(KEY_LOG,20)).in(new FluidStack(AIR,1000))
+			.out(new ItemStack(Items.coal, 20 ,1)).out(new FluidStack(WOODOIL,2000))
+		);
+		recipes.add(new PyroOvenRecipe(1800)
+			.in(new OreDictStack(KEY_LOG,20)).in(new FluidStack(NITROGEN,1000))
+			.out(new ItemStack(Items.coal, 20 ,1)).out(new FluidStack(WOODOIL,4000))
+		);
+		recipes.add(new PyroOvenRecipe(300)
+			.in(new OreDictStack(KEY_LOG,20)).in(new FluidStack(OXYGEN,1000))
+			.out(new ItemStack(Items.coal, 10 ,1)).out(new FluidStack(WOODOIL,2000))
+		);
+		recipes.add(new PyroOvenRecipe(1200)
+			.in(new OreDictStack(COAL.gem(),10)).in(new FluidStack(STEAM,4000))
+			.out(DictFrame.fromOne(ModItems.coke, EnumAshType.COAL)).out(new FluidStack(PHENOL,1000))
+		);
+		recipes.add(new PyroOvenRecipe(600)
+			.in(new FluidStack(PHENOL,1000))
+			.out(DictFrame.fromOne(ModItems.oil_tar, ItemEnums.EnumTarType.COAL)).out(new FluidStack(ACETONE,700))
+		);
 
 	}
 

@@ -607,14 +607,15 @@ public class AssemblerRecipes extends SerializableRecipe {
 			}, 600);
 
 		makeRecipe(new ComparableStack(ModBlocks.reactor_zirnox, 1), new AStack[] {
-				!exp ? new OreDictStack(STEEL.shell(), 4) : new OreDictStack(STEEL.heavyComp(), 1),
-				new OreDictStack(STAINLESS.pipe(), 8),
+				!exp ? new OreDictStack(STEEL.shell(), 8) : new OreDictStack(STEEL.heavyComp(), 1),
+				new OreDictStack(STAINLESS.plate(), 16),
 				new OreDictStack(B.ingot(), 8),
-				new OreDictStack(GRAPHITE.ingot(), 16),
-				new OreDictStack(RUBBER.ingot(), 16),
-				new OreDictStack(ANY_CONCRETE.any(), 16),
+				new OreDictStack(GRAPHITE.ingot(), 32),
+				new OreDictStack(RUBBER.ingot(), 32),
+				new OreDictStack(ANY_CONCRETE.any(), 32),
 				new ComparableStack(ModBlocks.steel_scaffold, 4),
-				new ComparableStack(ModItems.circuit, 4, EnumCircuitType.BASIC)
+				new ComparableStack(ModItems.circuit, 5, EnumCircuitType.BASIC),
+				new OreDictStack(ANY_PLASTIC.any(),16),
 			}, 600);
 
 		makeRecipe(new ComparableStack(ModItems.spawn_worm, 1), new AStack[] {
@@ -1000,12 +1001,13 @@ public class AssemblerRecipes extends SerializableRecipe {
 				new ComparableStack(ModItems.circuit, 1, EnumCircuitType.BISMOID)
 			}, 200);
 		makeRecipe(new ComparableStack(ModBlocks.machine_pyrooven, 1), new AStack[] {
-				!exp ? new OreDictStack(STEEL.plateWelded(), 16) : new OreDictStack(STEEL.heavyComp(), 4),
+				!exp ? new OreDictStack(STEEL.shell(), 16) : new OreDictStack(STEEL.heavyComp(), 4),
 				new OreDictStack(ANY_HARDPLASTIC.ingot(), 16),
-				new ComparableStack(ModItems.ingot_cft, 4),
+				new ComparableStack(ModItems.coil_advanced_alloy, 16),
+				new ComparableStack(ModBlocks.hadron_coil_alloy,8),
 				new OreDictStack(CU.pipe(), 12),
-				new ComparableStack(ModItems.motor_desh, 1),
-				new ComparableStack(ModItems.circuit, 1, EnumCircuitType.BISMOID)
+				new ComparableStack(ModItems.motor, 3),
+				new ComparableStack(ModItems.circuit, 5, EnumCircuitType.ANALOG)
 			}, 200);
 
 		makeRecipe(new ComparableStack(ModBlocks.machine_compressor, 1), new AStack[] {
@@ -1434,6 +1436,18 @@ public class AssemblerRecipes extends SerializableRecipe {
 		makeRecipe(new ComparableStack(ModBlocks.sliding_seal_door, 1), new AStack[]{new OreDictStack(STEEL.plate(), 12), new ComparableStack(ModItems.plate_polymer, 4), new ComparableStack(ModItems.motor, 2), new OreDictStack(DURA.bolt(), 4), new OreDictStack("dyeWhite", 2)}, 200);
 		makeRecipe(new ComparableStack(ModBlocks.silo_hatch, 1), new AStack[]{new OreDictStack(STEEL.plateWelded(), 4), new ComparableStack(ModItems.plate_polymer, 4), new ComparableStack(ModItems.motor, 2), new OreDictStack(STEEL.bolt(), 16), new OreDictStack(KEY_GREEN, 4)}, 200);
 		makeRecipe(new ComparableStack(ModBlocks.silo_hatch_large, 1), new AStack[]{new OreDictStack(STEEL.plateWelded(), 6), new ComparableStack(ModItems.plate_polymer, 8), new ComparableStack(ModItems.motor, 2), new OreDictStack(STEEL.bolt(), 16), new OreDictStack(KEY_GREEN, 8)}, 200);
+
+		//hbm hard shit
+		makeRecipe(new ComparableStack(ModBlocks.machine_laserboi,1), new AStack[]{
+			new OreDictStack(STEEL.ingot(),16),
+			new OreDictStack(ANY_HARDPLASTIC.ingot(),8),
+			new ComparableStack(ModItems.motor,4),
+			new ComparableStack(ModItems.motor_desh,1),
+			new OreDictStack(STEEL.pipe(),4),
+			new ComparableStack(ModItems.crt_display,4)
+		}, 300);
+
+
 
 		if(GeneralConfig.enableMekanismChanges && Loader.isModLoaded("Mekanism")) {
 

@@ -447,7 +447,7 @@ public class CentrifugeRecipes extends SerializableRecipe {
 		recipes.put(new OreDictStack(U.ore()), new ItemStack[] {
 				lbs ? new ItemStack(ModItems.powder_uranium, 2) : new ItemStack(ModItems.powder_uranium, 1),
 				lbs ? new ItemStack(ModItems.nugget_technetium, 2) : new ItemStack(ModItems.powder_uranium, 1),
-				lbs ? new ItemStack(ModItems.nugget_ra226, 2) : new ItemStack(ModItems.nugget_ra226, 1),
+				new ItemStack(Blocks.gravel, 1) ,
 				new ItemStack(Blocks.gravel, 1) });
 
 		for(String ore : OreDictManager.TH232.all(MaterialShapes.ORE)) recipes.put(new OreDictStack(ore), new ItemStack[] {

@@ -562,7 +562,7 @@ public class Fluids {
 		VINYL_CHLORIDE = new FluidType("VINYL_CHLORIDE",0xC0C0C0,3,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
 		BUTANE = new FluidType("BUTANE",0xFFD700,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
 		ACETONE = new FluidType("ACETONE", 0xFFB6C1,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
-		PHENOL = new FluidType("PHENOL",0xDDA0DD,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
+		PHENOL = new FluidType("PHENOL",0x442b12,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
 		EPOXY = new FluidType("EPOXY",0xFFFFFF,0,0,0, EnumSymbol.NONE).addTraits(VISCOUS);
 		OCTANEGASOLINE = new FluidType("OCTANEGASOLINE", 0xa06e37 ,1,3,0,EnumSymbol.NONE ).addTraits(new FT_Combustible(FuelGrade.HIGH, 20_000_000));
 		// ^ ^ ^ ^ ^ ^ ^ ^
