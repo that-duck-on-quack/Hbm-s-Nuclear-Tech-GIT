@@ -143,11 +143,19 @@ public class PyroOvenRecipes extends SerializableRecipe {
 		);
 		recipes.add(new PyroOvenRecipe(1200)
 			.in(new OreDictStack(COAL.gem(),10)).in(new FluidStack(STEAM,4000))
-			.out(DictFrame.fromOne(ModItems.coke, EnumAshType.COAL)).out(new FluidStack(PHENOL,1000))
+			.out(DictFrame.fromOne(ModItems.coke, ItemEnums.EnumCokeType.COAL)).out(new FluidStack(PHENOL,1000))
 		);
 		recipes.add(new PyroOvenRecipe(600)
 			.in(new FluidStack(PHENOL,1000))
 			.out(DictFrame.fromOne(ModItems.oil_tar, ItemEnums.EnumTarType.COAL)).out(new FluidStack(ACETONE,700))
+		);
+		recipes.add(new PyroOvenRecipe(1800)
+			.in(new OreDictStack(COAL.gem(),1))
+			.out(new FluidStack(COALCREOSOTE,200))
+		);
+		recipes.add(new PyroOvenRecipe(1800)
+			.in(new FluidStack(COALCREOSOTE,2000))
+			.out(new FluidStack(COALGAS,500)).out(DictFrame.fromOne(ModItems.oil_tar, ItemEnums.EnumTarType.COAL))
 		);
 
 	}
