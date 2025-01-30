@@ -1,10 +1,12 @@
-# HBM's Nuclear Tech Mod + JamesH2 HARDENED + duck on quack fork for Minecraft 1.7.10
+# HBM's Nuclear Tech Mod + JamesH2 HARDENED for Minecraft 1.7.10
 
 Hi, i am memeing things into existence, dont mind me! im just the bent fork at the end of the table -JamesH_2
 
 Oh, us? We're the fun police, we're taking the fun away from this :D -cherlyte, Blankbutnot
 
 TL;DR: This fork (of a fork) makes certain game elements harder, adds more stuff (which makes the mod harder) and implements new mechanics (which makes the mod harder :D)
+
+[JamesH2 fork (Precursor) on GitHub](https://github.com/JameH2/Hbm-s-Nuclear-Tech-GIT)
 
 [NTM Space (Original) on Modrinth](https://modrinth.com/mod/ntmspace)
 
