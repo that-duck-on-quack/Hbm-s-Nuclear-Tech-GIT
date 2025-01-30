@@ -6,6 +6,8 @@ Oh, us? We're the fun police, we're taking the fun away from this :D -cherlyte, 
 
 TL;DR: This fork (of a fork) makes certain game elements harder, adds more stuff (which makes the mod harder) and implements new mechanics (which makes the mod harder :D)
 
+[JamesH2 fork (Precursor) on GitHub](https://github.com/JameH2/Hbm-s-Nuclear-Tech-GIT)
+
 [NTM Space (Original) on Modrinth](https://modrinth.com/mod/ntmspace)
 
 [NTM (Original) on CurseForge](https://minecraft.curseforge.com/projects/hbms-nuclear-tech-mod?gameCategorySlug=mc-mods&projectID=235439)
