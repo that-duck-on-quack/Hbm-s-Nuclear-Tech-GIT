@@ -2,8 +2,8 @@ package com.hbm.lib;
 
 public class RefStrings {
 	public static final String MODID = "hbm";
-	public static final String NAME = "Hbm's Nuclear Tech Mod";
-	public static final String VERSION = "1.0.27 BETA (5211)";
+	public static final String NAME = "NTM: Space";
+	public static final String VERSION = "1.0.27 BETA (5245)";
 	//HBM's Beta Naming Convention:
 	//V T (X)
 	//V -> next release version

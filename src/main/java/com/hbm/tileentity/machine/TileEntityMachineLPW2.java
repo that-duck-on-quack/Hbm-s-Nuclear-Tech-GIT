@@ -101,9 +101,9 @@ public class TileEntityMachineLPW2 extends TileEntityMachineBase implements IPro
 					ForgeDirection dir = ForgeDirection.getOrientation(this.getBlockMetadata() - BlockDummyable.offset).getRotation(ForgeDirection.UP);
 
 					NBTTagCompound data = new NBTTagCompound();
-					data.setDouble("posX", xCoord + dir.offsetX * 8);
-					data.setDouble("posY", yCoord + 4);
-					data.setDouble("posZ", zCoord + dir.offsetZ * 8);
+					data.setDouble("posX", xCoord + dir.offsetX * 8.5);
+					data.setDouble("posY", yCoord + 4.5);
+					data.setDouble("posZ", zCoord + dir.offsetZ * 8.5);
 					data.setString("type", "missileContrail");
 					data.setFloat("scale", 3);
 					data.setDouble("moX", dir.offsetX * 10);

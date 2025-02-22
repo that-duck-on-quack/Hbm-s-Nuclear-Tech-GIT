@@ -68,10 +68,10 @@ public class TileEntityMachineGasDock extends TileEntityMachineBase implements I
 				}
 			}
 
-			CelestialBody body = CelestialBody.getTarget(worldObj, xCoord, zCoord).body.getPlanet();
+			CelestialBody planet = CelestialBody.getPlanet(worldObj);
 
 			launchTicks = MathHelper.clamp_int(launchTicks + (hasRocket ? -1 : 1), hasRocket ? -20 : 0, 100);
-			if(body == CelestialBody.getBody("jool") && hasFuel()) {
+			if(planet.name == "jool" && hasFuel()) {
 				if(launchTicks <= -20) {
 					hasRocket = false;
 				} else if(launchTicks >= 100) {

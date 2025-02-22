@@ -1,8 +1,12 @@
 package com.hbm.inventory.recipes.anvil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonWriter;
 import com.hbm.blocks.ModBlocks;
 import com.hbm.config.GeneralConfig;
 import com.hbm.inventory.OreDictManager;
@@ -18,11 +22,13 @@ import com.hbm.inventory.material.Mats;
 import com.hbm.inventory.material.NTMMaterial;
 import com.hbm.inventory.recipes.AssemblerRecipes;
 import com.hbm.inventory.recipes.AssemblerRecipes.AssemblerRecipe;
+import com.hbm.inventory.recipes.loader.SerializableRecipe;
 import com.hbm.items.ItemEnums.EnumChunkType;
 import com.hbm.items.ItemEnums.EnumCokeType;
 import com.hbm.items.ModItems;
 import com.hbm.items.food.ItemFlask.EnumInfusion;
 import com.hbm.items.machine.ItemCircuit.EnumCircuitType;
+import com.hbm.util.Tuple.Pair;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -31,15 +37,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 
-public class AnvilRecipes {
+public class AnvilRecipes extends SerializableRecipe {
 
 	private static List<AnvilSmithingRecipe> smithingRecipes = new ArrayList();
 	private static List<AnvilConstructionRecipe> constructionRecipes = new ArrayList();
 
 	public static void register() {
 		registerSmithing();
-		registerConstruction();
 	}
+
+	@Override public String getFileName() { return "hbmAnvil.json"; }
+	@Override public Object getRecipeObject() { return constructionRecipes; }
+	@Override public void deleteRecipes() { constructionRecipes.clear(); }
+	@Override public void registerDefaults() { registerConstruction(); }
 
 	/*
 	 *      //////  //      //  //  //////  //  //  //  //    //  //////
@@ -85,7 +95,7 @@ public class AnvilRecipes {
 		smithingRecipes.add(new AnvilSmithingRecipe(1916169, new ItemStack(ModItems.wings_murk, 1), new ComparableStack(ModItems.wings_limp), new ComparableStack(ModItems.particle_tachyon)));
 		smithingRecipes.add(new AnvilSmithingRecipe(4, new ItemStack(ModItems.flask_infusion, 1, EnumInfusion.SHIELD.ordinal()), new ComparableStack(ModItems.gem_alexandrite), new ComparableStack(ModItems.bottle_nuka)));
 
-		smithingRecipes.add(new AnvilSmithingRecipe(1, new ItemStack(ModItems.ingot_gunmetal, 1), new OreDictStack(CU.ingot()), new OreDictStack(AL.ingot())));
+		smithingRecipes.add(new AnvilSmithingRecipe(1, new ItemStack(ModItems.ingot_gunmetal, 1), new OreDictStack(CU.ingot()), new OreDictStack(ZI.ingot())));
 
 		smithingRecipes.add(new AnvilSmithingMold(0, new OreDictStack(GOLD.nugget()), new OreDictStack("nugget")));
 		smithingRecipes.add(new AnvilSmithingMold(1, new OreDictStack(U.billet()),  new OreDictStack("billet")));
@@ -1097,6 +1107,12 @@ public class AnvilRecipes {
 			this.setOverlay(OverlayType.NONE); //no preferred overlay for many:many conversions
 		}
 
+		public AnvilConstructionRecipe(AStack[] input, Pair<ItemStack, Float>[] output) {
+			for(AStack stack : input) this.input.add(stack);
+			for(Pair<ItemStack, Float> out : output) this.output.add(new AnvilOutput(out.getKey(), out.getValue()));
+			this.setOverlay(OverlayType.NONE); //no preferred overlay for many:many conversions
+		}
+
 		public AnvilConstructionRecipe setTier(int tier) {
 			this.tierLower = tier;
 			if(GeneralConfig.enableLBSM && GeneralConfig.enableLBSMUnlockAnvil) this.tierLower = 1;
@@ -1162,5 +1178,43 @@ public class AnvilRecipes {
 		CONSTRUCTION,
 		RECYCLING,
 		SMITHING;
+	}
+
+	@Override
+	public void readRecipe(JsonElement recipe) {
+		JsonObject obj = (JsonObject) recipe;
+
+		AStack[] inputs = this.readAStackArray(obj.get("inputs").getAsJsonArray());
+		Pair<ItemStack, Float>[] outputs = this.readItemStackArrayChance(obj.get("outputs").getAsJsonArray());
+
+		int tierLower = obj.get("tierLower").getAsInt();
+		int tierUpper = obj.has("tierUpper") ? obj.get("tierUpper").getAsInt() : -1;
+
+		OverlayType overlay = OverlayType.NONE;
+		if(obj.has("overlay")) {
+			String overlayName = obj.get("overlay").getAsString();
+			overlay = OverlayType.valueOf(overlayName);
+			if(overlay == null) overlay = OverlayType.NONE;
+		}
+
+		this.constructionRecipes.add(new AnvilConstructionRecipe(inputs, outputs).setTierRange(tierLower, tierUpper).setOverlay(overlay));
+	}
+
+	@Override
+	public void writeRecipe(Object recipe, JsonWriter writer) throws IOException {
+		AnvilConstructionRecipe rec = (AnvilConstructionRecipe) recipe;
+
+		writer.name("inputs").beginArray();
+		for(AStack stack : rec.input) this.writeAStack(stack, writer);
+		writer.endArray();
+
+		writer.name("outputs").beginArray();
+		for(AnvilOutput stack : rec.output) this.writeItemStackChance(new Pair(stack.stack, stack.chance), writer);
+		writer.endArray();
+
+		writer.name("tierLower").value(rec.tierLower);
+		writer.name("tierUpper").value(rec.tierUpper);
+
+		writer.name("overlay").value(rec.overlay.name());
 	}
 }

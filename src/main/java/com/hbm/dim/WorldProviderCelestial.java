@@ -28,6 +28,7 @@ import net.minecraft.util.WeightedRandomFishable;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.IRenderHandler;
+import net.minecraftforge.client.event.EntityViewRenderEvent.FogDensity;
 
 public abstract class WorldProviderCelestial extends WorldProvider {
 
@@ -77,7 +78,7 @@ public abstract class WorldProviderCelestial extends WorldProvider {
 	}
 
 	// Can be overridden to provide fog changing events based on weather
-	public float fogDensity() {
+	public float fogDensity(FogDensity event) {
 		CBT_Atmosphere atmosphere = CelestialBody.getTrait(worldObj, CBT_Atmosphere.class);
 		if(atmosphere == null) return 0;
 

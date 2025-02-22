@@ -19,22 +19,23 @@ import net.minecraft.tileentity.TileEntity;
 
 @Optional.InterfaceList({@Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")})
 public class TileEntityGeiger extends TileEntity implements SimpleComponent, IInfoProviderEC, CompatHandler.OCComponent {
-	
+
 	int timer = 0;
 	int ticker = 0;
-	
+
 	@Override
 	public void updateEntity() {
-		
+
 		timer++;
-		
+
 		if(timer == 10) {
 			timer = 0;
 			ticker = check();
 		}
-		
+
 		if(timer % 5 == 0) {
 			if(ticker > 0) {
+				if(worldObj.rand.nextFloat() > ticker) return;
 				List<Integer> list = new ArrayList<Integer>();
 
 				if(ticker < 1)
@@ -53,16 +54,16 @@ public class TileEntityGeiger extends TileEntity implements SimpleComponent, IIn
 					list.add(5);
 				if(ticker > 25)
 					list.add(6);
-			
+
 				int r = list.get(worldObj.rand.nextInt(list.size()));
-				
+
 				if(r > 0)
 		        	worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "hbm:item.geiger" + r, 1.0F, 1.0F);
 			} else if(worldObj.rand.nextInt(50) == 0) {
 				worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "hbm:item.geiger"+ (1 + worldObj.rand.nextInt(1)), 1.0F, 1.0F);
 			}
 		}
-		
+
 	}
 
 	public int check() {

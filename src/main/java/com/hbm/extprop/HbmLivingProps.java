@@ -19,7 +19,6 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -50,10 +49,7 @@ public class HbmLivingProps implements IExtendedEntityProperties {
 	private int contagion;
 	private int oil;
 	private float activation;
-	private int temperature;
 	private int oxygen = 100;
-	private boolean frozen = false;
-	private boolean burning = false;
 	public int fire;
 	public int phosphorus;
 	public int balefire;
@@ -349,6 +345,12 @@ public class HbmLivingProps implements IExtendedEntityProperties {
 		buf.writeInt(contagion);
 		buf.writeInt(blacklung);
 		buf.writeInt(oil);
+		buf.writeInt(oxygen);
+		buf.writeBoolean(gravity);
+		buf.writeFloat(activation);
+		buf.writeInt(fire);
+		buf.writeInt(phosphorus);
+		buf.writeInt(balefire);
 		buf.writeInt(this.contamination.size());
 		for (ContaminationEffect contaminationEffect : this.contamination) {
 			contaminationEffect.serialize(buf); // long ass buffers? uh, yes please!
@@ -364,6 +366,12 @@ public class HbmLivingProps implements IExtendedEntityProperties {
 			contagion = buf.readInt();
 			blacklung = buf.readInt();
 			oil = buf.readInt();
+			oxygen = buf.readInt();
+			gravity = buf.readBoolean();
+			activation = buf.readFloat();
+			fire = buf.readInt();
+			phosphorus = buf.readInt();
+			balefire = buf.readInt();
 			int size = buf.readInt();
 			for (int i = 0; i < size; i++) {
 				this.contamination.add(ContaminationEffect.deserialize(buf));

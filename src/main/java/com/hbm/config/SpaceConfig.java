@@ -23,7 +23,6 @@ public class SpaceConfig {
 
 	public static int minmusBiome = 40;
 	public static int minmusBasins = 41;
-
 	public static int moonBiome = 111;
 
 	public static int dunaBiome = 112;
@@ -47,12 +46,13 @@ public class SpaceConfig {
 	public static int laytheBiome = 123;
 	public static int laytheOceanBiome = 124;
 	public static int laythePolarBiome = 126;
+	public static int laytheCoastBiome = 44;
 
 	public static int ikeBiome = 127;
 
 	public static int tektoPolyvinyl = 100;
-	public static int HalogenHill = 101;
-	public static int TektoRiver = 102;
+	public static int tektoHalogenHill = 101;
+	public static int tektoRiver = 102;
 
 
 	
@@ -111,6 +111,7 @@ public class SpaceConfig {
 		dresBasins = CommonConfig.createConfigInt(config, CATEGORY_BIOME, "16.21_dresBasinsBiome", "Dres Basins Biome ID", dresBasins);
 		mohoBasaltBiome = CommonConfig.createConfigInt(config, CATEGORY_BIOME, "16.22_mohoBasaltBiome", "Moho Basalt Biome ID", mohoBasaltBiome);
 		orbitBiome = CommonConfig.createConfigInt(config, CATEGORY_BIOME, "16.23_orbitBiome", "Space Biome ID", orbitBiome);
+		laytheCoastBiome = CommonConfig.createConfigInt(config, CATEGORY_BIOME, "16.24_laytheCoastBiome", "Laythe Coast Biome ID", laytheCoastBiome);
 	}
 
 }

@@ -10,6 +10,7 @@ import com.hbm.dim.eve.GenLayerEve.WorldGenElectricVolcano;
 import com.hbm.dim.eve.GenLayerEve.WorldGenEveSpike;
 import com.hbm.dim.eve.biome.BiomeGenBaseEve;
 import com.hbm.world.feature.OilBubble;
+import com.hbm.world.gen.NBTStructure;
 import com.hbm.world.generator.DungeonToolbox;
 
 import cpw.mods.fml.common.IWorldGenerator;
@@ -20,6 +21,10 @@ import net.minecraft.world.chunk.IChunkProvider;
 public class WorldGeneratorEve implements IWorldGenerator {
 
 	WorldGenElectricVolcano volcano = new WorldGenElectricVolcano(30, 22, ModBlocks.eve_silt, ModBlocks.eve_rock);
+
+	public WorldGeneratorEve() {
+		NBTStructure.registerNullWeight(SpaceConfig.eveDimension, 24);
+	}
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {

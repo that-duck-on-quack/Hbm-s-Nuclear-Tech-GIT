@@ -46,6 +46,7 @@ public class MapGenTiltedSpires extends MapGenBase {
 	@Override
 	public void func_151539_a(IChunkProvider chunk, World world, int chunkX, int chunkZ, Block[] blocks) {
 		if (worldObj != world) {
+			this.rand.setSeed(world.getSeed() + 69);
 			this.perlin = DoublePerlinNoiseSampler.create(new Random(rand.nextLong()), -8, 1.0D, 2.0D);
 		}
 

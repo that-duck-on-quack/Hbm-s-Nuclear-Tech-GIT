@@ -1,5 +1,7 @@
 package com.hbm.world;
 
+import java.util.ArrayList;
+
 import com.hbm.config.SpaceConfig;
 import com.hbm.dim.dres.WorldGeneratorDres;
 import com.hbm.dim.WorldGeneratorCelestial;
@@ -21,6 +23,7 @@ import com.hbm.dim.moon.WorldProviderMoon;
 import com.hbm.dim.orbit.WorldProviderOrbit;
 import com.hbm.dim.tekto.WorldGeneratorTekto;
 import com.hbm.dim.tekto.WorldProviderTekto;
+import com.hbm.util.BobMathUtil;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.world.WorldProvider;
@@ -29,6 +32,17 @@ import net.minecraftforge.common.DimensionManager;
 public class PlanetGen {
 
     public static void init() {
+
+		registerDimension(SpaceConfig.moonDimension, WorldProviderMoon.class);
+		registerDimension(SpaceConfig.dunaDimension, WorldProviderDuna.class);
+		registerDimension(SpaceConfig.ikeDimension, WorldProviderIke.class);
+		registerDimension(SpaceConfig.eveDimension, WorldProviderEve.class);
+		registerDimension(SpaceConfig.dresDimension, WorldProviderDres.class);
+		registerDimension(SpaceConfig.mohoDimension, WorldProviderMoho.class);
+		registerDimension(SpaceConfig.minmusDimension, WorldProviderMinmus.class);
+		registerDimension(SpaceConfig.laytheDimension, WorldProviderLaythe.class);
+		registerDimension(SpaceConfig.orbitDimension, WorldProviderOrbit.class);
+		registerDimension(SpaceConfig.tektoDimension, WorldProviderTekto.class);
 
 		// Register our ore providers
 		GameRegistry.registerWorldGenerator(new WorldGeneratorCelestial(), 2);
@@ -43,23 +57,20 @@ public class PlanetGen {
 		GameRegistry.registerWorldGenerator(new WorldGeneratorLaythe(), 1);
 		GameRegistry.registerWorldGenerator(new WorldGeneratorTekto(), 1);
 
-		registerDimension(SpaceConfig.moonDimension, WorldProviderMoon.class);
-		registerDimension(SpaceConfig.dunaDimension, WorldProviderDuna.class);
-		registerDimension(SpaceConfig.ikeDimension, WorldProviderIke.class);
-		registerDimension(SpaceConfig.eveDimension, WorldProviderEve.class);
-		registerDimension(SpaceConfig.dresDimension, WorldProviderDres.class);
-		registerDimension(SpaceConfig.mohoDimension, WorldProviderMoho.class);
-		registerDimension(SpaceConfig.minmusDimension, WorldProviderMinmus.class);
-		registerDimension(SpaceConfig.laytheDimension, WorldProviderLaythe.class);
-		registerDimension(SpaceConfig.orbitDimension, WorldProviderOrbit.class);
-		registerDimension(SpaceConfig.tektoDimension, WorldProviderTekto.class);
-
     }
+
+	private static ArrayList<Integer> spaceDimensions = new ArrayList<>();
+
+	public static int[] getSpaceDimensions() {
+		return BobMathUtil.intCollectionToArray(spaceDimensions);
+	}
 
 	private static void registerDimension(int dimensionId, Class<? extends WorldProvider> clazz) {
 		DimensionManager.registerProviderType(dimensionId, clazz, false);
 		DimensionManager.registerDimension(dimensionId, dimensionId);
+
+		if(dimensionId != SpaceConfig.orbitDimension) spaceDimensions.add(dimensionId);
 	}
-	
+
 }
 

@@ -331,7 +331,7 @@ public class ModEventHandler {
 		}
 
 		if(!event.entityLiving.worldObj.isRemote) {
-			
+
 			if(event.source==ModDamageSource.eve)
 			{
 				for(int i = -1; i < 2; i++) {
@@ -341,8 +341,8 @@ public class ModEventHandler {
 							{
 								if(ModBlocks.flesh_block.canPlaceBlockAt(event.entityLiving.worldObj, (int)event.entityLiving.posX+i, (int)event.entityLiving.posY+j, (int)event.entityLiving.posZ+k))
 								{
-									event.entityLiving.worldObj.setBlock((int)event.entityLiving.posX+i, (int)event.entityLiving.posY+j, (int)event.entityLiving.posZ+k, ModBlocks.flesh_block);	
-								}								
+									event.entityLiving.worldObj.setBlock((int)event.entityLiving.posX+i, (int)event.entityLiving.posY+j, (int)event.entityLiving.posZ+k, ModBlocks.flesh_block);
+								}
 							}
 						}
 					}
@@ -373,7 +373,7 @@ public class ModEventHandler {
 				if(event.entityLiving instanceof EntityCyberCrab && event.entityLiving.getRNG().nextInt(500) == 0) {
 					event.entityLiving.dropItem(ModItems.wd40, 1);
 				}
-				
+
 				if(event.entityLiving instanceof EntityVillager&& event.entityLiving.getRNG().nextInt(1) == 0) {
 					event.entityLiving.dropItem(ModItems.flesh, 5);
 			}
@@ -383,20 +383,20 @@ public class ModEventHandler {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onEntityDeathLast(LivingDeathEvent event) {
-		
+
 		EntityLivingBase entity = event.entityLiving;
-		
+
 		if(EntityDamageUtil.wasAttackedByV1(event.source)) {
 
 			NBTTagCompound vdat = new NBTTagCompound();
 			vdat.setString("type", "giblets");
 			vdat.setInteger("ent", entity.getEntityId());
 			PacketDispatcher.wrapper.sendToAllAround(new AuxParticlePacketNT(vdat, entity.posX, entity.posY + entity.height * 0.5, entity.posZ), new TargetPoint(entity.dimension, entity.posX, entity.posY + entity.height * 0.5, entity.posZ, 150));
-			
+
 			entity.worldObj.playSoundEffect(entity.posX, entity.posY, entity.posZ, "mob.zombie.woodbreak", 2.0F, 0.95F + entity.worldObj.rand.nextFloat() * 0.2F);
-			
+
 			EntityPlayer attacker = (EntityPlayer) ((EntityDamageSource)event.source).getEntity();
-			
+
 			if(attacker.getDistanceSqToEntity(entity) < 100) {
 				attacker.heal(entity.getMaxHealth() * 0.25F);
 			}
@@ -577,7 +577,7 @@ public class ModEventHandler {
 	public void onBucketUse(FillBucketEvent event) {
 		if(event.world.isRemote) return;
 		if(event.target.typeOfHit != MovingObjectType.BLOCK) return;
-		
+
 		if(event.current != null && event.current.getItem() == Items.water_bucket) {
 			ForgeDirection dir = ForgeDirection.getOrientation(event.target.sideHit);
 			CBT_Atmosphere atmosphere = ChunkAtmosphereManager.proxy.getAtmosphere(event.world, event.target.blockX + dir.offsetX, event.target.blockY + dir.offsetY, event.target.blockZ + dir.offsetZ);
@@ -613,7 +613,7 @@ public class ModEventHandler {
 
 		if(!event.entity.worldObj.isRemote && event.entityLiving.isPotionActive(HbmPotion.slippery.id)) {
 			if (event.entityLiving.onGround) {
-				double slipperiness = 0.6; 
+				double slipperiness = 0.6;
 				double inertia = 0.1;
 				boolean isMoving = event.entityLiving.moveForward != 0.0 || event.entityLiving.moveStrafing != 0.0;
 
@@ -627,7 +627,7 @@ public class ModEventHandler {
 
 				event.entityLiving.motionX += diffX * inertia; //god weeps
 				event.entityLiving.motionZ += diffZ * inertia;
-				
+
 				if (!isMoving) {
 					event.entityLiving.motionX *= (1.0 - 0.1);
 
@@ -638,7 +638,7 @@ public class ModEventHandler {
 				}
 			}
 		}
-	
+
 		boolean isFlying = event.entity instanceof EntityPlayer ? ((EntityPlayer) event.entity).capabilities.isFlying : false;
 
 		if(!isFlying) {
@@ -653,7 +653,7 @@ public class ModEventHandler {
 					gravity = AstronomyUtil.STANDARD_GRAVITY * station.gravityMultiplier;
 					if(gravity < 0.2) gravity = 0;
 				}
-					
+
 				event.entityLiving.motionY /= 0.98F;
 				event.entityLiving.motionY += (AstronomyUtil.STANDARD_GRAVITY / 20F);
 				event.entityLiving.motionY -= (gravity / 20F);
@@ -668,14 +668,14 @@ public class ModEventHandler {
 			} else {
 				CelestialBody body = CelestialBody.getBody(event.entity.worldObj);
 				float gravity = body.getSurfaceGravity() * AstronomyUtil.PLAYER_GRAVITY_MODIFIER;
-		
+
 				// If gravity is basically the same as normal, do nothing
 				// Also do nothing in water, or if we've been alive less than a second (so we don't glitch into the ground)
 				if(!event.entityLiving.isInWater() && event.entityLiving.ticksExisted > 20 && (gravity < 1.5F || gravity > 1.7F)) {
-		
+
 					// Minimum gravity to prevent floating bug
 					if(gravity < 0.2F) gravity = 0.2F;
-		
+
 					// Undo falling, and add our intended falling speed
 					// On high gravity planets, only apply falling speed when descending, so we can still jump up single blocks
 					if (gravity < 1.5F || event.entityLiving.motionY < 0) {
@@ -815,13 +815,13 @@ public class ModEventHandler {
 									boolean inOrbit = event.world.provider instanceof WorldProviderOrbit;
 									Entity ridingEntity = player.ridingEntity;
 									float prevHeight = ridingEntity.height;
-									
+
 									ridingEntity.height = inOrbit ? ridingEntity.height + 1.0F : 1.0F;
 									player.mountEntity(null);
 									if(!inOrbit) player.setPositionAndUpdate(player.posX + 2, player.posY, player.posZ);
 									ridingEntity.height = prevHeight;
 								}
-								
+
 								player.setSneaking(false);
 							}
 						}
@@ -836,7 +836,7 @@ public class ModEventHandler {
 							if(event.world.rand.nextInt(3) == 0 ) {
 								EntityCreeperNuclear creep = new EntityCreeperNuclear(event.world);
 								creep.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
-								
+
 								if(!entity.isDead)
 									if(!event.world.isRemote)
 										event.world.spawnEntityInWorld(creep);
@@ -845,7 +845,7 @@ public class ModEventHandler {
 								entity.attackEntityFrom(ModDamageSource.radiation, 100F);
 							}
 							continue;
-						
+
 						} else if(entity instanceof EntityCow && !(entity instanceof EntityMooshroom) && eRad >= 50) {
 							EntityMooshroom creep = new EntityMooshroom(event.world);
 							creep.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
@@ -855,24 +855,24 @@ public class ModEventHandler {
 									event.world.spawnEntityInWorld(creep);
 							entity.setDead();
 							continue;
-							
+
 						} else if(entity instanceof EntityVillager && eRad >= 500) {
 							EntityZombie creep = new EntityZombie(event.world);
 							creep.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
-							
+
 							if(!entity.isDead)
 								if(!event.world.isRemote)
 									event.world.spawnEntityInWorld(creep);
 							entity.setDead();
 							continue;
 						} else if(entity.getClass().equals(EntityDuck.class) && eRad >= 200) {
-							
+
 							EntityQuackos quacc = new EntityQuackos(event.world);
 							quacc.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
-							
+
 							if(!entity.isDead && !event.world.isRemote)
 								event.world.spawnEntityInWorld(quacc);
-							
+
 							entity.setDead();
 							continue;
 						}
@@ -891,10 +891,10 @@ public class ModEventHandler {
 								entity.setHealth(0);
 								entity.onDeath(ModDamageSource.radiation);
 							}
-							
+
 							if(entity instanceof EntityPlayer)
 								((EntityPlayer)entity).triggerAchievement(MainRegistry.achRadDeath);
-							
+
 						} else if(eRad >= 800) {
 							if(event.world.rand.nextInt(300) == 0)
 								entity.addPotionEffect(new PotionEffect(Potion.confusion.id, 5 * 30, 0));
@@ -906,7 +906,7 @@ public class ModEventHandler {
 								entity.addPotionEffect(new PotionEffect(Potion.poison.id, 3 * 20, 2));
 							if(event.world.rand.nextInt(700) == 0)
 								entity.addPotionEffect(new PotionEffect(Potion.wither.id, 3 * 20, 1));
-							
+
 						} else if(eRad >= 600) {
 							if(event.world.rand.nextInt(300) == 0)
 								entity.addPotionEffect(new PotionEffect(Potion.confusion.id, 5 * 30, 0));
@@ -916,7 +916,7 @@ public class ModEventHandler {
 								entity.addPotionEffect(new PotionEffect(Potion.weakness.id, 10 * 20, 2));
 							if(event.world.rand.nextInt(500) == 0)
 								entity.addPotionEffect(new PotionEffect(Potion.poison.id, 3 * 20, 1));
-							
+
 						} else if(eRad >= 400) {
 							if(event.world.rand.nextInt(300) == 0)
 								entity.addPotionEffect(new PotionEffect(Potion.confusion.id, 5 * 30, 0));
@@ -924,13 +924,13 @@ public class ModEventHandler {
 								entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 5 * 20, 0));
 							if(event.world.rand.nextInt(300) == 0)
 								entity.addPotionEffect(new PotionEffect(Potion.weakness.id, 5 * 20, 1));
-							
+
 						} else if(eRad >= 200) {
 							if(event.world.rand.nextInt(300) == 0)
 								entity.addPotionEffect(new PotionEffect(Potion.confusion.id, 5 * 20, 0));
 							if(event.world.rand.nextInt(500) == 0)
 								entity.addPotionEffect(new PotionEffect(Potion.weakness.id, 5 * 20, 0));
-							
+
 							if(entity instanceof EntityPlayer)
 								((EntityPlayer)entity).triggerAchievement(MainRegistry.achRadPoison);
 						}
@@ -965,7 +965,7 @@ public class ModEventHandler {
 					event.world.provider.setWorldTime(event.world.provider.getWorldTime() + 1L);
 				}
 			}
-			
+
 		}
 
 		if(event.phase == Phase.START) {
@@ -1055,7 +1055,7 @@ public class ModEventHandler {
 		/// V1 ///
 		if(EntityDamageUtil.wasAttackedByV1(event.source)) {
 			EntityPlayer attacker = (EntityPlayer) ((EntityDamageSource)event.source).getEntity();
-			
+
 			NBTTagCompound data = new NBTTagCompound();
 			data.setString("type", "vanillaburst");
 			data.setInteger("count", (int)Math.min(e.getMaxHealth() / 2F, 250));
@@ -1063,12 +1063,12 @@ public class ModEventHandler {
 			data.setString("mode", "blockdust");
 			data.setInteger("block", Block.getIdFromBlock(Blocks.redstone_block));
 			PacketDispatcher.wrapper.sendToAllAround(new AuxParticlePacketNT(data, e.posX, e.posY + e.height * 0.5, e.posZ), new TargetPoint(e.dimension, e.posX, e.posY, e.posZ, 50));
-			
+
 			if(attacker.getDistanceSqToEntity(e) < 25) {
 				attacker.heal(event.ammount * 0.5F);
 			}
 		}
-		
+
 		/// ARMOR MODS ///
 		for(int i = 1; i < 5; i++) {
 
@@ -1176,7 +1176,7 @@ public class ModEventHandler {
 		} else {
 			CelestialBody body = CelestialBody.getBody(event.entity.worldObj);
 			float gravity = body.getSurfaceGravity() * AstronomyUtil.PLAYER_GRAVITY_MODIFIER;
-	
+
 			// Reduce fall damage on low gravity bodies
 			if(gravity < 0.3F) {
 				event.distance = 0;
@@ -1341,7 +1341,7 @@ public class ModEventHandler {
 
 		if(player.isPotionActive(HbmPotion.slippery.id) && !player.capabilities.isFlying) {
 			if (player.onGround) {
-				double slipperiness = 0.6; 
+				double slipperiness = 0.6;
 				double inertia = 0.1;
 				boolean isMoving = player.moveForward != 0.0 || player.moveStrafing != 0.0;
 				// double playerMotion = Math.sqrt(player.motionX * player.motionX + player.motionZ * player.motionZ);
@@ -1356,7 +1356,7 @@ public class ModEventHandler {
 
 				player.motionX += diffX * inertia; //god weeps
 				player.motionZ += diffZ * inertia;
-				
+
 				if (!isMoving) {
 					player.motionX *= (1.0 - 0.1);
 
@@ -1479,7 +1479,7 @@ public class ModEventHandler {
 				//if (!(Library.checkForHazmat((EntityPlayer)player) || Library.checkForRads((EntityPlayer)player)))
 				//{
 				Random rand = new Random();
-				
+
 				//if (Library.checkInventory(player, Items.experience_bottle, slot))
 				//{
 				//	((EntityPlayer)player).inventory.mainInventory[slot] = new ItemStack(Items.glass_bottle);
@@ -1496,12 +1496,12 @@ public class ModEventHandler {
 				}
 
 			}
-			
+
 			/// PU RADIATION END ///
-			
+
 			for(int i = 0; i < player.inventory.mainInventory.length; i++) {
 				ItemStack stack2 = player.inventory.getStackInSlot(i);
-				
+
 				//oh yeah remind me...
 				if(stack2 != null) {
 					if(stack2.hasTagCompound() && HazardSystem.getHazardLevelFromStack(stack2, HazardRegistry.RADIATION) == 0) {
@@ -1529,12 +1529,12 @@ public class ModEventHandler {
 				player.worldObj.spawnParticle("townaura", player.posX + vec.xCoord, player.posY + 1 + vec.yCoord, player.posZ + vec.zCoord, 0.0, 0.0, 0.0);
 			}
 			if(player.getUniqueID().toString().equals(ShadyUtil.DUODEC_)) {
-				
+
 				Vec3 vec = Vec3.createVectorHelper(3 * rand.nextDouble(), 0, 0);
-				
+
 				vec.rotateAroundZ((float) (rand.nextDouble() * Math.PI));
 				vec.rotateAroundY((float) (rand.nextDouble() * Math.PI * 2));
-				
+
 				//player.worldObj.spawnParticle("magicCrit", player.posX + vec.xCoord, player.posY + 1 + vec.yCoord, player.posZ + vec.zCoord, 0.0, 0.0, 0.0);
 				ParticleUtil.spawnTuneFlame(player.worldObj, player.posX + vec.xCoord, player.posY + 1 + vec.yCoord, player.posZ + vec.zCoord);
 				ParticleUtil.spawnJesusFlame(player.worldObj, player.posX + vec.xCoord, player.posY + 1 + vec.yCoord, player.posZ + vec.zCoord);
@@ -1543,7 +1543,7 @@ public class ModEventHandler {
 
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void preventOrganicSpawn(DecorateBiomeEvent.Decorate event) {
 		// In space, no one can hear you shroom
@@ -1578,6 +1578,7 @@ public class ModEventHandler {
 			RequestNetwork.updateEntries();
 			TileEntityMachineRadarNT.updateSystem();
 			Nodespace.updateNodespace();
+			CelestialBody.updateSwarms();
 			// bob i beg of you i need fluid nodespace :pray:
 		}
 
@@ -1717,8 +1718,8 @@ public class ModEventHandler {
 	public void onClickSign(PlayerInteractEvent event) {
 
 		int x = event.x;
-		int y = event.y;
-		int z = event.z;
+		int y = event.z;
+		int z = event.y;
 		World world = event.world;
 
 		if(!world.isRemote && event.action == Action.RIGHT_CLICK_BLOCK && world.getTileEntity(x, y, z) instanceof TileEntitySign) {
@@ -1735,7 +1736,7 @@ public class ModEventHandler {
 				MainRegistry.logger.log(Level.FATAL, "THE HIDDENCAT HAS BEEN OBTAINED " + " x: " + x + " / "	+ " y: " + + y + " / "+ "z: " + + z + " by " + event.entityPlayer.getDisplayName() + "!");
 
 			}
-		}		
+		}
 	}
 
 	// This is really fucky, but ensures we can respawn safely on celestial bodies
@@ -1750,7 +1751,7 @@ public class ModEventHandler {
 			WorldProviderCelestial.attemptingSleep = true;
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onEntityHeal(LivingHealEvent event) {
 		if (!event.entity.worldObj.isRemote) {
@@ -1765,7 +1766,7 @@ public class ModEventHandler {
 				double amount = event.amount;
 				double rad = HbmLivingProps.getRadiation(entity);
 				if (rad > 100 && rad < 800) { ///TODO get per entity
-					amount *=1-(((rad-100)*(1-0))/(800-100))+0;                	
+					amount *=1-(((rad-100)*(1-0))/(800-100))+0;
 				}
 				if (rad > 800) { ///TODO get per entity
 					amount = 0;
@@ -1782,12 +1783,12 @@ public class ModEventHandler {
 		int y = event.y;
 		int z = event.z;
 		World world = event.world;
-		
+
 		if(!world.isRemote && event.action == Action.RIGHT_CLICK_BLOCK && world.getBlock(x, y, z) == Blocks.lever && GeneralConfig.enableExtendedLogging == true) {
 			MainRegistry.logger.log(Level.INFO, "[DET] pulled lever at " + x + " / " + y + " / " + z + " by " + event.entityPlayer.getDisplayName() + "!");
 		}
 	}
-	
+
 
 
 	@SubscribeEvent

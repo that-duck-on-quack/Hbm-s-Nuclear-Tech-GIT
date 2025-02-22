@@ -6,8 +6,10 @@ import com.hbm.blocks.ModBlocks;
 import com.hbm.inventory.material.Mats;
 import com.hbm.items.ItemEnums.EnumCokeType;
 import com.hbm.items.machine.ItemCircuit.EnumCircuitType;
+import com.hbm.items.machine.ItemPWRFuel.EnumPWRFuel;
 import com.hbm.items.ModItems;
 import com.hbm.items.tool.ItemBlowtorch;
+import com.hbm.items.weapon.sedna.factory.GunFactory.EnumAmmo;
 
 import net.minecraft.init.Items;
 import net.minecraft.util.WeightedRandomChestContent;
@@ -22,9 +24,11 @@ public class ItemPoolsComponent {
 	public static final String POOL_SOLID_FUEL = "POOL_SOLID_FUEL";
 	public static final String POOL_VAULT_LAB = "POOL_VAULT_LAB";
 	public static final String POOL_VAULT_LOCKERS = "POOL_VAULT_LOCKERS";
-	
+	public static final String POOL_SUBMARINE = "POOL_SUBMARINE";
+	public static final String POOL_METEOR_SAFE = "POOL_METEOR_SAFE";
+
 	public static void init() {
-		
+
 		//machine parts
 		new ItemPool(POOL_MACHINE_PARTS) {{
 			this.pool = new WeightedRandomChestContent[] {
@@ -47,7 +51,7 @@ public class ItemPoolsComponent {
 					weighted(ModItems.blade_titanium, 0, 1, 8, 1)
 			};
 		}};
-		
+
 		//fuel isotopes found in bunkers and labs
 		new ItemPool(POOL_NUKE_FUEL) {{
 			this.pool = new WeightedRandomChestContent[] {
@@ -68,7 +72,7 @@ public class ItemPoolsComponent {
 					weighted(ModItems.screwdriver, 0, 1, 1, 2)
 			};
 		}};
-		
+
 		//missile parts found in silos
 		new ItemPool(POOL_SILO) {{
 			this.pool = new WeightedRandomChestContent[] {
@@ -86,7 +90,7 @@ public class ItemPoolsComponent {
 					weighted(ModItems.bottle_nuka, 0, 1, 3, 10)
 			};
 		}};
-		
+
 		//low quality items from offices in chests
 		new ItemPool(POOL_OFFICE_TRASH) {{
 			this.pool = new WeightedRandomChestContent[] {
@@ -107,7 +111,7 @@ public class ItemPoolsComponent {
 					weighted(ModBlocks.deco_computer, 0, 1, 1, 1)
 			};
 		}};
-		
+
 		//things found in various filing cabinets, paper, books, etc
 		new ItemPool(POOL_FILING_CABINET) {{
 			this.pool = new WeightedRandomChestContent[] {
@@ -122,7 +126,7 @@ public class ItemPoolsComponent {
 					weighted(ModItems.ink, 0, 1, 1, 1)
 			};
 		}};
-		
+
 		//solid fuels from bunker power rooms
 		new ItemPool(POOL_SOLID_FUEL) {{
 			this.pool = new WeightedRandomChestContent[] {
@@ -134,7 +138,7 @@ public class ItemPoolsComponent {
 					weighted(ModItems.niter, 0, 1, 3, 1)
 			};
 		}};
-		
+
 		//various lab related items from bunkers
 		new ItemPool(POOL_VAULT_LAB) {{
 			this.pool = new WeightedRandomChestContent[] {
@@ -155,7 +159,7 @@ public class ItemPoolsComponent {
 					weighted(ModItems.powder_boron, 0, 1, 1, 1)
 			};
 		}};
-		
+
 		//personal items and gear from vaults
 		new ItemPool(POOL_VAULT_LOCKERS) {{
 			this.pool = new WeightedRandomChestContent[] {
@@ -181,6 +185,48 @@ public class ItemPoolsComponent {
 					weighted(Items.clock, 0, 1, 1, 3),
 					weighted(Items.book, 0, 1, 5, 10),
 					weighted(Items.experience_bottle, 0, 1, 3, 1)
+			};
+		}};
+
+		// Black Book safe in meteor dungeons
+		new ItemPool(POOL_METEOR_SAFE) {{
+			this.pool = new WeightedRandomChestContent[] {
+					weighted(ModItems.book_of_, 0, 1, 1, 1),
+					weighted(ModItems.stamp_book, 0, 1, 1, 1),
+					weighted(ModItems.stamp_book, 1, 1, 1, 1),
+					weighted(ModItems.stamp_book, 2, 1, 1, 1),
+					weighted(ModItems.stamp_book, 3, 1, 1, 1),
+					weighted(ModItems.stamp_book, 4, 1, 1, 1),
+					weighted(ModItems.stamp_book, 5, 1, 1, 1),
+					weighted(ModItems.stamp_book, 6, 1, 1, 1),
+					weighted(ModItems.stamp_book, 7, 1, 1, 1),
+			};
+		}};
+
+		// Submarines found sunk on Laythe
+		new ItemPool(POOL_SUBMARINE) {{
+			this.pool = new WeightedRandomChestContent[] {
+					weighted(ModItems.nugget_u235, 0, 3, 12, 5),
+					weighted(ModItems.nugget_pu238, 0, 3, 12, 5),
+					weighted(ModItems.nugget_ra226, 0, 3, 6, 5),
+					weighted(ModItems.oxy_pinwheel, 0, 1, 1, 1),
+					weighted(ModItems.gas_mask_m65, 0, 1, 1, 2),
+					weighted(ModItems.gas_mask_mono, 0, 1, 1, 2),
+					weighted(ModItems.gas_mask_filter, 0, 1, 1, 2),
+					weighted(ModItems.powder_iodine, 0, 1, 1, 1),
+					weighted(ModItems.powder_bromine, 0, 1, 2, 1),
+					weighted(ModItems.hazmat_kit, 0, 1, 1, 2),
+					weighted(ModItems.gun_carbine, 0, 1, 1, 2),
+					weighted(ModItems.ammo_standard, EnumAmmo.R762_FMJ.ordinal(), 8, 32, 4),
+					weighted(ModBlocks.yellow_barrel, 0, 1, 3, 3),
+					weighted(ModItems.powder_neptunium, 0, 1, 1, 1),
+					weighted(ModItems.pwr_fuel, EnumPWRFuel.MEU.ordinal(), 1, 3, 3),
+					weighted(ModItems.pwr_fuel, EnumPWRFuel.MEP.ordinal(), 1, 3, 3),
+					weighted(ModItems.pwr_fuel, EnumPWRFuel.HEU235.ordinal(), 1, 3, 4),
+					weighted(Items.paper, 0, 1, 6, 5),
+					weighted(Items.clock, 0, 1, 1, 3),
+					weighted(Items.compass, 0, 1, 1, 3),
+					weighted(Items.book, 0, 1, 5, 4),
 			};
 		}};
 	}

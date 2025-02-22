@@ -16,6 +16,7 @@ import com.hbm.inventory.material.MaterialShapes;
 import com.hbm.inventory.material.Mats;
 import com.hbm.inventory.material.Mats.MaterialStack;
 import com.hbm.inventory.recipes.loader.SerializableRecipe;
+import com.hbm.items.ItemEnums;
 import com.hbm.items.ModItems;
 import com.hbm.items.machine.ItemFluidIcon;
 import com.hbm.items.machine.ItemScraps;
@@ -79,9 +80,11 @@ public class ElectrolyserMetalRecipes extends SerializableRecipe {
 				new ItemStack(ModItems.powder_lithium_tiny, 3)));
 
 		recipes.put(new ComparableStack(ModItems.crystal_aluminium), new ElectrolysisMetalRecipe(
-				new MaterialStack(Mats.MAT_ALUMINIUM, MaterialShapes.INGOT.q(6)),
+				new MaterialStack(Mats.MAT_ALUMINIUM, MaterialShapes.INGOT.q(2)),
 				new MaterialStack(Mats.MAT_IRON, MaterialShapes.INGOT.q(2)),
+				new ItemStack(ModItems.chunk_ore, 4, ItemEnums.EnumChunkType.CRYOLITE.ordinal()),
 				new ItemStack(ModItems.powder_lithium_tiny, 3)));
+
 
 		recipes.put(new ComparableStack(ModItems.crystal_beryllium), new ElectrolysisMetalRecipe(
 				new MaterialStack(Mats.MAT_BERYLLIUM, MaterialShapes.INGOT.q(6)),
@@ -107,6 +110,9 @@ public class ElectrolyserMetalRecipes extends SerializableRecipe {
 		recipes.put(new ComparableStack(ModItems.crystal_rare), new ElectrolysisMetalRecipe(
 				new MaterialStack(Mats.MAT_ZIRCONIUM, MaterialShapes.NUGGET.q(6)),
 				new MaterialStack(Mats.MAT_BORON, MaterialShapes.NUGGET.q(2))));
+
+				new MaterialStack(Mats.MAT_BORON, MaterialShapes.NUGGET.q(2)),
+				new ItemStack(ModItems.powder_desh_mix, 3)));
 
 		recipes.put(new ComparableStack(ModItems.crystal_trixite), new ElectrolysisMetalRecipe(
 				new MaterialStack(Mats.MAT_PLUTONIUM, MaterialShapes.INGOT.q(3)),

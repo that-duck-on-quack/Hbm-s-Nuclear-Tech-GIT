@@ -436,32 +436,6 @@ public class ChemplantRecipes extends SerializableRecipe {
 				.inputItems(
 						new ComparableStack(ModBlocks.sand_dirty, 20))
 				.outputItems(new ItemStack(ModItems.ingot_iridium, 1)));
-		recipes.add(new ChemRecipe(108, "ELBOMB", 300)
-				.inputFluids(new FluidStack(Fluids.ELBOWGREASE, 100))
-				.inputItems(
-						new ComparableStack(ModItems.ingot_lead, 1),
-						new OreDictStack(ANY_SMOKELESS.dust(), 1))
-				.outputItems(new ItemStack(ModItems.assembly_smg, 32))); //9mm
-		recipes.add(new ChemRecipe(109, "ELBOOB", 350)
-				.inputFluids(new FluidStack(Fluids.ELBOWGREASE, 100))
-				.inputItems(
-						new ComparableStack(ModItems.ingot_copper, 1),
-						new OreDictStack(ANY_SMOKELESS.dust(), 1))
-				.outputItems(new ItemStack(ModItems.assembly_762, 32))); //762
-		recipes.add(new ChemRecipe(110, "ELGORE", 250)
-				.inputFluids(new FluidStack(Fluids.ELBOWGREASE, 100))
-				.inputItems(
-						new ComparableStack(ModItems.ingot_copper, 1),
-						new ComparableStack(ModItems.ingot_lead, 1),
-						new OreDictStack(ANY_SMOKELESS.dust(), 1))
-				.outputItems(new ItemStack(ModItems.assembly_556, 32))); //556
-		recipes.add(new ChemRecipe(111, "FIVEFIVE", 300)
-				.inputFluids(new FluidStack(Fluids.ELBOWGREASE, 100))
-				.inputItems(
-						new ComparableStack(ModItems.ingot_copper, 1),
-						new ComparableStack(ModItems.ingot_steel, 1),
-						new OreDictStack(ANY_SMOKELESS.dust(), 1))
-				.outputItems(new ItemStack(ModItems.assembly_lacunae, 32))); //5mm
 		recipes.add(new ChemRecipe(112, "NMASSIII", 300)
 				.inputFluids(new FluidStack(Fluids.DEATH, 7000), (new FluidStack(Fluids.ELBOWGREASE, 6000)))
 				.inputItems(
@@ -496,6 +470,7 @@ public class ChemplantRecipes extends SerializableRecipe {
 		recipes.add(new ChemRecipe(118, "CC_CENTRIFUGE", 200)
 				.inputFluids(new FluidStack(Fluids.CHLOROCALCITE_CLEANED, 500), new FluidStack(Fluids.SULFURIC_ACID, 8_000))
 				.outputFluids(new FluidStack(Fluids.POTASSIUM_CHLORIDE, 250), new FluidStack(Fluids.CALCIUM_CHLORIDE, 250)));
+
 		recipes.add(new ChemRecipe(119, "THORIUM_SALT", 60)
 				.inputFluids(new FluidStack(Fluids.THORIUM_SALT_DEPLETED, 16_000))
 				.inputItems(new OreDictStack(TH232.nugget(), 2))

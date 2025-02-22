@@ -7,8 +7,11 @@ import com.hbm.config.SpaceConfig;
 import com.hbm.config.WorldConfig;
 import com.hbm.dim.CelestialBody;
 import com.hbm.dim.WorldTypeTeleport;
-import com.hbm.main.ResourceManager;
+import com.hbm.main.StructureManager;
 import com.hbm.world.feature.OilBubble;
+import com.hbm.world.gen.NBTStructure;
+import com.hbm.world.gen.NBTStructure.JigsawPiece;
+import com.hbm.world.gen.NBTStructure.SpawnCondition;
 import com.hbm.world.generator.DungeonToolbox;
 
 import cpw.mods.fml.common.IWorldGenerator;
@@ -16,6 +19,15 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldGeneratorDuna implements IWorldGenerator {
+
+	public WorldGeneratorDuna() {
+		NBTStructure.registerStructure(SpaceConfig.dunaDimension, new SpawnCondition() {{
+			structure = new JigsawPiece("duna_comms", StructureManager.duna_comms, -1);
+			canSpawn = biome -> biome.heightVariation < 0.1F;
+			spawnWeight = 8;
+		}});
+		NBTStructure.registerNullWeight(SpaceConfig.dunaDimension, 16);
+	}
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
@@ -51,8 +63,8 @@ public class WorldGeneratorDuna implements IWorldGenerator {
 			int z = 0;
 			int y = world.getHeightValue(x, z) - 1;
 
-			ResourceManager.martian.build(world, x, y, z);
+			StructureManager.martian.build(world, x, y, z);
 		}
 	}
-	
+
 }

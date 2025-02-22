@@ -30,6 +30,7 @@ import com.hbm.inventory.RecipesCommon.ComparableStack;
 import com.hbm.inventory.gui.GUIArmorTable;
 import com.hbm.inventory.gui.GUIScreenPreview;
 import com.hbm.inventory.gui.GUIScreenWikiRender;
+import com.hbm.items.ItemCustomLore;
 import com.hbm.items.ModItems;
 import com.hbm.items.armor.*;
 import com.hbm.items.machine.ItemDepletedFuel;
@@ -67,9 +68,6 @@ import com.hbm.util.ArmorRegistry.HazardClass;
 import com.hbm.wiaj.GuiWorldInAJar;
 import com.hbm.wiaj.cannery.CanneryBase;
 import com.hbm.wiaj.cannery.Jars;
-import com.hbm.util.ArmorRegistry;
-import com.hbm.util.ArmorUtil;
-import com.hbm.util.DamageResistanceHandler;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -167,6 +165,29 @@ public class ModEventHandlerClient {
 			GL11.glDepthMask(true);
 			return;
 		}
+
+		/*if(event.type == ElementType.CROSSHAIRS && player.getHeldItem() != null && player.getHeldItem().getItem() == ModItems.gun_aberrator) {
+			int width = event.resolution.getScaledWidth();
+			int height = event.resolution.getScaledHeight();
+			Tessellator tess = Tessellator.instance;
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GL11.glEnable(GL11.GL_BLEND);
+			OpenGlHelper.glBlendFunc(GL11.GL_ONE_MINUS_DST_COLOR, GL11.GL_ONE_MINUS_SRC_COLOR, 1, 0);
+			GL11.glAlphaFunc(GL11.GL_GEQUAL, 0.0F);
+			GL11.glDepthMask(false);
+			tess.startDrawingQuads();
+			float intensity = 0.2F;
+			tess.setColorRGBA_F(intensity, intensity, intensity, 1F);
+			tess.addVertex(width, 0, 0);
+			tess.addVertex(0, 0, 0);
+			tess.addVertex(0, height, 0);
+			tess.addVertex(width, height, 0);
+			tess.draw();
+			OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
+			GL11.glDepthMask(true);
+		}*/
 
 		/// HANDLE GUN OVERLAYS ///
 		if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof IItemHUD) {
@@ -354,7 +375,7 @@ public class ModEventHandlerClient {
 		}
 
 		/// HANDLE FLASHBANG OVERLAY///
-		if(player.isPotionActive(HbmPotion.flashbang)) {		
+		if(player.isPotionActive(HbmPotion.flashbang)) {
 			RenderScreenOverlay.renderFlashbangOverlay(event.resolution);
 		}
 		/// HANDLE FSB HUD ///
@@ -404,8 +425,8 @@ public class ModEventHandlerClient {
 		if (!event.isCanceled() && event.type == ElementType.ALL) {
 			long time = ImpactWorldHandler.getTimeForClient(player.worldObj);
 			if(time > 0) {
-				RenderScreenOverlay.renderCountdown(event.resolution, Minecraft.getMinecraft().ingameGUI, Minecraft.getMinecraft().theWorld);	
-			}        	
+				RenderScreenOverlay.renderCountdown(event.resolution, Minecraft.getMinecraft().ingameGUI, Minecraft.getMinecraft().theWorld);
+			}
 		}
 
 		if(event.type == ElementType.ARMOR) {
@@ -801,11 +822,9 @@ public class ModEventHandlerClient {
 				for(String s : names) {
 					list.add(EnumChatFormatting.AQUA + " -" + s);
 				}
-			} else {
-				list.add(EnumChatFormatting.RED + "No Ore Dict data!");
 			}
 		}
-		
+
 		///NEUTRON ACTIVATION
 		float level = 0;
 		float rads = HazardSystem.getHazardLevelFromStack(stack, HazardRegistry.RADIATION);
@@ -813,15 +832,15 @@ public class ModEventHandlerClient {
 			if(stack.hasTagCompound() && stack.stackTagCompound.hasKey(HazardTypeNeutron.NEUTRON_KEY)) {
 				level += stack.stackTagCompound.getFloat(HazardTypeNeutron.NEUTRON_KEY);
 			}
-			
+
 			if(level >= 1e-5) {
 				list.add(EnumChatFormatting.GREEN + "[" + I18nUtil.resolveKey("trait.radioactive") + "]");
 				String rads2 = "" + (Math.floor(level* 1000) / 1000);
 				list.add(EnumChatFormatting.YELLOW + (rads2 + "RAD/s"));
-				
+
 				if(stack.stackSize > 1) {
 					list.add(EnumChatFormatting.YELLOW + "Stack: " + ((Math.floor(level * 1000 * stack.stackSize) / 1000) + "RAD/s"));
-				}	
+				}
 			}
 		}
 
@@ -1369,9 +1388,10 @@ public class ModEventHandlerClient {
 	public static IIcon particleSwen;
 	public static IIcon particleLen;
 
-
 	public static IIcon particleSplash;
 	public static IIcon particleAshes;
+
+	public static IIcon particleFlare;
 
 	@SubscribeEvent
 	public void onTextureStitch(TextureStitchEvent.Pre event) {
@@ -1384,6 +1404,8 @@ public class ModEventHandlerClient {
 
 			particleSplash = event.map.registerIcon(RefStrings.MODID + ":particle/particle_splash");
 			particleAshes = event.map.registerIcon(RefStrings.MODID + ":particle/particle_ashes");
+
+			particleFlare = event.map.registerIcon(RefStrings.MODID + ":particle/yelflare");
 		}
 	}
 
@@ -1451,9 +1473,11 @@ public class ModEventHandlerClient {
 			}
 		}
 
+		if(event.phase == event.phase.END) ItemCustomLore.updateSystem();
 
 
-            
+
+
 	}
 
 	@SubscribeEvent

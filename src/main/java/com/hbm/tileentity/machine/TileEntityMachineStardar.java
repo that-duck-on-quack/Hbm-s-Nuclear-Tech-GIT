@@ -224,7 +224,7 @@ public class TileEntityMachineStardar extends TileEntityMachineBase implements I
 			} else {
 				pos = SolarSystemWorldSavedData.get(worldObj).findFreeSpace();
 			}
-	
+
 			slots[0].stackTagCompound = new NBTTagCompound();
 			slots[0].stackTagCompound.setInteger("x", pos.chunkXPos);
 			slots[0].stackTagCompound.setInteger("z", pos.chunkZPos);
@@ -269,7 +269,7 @@ public class TileEntityMachineStardar extends TileEntityMachineBase implements I
 					body.axialTilt,
 					body.canLand,
 					body.massKg,
-					body.processingLevel,
+					body.getProcessingLevel(CelestialBody.getBody(worldObj)),
 					body.radiusKm,
 					body.semiMajorAxisKm,
 					body.getSunPower(),

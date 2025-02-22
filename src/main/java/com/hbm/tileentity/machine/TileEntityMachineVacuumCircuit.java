@@ -15,6 +15,8 @@ import com.hbm.inventory.recipes.VacuumCircuitRecipes.VacuumCircuitRecipe;
 import com.hbm.items.machine.ItemMachineUpgrade;
 import com.hbm.items.machine.ItemMachineUpgrade.UpgradeType;
 import com.hbm.lib.Library;
+import com.hbm.packet.PacketDispatcher;
+import com.hbm.packet.toclient.AuxParticlePacketNT;
 import com.hbm.tileentity.IGUIProvider;
 import com.hbm.tileentity.IUpgradeInfoProvider;
 import com.hbm.tileentity.TileEntityMachineBase;
@@ -22,6 +24,7 @@ import com.hbm.util.I18nUtil;
 import com.hbm.util.fauxpointtwelve.DirPos;
 
 import api.hbm.energymk2.IEnergyReceiverMK2;
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
@@ -33,6 +36,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityMachineVacuumCircuit extends TileEntityMachineBase implements IEnergyReceiverMK2, IGUIProvider, IUpgradeInfoProvider {
 
@@ -108,8 +112,15 @@ public class TileEntityMachineVacuumCircuit extends TileEntityMachineBase implem
 						
 						this.markDirty();
 					}
-					
-					
+
+					if(worldObj.getTotalWorldTime() % 20 == 0) {
+						ForgeDirection dir = ForgeDirection.getOrientation(this.getBlockMetadata() - 10);
+						ForgeDirection rot = dir.getRotation(ForgeDirection.UP);
+						NBTTagCompound dPart = new NBTTagCompound();
+						dPart.setString("type", "tau");
+						dPart.setByte("count", (byte) 3);
+						PacketDispatcher.wrapper.sendToAllAround(new AuxParticlePacketNT(dPart, xCoord + 0.5 + dir.offsetX * 0.625 + rot.offsetX * 0.5, yCoord + 1.25, zCoord + 0.5 + dir.offsetZ * 0.625 + rot.offsetZ * 0.5), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 25));
+					}
 				} else {
 					this.progress = 0;
 				}

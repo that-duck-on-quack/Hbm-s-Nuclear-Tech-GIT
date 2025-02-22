@@ -23,6 +23,7 @@ import com.hbm.tileentity.IBufPacketReceiver;
 import com.hbm.tileentity.IOverpressurable;
 import com.hbm.tileentity.TileEntityLoadedBase;
 import com.hbm.tileentity.machine.rbmk.TileEntityRBMKConsole.ColumnType;
+import com.hbm.util.BobMathUtil;
 import com.hbm.util.Compat;
 import com.hbm.util.I18nUtil;
 import com.hbm.util.fauxpointtwelve.BlockPos;
@@ -139,8 +140,10 @@ public abstract class TileEntityRBMKBase extends TileEntityLoadedBase implements
 		double availableWater = this.water;
 		double availableSpace = this.maxSteam - this.steam;
 
-		int processedWater = (int) Math.floor(Math.min(availableHeat, Math.min(availableWater, availableSpace)) * RBMKDials.getReaSimBoilerSpeed(worldObj));
+		int processedWater = (int) Math.floor(BobMathUtil.min(availableHeat, availableWater, availableSpace) * MathHelper.clamp_double(RBMKDials.getReaSimBoilerSpeed(worldObj), 0D, 1D));
 
+		if(processedWater <= 0) return;
+		
 		this.water -= processedWater;
 		this.steam += processedWater;
 		this.heat -= processedWater * heatConsumption;

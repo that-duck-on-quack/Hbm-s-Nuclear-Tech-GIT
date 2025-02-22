@@ -8,7 +8,6 @@ import com.hbm.render.anim.AnimationLoader;
 import com.hbm.render.anim.BusAnimation;
 import com.hbm.render.loader.HFRWavefrontObject;
 import com.hbm.render.loader.IModelCustomNamed;
-import com.hbm.world.gen.NBTStructure;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
@@ -166,7 +165,7 @@ public class ResourceManager {
 
 	//Solderer
 	public static final IModelCustom soldering_station = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/soldering_station.obj"), false).asVBO();
-	public static final IModelCustom vac_cir_station = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/vacuum_solderer.obj"), false).asVBO();
+	public static final IModelCustom vac_cir_station = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/vacuum_solderer.obj")).asVBO();
 
 	//Arc Furnace
 	public static final IModelCustom arc_furnace = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/arc_furnace.obj")).asVBO();
@@ -189,6 +188,7 @@ public class ResourceManager {
 	//Mining Drill
 	public static final IModelCustom mining_drill = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/mining_drill.obj")).asVBO();
 	public static final IModelCustom ore_slopper = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/ore_slopper.obj")).asVBO();
+	public static final IModelCustom magma_drill = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/magma_drill.obj")).asVBO();
 
 	//Laser Miner
 	public static final IModelCustom mining_laser = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/mining_laser.obj")).asVBO();
@@ -284,6 +284,14 @@ public class ResourceManager {
 
 	//Forcefield
 	public static final IModelCustom forcefield_top = AdvancedModelLoader.loadModel(new ResourceLocation(RefStrings.MODID, "models/forcefield_top.obj"));
+
+	// Dyson
+	public static final IModelCustom dyson_receiver = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/dyson_receiver.obj")).asVBO();
+	public static final IModelCustom dyson_anatmogenesis = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/dyson_anatmogenesis.obj")).asVBO();
+	public static final IModelCustom dyson_he_converter = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/dyson_he_converter.obj")).asVBO();
+	public static final IModelCustom dyson_tu_converter = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/dyson_tu_converter.obj")).asVBO();
+	public static final IModelCustom dyson_spinlaunch = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/dyson_spinlaunch.obj")).asVBO();
+	public static final IModelCustom dyson_swarm_member = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/dyson_swarm_satellite.obj"));
 
 	//Bombs
 	public static final IModelCustom bomb_gadget = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/bombs/gadget.obj")).asVBO();
@@ -639,6 +647,7 @@ public class ResourceManager {
 	//Mining Drill
 	public static final ResourceLocation mining_drill_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/mining_drill.png");
 	public static final ResourceLocation ore_slopper_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/ore_slopper.png");
+	public static final ResourceLocation magma_drill_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/magma_drill.png");
 
 	//Laser Miner
 	public static final ResourceLocation mining_laser_base_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/mining_laser_base.png");
@@ -744,6 +753,14 @@ public class ResourceManager {
 	//Forcefield
 	public static final ResourceLocation forcefield_base_tex = new ResourceLocation(RefStrings.MODID, "textures/models/forcefield_base.png");
 	public static final ResourceLocation forcefield_top_tex = new ResourceLocation(RefStrings.MODID, "textures/models/forcefield_top.png");
+
+	// Dyson
+	public static final ResourceLocation dyson_receiver_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/dyson_receiver.png");
+	public static final ResourceLocation dyson_anatmogenesis_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/dyson_anatmogenesis.png");
+	public static final ResourceLocation dyson_he_converter_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/dyson_he_converter.png");
+	public static final ResourceLocation dyson_tu_converter_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/dyson_tu_converter.png");
+	public static final ResourceLocation dyson_spinlaunch_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/dyson_spinlaunch.png");
+	public static final ResourceLocation dyson_swarm_member_tex = new ResourceLocation(RefStrings.MODID, "textures/models/dyson_swarm_satellite.png");
 
 	//Bombs
 	public static final ResourceLocation bomb_gadget_tex = new ResourceLocation(RefStrings.MODID, "textures/models/bombs/gadget.png");
@@ -939,6 +956,7 @@ public class ResourceManager {
 	public static final IModelCustom hangman = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/weapons/hangman.obj")).asVBO();
 	public static final IModelCustom folly = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/weapons/folly.obj")).asVBO();
 	public static final IModelCustom double_barrel = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/weapons/sacred_dragon.obj")).asVBO();
+	public static final IModelCustom aberrator = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/weapons/aberrator.obj")).asVBO();
 
 	public static final HashMap<String, BusAnimation> python_anim = AnimationLoader.load(new ResourceLocation(RefStrings.MODID, "models/weapons/animations/python.json"));
 	public static final HashMap<String, BusAnimation> cursed_anim = AnimationLoader.load(new ResourceLocation(RefStrings.MODID, "models/weapons/animations/cursed.json"));
@@ -1087,6 +1105,8 @@ public class ResourceManager {
 	public static final ResourceLocation folly_tex = new ResourceLocation(RefStrings.MODID, "textures/models/weapons/moonlight.png");
 	public static final ResourceLocation double_barrel_tex = new ResourceLocation(RefStrings.MODID, "textures/models/weapons/double_barrel.png");
 	public static final ResourceLocation double_barrel_sacred_dragon_tex = new ResourceLocation(RefStrings.MODID, "textures/models/weapons/double_barrel_sacred_dragon.png");
+	public static final ResourceLocation aberrator_tex = new ResourceLocation(RefStrings.MODID, "textures/models/weapons/aberrator.png");
+	public static final ResourceLocation eott_tex = new ResourceLocation(RefStrings.MODID, "textures/models/weapons/eott.png");
 
 	public static final ResourceLocation lance_tex = new ResourceLocation(RefStrings.MODID, "textures/models/weapons/lance.png");
 

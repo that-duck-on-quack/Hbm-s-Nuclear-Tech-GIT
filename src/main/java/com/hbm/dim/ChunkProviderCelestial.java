@@ -210,10 +210,10 @@ public abstract class ChunkProviderCelestial implements IChunkProvider {
 						float f3 = biomegenbase1.rootHeight;
 						float f4 = biomegenbase1.heightVariation;
 
-                        if(amplified && f3 > 0.0F) {
-                            f3 = 1.0F + f3 * 2.0F;
-                            f4 = 1.0F + f4 * 4.0F;
-                        }
+						if(amplified && f3 > 0.0F) {
+							f3 = 1.0F + f3 * 2.0F;
+							f4 = 1.0F + f4 * 4.0F;
+						}
 
 						float f5 = parabolicField[l1 + 2 + (i2 + 2) * 5] / (f3 + 2.0F);
 
@@ -403,9 +403,9 @@ public abstract class ChunkProviderCelestial implements IChunkProvider {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List getPossibleCreatures(EnumCreatureType creatureType, int x, int y, int z) {
-        BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(x, z);
+		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(x, z);
 		if(biomegenbase instanceof BiomeGenCraterBase) return new ArrayList<SpawnListEntry>();
-        return biomegenbase.getSpawnableList(creatureType);
+		return biomegenbase.getSpawnableList(creatureType);
 	}
 
 	/**

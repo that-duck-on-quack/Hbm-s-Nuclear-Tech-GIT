@@ -1,21 +1,29 @@
 package com.hbm.dim;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import com.hbm.blocks.BlockEnums.EnumStoneType;
 import com.hbm.blocks.ModBlocks;
-import com.hbm.config.GeneralConfig;
 import com.hbm.config.WorldConfig;
-import com.hbm.dim.laythe.biome.BiomeGenBaseLaythe;
 import com.hbm.inventory.FluidStack;
 import com.hbm.items.ModItems;
-import com.hbm.main.MainRegistry;
+import com.hbm.main.StructureManager;
 import com.hbm.util.WeightedRandomGeneric;
+import com.hbm.world.PlanetGen;
 import com.hbm.world.feature.BedrockOre;
 import com.hbm.world.feature.BedrockOre.BedrockOreDefinition;
 import com.hbm.world.feature.DepthDeposit;
-import com.hbm.world.generator.CellularDungeonFactory;
+import com.hbm.world.gen.NBTStructure;
+import com.hbm.world.gen.NBTStructure.JigsawPiece;
+import com.hbm.world.gen.NBTStructure.JigsawPool;
+import com.hbm.world.gen.NBTStructure.SpawnCondition;
+import com.hbm.world.gen.component.Component.CrabSpawners;
+import com.hbm.world.gen.component.Component.GreenOoze;
+import com.hbm.world.gen.component.Component.MeteorBricks;
+import com.hbm.world.gen.component.Component.SupplyCrates;
 import com.hbm.world.generator.DungeonToolbox;
 
 import cpw.mods.fml.common.IWorldGenerator;
@@ -25,12 +33,98 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraft.world.gen.structure.StructureComponent.BlockSelector;
 import net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable;
 
 public class WorldGeneratorCelestial implements IWorldGenerator {
+
+    // Register system-wide structures
+    public WorldGeneratorCelestial() {
+        Map<Block, BlockSelector> bricks = new HashMap<Block, BlockSelector>() {{
+            put(ModBlocks.meteor_brick, new MeteorBricks());
+        }};
+        Map<Block, BlockSelector> crates = new HashMap<Block, BlockSelector>() {{
+            put(ModBlocks.meteor_brick, new MeteorBricks());
+            put(ModBlocks.crate, new SupplyCrates());
+            put(ModBlocks.meteor_spawner, new CrabSpawners());
+        }};
+        Map<Block, BlockSelector> ooze = new HashMap<Block, BlockSelector>() {{
+            put(ModBlocks.meteor_brick, new MeteorBricks());
+            put(ModBlocks.concrete_colored, new GreenOoze());
+        }};
+
+        NBTStructure.registerStructure(new SpawnCondition() {{
+			minHeight = 32;
+			maxHeight = 32;
+			sizeLimit = 128;
+            canSpawn = biome -> biome.rootHeight >= 0;
+			startPool = "start";
+			pools = new HashMap<String, NBTStructure.JigsawPool>() {{
+				put("start", new JigsawPool() {{
+					add(new JigsawPiece("meteor_core", StructureManager.meteor_core) {{ blockTable = bricks; }}, 1);
+				}});
+				put("spike", new JigsawPool() {{
+					add(new JigsawPiece("meteor_spike", StructureManager.meteor_spike) {{ heightOffset = -3; conformToTerrain = true; }}, 1);
+				}});
+				put("default", new JigsawPool() {{
+					add(new JigsawPiece("meteor_corner", StructureManager.meteor_corner) {{ blockTable = bricks; }}, 2);
+					add(new JigsawPiece("meteor_t", StructureManager.meteor_t) {{ blockTable = bricks; }}, 3);
+					add(new JigsawPiece("meteor_stairs", StructureManager.meteor_stairs) {{ blockTable = bricks; }}, 1);
+					add(new JigsawPiece("meteor_room_base_thru", StructureManager.meteor_room_base_thru) {{ blockTable = bricks; }}, 3);
+					add(new JigsawPiece("meteor_room_base_end", StructureManager.meteor_room_base_end) {{ blockTable = bricks; }}, 4);
+					fallback = "fallback";
+				}});
+				put("10room", new JigsawPool() {{
+					add(new JigsawPiece("meteor_room_basic", StructureManager.meteor_room_basic) {{ blockTable = bricks; }}, 1);
+					add(new JigsawPiece("meteor_room_balcony", StructureManager.meteor_room_balcony) {{ blockTable = bricks; }}, 1);
+					add(new JigsawPiece("meteor_room_dragon", StructureManager.meteor_room_dragon) {{ blockTable = bricks; }}, 1);
+					add(new JigsawPiece("meteor_room_ladder", StructureManager.meteor_room_ladder) {{ blockTable = bricks; }}, 1);
+					add(new JigsawPiece("meteor_room_ooze", StructureManager.meteor_room_ooze) {{ blockTable = ooze; }}, 1);
+					add(new JigsawPiece("meteor_room_split", StructureManager.meteor_room_split) {{ blockTable = bricks; }}, 1);
+					add(new JigsawPiece("meteor_room_stairs", StructureManager.meteor_room_stairs) {{ blockTable = bricks; }}, 1);
+					add(new JigsawPiece("meteor_room_triple", StructureManager.meteor_room_triple) {{ blockTable = bricks; }}, 1);
+					fallback = "roomback";
+				}});
+				put("3x3loot", new JigsawPool() {{
+					add(new JigsawPiece("meteor_3_bale", StructureManager.meteor_3_bale), 1);
+					add(new JigsawPiece("meteor_3_blank", StructureManager.meteor_3_blank), 1);
+					add(new JigsawPiece("meteor_3_block", StructureManager.meteor_3_block), 1);
+					add(new JigsawPiece("meteor_3_crab", StructureManager.meteor_3_crab), 1);
+					add(new JigsawPiece("meteor_3_crab_tesla", StructureManager.meteor_3_crab_tesla), 1);
+					add(new JigsawPiece("meteor_3_crate", StructureManager.meteor_3_crate), 1);
+					add(new JigsawPiece("meteor_3_dirt", StructureManager.meteor_3_dirt), 1);
+					add(new JigsawPiece("meteor_3_lead", StructureManager.meteor_3_lead), 1);
+					add(new JigsawPiece("meteor_3_ooze", StructureManager.meteor_3_ooze), 1);
+					add(new JigsawPiece("meteor_3_pillar", StructureManager.meteor_3_pillar), 1);
+					add(new JigsawPiece("meteor_3_star", StructureManager.meteor_3_star), 1);
+					add(new JigsawPiece("meteor_3_tesla", StructureManager.meteor_3_tesla), 1);
+					add(new JigsawPiece("meteor_3_book", StructureManager.meteor_3_book), 1);
+					add(new JigsawPiece("meteor_3_mku", StructureManager.meteor_3_mku), 1);
+					add(new JigsawPiece("meteor_3_statue", StructureManager.meteor_3_statue), 1);
+					add(new JigsawPiece("meteor_3_glow", StructureManager.meteor_3_glow), 1);
+					fallback = "3x3loot"; // generate loot even if we're at the size limit
+				}});
+				put("headloot", new JigsawPool() {{
+					add(new JigsawPiece("meteor_dragon_chest", StructureManager.meteor_dragon_chest) {{ blockTable = crates; }}, 1);
+					add(new JigsawPiece("meteor_dragon_tesla", StructureManager.meteor_dragon_tesla) {{ blockTable = crates; }}, 1);
+					add(new JigsawPiece("meteor_dragon_trap", StructureManager.meteor_dragon_trap) {{ blockTable = crates; }}, 1);
+					add(new JigsawPiece("meteor_dragon_crate_crab", StructureManager.meteor_dragon_crate_crab) {{ blockTable = crates; }}, 1);
+                    fallback = "headback";
+				}});
+				put("fallback", new JigsawPool() {{
+					add(new JigsawPiece("meteor_fallback", StructureManager.meteor_fallback) {{ blockTable = bricks; }}, 1);
+				}});
+				put("roomback", new JigsawPool() {{
+					add(new JigsawPiece("meteor_room_fallback", StructureManager.meteor_room_fallback) {{ blockTable = bricks; }}, 1);
+				}});
+                put("headback", new JigsawPool() {{
+                    add(new JigsawPiece("meteor_loot_fallback", StructureManager.meteor_dragon_fallback) {{ blockTable = crates; }}, 1);
+                }});
+			}};
+		}}, PlanetGen.getSpaceDimensions());
+    }
 
     @Override
     public void generate(Random rand, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
@@ -58,23 +152,7 @@ public class WorldGeneratorCelestial implements IWorldGenerator {
     }
 
     public void generateStructures(World world, Random rand, int x, int z) {
-		BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(x, z);
 
-		if(WorldConfig.meteorStructure > 0 && rand.nextInt(WorldConfig.meteorStructure) == 0 && biome != BiomeGenBase.ocean && biome != BiomeGenBase.deepOcean && biome != BiomeGenBaseLaythe.laytheOcean) {
-			int px = x + rand.nextInt(16) + 8;
-			int pz = z + rand.nextInt(16) + 8;
-			
-			CellularDungeonFactory.meteor.generate(world, px, 10, pz, rand);
-			
-			if(GeneralConfig.enableDebugMode)
-				MainRegistry.logger.info("[Debug] Successfully spawned meteor dungeon at " + px + " 10 " + pz);
-			
-			int y = world.getHeightValue(px, pz);
-			
-			for(int f = 0; f < 3; f++)
-				world.setBlock(px, y + f, pz, ModBlocks.meteor_pillar);
-			world.setBlock(px, y + 3, pz, ModBlocks.meteor_brick_chiseled);
-		}
     }
 
     public void generateNTMOres(World world, Random rand, int x, int z, Block planetStone, int meta) {
@@ -134,19 +212,19 @@ public class WorldGeneratorCelestial implements IWorldGenerator {
             }
 
         } else {
-            
+
             if(rand.nextInt(3) == 0) {
                 List<WeightedRandomGeneric<BedrockOreDefinition>> list = BedrockOre.weightedOres;
                 SolarSystem.Body bodyEnum = CelestialBody.getEnum(world);
-    
+
                 // If we haven't got any defined body bedrock ores, default to earth bedrock ores
                 if(BedrockOre.weightedPlanetOres.containsKey(bodyEnum))
                     list = BedrockOre.weightedPlanetOres.get(bodyEnum);
-    
+
                 @SuppressWarnings("unchecked")
                 WeightedRandomGeneric<BedrockOreDefinition> item = (WeightedRandomGeneric<BedrockOreDefinition>) WeightedRandom.getRandomItem(rand, list);
                 BedrockOreDefinition def = item.get();
-                
+
                 int randPosX = x + rand.nextInt(2) + 8;
                 int randPosZ = z + rand.nextInt(2) + 8;
                 BedrockOre.generate(world, randPosX, randPosZ, def.stack, def.acid, def.color, def.tier, ModBlocks.stone_depth, planetStone);

@@ -7,9 +7,18 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerLaytheOceans extends GenLayer {
 
+    private final int targetBiome;
+
     public GenLayerLaytheOceans(long seed, GenLayer genLayer) {
         super(seed);
         this.parent = genLayer;
+        this.targetBiome = BiomeGenBaseLaythe.laytheIsland.biomeID;
+    }
+
+    public GenLayerLaytheOceans(long seed, GenLayer genLayer, int targetBiome) {
+        super(seed);
+        this.parent = genLayer;
+        this.targetBiome = targetBiome;
     }
 
     public int[] getInts(int areaX, int areaY, int areaWidth, int areaHeight) {
@@ -34,12 +43,12 @@ public class GenLayerLaytheOceans extends GenLayer {
                     int i2 = aint[j1 + 1 + 1 + (i1 + 1) * k];
                     int j2 = aint[j1 + 1 - 1 + (i1 + 1) * k];
                     int k2 = aint[j1 + 1 + (i1 + 1 + 1) * k];
-                    boolean flag = ((l1 == BiomeGenBaseLaythe.laytheIsland.biomeID)
-                            || (i2 == BiomeGenBaseLaythe.laytheIsland.biomeID)
-                            || (j2 == BiomeGenBaseLaythe.laytheIsland.biomeID)
-                            || (k2 == BiomeGenBaseLaythe.laytheIsland.biomeID));
+                    boolean flag = ((l1 == targetBiome)
+                            || (i2 == targetBiome)
+                            || (j2 == targetBiome)
+                            || (k2 == targetBiome));
                     if(flag) {
-                        k1 = BiomeGenBaseLaythe.laytheOcean.biomeID;
+                        k1 = BiomeGenBaseLaythe.laytheCoast.biomeID;
                     }
                 }
 

@@ -5,6 +5,8 @@ import com.hbm.handler.ThreeInts;
 import com.hbm.interfaces.ICopiable;
 import com.hbm.main.MainRegistry;
 import com.hbm.tileentity.IPersistentNBT;
+import com.hbm.world.gen.INBTTransformable;
+
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -33,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class BlockDummyable extends BlockContainer implements ICustomBlockHighlight, ICopiable {
+public abstract class BlockDummyable extends BlockContainer implements ICustomBlockHighlight, ICopiable, INBTTransformable {
 
 	public BlockDummyable(Material mat) {
 		super(mat);
@@ -197,7 +199,7 @@ public abstract class BlockDummyable extends BlockContainer implements ICustomBl
 		} else {
 			facingDir = placedSide;
 		}
-		
+
 		// The direction the final multiblock will be facing
 		ForgeDirection dir = getDirModified(facingDir);
 
@@ -263,7 +265,7 @@ public abstract class BlockDummyable extends BlockContainer implements ICustomBl
 		int z = MathHelper.floor_double(player.posZ);
 		return world.getBlock(x, y, z) == this || world.getBlock(x, y + 1, z) == this;
 	}
-	
+
 	/**
 	 * A bit more advanced than the dir modifier, but it is important that the resulting direction meta is in the core range.
 	 * Using the "extra" metas is technically possible but requires a bit of tinkering, e.g. preventing a recursive loop
@@ -465,7 +467,7 @@ public abstract class BlockDummyable extends BlockContainer implements ICustomBl
 	public boolean useDetailedHitbox() {
 		return !bounding.isEmpty();
 	}
-	
+
 	public List<AxisAlignedBB> bounding = new ArrayList<>();
 
 	// players currently inside instances of this block
@@ -476,7 +478,7 @@ public abstract class BlockDummyable extends BlockContainer implements ICustomBl
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB entityBounding, List list, Entity entity) {
 		if(!internalPlayers.isEmpty() && internalPlayers.contains(entity))
 			return;
-		
+
 		if(!this.useDetailedHitbox()) {
 			super.addCollisionBoxesToList(world, x, y, z, entityBounding, list, entity);
 			return;
@@ -492,7 +494,7 @@ public abstract class BlockDummyable extends BlockContainer implements ICustomBl
 		z = pos[2];
 
 		for(AxisAlignedBB aabb :this.bounding) {
-			AxisAlignedBB boxlet = getAABBRotationOffset(aabb, x + 0.5, y, z + 0.5, ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z) - this.offset).getRotation(ForgeDirection.UP));
+			AxisAlignedBB boxlet = getAABBRotationOffset(aabb, x + 0.5, y, z + 0.5, ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z) - offset).getRotation(ForgeDirection.UP));
 
 			if(entityBounding.intersectsWith(boxlet)) {
 				list.add(boxlet);
@@ -583,4 +585,27 @@ public abstract class BlockDummyable extends BlockContainer implements ICustomBl
 			return ((ICopiable) tile).infoForDisplay(world, x, y, z);
 		return null;
 	}
+
+	@Override
+	public int transformMeta(int meta, int coordBaseMode) {
+		boolean isOffset = meta >= 12; // squishing causes issues
+		boolean isExtra = !isOffset && meta >= extra;
+
+		if(isOffset) {
+			meta -= offset;
+		} else if(isExtra) {
+			meta -= extra;
+		}
+
+		meta = INBTTransformable.transformMetaDeco(meta, coordBaseMode);
+
+		if(isOffset) {
+			meta += offset;
+		} else if(isExtra) {
+			meta += extra;
+		}
+
+		return meta;
+	}
+
 }

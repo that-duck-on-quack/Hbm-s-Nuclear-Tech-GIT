@@ -8,7 +8,7 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerDiversifyLaythe extends GenLayer {
 	
-	private static final BiomeGenBase[] biomes = new BiomeGenBase[] { BiomeGenBaseLaythe.laytheIsland, BiomeGenBaseLaythe.laytheOcean };
+	private static final BiomeGenBase[] biomes = new BiomeGenBase[] { BiomeGenBaseLaythe.laytheIsland, BiomeGenBaseLaythe.laytheOcean, BiomeGenBaseLaythe.laytheCoast };
 
 	public GenLayerDiversifyLaythe(long l, GenLayer parent) {
 		super(l);

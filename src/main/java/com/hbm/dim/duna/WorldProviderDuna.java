@@ -25,6 +25,7 @@ import net.minecraft.world.gen.layer.GenLayerRiverMix;
 import net.minecraft.world.gen.layer.GenLayerSmooth;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
+import net.minecraftforge.client.event.EntityViewRenderEvent.FogDensity;
 
 public class WorldProviderDuna extends WorldProviderCelestial {
 
@@ -75,11 +76,11 @@ public class WorldProviderDuna extends WorldProviderCelestial {
 	}
 
 	@Override
-	public float fogDensity() {
+	public float fogDensity(FogDensity event) {
 		if(dustStormIntensity >= 0.5F)
 			return dustStormIntensity * dustStormIntensity * 0.05F;
 
-		return super.fogDensity();
+		return super.fogDensity(event);
 	}
 
 	@Override

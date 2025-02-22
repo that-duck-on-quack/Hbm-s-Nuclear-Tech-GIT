@@ -37,7 +37,7 @@ public class ItemBedrockOreNew extends Item {
 
 	public IIcon[] icons = new IIcon[CelestialBedrockOre.oreTypes.size() * BedrockOreGrade.values().length];
 	public IIcon[] overlays = new IIcon[ProcessingTrait.values().length];
-	
+
 	public ItemBedrockOreNew() {
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
@@ -47,10 +47,10 @@ public class ItemBedrockOreNew extends Item {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg) {
 
-		
+
 		if(reg instanceof TextureMap) {
 			TextureMap map = (TextureMap) reg;
-			
+
 			for(int i = 0; i < BedrockOreGrade.values().length; i++) { BedrockOreGrade grade = BedrockOreGrade.values()[i];
 				for(int j = 0; j < CelestialBedrockOre.oreTypes.size(); j++) { CelestialBedrockOreType type = CelestialBedrockOre.oreTypes.get(j);
 					String placeholderName = RefStrings.MODID + ":bedrock_ore_" + grade.prefix + "_" + type.suffix + "-" + (i * CelestialBedrockOre.oreTypes.size() + j);
@@ -60,7 +60,7 @@ public class ItemBedrockOreNew extends Item {
 				}
 			}
 		}
-		
+
 		for(int i = 0; i < overlays.length; i++) {
 			ProcessingTrait trait = ProcessingTrait.values()[i];
 			overlays[i] = reg.registerIcon(RefStrings.MODID + ":bedrock_ore_overlay." + trait.name().toLowerCase(Locale.US));
@@ -83,7 +83,7 @@ public class ItemBedrockOreNew extends Item {
 	public boolean requiresMultipleRenderPasses() {
 		return true;
 	}
-	
+
 	@Override
 	public int getRenderPasses(int metadata) {
 		return 1 + this.getGrade(metadata).traits.length;
@@ -109,15 +109,15 @@ public class ItemBedrockOreNew extends Item {
 		String body = I18nUtil.resolveKey("body." + getType(meta).body.name);
 		return StatCollector.translateToLocalFormatted(this.getUnlocalizedNameInefficiently(stack) + ".grade." + this.getGrade(meta).name().toLowerCase(Locale.US) + ".name", type) + " (" + body + ")";
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
-		
+
 		for(ProcessingTrait trait : this.getGrade(stack.getItemDamage()).traits) {
 			list.add(I18nUtil.resolveKey(this.getUnlocalizedNameInefficiently(stack) + ".trait." + trait.name().toLowerCase(Locale.US)));
 		}
 	}
-	
+
 	public static class BedrockOreOutput {
 		public NTMMaterial mat;
 		public int amount;
@@ -126,7 +126,7 @@ public class ItemBedrockOreNew extends Item {
 			this.amount = amount;
 		}
 	}
-	
+
 	public static BedrockOreOutput o(NTMMaterial mat, int amount) {
 		return new BedrockOreOutput(mat, amount);
 	}
@@ -140,7 +140,7 @@ public class ItemBedrockOreNew extends Item {
 	// 	NON_METAL(		0xAFAFAF, 0x0F0F0F, "nonmetal",	o(MAT_COAL, 9),		o(MAT_SULFUR, 9),	o(MAT_LIGNITE, 9),	o(MAT_KNO, 6),			o(MAT_FLUORITE, 6),		o(MAT_PHOSPHORUS, 5),		o(MAT_FLUORITE, 6),		o(MAT_SULFUR, 6),		o(MAT_CHLOROCALCITE, 6),	o(MAT_SILICON, 2),		o(MAT_SILICON, 2)),
 	// 	CRYSTALLINE(	0xE2FFFA, 0x1E8A77, "crystal",	o(MAT_REDSTONE, 9),	o(MAT_CINNABAR, 4),	o(MAT_SODALITE, 9),	o(MAT_ASBESTOS, 6),	o(MAT_DIAMOND, 3),		o(MAT_CINNABAR, 3),			o(MAT_ASBESTOS, 5),		o(MAT_EMERALD, 3),		o(MAT_BORAX, 3),			o(MAT_MOLYSITE, 3),		o(MAT_SODALITE, 9));
 	// 	//sediment
-		
+
 	// 	public int light;
 	// 	public int dark;
 	// 	public String suffix;
@@ -148,7 +148,7 @@ public class ItemBedrockOreNew extends Item {
 	// 	public BedrockOreOutput byproductAcid1, byproductAcid2, byproductAcid3;
 	// 	public BedrockOreOutput byproductSolvent1, byproductSolvent2, byproductSolvent3;
 	// 	public BedrockOreOutput byproductRad1, byproductRad2, byproductRad3;
-		
+
 	// 	private BedrockOreType(int light, int dark, String suffix, BedrockOreOutput p1, BedrockOreOutput p2, BedrockOreOutput bA1, BedrockOreOutput bA2, BedrockOreOutput bA3, BedrockOreOutput bS1, BedrockOreOutput bS2, BedrockOreOutput bS3, BedrockOreOutput bR1, BedrockOreOutput bR2, BedrockOreOutput bR3) {
 	// 		this.light = light;
 	// 		this.dark = dark;
@@ -174,11 +174,12 @@ public class ItemBedrockOreNew extends Item {
 	}
 
 	public static class CelestialBedrockOre {
+		// TODO: rebalance cryolite, Laythe gets regular aluminium for now
 		static {
 			//							primary							sulfuric							solvent							special(?)
 			register(
 				SolarSystem.Body.KERBIN,
-				T("light",		o(MAT_IRON, 24),			o(MAT_COPPER, 12),			o(MAT_ALUMINIUM, 6),		o(MAT_SODIUM, 3)),
+				T("light",		o(MAT_IRON, 24),			o(MAT_COPPER, 12),			o(MAT_CRYOLITE, 6),		o(MAT_SODIUM, 3)),
 				T("heavy",		o(MAT_TUNGSTEN, 24),		o(MAT_TUNGSTEN, 12),			o(MAT_TUNGSTEN, 6),		o(MAT_ZINC, 3)),
 				T("nonmetal",	o(MAT_COAL, 24),			o(MAT_LIGNITE, 12),			o(MAT_SULFUR, 6),		o(MAT_KNO, 3)),
 				T("crystal",		o(MAT_ASBESTOS, 24),		o(MAT_DIAMOND, 12),			o(MAT_EMERALD, 6),		o(MAT_EMERALD, 3))
@@ -244,7 +245,7 @@ public class ItemBedrockOreNew extends Item {
 
 			register(
 				SolarSystem.Body.IKE,
-				T("light",		o(MAT_COPPER, 24),		o(MAT_ALUMINIUM, 12),		o(MAT_NICKEL, 6),		o(MAT_SODIUM, 3)),
+				T("light",		o(MAT_COPPER, 24),		o(MAT_BAUXITE, 12),			o(MAT_NICKEL, 6),		o(MAT_SODIUM, 3)),
 				T("heavy",		o(MAT_LEAD, 24),			o(MAT_ZINC, 12),				o(MAT_GOLD, 6),			o(MAT_ARSENIC, 3)),
 				T("rare",		o(MAT_BORON, 24),		o(MAT_NEODYMIUM, 12),		o(MAT_STRONTIUM, 6),		o(MAT_LANTHANIUM, 3)),
 				T("hazard",		o(MAT_URANIUM, 24),		o(MAT_U238, 12),				o(MAT_PLUTONIUM, 6),		o(MAT_TECHNETIUM, 3))
@@ -293,7 +294,7 @@ public class ItemBedrockOreNew extends Item {
 		private static CelestialBedrockOreType T(String suffix, BedrockOreOutput primary, BedrockOreOutput byproductAcid, BedrockOreOutput byproductSolvent, BedrockOreOutput byproductRad) {
 			CelestialBedrockOreType type = new CelestialBedrockOreType();
 			type.index = index++;
-			
+
 			type.suffix = suffix;
 			type.primary = primary;
 			type.byproductAcid = byproductAcid;
@@ -303,7 +304,7 @@ public class ItemBedrockOreNew extends Item {
 			// Colours are autogenerated because otherwise I'd have to manually specify like 80 different colours
 			type.light = getAverageColor(false, primary, byproductAcid, byproductSolvent, byproductRad);
 			type.dark = getAverageColor(true, primary, byproductAcid, byproductSolvent, byproductRad);
-			
+
 			return type;
 		}
 
@@ -324,14 +325,14 @@ public class ItemBedrockOreNew extends Item {
 			return r << 16 | g << 8 | b;
 		}
 	}
-	
+
 	public static MaterialStack toFluid(BedrockOreOutput o, double amount) {
 		if(o.mat != null && o.mat.smeltable == SmeltingBehavior.SMELTABLE) {
 			return new MaterialStack(o.mat, (int) Math.ceil(MaterialShapes.FRAGMENT.q(o.amount) * amount));
 		}
 		return null;
 	}
-	
+
 	public static ItemStack extract(BedrockOreOutput o, double amount) {
 		return new ItemStack(ModItems.bedrock_ore_fragment, Math.min((int) Math.ceil(o.amount * amount), 64), o.mat.id);
 	}
@@ -348,7 +349,7 @@ public class ItemBedrockOreNew extends Item {
 	public static final int roasted = 0xCFCFCF;
 	public static final int arc = 0xC3A2A2;
 	public static final int washed = 0xDBE2CB;
-	
+
 	public static enum ProcessingTrait {
 		ROASTED,
 		ARC,
@@ -358,7 +359,7 @@ public class ItemBedrockOreNew extends Item {
 		SOLVENT,
 		RAD
 	}
-	
+
 	public static enum BedrockOreGrade {
 		BASE(none, "base"),												//from the slopper
 		BASE_ROASTED(roasted, "base", ROASTED),							//optional combination oven step, yields vitriol
@@ -374,45 +375,45 @@ public class ItemBedrockOreNew extends Item {
 		PRIMARY_FIRST(0xFFD3D4, "primary", CENTRIFUGED),				//higher first material yield
 		PRIMARY_SECOND(0xD3FFEB, "primary", CENTRIFUGED),				//higher second material yield
 		CRUMBS(none, "crumbs", CENTRIFUGED),							//endpoint for primary, recycling
-		
+
 		SULFURIC_BYPRODUCT(none, "sulfuric", CENTRIFUGED, SULFURIC),	//from centrifuging
 		SULFURIC_ROASTED(roasted, "sulfuric", ROASTED, SULFURIC),		//comboven again
 		SULFURIC_ARC(arc, "sulfuric", ARC, SULFURIC),					//alternate step
 		SULFURIC_WASHED(washed, "sulfuric", WASHED, SULFURIC),			//sulfuric endpoint
-		
+
 		SOLVENT_BYPRODUCT(none, "solvent", CENTRIFUGED, SOLVENT),		//from centrifuging
 		SOLVENT_ROASTED(roasted, "solvent", ROASTED, SOLVENT),			//comboven again
 		SOLVENT_ARC(arc, "solvent", ARC, SOLVENT),						//alternate step
 		SOLVENT_WASHED(washed, "solvent", WASHED, SOLVENT),				//solvent endpoint
-		
+
 		RAD_BYPRODUCT(none, "rad", CENTRIFUGED, RAD),					//from centrifuging
 		RAD_ROASTED(roasted, "rad", ROASTED, RAD),						//comboven again
 		RAD_ARC(arc, "rad", ARC, RAD),									//alternate step
 		RAD_WASHED(washed, "rad", WASHED, RAD);							//rad endpoint
-		
+
 		public int tint;
 		public String prefix;
 		public ProcessingTrait[] traits;
-		
+
 		private BedrockOreGrade(int tint, String prefix, ProcessingTrait... traits) {
 			this.tint = tint;
 			this.prefix = prefix;
 			this.traits = traits;
 		}
 	}
-	
+
 	public static ItemStack make(BedrockOreGrade grade, CelestialBedrockOreType type) {
 		return make(grade, type, 1);
 	}
-	
+
 	public static ItemStack make(BedrockOreGrade grade, CelestialBedrockOreType type, int amount) {
 		return new ItemStack(ModItems.bedrock_ore, amount, grade.ordinal() << 8 | type.index);
 	}
-	
+
 	public BedrockOreGrade getGrade(int meta) {
 		return EnumUtil.grabEnumSafely(BedrockOreGrade.class, meta >> 8);
 	}
-	
+
 	public CelestialBedrockOreType getType(int meta) {
 		return CelestialBedrockOre.oreTypes.get((meta & 255) % CelestialBedrockOre.oreTypes.size());
 	}

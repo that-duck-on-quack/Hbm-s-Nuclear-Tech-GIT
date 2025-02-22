@@ -10,12 +10,15 @@ import com.hbm.blocks.generic.BlockBedrockOreTE.TileEntityBedrockOre;
 import com.hbm.blocks.generic.BlockBobble.TileEntityBobble;
 import com.hbm.blocks.generic.BlockDynamicSlag.TileEntitySlag;
 import com.hbm.blocks.generic.BlockEmitter.TileEntityEmitter;
+import com.hbm.blocks.generic.BlockFissure.TileEntityFissure;
 import com.hbm.blocks.generic.BlockGlyphidSpawner.TileEntityGlpyhidSpawner;
 import com.hbm.blocks.generic.BlockLoot.TileEntityLoot;
 import com.hbm.blocks.generic.BlockPedestal.TileEntityPedestal;
 import com.hbm.blocks.generic.BlockPlushie.TileEntityPlushie;
 import com.hbm.blocks.generic.BlockSnowglobe.TileEntitySnowglobe;
 import com.hbm.blocks.generic.BlockSupplyCrate.TileEntitySupplyCrate;
+import com.hbm.blocks.generic.BlockWandJigsaw.TileEntityWandJigsaw;
+import com.hbm.blocks.generic.BlockWandLoot.TileEntityWandLoot;
 import com.hbm.blocks.generic.PartEmitter.TileEntityPartEmitter;
 import com.hbm.blocks.machine.BlockAtmosphereEditor.TileEntityAtmosphereEditor;
 import com.hbm.blocks.machine.BlockICF.TileEntityBlockICF;
@@ -36,6 +39,7 @@ import com.hbm.blocks.rail.RailStandardSwitch.TileEntityRailSwitch;
 import com.hbm.tileentity.bomb.*;
 import com.hbm.tileentity.deco.*;
 import com.hbm.tileentity.machine.*;
+import com.hbm.tileentity.machine.albion.*;
 import com.hbm.tileentity.machine.oil.*;
 import com.hbm.tileentity.machine.pile.*;
 import com.hbm.tileentity.machine.rbmk.*;
@@ -96,6 +100,7 @@ public class TileMappings {
 		put(TileEntityMachineExposureChamber.class, "tileentity_exposure_chamber");
 		put(TileEntityMachineRTG.class, "tileentity_machine_rtg");
 		put(TileEntityMachineExcavator.class, "tileentity_ntm_excavator");
+		put(TileEntityMachineMagma.class, "tileentity_magma");
 		put(TileEntityMachineOreSlopper.class, "tileentity_ore_slopper");
 		put(TileEntityMachineDrain.class, "tileentity_fluid_drain");
 		put(TileEntityMachineFluidTank.class, "tileentity_fluid_tank");
@@ -186,6 +191,12 @@ public class TileMappings {
 		put(TileEntityHadronDiode.class, "tileentity_hadron_diode");
 		put(TileEntityHadronPower.class, "tileentity_hadron_power");
 		put(TileEntityHadron.class, "tileentity_hadron");
+		put(TileEntityPASource.class, "tileentity_pa_source");
+		put(TileEntityPABeamline.class, "tileentity_pa_beamline");
+		put(TileEntityPARFC.class, "tileentity_pa_rfc");
+		put(TileEntityPAQuadrupole.class, "tileentity_pa_quadrupole");
+		put(TileEntityPADipole.class, "tileentity_pa_dipole");
+		put(TileEntityPADetector.class, "tileentity_pa_detector");
 		put(TileEntitySolarBoiler.class, "tileentity_solarboiler");
 		put(TileEntityMachineSolarPanel.class, "tileentity_solarpanel");
 		put(TileEntityMachineStardar.class, "tileentity_stardar");
@@ -236,6 +247,7 @@ public class TileMappings {
 		put(TileEntityProxyConductor.class, "tileentity_proxy_conductor");
 
 		put(TileEntityBedrockOre.class, "tileentity_bedrock_ore");
+		put(TileEntityFissure.class, "tileentity_fissure");
 
 		put(TileEntityAirPump.class, "tileentity_air_vent");
 		put(TileEntityAirScrubber.class, "tileentity_air_scrubber");
@@ -247,6 +259,10 @@ public class TileMappings {
 		put(TileEntityAtmosphereEditor.class, "tileentity_atmosphere_editor");
 
 		put(TileEntityData.class, "tileentity_data");
+
+		put(TileEntityWandLoot.class, "tileentity_wand_loot");
+		put(TileEntityWandJigsaw.class, "tileentity_wand_jigsaw");
+
 
 		//hbm hard stuff
 		put(TileEntityMachineLaserBoi.class,"tileentity_LaserBoi");
@@ -390,6 +406,12 @@ public class TileMappings {
 		put(TileEntityOrbitalStation.class, "tileentity_orbital_station");
 		put(TileEntityOrbitalStationComputer.class, "tileentity_orbital_station_computer");
 		put(TileEntityStationPropulsionCreative.class, "tileentity_propulsion_creative");
+
+		put(TileEntityDysonLauncher.class, "tileentity_dyson_launcher");
+		put(TileEntityDysonReceiver.class, "tileentity_dyson_receiver");
+		put(TileEntityDysonConverterTU.class, "tileentity_dyson_converter_tu");
+		put(TileEntityDysonConverterHE.class, "tileentity_dyson_converter_he");
+		put(TileEntityDysonConverterAnatmogenesis.class, "tileentity_dyson_converter_anatmogenesis");
 	}
 
 	private static void putPile() {

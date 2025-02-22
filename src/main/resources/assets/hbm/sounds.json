@@ -10,6 +10,8 @@
 	"misc.htrstart": {"category": "player", "sounds": [{"name": "misc/htr3start", "stream": false}]},
 	"misc.htrstop": {"category": "player", "sounds": [{"name": "misc/htrstop", "stream": false}]},
 	"misc.htrloop": {"category": "player", "sounds": [{"name": "misc/htrloop", "stream": false}]},
+	"misc.spinshot": {"category": "block", "sounds": ["misc/spinshot1", "misc/spinshot2"]},
+	"misc.spincharge": {"category": "block", "sounds": [{"name": "misc/spincharge", "stream": false}]},
 
 	"block.crateBreak": {"category": "block", "sounds": ["block/crateBreak1", "block/crateBreak2", "block/crateBreak3", "block/crateBreak4", "block/crateBreak5"]},
 	"block.shutdown": {"category": "block", "sounds": [{"name": "block/shutdown", "stream": true}]},
@@ -73,7 +75,9 @@
     "block.hephaestusRunning": {"category": "block", "sounds": [{"name": "block/hephaestusRunning", "stream": false}]},
     "block.squeakyToy": {"category": "block", "sounds": [{"name": "block/squeakyToy", "stream": false}]},
     "block.pyroOperate": {"category": "block", "sounds": [{"name": "block/pyroOperate", "stream": false}]},
-    
+	"block.dysonBeam": {"category": "block", "sounds": [{"name": "block/dysonBeam", "stream": false}]},
+    "block.teto": {"category": "block", "sounds": [{"name": "block/teto", "stream": false}]},
+
     "door.TransitionSealOpen": {"category": "block", "sounds": [{"name": "block/door/transition_seal_open", "stream": true}]},
     "door.wghStart": {"category": "block", "sounds": [{"name": "block/door/wgh_start", "stream": true}]},
     "door.wghStop": {"category": "block", "sounds": [{"name": "block/door/wgh_stop", "stream": true}]},
@@ -239,13 +243,13 @@
 	"weapon.explosionLargeFar": {"category": "player", "sounds": [{"name": "weapon/explosionLargeFar", "stream": false}]},
     "weapon.explosionSmallNear": {"category": "player", "sounds": ["weapon/explosionSmallNear1", "weapon/explosionSmallNear2", "weapon/explosionSmallNear3"]},
     "weapon.explosionSmallFar": {"category": "player", "sounds": ["weapon/explosionSmallFar1", "weapon/explosionSmallFar2"]},
-	
+
 	"weapon.dFlash": {"category": "player", "sounds": [{"name": "weapon/dFlash", "stream": false}]},
 
 	"weapon.reloadTurret": {"category": "player", "sounds": [{"name": "weapon/reloadTurret", "stream": false}]},
 	"weapon.switchmode1": {"category": "player", "sounds": [{"name": "weapon/switchmode1", "stream": false}]},
 	"weapon.switchmode2": {"category": "player", "sounds": [{"name": "weapon/switchmode2", "stream": false}]},
-    
+
     "weapon.fire.blackPowder": {"category": "player", "sounds": ["weapon/fire/blackPowder"]},
     "weapon.fire.flameLoop": {"category": "player", "sounds": ["weapon/fire/flameLoop"]},
     "weapon.fire.lockon": {"category": "player", "sounds": ["weapon/fire/lockon"]},
@@ -271,7 +275,8 @@
     "weapon.fire.greaseGun": {"category": "player", "sounds": ["weapon/fire/greaseGun"]},
     "weapon.fire.uzi": {"category": "player", "sounds": ["weapon/fire/uzi"]},
     "weapon.fire.tesla": {"category": "player", "sounds": ["weapon/fire/tesla"]},
-    
+    "weapon.fire.aberrator": {"category": "player", "sounds": ["weapon/fire/aberrator"]},
+
     "weapon.reload.boltClose": {"category": "player", "sounds": ["weapon/reload/boltClose"]},
     "weapon.reload.boltOpen": {"category": "player", "sounds": ["weapon/reload/boltOpen"]},
     "weapon.reload.closeClick": {"category": "player", "sounds": ["weapon/reload/closeClick"]},
@@ -302,7 +307,7 @@
     "weapon.reload.screw": {"category": "player", "sounds": ["weapon/reload/screw"]},
 
     "weapon.foley.gunWhack": {"category": "player", "sounds": ["weapon/foley/gunWhack", "weapon/foley/gunWhack2"]},
-	
+
 	"turret.chekhov_fire": {"category": "block", "sounds": [{"name": "turret/chekhov_fire", "stream": false}]},
 	"turret.jeremy_fire": {"category": "block", "sounds": ["turret/jeremy_fire1", "turret/jeremy_fire2", "turret/jeremy_fire3", "turret/jeremy_fire4", "turret/jeremy_fire5"]},
 	"turret.jeremy_reload": {"category": "block", "sounds": [{"name": "turret/jeremy_reload", "stream": false}]},
@@ -352,7 +357,7 @@
 	"step.metalBlock": {"category": "block", "sounds": ["footsteps/metalStep1", "footsteps/metalStep2", "footsteps/metalStep3", "footsteps/metalStep4"]},
 	"step.powered": {"category": "player", "sounds": ["footsteps/powered1", "footsteps/powered2", "footsteps/powered3"]},
 	"step.morkite": {"category": "player", "sounds": ["mining/MorkiteMiningB_3", "mining/MorkiteMiningB_2", "mining/MorkiteMiningB_1"]},
-	
+
 	"player.vomit": {"category": "player", "sounds": [{"name": "player/vomit", "stream": false}]},
 	"player.oil": {"category": "player", "sounds": [{"name": "player/oil", "stream": false}]},
 	"player.cough": {"category": "player", "sounds": ["player/cough1", "player/cough2", "player/cough3", "player/cough4"]},
@@ -361,13 +366,13 @@
 	"player.dash": {"category": "player", "sounds": [{"name": "player/dash", "stream": false}]},
 	"player.dashRecharge": {"category": "player", "sounds": [{"name": "player/dashRecharge", "stream": false}]},
 	"player.plss_breathing": {"category": "player", "sounds": [{"name": "player/plss_breathing", "stream": false}]},
-	
+
 	"potatos.random": {"category": "player", "sounds": ["potatos/randResponse0", "potatos/randResponse1", "potatos/randResponse2", "potatos/randResponse3", "potatos/randResponse4", "potatos/randResponse5", "potatos/randResponse6", "potatos/randResponse7"]},
-	
+
 	"fm.clap":  {"category": "block", "sounds": [{"name": "clap", "stream": false}]},
 	"fm.mug":  {"category": "block", "sounds": [{"name": "mug", "stream": false}]},
 	"fm.sample":  {"category": "block", "sounds": [{"name": "sample", "stream": false}]},
-	
+
 	"alarm.amsSiren": {"category": "record", "sounds": [{"name": "alarm/amsSiren", "stream": false}]},
 	"alarm.apcLoop": {"category": "record", "sounds": [{"name": "alarm/apcLoop", "stream": false}]},
 	"alarm.apcPass": {"category": "record", "sounds": [{"name": "alarm/apcPass", "stream": false}]},
@@ -410,5 +415,5 @@
 		  }
 		]
 	  }
-	  
+
 }

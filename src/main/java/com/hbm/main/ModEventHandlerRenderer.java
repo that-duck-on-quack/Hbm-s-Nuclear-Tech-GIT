@@ -402,19 +402,21 @@ public class ModEventHandlerRenderer {
 		}
 	}
 
+	public static float lastFogDensity;
+
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void thickenFog(FogDensity event) {
 		if(event.entity.worldObj.provider instanceof WorldProviderCelestial) {
 			WorldProviderCelestial provider = (WorldProviderCelestial) event.entity.worldObj.provider;
-			float fogDensity = provider.fogDensity();
+			lastFogDensity = provider.fogDensity(event);
 			
-			if(fogDensity > 0) {
+			if(lastFogDensity > 0) {
 				if(GLContext.getCapabilities().GL_NV_fog_distance) {
 					GL11.glFogi(34138, 34139);
 				}
 				GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
 	
-				event.density = fogDensity;
+				event.density = lastFogDensity;
 				event.setCanceled(true);
 
 				return;

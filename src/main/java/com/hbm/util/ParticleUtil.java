@@ -79,6 +79,7 @@ public class ParticleUtil {
 			}
 		}	
 	}
+
 	public static void spawnDustFlame(World world, double x, double y, double z, double mX, double mY, double mZ) {
 
 		NBTTagCompound data = new NBTTagCompound();
@@ -86,6 +87,7 @@ public class ParticleUtil {
 		data.setDouble("mX", mX);
 		data.setDouble("mY", mY);
 		data.setDouble("mZ", mZ);
+		data.setFloat("scale", 4F);
 		
 		if(world.isRemote) {
 			data.setDouble("posX", x);
@@ -96,6 +98,26 @@ public class ParticleUtil {
 			PacketDispatcher.wrapper.sendToAllAround(new AuxParticlePacketNT(data, x, y, z), new TargetPoint(world.provider.dimensionId, x, y, z, 150));
 		}
 	}
+
+	public static void spawnFlare(World world, double x, double y, double z, double mX, double mY, double mZ, float scale) {
+
+		NBTTagCompound data = new NBTTagCompound();
+		data.setString("type", "flare");
+		data.setDouble("mX", mX);
+		data.setDouble("mY", mY);
+		data.setDouble("mZ", mZ);
+		data.setFloat("scale", scale);
+		
+		if(world.isRemote) {
+			data.setDouble("posX", x);
+			data.setDouble("posY", y);
+			data.setDouble("posZ", z);
+			MainRegistry.proxy.effectNT(data);
+		} else {
+			PacketDispatcher.wrapper.sendToAllAround(new AuxParticlePacketNT(data, x, y, z), new TargetPoint(world.provider.dimensionId, x, y, z, 150));
+		}
+	}
+
 	public static void spawnNFlame(World world, double x, double y, double z, double mX, double mY, double mZ) {
 
 		NBTTagCompound data = new NBTTagCompound();
