@@ -436,7 +436,7 @@ public class CentrifugeRecipes extends SerializableRecipe {
 				new ItemStack(Blocks.gravel, 1) });
 
 		recipes.put(new OreDictStack("oreRareEarth"), new ItemStack[] {
-				new ItemStack(ModItems.powder_desh_mix, 1),
+				new ItemStack(ModItems.nugget_zirconium, 1),
 				new ItemStack(ModItems.nugget_zirconium, 1),
 				new ItemStack(ModItems.nugget_zirconium, 1),
 				new ItemStack(Blocks.gravel, 1) });
