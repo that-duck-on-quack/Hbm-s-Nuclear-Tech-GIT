@@ -5015,8 +5015,6 @@ public class ModItems {
 
 		alloy_hoe = new ModHoe(MainRegistry.tMatAlloy).setUnlocalizedName("alloy_hoe").setTextureName(RefStrings.MODID + ":alloy_hoe");
 
-		alloy_knife = new ModHoe(MainRegistry.tMatAlloy).setUnlocalizedName("alloy_knife").setTextureName(RefStrings.MODID + ":alloy_knife");
-
 
 		cmb_sword = new ItemSwordAbility(35F, 0, MainRegistry.tMatCMB)
 				.addHitAbility(new WeaponAbility.StunAbility(2))

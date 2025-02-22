@@ -577,9 +577,9 @@ public class AnvilRecipes extends SerializableRecipe {
 				new AStack[] {new ComparableStack(ModBlocks.glass_quartz, 3), new ComparableStack(ModItems.pill_herbal, 2), new ComparableStack(ModItems.powder_magic, 2)},
 				new AnvilOutput(new ItemStack(ModItems.flask_infusion, 1, EnumInfusion.NITAN.ordinal()))).setTier(2));
 
-		constructionRecipes.add(new AnvilConstructionRecipe(
-				new AStack[] {new OreDictStack(GAAS.ingot()), new OreDictStack(REDSTONE.dust(), 4), new OreDictStack(ASBESTOS.ingot(), 2)},
-				new AnvilOutput(new ItemStack(ModItems.circuit_arsenic_raw))).setTier(5));
+		//constructionRecipes.add(new AnvilConstructionRecipe(
+		//		new AStack[] {new OreDictStack(GAAS.ingot()), new OreDictStack(REDSTONE.dust(), 4), new OreDictStack(ASBESTOS.ingot(), 2)},
+		//		new AnvilOutput(new ItemStack(ModItems.circuit_arsenic_raw))).setTier(5));
 
 		constructionRecipes.add(new AnvilConstructionRecipe(
 				new AStack[] {
@@ -629,7 +629,7 @@ public class AnvilRecipes extends SerializableRecipe {
 		constructionRecipes.add(new AnvilConstructionRecipe(new AStack[]{new ComparableStack(ModItems.mold_base), new OreDictStack(STEEL.ingot(), 4)}, new AnvilOutput(new ItemStack(ModItems.mold, 1, 28))).setTier(2));
 
 		pullFromAssembler(new ComparableStack(ModItems.pellet_buckshot), 1);
-		pullFromAssembler(new ComparableStack(ModItems.pellet_canister), 1);
+		//pullFromAssembler(new ComparableStack(ModItems.pellet_canister), 1);
 	}
 
 	public static void registerConstructionUpgrades() {

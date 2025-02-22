@@ -218,7 +218,7 @@ public class ResourceManager {
 
 	//Deuterium Tower
 	public static final IModelCustom atmo_tower = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/atmo_tower.obj")).asVBO();
-	public static final IModelCustom atmo_vent = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/atmo_vent.obj")).asVBO();;
+	public static final IModelCustom atmo_vent = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/atmo_vent.obj")).asVBO();
 	public static final IModelCustom deuterium_tower = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/machine_deuterium_tower.obj")).asVBO();
 
 	//Dark Matter Core
@@ -1732,6 +1732,5 @@ public class ResourceManager {
 	//broken idk why kill me now
 	public static final IModelCustom engraver =  new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/engraver.obj")).asVBO();
 
-	public static final NBTStructure martian = new NBTStructure(new ResourceLocation(RefStrings.MODID, "structures/martian-base.nbt"));
 
 }

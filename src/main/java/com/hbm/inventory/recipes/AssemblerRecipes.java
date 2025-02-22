@@ -594,13 +594,13 @@ public class AssemblerRecipes extends SerializableRecipe {
 				new OreDictStack(Fluids.LUBRICANT.getDict(1_000), 4)
 			}, 600);
 
-		makeRecipe(new ComparableStack(ModItems.pellet_chlorophyte, 2), new AStack[] {
-				new ComparableStack(ModItems.powder_chlorophyte, 1),
-				new OreDictStack(PB.nugget(), 12),
-			}, 50);
-		makeRecipe(new ComparableStack(ModItems.pellet_canister, 2), new AStack[] {
-				new OreDictStack(IRON.ingot(), 3),
-			}, 50);
+		//makeRecipe(new ComparableStack(ModItems.pellet_chlorophyte, 2), new AStack[] {
+		//		new ComparableStack(ModItems.powder_chlorophyte, 1),
+		//		new OreDictStack(PB.nugget(), 12),
+		//	}, 50);
+		//makeRecipe(new ComparableStack(ModItems.pellet_canister, 2), new AStack[] {
+		//		new OreDictStack(IRON.ingot(), 3),
+		//	}, 50);
 
 		makeRecipe(new ComparableStack(ModBlocks.machine_cyclotron, 1), new AStack[] {
 				new ComparableStack(ModBlocks.machine_lithium_battery, 3),
