@@ -26,11 +26,13 @@ For 1.18, try Martin's remake: https://codeberg.org/MartinTheDragon/Nuclear-Tech
 ## Downloading pre-compiled versions from GitHub
 
 Simply navigate to "Releases" on the right side of the page, download links for the compiled JAR as well as the corresponding source code are under the "Assets" category below the changelog. Make sure to review all changelogs when updating!
+Exceeeeeeeeeept...we don't have any! :DDDDD you'll have to wait until we're done with the Big-Ass List of Bullshit.
 
 ## Building from source
 
 Tired of waiting until the next version comes out? Here is a tutorial on how to compile the very newest version yourself:
 Please note that these installation instructions are assuming you're running Microsoft Windows operating system. Linux users should know what to do by looking at the same guide.
+(ps. it fails 99% of the time)
 
  1. Make sure you have JDK8 installed. If not, download it from [adoptium.net](https://adoptium.net/?variant=openjdk8&jvmVariant=hotspot)
  2. If you don't have git installed, download&install it from [here](https://git-scm.com/downloads).
@@ -101,7 +103,7 @@ If you want to make some changes to the mod, follow this guide:
       * Enter **JAVA_HOME** under Variable Name and enter the path to your JDK 8 under Variable Value (e.g., C:\Program-Files\Java\jdk1.8.0_102).
       * In Eclipse, now enter Windows>Preferences>Java>Installed JREs.
       * Click **Add Standard VM**; in the JRE home, navigate to the directory where the JDK is installed, then click finish and select it.
-10. Code!
+10. suffer
 
 ## Contributing animations
 Weapon animations in NTM are stored in JSON files, which are used alongside OBJ models to produce high quality animations with reasonable filesizes. Import/Export Blender addons are available for versions 2.79, 3.2, and 4.0 in `tools`, and they should function reasonably well in newer versions as well. See the comments in the header of the export scripts for usage instructions.
