@@ -20,12 +20,10 @@ import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.recipes.loader.SerializableRecipe;
 import com.hbm.items.ItemEnums;
 import com.hbm.items.ModItems;
-import com.hbm.items.machine.ItemCircuit;
 import com.hbm.main.MainRegistry;
 import com.hbm.items.machine.ItemCircuit.EnumCircuitType;
 
 
-import cpw.mods.fml.common.Mod;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -511,15 +509,7 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.inputFluids(new FluidStack(Fluids.GAS, 750), new FluidStack(Fluids.CHLORINE, 250))
 			.outputFluids(new FluidStack(Fluids.CHLOROMETHANE, 1000)));
 
-		//nilered recipe
-		recipes.add(new ChemRecipe(1003, "HYDRAPISS", 300)
-			.inputFluids(new FluidStack(Fluids.NITRIC_ACID, 2000))
-			.inputItems(new ComparableStack(ModItems.rag_piss)) // urea...
-			.outputFluids(new FluidStack(Fluids.HYDRAZINE, 800)));
-
 		//hbm hard stuff
-
-
 		recipes.add(new ChemRecipe(1101,"RESINBALL", 60)
 				.inputFluids(new FluidStack(Fluids.RESIN,500))
 				.inputItems(new ComparableStack(ModItems.sulfur, 2))
