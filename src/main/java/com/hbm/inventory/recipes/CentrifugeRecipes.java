@@ -46,7 +46,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class CentrifugeRecipes extends SerializableRecipe {
 
-	private static HashMap<AStack, ItemStack[]> recipes = new HashMap();
+	public static HashMap<AStack, ItemStack[]> recipes = new HashMap();
 
 	@Override
 	public void registerDefaults() {
@@ -573,7 +573,7 @@ public class CentrifugeRecipes extends SerializableRecipe {
 				new ItemStack(ModItems.powder_iron, 1)});
 
 		recipes.put(new ComparableStack(ModItems.ingot_magma, 1), new ItemStack[] {
-				Mats.MAT_GALLIUM.make(ModItems.bedrock_ore_fragment, 2),
+				Mats.MAT_GALLIUM.make(ModItems.bedrock_ore_fragment, 4),
 				Mats.MAT_ARSENIC.make(ModItems.bedrock_ore_fragment, 2),
 				new ItemStack(ModItems.powder_meteorite_tiny, 2),
 				new ItemStack(ModItems.dust_tiny, 3),

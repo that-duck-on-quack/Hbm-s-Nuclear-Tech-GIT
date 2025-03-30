@@ -1,6 +1,5 @@
 package com.hbm.main;
 
-import api.hbm.energymk2.Nodespace;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.hbm.blocks.IStepTickReceiver;
@@ -68,6 +67,7 @@ import com.hbm.tileentity.machine.TileEntityMachineRadarNT;
 import com.hbm.tileentity.machine.rbmk.RBMKDials;
 import com.hbm.tileentity.network.RTTYSystem;
 import com.hbm.tileentity.network.RequestNetwork;
+import com.hbm.uninos.UniNodespace;
 import com.hbm.util.*;
 import com.hbm.util.ArmorRegistry.HazardClass;
 import com.hbm.util.ContaminationUtil.ContaminationType;
@@ -88,7 +88,6 @@ import io.netty.buffer.PooledByteBufAllocator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockFire;
-import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandGameRule;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -103,6 +102,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityMooshroom;
 import net.minecraft.entity.passive.EntityVillager;
@@ -152,6 +152,7 @@ import net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
+import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.logging.log4j.Level;
@@ -577,12 +578,13 @@ public class ModEventHandler {
 	public void onBucketUse(FillBucketEvent event) {
 		if(event.world.isRemote) return;
 		if(event.target.typeOfHit != MovingObjectType.BLOCK) return;
+		if(!(event.world.provider instanceof WorldProviderCelestial)) return;
 
 		if(event.current != null && event.current.getItem() == Items.water_bucket) {
 			ForgeDirection dir = ForgeDirection.getOrientation(event.target.sideHit);
 			CBT_Atmosphere atmosphere = ChunkAtmosphereManager.proxy.getAtmosphere(event.world, event.target.blockX + dir.offsetX, event.target.blockY + dir.offsetY, event.target.blockZ + dir.offsetZ);
-			if(!ChunkAtmosphereManager.proxy.hasLiquidPressure(atmosphere)) {
-				event.setCanceled(true);
+			if(ChunkAtmosphereManager.proxy.hasLiquidPressure(atmosphere)) {
+				event.world.provider.isHellWorld = false;
 			}
 		}
 	}
@@ -678,7 +680,7 @@ public class ModEventHandler {
 
 					// Undo falling, and add our intended falling speed
 					// On high gravity planets, only apply falling speed when descending, so we can still jump up single blocks
-					if (gravity < 1.5F || event.entityLiving.motionY < 0) {
+					if((gravity < 1.5F || event.entityLiving.motionY < 0) && !(event.entity instanceof EntityChicken)) {
 						event.entityLiving.motionY /= 0.98F;
 						event.entityLiving.motionY += (AstronomyUtil.STANDARD_GRAVITY / 20F);
 						event.entityLiving.motionY -= (gravity / 20F);
@@ -757,8 +759,7 @@ public class ModEventHandler {
 
 	@SubscribeEvent
 	public void onUnload(WorldEvent.Unload event) {
-		NeutronNodeWorld.removeAllWorlds(); // Remove world from worlds when unloaded to avoid world issues.
-		NeutronNodeWorld.removeAllNodes(); // Remove all nodes.
+		NeutronNodeWorld.streamWorlds.remove(event.world);
 	}
 
 	public static boolean didSit = false;
@@ -1577,9 +1578,9 @@ public class ModEventHandler {
 			RTTYSystem.updateBroadcastQueue();
 			RequestNetwork.updateEntries();
 			TileEntityMachineRadarNT.updateSystem();
-			Nodespace.updateNodespace();
+			//Nodespace.updateNodespace();
 			CelestialBody.updateSwarms();
-			// bob i beg of you i need fluid nodespace :pray:
+			UniNodespace.updateNodespace();
 		}
 
 		// There is an issue here somewhere...
@@ -1622,6 +1623,18 @@ public class ModEventHandler {
 
 		if(evt.entity instanceof EntityMissileCustom) {
 			((EntityMissileCustom) evt.entity).loadNeighboringChunks(evt.newChunkX, evt.newChunkZ);
+		}*/
+	}
+
+	@SubscribeEvent
+	public void onChunkLoad(ChunkEvent.Load event) {
+
+		//test for automatic in-world block replacement
+
+		/*for(int x = 0; x < 16; x++) for(int y = 0; y < 255; y++) for(int z = 0; z < 16; z++) {
+			if(event.getChunk().getBlock(x, y, z) instanceof MachineArcFurnace) {
+				event.getChunk().func_150807_a(x, y, z, Blocks.air, 0);
+			}
 		}*/
 	}
 

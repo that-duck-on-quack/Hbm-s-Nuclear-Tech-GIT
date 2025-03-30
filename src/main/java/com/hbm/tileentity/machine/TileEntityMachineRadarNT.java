@@ -212,7 +212,7 @@ public class TileEntityMachineRadarNT extends TileEntityMachineBase implements I
 						screen.refZ = zCoord;
 						screen.range = this.getRange();
 						screen.linked = true;
-						networkPackNT(25);
+						screen.networkPackNT(25);
 					}
 				}
 			}
@@ -332,7 +332,10 @@ public class TileEntityMachineRadarNT extends TileEntityMachineBase implements I
 		this.entries.clear();
 
 		if(this.yCoord < radarAltitude) return;
-		if(this.power < consumption) return;
+		if(this.power < consumption) {
+			this.power = 0;
+			return;
+		}
 		this.power -= consumption;
 
 		int scan = this.getRange();

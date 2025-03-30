@@ -5,9 +5,9 @@ import com.hbm.dim.WorldChunkManagerCelestial;
 import com.hbm.dim.WorldProviderCelestial;
 import com.hbm.dim.WorldTypeTeleport;
 import com.hbm.dim.WorldChunkManagerCelestial.BiomeGenLayers;
-import com.hbm.dim.duna.GenLayerDuna.GenLayerDiversifyDuna;
-import com.hbm.dim.duna.GenLayerDuna.GenLayerDunaBiomes;
-import com.hbm.dim.duna.GenLayerDuna.GenLayerDunaLowlands;
+import com.hbm.dim.duna.genlayer.GenLayerDiversifyDuna;
+import com.hbm.dim.duna.genlayer.GenLayerDunaBiomes;
+import com.hbm.dim.duna.genlayer.GenLayerDunaLowlands;
 import com.hbm.util.ParticleUtil;
 
 import io.netty.buffer.ByteBuf;
@@ -38,7 +38,7 @@ public class WorldProviderDuna extends WorldProviderCelestial {
 	public String getDimensionName() {
 		return "Duna";
 	}
-	
+
 	@Override
 	public IChunkProvider createChunkGenerator() {
 		return new ChunkProviderDuna(this.worldObj, this.getSeed(), false);
@@ -150,7 +150,7 @@ public class WorldProviderDuna extends WorldProviderCelestial {
 
 	private static BiomeGenLayers createBiomeGenerators(long seed) {
 		GenLayer biomes = new GenLayerDunaBiomes(seed);
-		
+
 		biomes = new GenLayerFuzzyZoom(2000L, biomes);
 		biomes = new GenLayerZoom(2001L, biomes);
 		biomes = new GenLayerDiversifyDuna(1000L, biomes);
@@ -165,10 +165,8 @@ public class WorldProviderDuna extends WorldProviderCelestial {
 		biomes = new GenLayerFuzzyZoom(1000L, biomes);
 		biomes = new GenLayerSmooth(705L, biomes);
 		biomes = new GenLayerFuzzyZoom(1001L, biomes);
-		biomes = new GenLayerSmooth(706L, biomes);
-		biomes = new GenLayerFuzzyZoom(1002L, biomes);
 		biomes = new GenLayerZoom(1006L, biomes);
-		
+
 		GenLayer genlayerVoronoiZoom = new GenLayerVoronoiZoom(10L, biomes);
 
 		GenLayer genlayerRiverZoom = new GenLayerZoom(1000L, biomes);

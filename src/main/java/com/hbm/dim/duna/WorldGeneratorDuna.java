@@ -3,6 +3,7 @@ package com.hbm.dim.duna;
 import java.util.Random;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.blocks.machine.Spotlight;
 import com.hbm.config.SpaceConfig;
 import com.hbm.config.WorldConfig;
 import com.hbm.dim.CelestialBody;
@@ -24,9 +25,9 @@ public class WorldGeneratorDuna implements IWorldGenerator {
 		NBTStructure.registerStructure(SpaceConfig.dunaDimension, new SpawnCondition() {{
 			structure = new JigsawPiece("duna_comms", StructureManager.duna_comms, -1);
 			canSpawn = biome -> biome.heightVariation < 0.1F;
-			spawnWeight = 8;
+			spawnWeight = 4;
 		}});
-		NBTStructure.registerNullWeight(SpaceConfig.dunaDimension, 16);
+		NBTStructure.registerNullWeight(SpaceConfig.dunaDimension, 20);
 	}
 
 	@Override
@@ -63,7 +64,9 @@ public class WorldGeneratorDuna implements IWorldGenerator {
 			int z = 0;
 			int y = world.getHeightValue(x, z) - 1;
 
+			Spotlight.disableOnGeneration = false;
 			StructureManager.martian.build(world, x, y, z);
+			Spotlight.disableOnGeneration = true;
 		}
 	}
 

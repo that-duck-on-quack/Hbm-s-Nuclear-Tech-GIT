@@ -88,6 +88,8 @@ public class CBT_Dyson extends CelestialBodyTrait {
 			swarm.consumers = swarm.addedConsumers;
 			swarm.addedConsumers = 0;
 
+			if(swarm.members <= 0) continue;
+
 			double decayChance = (double)size() / (1024 * 5 * 20);
 			if(Math.random() < decayChance) swarm.members--;
 		}

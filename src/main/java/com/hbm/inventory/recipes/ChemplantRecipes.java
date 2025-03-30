@@ -43,7 +43,7 @@ public class ChemplantRecipes extends SerializableRecipe {
 	@Override
 	public void registerDefaults() {
 
-		//6-30, formerly oil cracking, coal liquefaction and solidifciation
+		//6-30, formerly oil cracking, coal liquefaction and solidification
 		registerOtherOil();
 
 		 recipes.add(new ChemRecipe(1004, "URANIUM_BROMIDE", 50)
@@ -511,6 +511,12 @@ public class ChemplantRecipes extends SerializableRecipe {
 				.inputFluids(new FluidStack(Fluids.GAS, 750), new FluidStack(Fluids.CHLORINE, 250))
 				.outputFluids(new FluidStack(Fluids.CHLOROMETHANE, 1000)));
 
+		//nilered recipe
+		recipes.add(new ChemRecipe(1003, "HYDRAPISS", 300)
+			.inputFluids(new FluidStack(Fluids.NITRIC_ACID, 2000))
+			.inputItems(new ComparableStack(ModItems.rag_piss)) // urea...
+			.outputFluids(new FluidStack(Fluids.HYDRAZINE, 800)));
+
 		//hbm hard stuff
 
 
@@ -584,6 +590,12 @@ public class ChemplantRecipes extends SerializableRecipe {
 
 
 
+
+		// WARNING: NILERED CHEMISTRY ZONE //
+		recipes.add(new ChemRecipe(1003, "HYDRAPISS", 300)
+				.inputFluids(new FluidStack(Fluids.NITRIC_ACID, 2000))
+				.inputItems(new ComparableStack(ModItems.rag_piss)) // urea...
+				.outputFluids(new FluidStack(Fluids.HYDRAZINE, 800)));
 	}
 
 	public static void registerOtherOil() {

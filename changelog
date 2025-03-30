@@ -1,26 +1,3 @@
-Includes all changes from the latest upstream NTMain update - [X5243 - the secret invisible C96](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5243)
+Includes all changes and bugfixes from the latest upstream NTMain update - [X5279 - the escape plan](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5279)
 
-
-## Added
-* DYSON SWARMS
-  * Dyson Swarm Members - must be continuously launched in order to maintain the swarm, as members will attenuate over time, the more members, the faster they attenuate
-  * Dyson Spinlauncher - launches new swarm members continuously as long as it is powered and has a satellite ID chip installed
-  * Dyson Receiver - receives energy from the swarm as long as a matching satellite ID chip is installed, collimates it into a potent beam
-  * Dyson Power Converter - receives an energy beam from a receiver and converts it directly into power (HE)
-  * Dyson Heat Converter - receives an energy beam from a receiver and converts it directly into heat (TU)
-  * Dyson Anatmogenesis Terraformer - receives an energy beam from a receiver and converts the energy into mass, producing atmospheric gases at planetary scales
-  * Satellite Dyson Relay - launch this into orbit in order for a Dyson receiver with a matching ID to be able to operate at night for that planet/moon
-* Magma Drill - extracts mineral-rich magma from Moho, which can be processed into gallium, arsenic, and meteorite dust
-* Atmosphere Scanner - reports on the current atmospheric composition
-
-
-## Changed
-* Redesigned Meteor Dungeons!
-* Geiger counters now produce less counts between 0-1RAD/s
-* Jetpack and oxygen tanks now stack to 16, and aren't consumed if the target is full
-
-
-## Fixed
-* All fixes from upstream NTM
-* Improved celestial trait syncing robustness
-* PU-239 bedrock fragments now produce ingots
+**Big fluidnet bugfix update upstream!**, also includes missing weapon mod recipes and fixes a bunch of dupes

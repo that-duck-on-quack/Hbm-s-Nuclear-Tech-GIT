@@ -6,6 +6,8 @@ import com.hbm.entity.projectile.EntityTom;
 import com.hbm.handler.BossSpawnHandler;
 import com.hbm.handler.ImpactWorldHandler;
 import com.hbm.saveddata.TomSaveData;
+import com.hbm.world.PlanetGen;
+
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -22,7 +24,6 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
@@ -62,7 +63,7 @@ public class ModEventHandlerImpact {
 				data.dust = Math.min(1, (data.dust + cool));
 				data.markDirty();
 			}
-			
+
 			if(data.time > 0) {
 				data.time--;
 				if(data.time<=2400)
@@ -74,7 +75,7 @@ public class ModEventHandlerImpact {
 						if(rand.nextInt(100)==0)
 						{
 							BossSpawnHandler.spawnMeteorAtPlayer(e, false, true);
-						}	
+						}
 					}
 				}
 				if(data.time==data.dtime)
@@ -142,8 +143,8 @@ public class ModEventHandlerImpact {
 						event.entityLiving.setDead();
 					}
 				}
-			}		
-		}		
+			}
+		}
 	}
 
 	@SubscribeEvent
@@ -165,8 +166,7 @@ public class ModEventHandlerImpact {
 		TomSaveData.resetLastCached();
 
 		if(!(event.world.provider instanceof WorldProviderEarth)) {
-			DimensionManager.unregisterProviderType(0);
-			DimensionManager.registerProviderType(0, WorldProviderEarth.class, true);
+			PlanetGen.overrideOverworldProvider();
 		}
 	}
 

@@ -84,6 +84,16 @@ public abstract class ItemRenderWeaponBase implements IItemRenderer {
 		GL11.glPushMatrix();
 
 		if(mc.gameSettings.thirdPersonView == 0 && !mc.renderViewEntity.isPlayerSleeping() && !mc.gameSettings.hideGUI && !mc.playerController.enableEverythingIsScrewedUpMode()) {
+			/*ItemRenderer ir = mc.entityRenderer.itemRenderer;
+			float equip = ir.prevEquippedProgress + (ir.equippedProgress- ir.prevEquippedProgress) * interp;
+			Animation current = HbmAnimations.getRelevantAnim();
+			// flicker prevention, if equip is in progress, only render if an animation is playing
+			if(!(equip < 0.25 && ir.prevEquippedProgress < ir.equippedProgress && (current == null || current.type != AnimType.EQUIP))) {
+				entityRenderer.enableLightmap(interp);
+				this.setupTransformsAndRender(stack);
+				entityRenderer.disableLightmap(interp);
+			}*/
+			
 			entityRenderer.enableLightmap(interp);
 			this.setupTransformsAndRender(stack);
 			entityRenderer.disableLightmap(interp);
@@ -251,6 +261,16 @@ public abstract class ItemRenderWeaponBase implements IItemRenderer {
 		double scale = 0.125D;
 		GL11.glScaled(scale, scale, scale);
 	}
+	
+	public void setupModTable(ItemStack stack) {
+		double scale = -5D;
+		GL11.glScaled(scale, scale, scale);
+		GL11.glRotated(90, 0, 1, 0);
+	}
+	
+	public void renderModTable(ItemStack stack, int index) {
+		renderOther(stack, ItemRenderType.INVENTORY);
+	}
 
 	public abstract void renderFirstPerson(ItemStack stack);
 	public void renderOther(ItemStack stack, ItemRenderType type) { }
@@ -331,6 +351,7 @@ public abstract class ItemRenderWeaponBase implements IItemRenderer {
 			double inset = 2;
 			Minecraft.getMinecraft().renderEngine.bindTexture(flash_plume);
 			tess.startDrawingQuads();
+			tess.setBrightness(240);
 			tess.setNormal(0F, 1F, 0F);
 			tess.setColorRGBA_F(1F, 1F, 1F, 1F);
 			
@@ -379,6 +400,7 @@ public abstract class ItemRenderWeaponBase implements IItemRenderer {
 			double lengthOffset = 0.125;
 			Minecraft.getMinecraft().renderEngine.bindTexture(flash_plume);
 			tess.startDrawingQuads();
+			tess.setBrightness(240);
 			tess.setNormal(0F, 1F, 0F);
 			tess.setColorRGBA_F(1F, 1F, 1F, 1F);
 			

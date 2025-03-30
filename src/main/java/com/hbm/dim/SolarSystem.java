@@ -470,7 +470,7 @@ public class SolarSystem {
 	public static double calculateSunSize(CelestialBody from) {
 		if(from.parent == null) return 0;
 		if(from.parent.parent != null) return calculateSunSize(from.parent);
-		return getApparentSize(from.parent.radiusKm, from.semiMajorAxisKm) * SUN_RENDER_SCALE;
+		return getApparentSize(from.parent.radiusKm, from.semiMajorAxisKm);
 	}
 
 	// Gets angle for a single planet, good for locking tidal bodies

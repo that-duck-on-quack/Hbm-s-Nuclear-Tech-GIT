@@ -51,6 +51,10 @@ public class ContainerMachineRocketAssembly extends ContainerBase {
 		//SHIFT: 1
 		//DRAG: 5
 
+		if(index >= tile.getSizeInventory() && mode == 1) {
+			return null;
+		}
+
 		if(index < tile.getSizeInventory() - RocketStruct.MAX_STAGES * 2 || index >= tile.getSizeInventory()) {
 			return super.slotClick(index, button, mode, player);
 		}

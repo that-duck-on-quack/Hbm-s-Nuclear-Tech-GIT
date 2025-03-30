@@ -32,7 +32,7 @@ public class WorldGeneratorMinmus implements IWorldGenerator {
 		JigsawPiece minmusBase = new JigsawPiece("minmus_base", StructureManager.mun_base) {{ alignToTerrain = true; heightOffset = -1; blockTable = concrete; }};
 
 		NBTStructure.registerStructure(SpaceConfig.minmusDimension, new SpawnCondition() {{
-			spawnWeight = 8;
+			spawnWeight = 6;
 			sizeLimit = 32;
 			startPool = "start";
 			pools = new HashMap<String, JigsawPool>() {{
@@ -57,7 +57,7 @@ public class WorldGeneratorMinmus implements IWorldGenerator {
 			}};
 		}});
 
-		NBTStructure.registerNullWeight(SpaceConfig.minmusDimension, 16);
+		NBTStructure.registerNullWeight(SpaceConfig.minmusDimension, 18);
 	}
 
 	@Override

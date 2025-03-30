@@ -95,6 +95,8 @@ public class MatDistribution extends SerializableRecipe {
 		registerEntry(DictFrame.fromOne(ModItems.powder_ash, EnumAshType.WOOD), MAT_CARBON, NUGGET.q(1));
 		registerEntry(DictFrame.fromOne(ModItems.powder_ash, EnumAshType.COAL), MAT_CARBON, NUGGET.q(2));
 		registerEntry(DictFrame.fromOne(ModItems.powder_ash, EnumAshType.MISC), MAT_CARBON, NUGGET.q(1));
+
+		registerEntry(ModItems.ring_starmetal, MAT_STAR, INGOT.q(4));
 	}
 
 	public static void registerEntry(Object key, Object... matDef) {

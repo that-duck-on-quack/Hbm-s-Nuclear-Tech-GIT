@@ -186,6 +186,14 @@ public class ItemRenderAberrator extends ItemRenderWeaponBase {
 	}
 
 	@Override
+	public void setupModTable(ItemStack stack) {
+		double scale = -12.5D;
+		GL11.glScaled(scale, scale, scale);
+		GL11.glRotated(90, 0, 1, 0);
+		GL11.glTranslated(0,-1, 0.5);
+	}
+
+	@Override
 	public void renderOther(ItemStack stack, ItemRenderType type) {
 
 		GL11.glEnable(GL11.GL_LIGHTING);
@@ -219,6 +227,7 @@ public class ItemRenderAberrator extends ItemRenderWeaponBase {
 			double lengthOffset = -1.125;
 			Minecraft.getMinecraft().renderEngine.bindTexture(flash_plume);
 			tess.startDrawingQuads();
+			tess.setBrightness(240);
 			tess.setNormal(0F, 1F, 0F);
 			tess.setColorRGBA_F(1F, 1F, 1F, 1F);
 

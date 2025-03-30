@@ -32,7 +32,7 @@ public class ItemAtmosphereScanner extends Item {
 				FluidEntry entry = atmosphere.fluids.get(i);
 				if(entry.pressure > 0.001) {
 					double pressure = BobMathUtil.roundDecimal(entry.pressure, 3);
-					PacketDispatcher.wrapper.sendTo(new PlayerInformPacket(ChatBuilder.start(entry.fluid.getLocalizedName() + ": ").color(EnumChatFormatting.AQUA).next(pressure + "atm").color(EnumChatFormatting.RESET).flush(), 969 + i, 4000), player);
+					PacketDispatcher.wrapper.sendTo(new PlayerInformPacket(ChatBuilder.startTranslation(entry.fluid.getUnlocalizedName()).color(EnumChatFormatting.AQUA).next(": ").next(pressure + "atm").color(EnumChatFormatting.RESET).flush(), 969 + i, 4000), player);
 					hasAtmosphere = true;
 				}
 			}

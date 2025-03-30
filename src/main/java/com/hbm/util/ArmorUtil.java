@@ -138,7 +138,7 @@ public class ArmorUtil {
 
 			return true;
 		}
-		
+
 		if(player.isPotionActive(HbmPotion.mutation) | player.isPotionActive(HbmPotion.nitan))
 			return true;
 
@@ -222,14 +222,14 @@ public class ArmorUtil {
 				if(stack == null || !(stack.getItem() instanceof ArmorFSB) || !((ArmorFSB)stack.getItem()).canSeal) {
 					isSealed = false;
 				}
-				
+
 				if(stack == null) continue;
 
 				if(rand.nextInt(2) == 0) {
 					stack.setItemDamage(stack.getItemDamage() + 1);
 				}
 
-				if(stack.getItemDamage() >= stack.getMaxDamage() || !((ArmorFSB)stack.getItem()).isArmorEnabled(stack)) {
+				if(stack.getItemDamage() >= stack.getMaxDamage() || !(stack.getItem() instanceof ArmorFSB) || !((ArmorFSB)stack.getItem()).isArmorEnabled(stack)) {
 					stack.stackSize = 0;
 					player.inventory.armorInventory[i] = null;
 					entity.worldObj.playSoundAtEntity(entity, "random.fizz", 0.2F, 1F);

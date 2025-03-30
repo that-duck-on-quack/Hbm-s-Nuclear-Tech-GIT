@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.hbm.config.StructureConfig;
+import com.hbm.main.StructureManager;
+import com.hbm.world.gen.NBTStructure.JigsawPiece;
 import com.hbm.world.gen.NBTStructure.SpawnCondition;
 import com.hbm.world.gen.component.BunkerComponents.BunkerStart;
 
@@ -26,13 +28,25 @@ public class NTMWorldGenerator implements IWorldGenerator {
 		NBTStructure.registerStructure(0, new SpawnCondition() {{
 			canSpawn = biome -> !invalidBiomes.contains(biome);
 			start = d -> new MapGenNTMFeatures.Start(d.getW(), d.getX(), d.getY(), d.getZ());
-			spawnWeight = 14;
+			spawnWeight = 14 * 4;
 		}});
 
 		NBTStructure.registerStructure(0, new SpawnCondition() {{
 			canSpawn = biome -> !invalidBiomes.contains(biome);
 			start = d -> new BunkerStart(d.getW(), d.getX(), d.getY(), d.getZ());
-			spawnWeight = 1;
+			spawnWeight = 1 * 4;
+		}});
+
+		NBTStructure.registerStructure(0, new SpawnCondition() {{
+			canSpawn = biome -> !biome.canSpawnLightningBolt() && biome.temperature >= 2F;
+			structure = new JigsawPiece("vertibird", StructureManager.vertibird, -3);
+			spawnWeight = 3 * 4;
+		}});
+
+		NBTStructure.registerStructure(0, new SpawnCondition() {{
+			canSpawn = biome -> !biome.canSpawnLightningBolt() && biome.temperature >= 2F;
+			structure = new JigsawPiece("crashed_vertibird", StructureManager.crashed_vertibird, -10);
+			spawnWeight = 3 * 4;
 		}});
 	}
 

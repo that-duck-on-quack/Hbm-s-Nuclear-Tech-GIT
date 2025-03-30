@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.hbm.config.SpaceConfig;
 import com.hbm.dim.dres.WorldGeneratorDres;
 import com.hbm.dim.WorldGeneratorCelestial;
+import com.hbm.dim.WorldProviderEarth;
 import com.hbm.dim.Ike.WorldGeneratorIke;
 import com.hbm.dim.Ike.WorldProviderIke;
 import com.hbm.dim.dres.WorldProviderDres;
@@ -57,6 +58,8 @@ public class PlanetGen {
 		GameRegistry.registerWorldGenerator(new WorldGeneratorLaythe(), 1);
 		GameRegistry.registerWorldGenerator(new WorldGeneratorTekto(), 1);
 
+		overrideOverworldProvider();
+
     }
 
 	private static ArrayList<Integer> spaceDimensions = new ArrayList<>();
@@ -70,6 +73,11 @@ public class PlanetGen {
 		DimensionManager.registerDimension(dimensionId, dimensionId);
 
 		if(dimensionId != SpaceConfig.orbitDimension) spaceDimensions.add(dimensionId);
+	}
+
+	public static void overrideOverworldProvider() {
+		DimensionManager.unregisterProviderType(0);
+		DimensionManager.registerProviderType(0, WorldProviderEarth.class, true);
 	}
 
 }

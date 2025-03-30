@@ -42,6 +42,8 @@ public class TileEntityMachineRocketAssembly extends TileEntityMachineBase imple
 
 	public int currentStage;
 
+	public boolean isBreaking;
+
 	public TileEntityMachineRocketAssembly() {
 		super(1 + RocketStruct.MAX_STAGES * 3 + 1 + RocketStruct.MAX_STAGES * 2); // capsule + stages + result + drives
 	}
@@ -202,6 +204,12 @@ public class TileEntityMachineRocketAssembly extends TileEntityMachineBase imple
 				worldObj.setBlockToAir(xCoord + x, yCoord + height, zCoord + z);
 			}
 		}
+	}
+
+	@Override
+	public int getSizeInventory() {
+		if(isBreaking) return super.getSizeInventory() - RocketStruct.MAX_STAGES * 2;
+		return super.getSizeInventory();
 	}
 
 	@Override

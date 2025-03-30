@@ -4,12 +4,12 @@ import com.hbm.dim.WorldChunkManagerCelestial.BiomeGenLayers;
 
 import com.hbm.dim.WorldChunkManagerCelestial;
 import com.hbm.dim.WorldProviderCelestial;
-import com.hbm.dim.laythe.GenLayerLaythe.GenLayerDiversifyLaythe;
-import com.hbm.dim.laythe.GenLayerLaythe.GenLayerLaytheBiomes;
-import com.hbm.dim.laythe.GenLayerLaythe.GenLayerLaytheIslands;
-import com.hbm.dim.laythe.GenLayerLaythe.GenLayerLaytheOceans;
-import com.hbm.dim.laythe.GenLayerLaythe.GenLayerLaythePolar;
 import com.hbm.dim.laythe.biome.BiomeGenBaseLaythe;
+import com.hbm.dim.laythe.genlayer.GenLayerDiversifyLaythe;
+import com.hbm.dim.laythe.genlayer.GenLayerLaytheBiomes;
+import com.hbm.dim.laythe.genlayer.GenLayerLaytheIslands;
+import com.hbm.dim.laythe.genlayer.GenLayerLaytheOceans;
+import com.hbm.dim.laythe.genlayer.GenLayerLaythePolar;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

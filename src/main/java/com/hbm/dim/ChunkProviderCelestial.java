@@ -48,16 +48,16 @@ public abstract class ChunkProviderCelestial implements IChunkProvider {
 
 	// Embiggenify
 	protected boolean amplified = false;
-	
+
 	//round
 	protected boolean reclamp = true;
-	
+
 
 	// Now for the regular stuff, changing these won't change gen, just break things
 	protected World worldObj;
 	protected final boolean mapFeaturesEnabled;
 	protected Random rand;
-	
+
 	// Generation buffers and the like, no need to modify or have visibility to these
 	private NoiseGeneratorOctaves firstOrder;
 	private NoiseGeneratorOctaves secondOrder;
@@ -270,7 +270,7 @@ public abstract class ChunkProviderCelestial implements IChunkProvider {
 						d6 *= 4.0D;
 					}
 
-					double d7 = firstOrderBuffer[l] / 512.0D; 
+					double d7 = firstOrderBuffer[l] / 512.0D;
 					double d8 = secondOrderBuffer[l] / 512.0D;
 					double d9 = (thirdOrderBuffer[l] / 10.0D + 1.0D) / 2.0D;
 					//srry, there has to be a better way to smooth out things, we got the perlin tools to do so but i have no idea how to invoke those tools here.
@@ -310,6 +310,8 @@ public abstract class ChunkProviderCelestial implements IChunkProvider {
 
 	@Override
 	public Chunk provideChunk(int x, int z) {
+		BlockFalling.fallInstantly = true;
+
 		rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 
 		BlockMetaBuffer ablock = getChunkPrimer(x, z);
@@ -328,6 +330,9 @@ public abstract class ChunkProviderCelestial implements IChunkProvider {
 		}
 
 		chunk.generateSkylightMap();
+
+		BlockFalling.fallInstantly = false;
+
 		return chunk;
 	}
 
