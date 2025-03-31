@@ -566,24 +566,24 @@ public class Fluids {
 		DIRTY_WATER =			new FluidType("DIRTY_WATER", 0x3333FF, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
 		OSLURRY = new FluidType("OSLURRY", 0x4A1C0F, 0, 0, 0, EnumSymbol.NONE).addTraits(new FT_Flammable(15), LIQUID, VISCOUS, P_OIL);
 		DSHSLURRY = new FluidType("DSHSLURRY", 0xD63B27, 0, 0, 0, EnumSymbol.ACID).addTraits(LIQUID, new FT_Corrosive(25));
-		PROPYNE = new FluidType("PROPYNE", 0x7F7F7F, 1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
-		BUTYNE = new FluidType("BUTYNE",0xFFFF00,1,4,1,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
-		ETHYLENE = new FluidType("ETHYLENE",0xddf7ff, 1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
-		ACETYLENE = new FluidType("ACETYLENE",0xFFA500,1,4,3,EnumSymbol.ASPHYXIANT).addTraits(new FT_Flammable(1000),GASEOUS);
-		TOULENE = new FluidType("TOULENE", 0xFFCC80, 2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
-		BENZENE = new FluidType("BENZENE", 0xFFC0CB,3,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
-		BUTENE = new FluidType("BUTENE",0xFFD700,1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
-		ETHANE = new FluidType("ETHANE",0x87CEFA,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
-		PROPANE = new FluidType("PROPANE",0x4682B4,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
-		OCTANE = new FluidType("OCTANE",0xFFA500,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
-		STYRENE= new FluidType("STYRENE",0xF08080,2,3,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
-		BUTADIENE = new FluidType("BUTADIENE",0xFFDAB9,2,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
-		VINYL_CHLORIDE = new FluidType("VINYL_CHLORIDE",0xC0C0C0,3,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
-		BUTANE = new FluidType("BUTANE",0xFFD700,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS);
+		PROPYNE = new FluidType("PROPYNE", 0x7F7F7F, 1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
+		BUTYNE = new FluidType("BUTYNE",0xFFFF00,1,4,1,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
+		ETHYLENE = new FluidType("ETHYLENE",0xddf7ff, 1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
+		ACETYLENE = new FluidType("ACETYLENE",0xFFA500,1,4,3,EnumSymbol.ASPHYXIANT).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
+		TOULENE = new FluidType("TOULENE", 0xFFCC80, 2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
+		BENZENE = new FluidType("BENZENE", 0xFFC0CB,3,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
+		BUTENE = new FluidType("BUTENE",0xFFD700,1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
+		ETHANE = new FluidType("ETHANE",0x87CEFA,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
+		PROPANE = new FluidType("PROPANE",0x4682B4,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
+		OCTANE = new FluidType("OCTANE",0xFFA500,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
+		STYRENE= new FluidType("STYRENE",0xF08080,2,3,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
+		BUTADIENE = new FluidType("BUTADIENE",0xFFDAB9,2,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
+		VINYL_CHLORIDE = new FluidType("VINYL_CHLORIDE",0xC0C0C0,3,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
+		BUTANE = new FluidType("BUTANE",0xFFD700,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		ACETONE = new FluidType("ACETONE", 0xFFB6C1,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
 		PHENOL = new FluidType("PHENOL",0x442b12,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
 		EPOXY = new FluidType("EPOXY",0xFFFFFF,0,0,0, EnumSymbol.NONE).addTraits(VISCOUS);
-		OCTANEGASOLINE = new FluidType("OCTANEGASOLINE", 0xa06e37 ,1,3,0,EnumSymbol.NONE ).addTraits(new FT_Combustible(FuelGrade.HIGH, 20_000_000));
+		OCTANEGASOLINE = new FluidType("OCTANEGASOLINE", 0xa06e37 ,1,3,0,EnumSymbol.NONE ).addTraits(new FT_Combustible(FuelGrade.HIGH, 20_000_000), new FT_Polluting().release(PollutionType.SOOT, SOOT_REFINED_OIL));
 		// ^ ^ ^ ^ ^ ^ ^ ^
 		//ADD NEW FLUIDS HERE
 
@@ -1042,6 +1042,7 @@ public class Fluids {
 
 		registerCalculatedFuel(SYNGAS, (coalHeat * (1000 /* bucket */ / 100 /* mB per coal */) * flammabilityLow * demandLow * complexityChemplant) * 2.5, 2.25, FuelGrade.GAS); //same as coal oil, +50% bonus
 		registerCalculatedFuel(OXYHYDROGEN, 5_000, 3, FuelGrade.GAS); // whatever
+		registerCalculatedFuel(OCTANEGASOLINE, (baseline / 0.15 * flammabilityNormal * demandMedium * complexityRefinery * complexityChemplant ), 3.4D, FuelGrade.HIGH);
 
 		File config = new File(folder.getAbsolutePath() + File.separatorChar + "hbmFluidTraits.json");
 		File template = new File(folder.getAbsolutePath() + File.separatorChar + "_hbmFluidTraits.json");
