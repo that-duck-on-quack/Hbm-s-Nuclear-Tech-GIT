@@ -572,19 +572,19 @@ public class Fluids {
 		ETHYLENE = new FluidType("ETHYLENE",0xddf7ff, 1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		ACETYLENE = new FluidType("ACETYLENE",0xFFA500,1,4,3,EnumSymbol.ASPHYXIANT).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		TOULENE = new FluidType("TOULENE", 0xFFCC80, 2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
-		BENZENE = new FluidType("BENZENE", 0xFFC0CB,3,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, new FT_Polluting().release(PollutionType.POISON, (POISON_EXTREME*2)));
+		BENZENE = new FluidType("BENZENE", 0xFFC0CB,3,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, new FT_Polluting().burn(PollutionType.POISON, (POISON_EXTREME*2)));
 		BUTENE = new FluidType("BUTENE",0xFFD700,1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		ETHANE = new FluidType("ETHANE",0x87CEFA,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		PROPANE = new FluidType("PROPANE",0x4682B4,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		OCTANE = new FluidType("OCTANE",0xFFA500,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
-		STYRENE= new FluidType("STYRENE",0xF08080,2,3,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, new FT_Polluting().release(PollutionType.POISON, POISON_EXTREME));
+		STYRENE= new FluidType("STYRENE",0xF08080,2,3,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, new FT_Polluting().burn(PollutionType.POISON, POISON_EXTREME));
 		BUTADIENE = new FluidType("BUTADIENE",0xFFDAB9,2,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
-		VINYL_CHLORIDE = new FluidType("VINYL_CHLORIDE",0xC0C0C0,3,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, new FT_Polluting().release(PollutionType.POISON, (POISON_EXTREME*5)));
+		VINYL_CHLORIDE = new FluidType("VINYL_CHLORIDE",0xC0C0C0,3,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, new FT_Polluting().burn(PollutionType.POISON, (POISON_EXTREME*5)));
 		BUTANE = new FluidType("BUTANE",0xFFD700,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		ACETONE = new FluidType("ACETONE", 0xFFB6C1,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
 		PHENOL = new FluidType("PHENOL",0x442b12,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
 		EPOXY = new FluidType("EPOXY",0xFFFFFF,0,0,0, EnumSymbol.NONE).addTraits(VISCOUS);
-		OCTANEGASOLINE = new FluidType("OCTANEGASOLINE", 0xa06e37 ,1,3,0,EnumSymbol.NONE ).addTraits(new FT_Combustible(FuelGrade.HIGH, 20_000_000), new FT_Polluting().release(PollutionType.SOOT, SOOT_REFINED_OIL));
+		OCTANEGASOLINE = new FluidType("OCTANEGASOLINE", 0xa06e37 ,1,3,0,EnumSymbol.NONE ).addTraits(new FT_Combustible(FuelGrade.HIGH, 20_000_000), new FT_Polluting().burn(PollutionType.SOOT, SOOT_REFINED_OIL));
 		// ^ ^ ^ ^ ^ ^ ^ ^
 		//ADD NEW FLUIDS HERE
 
