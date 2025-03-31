@@ -29,6 +29,7 @@ import com.hbm.inventory.fluid.trait.FT_Heatable.HeatingType;
 import com.hbm.inventory.fluid.trait.FT_Toxin.*;
 import com.hbm.render.util.EnumSymbol;
 import com.hbm.util.ArmorRegistry.HazardClass;
+import com.ibm.icu.impl.UPropertyAliases;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
@@ -571,17 +572,17 @@ public class Fluids {
 		ETHYLENE = new FluidType("ETHYLENE",0xddf7ff, 1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		ACETYLENE = new FluidType("ACETYLENE",0xFFA500,1,4,3,EnumSymbol.ASPHYXIANT).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		TOULENE = new FluidType("TOULENE", 0xFFCC80, 2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
-		BENZENE = new FluidType("BENZENE", 0xFFC0CB,3,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
+		BENZENE = new FluidType("BENZENE", 0xFFC0CB,3,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, new FT_Polluting().release(PollutionType.POISON, (POISON_EXTREME*2)));
 		BUTENE = new FluidType("BUTENE",0xFFD700,1,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		ETHANE = new FluidType("ETHANE",0x87CEFA,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		PROPANE = new FluidType("PROPANE",0x4682B4,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		OCTANE = new FluidType("OCTANE",0xFFA500,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
-		STYRENE= new FluidType("STYRENE",0xF08080,2,3,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
+		STYRENE= new FluidType("STYRENE",0xF08080,2,3,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, new FT_Polluting().release(PollutionType.POISON, POISON_EXTREME));
 		BUTADIENE = new FluidType("BUTADIENE",0xFFDAB9,2,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
-		VINYL_CHLORIDE = new FluidType("VINYL_CHLORIDE",0xC0C0C0,3,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
+		VINYL_CHLORIDE = new FluidType("VINYL_CHLORIDE",0xC0C0C0,3,4,2,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, new FT_Polluting().release(PollutionType.POISON, (POISON_EXTREME*5)));
 		BUTANE = new FluidType("BUTANE",0xFFD700,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
-		ACETONE = new FluidType("ACETONE", 0xFFB6C1,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
-		PHENOL = new FluidType("PHENOL",0x442b12,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID);
+		ACETONE = new FluidType("ACETONE", 0xFFB6C1,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
+		PHENOL = new FluidType("PHENOL",0x442b12,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
 		EPOXY = new FluidType("EPOXY",0xFFFFFF,0,0,0, EnumSymbol.NONE).addTraits(VISCOUS);
 		OCTANEGASOLINE = new FluidType("OCTANEGASOLINE", 0xa06e37 ,1,3,0,EnumSymbol.NONE ).addTraits(new FT_Combustible(FuelGrade.HIGH, 20_000_000), new FT_Polluting().release(PollutionType.SOOT, SOOT_REFINED_OIL));
 		// ^ ^ ^ ^ ^ ^ ^ ^
@@ -960,7 +961,7 @@ public class Fluids {
 		double complexityCoker = 1.25D;
 		double complexityChemplant = 1.1D;
 		double complexityLubed = 1.15D;
-		double complexityLeaded = 1.5D;
+		double complexityLeaded = 2.8D;
 		double complexityVacuum = 3.0D;
 		double complexityReform = 2.5D;
 		double complexityHydro = 2.0D;
@@ -1042,7 +1043,27 @@ public class Fluids {
 
 		registerCalculatedFuel(SYNGAS, (coalHeat * (1000 /* bucket */ / 100 /* mB per coal */) * flammabilityLow * demandLow * complexityChemplant) * 2.5, 2.25, FuelGrade.GAS); //same as coal oil, +50% bonus
 		registerCalculatedFuel(OXYHYDROGEN, 5_000, 3, FuelGrade.GAS); // whatever
-		registerCalculatedFuel(OCTANEGASOLINE, (baseline / 0.15 * flammabilityNormal * demandMedium * complexityRefinery * complexityChemplant ), 3.4D, FuelGrade.HIGH);
+
+		//NTM Hard Fuels. Scuffed, please don't mind.
+		registerCalculatedFuel(PROPYNE, (baseline / 0.25 * (flammabilityHigh*1.2) * demandLow * complexityRefinery ), 1.3D, FuelGrade.GAS); //Good rocket fuel, but not that good for ICEs.
+		registerCalculatedFuel(BUTYNE, (baseline / 0.45 * (flammabilityHigh*2.1) * demandLow * complexityRefinery ), 1D, FuelGrade.GAS); //Too flammable for its own sake, but not good as a fuel.
+		registerCalculatedFuel(ETHYLENE, (baseline / 1.2 * (flammabilityHigh*3.2) * demandVeryLow * complexityRefinery ), 1D, FuelGrade.GAS); //It's worse than Butyne in terms of efficiency but is way more flammable.
+		registerCalculatedFuel(ACETYLENE, (baseline / 0.50 * flammabilityHigh * demandLow * complexityRefinery ), 1D, FuelGrade.GAS); //Good, but lower than expected efficiency due to uncontrolled reactivity.
+		registerCalculatedFuel(TOULENE, (baseline / 0.35 * flammabilityNormal * demandLow * complexityRefinery ), 1D, FuelGrade.LOW); //Middest fuel ever.
+		registerCalculatedFuel(BENZENE, (baseline / 0.20 * flammabilityHigh * demandMedium * complexityRefinery ), 1.4D, FuelGrade.HIGH); //Benzene is actually pretty good! Except for the cancer.
+		registerCalculatedFuel(BUTENE, (baseline / 0.30 * flammabilityHigh * demandMedium * complexityRefinery ), 1D, FuelGrade.GAS); //Pretty good I'd say, except it's a gas.
+		//Ethane is not present since it's near useless in gas form, and liquid requires cryo storage. Plus, Ethylene would just end up better.
+		registerCalculatedFuel(PROPANE, (baseline / 0.20 * flammabilityHigh * demandMedium * complexityRefinery * complexityChemplant ), 1.8D, FuelGrade.HIGH); //It's Propane!
+		registerCalculatedFuel(OCTANE, (baseline / 0.40 * flammabilityNormal * demandVeryLow * complexityRefinery ), .6D, FuelGrade.MEDIUM); //Pure octane sucks, mix it with gasoline instead.
+		registerCalculatedFuel(STYRENE, (baseline / 0.40 * flammabilityLow * demandLow * complexityRefinery ), .8D, FuelGrade.LOW); //Pretty mid, plus, CANCER.
+		//Butadiene not present since it's unable to run under ICEs.
+		registerCalculatedFuel(VINYL_CHLORIDE, (baseline / 0.64 * flammabilityHigh * demandLow * complexityRefinery ), .5D, FuelGrade.GAS); //Vinyl Chloride isn't the worst, but produces so much cancer i gave it a .6 multiplier.
+		registerCalculatedFuel(BUTANE, (baseline / 0.34 * flammabilityHigh * demandLow * complexityRefinery * complexityChemplant ), 1.1D, FuelGrade.GAS); //Propane's worse sibling.
+		registerCalculatedFuel(ACETONE, (baseline / 0.75 * flammabilityHigh * demandVeryLow * complexityRefinery ), .4D, FuelGrade.LOW); //It's not because you can that it means you should.
+		registerCalculatedFuel(PHENOL, (baseline / 0.40 * flammabilityLow * demandVeryLow * complexityRefinery ), 1D, FuelGrade.LOW); //Actually, this is the middest fuel.
+		registerCalculatedFuel(EPOXY, 1, .2D, FuelGrade.LOW); //WHY?????????
+
+		registerCalculatedFuel(OCTANEGASOLINE, (baseline / 0.15 * flammabilityNormal * demandMedium * complexityRefinery * complexityChemplant ), 3.2D, FuelGrade.HIGH); //Cmon, it's high octane gasoline!
 
 		File config = new File(folder.getAbsolutePath() + File.separatorChar + "hbmFluidTraits.json");
 		File template = new File(folder.getAbsolutePath() + File.separatorChar + "_hbmFluidTraits.json");
