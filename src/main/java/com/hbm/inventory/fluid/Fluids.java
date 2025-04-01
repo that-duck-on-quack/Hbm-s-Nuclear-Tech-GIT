@@ -583,7 +583,7 @@ public class Fluids {
 		BUTANE = new FluidType("BUTANE",0xFFD700,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		ACETONE = new FluidType("ACETONE", 0xFFB6C1,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
 		PHENOL = new FluidType("PHENOL",0x442b12,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
-		EPOXY = new FluidType("EPOXY",0xFFFFFF,0,0,0, EnumSymbol.NONE).addTraits(VISCOUS, new FT_Polluting().burn(PollutionType.SOOT, 5000*50)); //I CAN DO WHATEVER I WANT!!!!!!! except burn epoxy
+		EPOXY = new FluidType("EPOXY",0xFFFFFF,0,0,0, EnumSymbol.NONE).addTraits(VISCOUS, new FT_Polluting().burn(PollutionType.SOOT, 1100)); //I CAN DO WHATEVER I WANT!!!!!!! except burn epoxy
 		OCTANEGASOLINE = new FluidType("OCTANEGASOLINE", 0xa06e37 ,1,3,0,EnumSymbol.NONE ).addTraits(new FT_Combustible(FuelGrade.HIGH, 20_000_000), new FT_Polluting().burn(PollutionType.SOOT, SOOT_REFINED_OIL));
 		// ^ ^ ^ ^ ^ ^ ^ ^
 		//ADD NEW FLUIDS HERE
@@ -961,7 +961,7 @@ public class Fluids {
 		double complexityCoker = 1.25D;
 		double complexityChemplant = 1.1D;
 		double complexityLubed = 1.15D;
-		double complexityLeaded = 2.8D;
+		double complexityLeaded = 1.8D;
 		double complexityVacuum = 3.0D;
 		double complexityReform = 2.5D;
 		double complexityHydro = 2.0D;
@@ -1009,8 +1009,8 @@ public class Fluids {
 		registerCalculatedFuel(SOURGAS, (baseline / 0.15 * flammabilityLow * demandVeryLow * complexityVacuum), 0, null);
 		registerCalculatedFuel(XYLENE, (baseline / 0.15 * flammabilityNormal * demandMedium * complexityVacuum * complexityFraction), 2.5D, FuelGrade.HIGH);
 		registerCalculatedFuel(HEATINGOIL_VACUUM, (baseline / 0.24 * flammabilityNormal * demandLow * complexityVacuum * complexityFraction), 1.25D, FuelGrade.LOW);
-		registerCalculatedFuel(DIESEL_REFORM, DIESEL.getTrait(FT_Flammable.class).getHeatEnergy() * complexityReform, 2.5D, FuelGrade.HIGH);
-		registerCalculatedFuel(DIESEL_CRACK_REFORM, DIESEL_CRACK.getTrait(FT_Flammable.class).getHeatEnergy() * complexityReform, 2.5D, FuelGrade.HIGH);
+		registerCalculatedFuel(DIESEL_REFORM, DIESEL.getTrait(FT_Flammable.class).getHeatEnergy() * complexityReform, 3D, FuelGrade.HIGH);
+		registerCalculatedFuel(DIESEL_CRACK_REFORM, DIESEL_CRACK.getTrait(FT_Flammable.class).getHeatEnergy() * complexityReform, 3D, FuelGrade.HIGH);
 		registerCalculatedFuel(KEROSENE_REFORM, KEROSENE.getTrait(FT_Flammable.class).getHeatEnergy() * complexityReform, 1.5D, FuelGrade.AERO);
 		registerCalculatedFuel(NMASSTETRANOL, BALEFIRE.getTrait(FT_Flammable.class).getHeatEnergy() * 1000, 10.5, FuelGrade.HIGH); //0.8
 		registerCalculatedFuel(DICYANOACETYLENE, (baseline / 0.15 * flammabilityHigh * demandHigh * complexityRefinery * complexityCracking) + UNSATURATEDS.getTrait(FT_Flammable.class).getHeatEnergy(), 0, null);
@@ -1061,7 +1061,7 @@ public class Fluids {
 		registerCalculatedFuel(BUTANE, (baseline / 0.34 * flammabilityHigh * demandLow * complexityRefinery * complexityChemplant ), 1.1D, FuelGrade.GAS); //Propane's worse sibling.
 		registerCalculatedFuel(ACETONE, (baseline / 0.75 * flammabilityHigh * demandVeryLow * complexityRefinery ), .4D, FuelGrade.LOW); //It's not because you can that it means you should.
 		registerCalculatedFuel(PHENOL, (baseline / 0.40 * flammabilityLow * demandVeryLow * complexityRefinery ), 1D, FuelGrade.LOW); //Actually, this is the middest fuel.
-		registerCalculatedFuel(EPOXY, 1, .2D, FuelGrade.LOW); //WHY?????????
+		registerCalculatedFuel(EPOXY, 1, 1D, FuelGrade.LOW); //WHY?????????
 
 		registerCalculatedFuel(OCTANEGASOLINE, (baseline / 0.15 * flammabilityNormal * demandMedium * complexityRefinery * complexityChemplant ), 3.2D, FuelGrade.HIGH); //Cmon, it's high octane gasoline!
 
