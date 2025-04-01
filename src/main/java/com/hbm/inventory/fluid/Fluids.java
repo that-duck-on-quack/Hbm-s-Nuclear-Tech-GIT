@@ -583,7 +583,7 @@ public class Fluids {
 		BUTANE = new FluidType("BUTANE",0xFFD700,1,4,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),GASEOUS, P_GAS);
 		ACETONE = new FluidType("ACETONE", 0xFFB6C1,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
 		PHENOL = new FluidType("PHENOL",0x442b12,2,3,0,EnumSymbol.NONE).addTraits(new FT_Flammable(1000),LIQUID, P_OIL);
-		EPOXY = new FluidType("EPOXY",0xFFFFFF,0,0,0, EnumSymbol.NONE).addTraits(VISCOUS, new FT_Polluting().burn(PollutionType.SOOT, 1100)); //I CAN DO WHATEVER I WANT!!!!!!! except burn epoxy
+		EPOXY = new FluidType("EPOXY",0xFFFFFF,0,0,0, EnumSymbol.NONE).addTraits(VISCOUS, new FT_Polluting().burn(PollutionType.SOOT, 1100), new FT_Really()); //I CAN DO WHATEVER I WANT!!!!!!! except burn epoxy
 		OCTANEGASOLINE = new FluidType("OCTANEGASOLINE", 0xa06e37 ,1,3,0,EnumSymbol.NONE ).addTraits(new FT_Combustible(FuelGrade.HIGH, 20_000_000), new FT_Polluting().burn(PollutionType.SOOT, SOOT_REFINED_OIL));
 		// ^ ^ ^ ^ ^ ^ ^ ^
 		//ADD NEW FLUIDS HERE
