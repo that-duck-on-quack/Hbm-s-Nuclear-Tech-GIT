@@ -48,9 +48,9 @@ public class MagicRecipes {
 		recipes.add(new MagicRecipe(new ItemStack(ModItems.ingot_electronium), new ComparableStack(ModItems.pellet_charged), new ComparableStack(ModItems.pellet_charged), new ComparableStack(ModItems.ingot_dineutronium), new ComparableStack(ModItems.ingot_dineutronium)));
 
 		recipes.add(new MagicRecipe(new ItemStack(ModItems.diamond_gavel),
-				new ComparableStack(ModBlocks.gravel_diamond),
-				new ComparableStack(ModBlocks.gravel_diamond),
-				new ComparableStack(ModBlocks.gravel_diamond),
+				new ComparableStack(ModBlocks.ore_sellafield_diamond),
+				new ComparableStack(ModBlocks.ore_sellafield_diamond),
+				new ComparableStack(ModBlocks.ore_sellafield_diamond),
 				new ComparableStack(ModItems.lead_gavel)));
 
 		recipes.add(new MagicRecipe(new ItemStack(ModItems.mese_gavel),
