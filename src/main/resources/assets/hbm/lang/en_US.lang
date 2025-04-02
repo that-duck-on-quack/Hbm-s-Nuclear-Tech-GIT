@@ -1747,7 +1747,7 @@ item.crude_circuit.name= Crude Circuit
 item.crude_cap.name= Crude Capacitor
 item.crude_pcb.name= Crude Circuit Board
 item.tungsten_hammer.name= Tungsten Hammer
-item.calcium_carbide.name= Calcium carbide
+item.calcium_carbide.name= Calcium Carbide
 
 hbmpseudofluid.none=Empty
 hbmpseudofluid.heuf6=Highly Enriched UF6

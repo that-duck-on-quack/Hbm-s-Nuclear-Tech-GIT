@@ -575,12 +575,6 @@ public class ChemplantRecipes extends SerializableRecipe {
 		);
 
 
-
-
-
-
-
-
 		// WARNING: NILERED CHEMISTRY ZONE //
 		recipes.add(new ChemRecipe(1003, "HYDRAPISS", 300)
 				.inputFluids(new FluidStack(Fluids.NITRIC_ACID, 2000))
