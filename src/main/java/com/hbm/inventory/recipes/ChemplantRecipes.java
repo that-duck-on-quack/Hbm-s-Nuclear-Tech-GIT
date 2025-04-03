@@ -26,6 +26,7 @@ import com.hbm.items.machine.ItemCircuit.EnumCircuitType;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ChemplantRecipes extends SerializableRecipe {
@@ -516,8 +517,8 @@ public class ChemplantRecipes extends SerializableRecipe {
 				.outputItems(new ItemStack(ModItems.ball_resin,1)));
 
 		recipes.add(new ChemRecipe(1102,"DEAERATION", 3)
-                .inputFluids(new FluidStack(Fluids.AERATEDWATER,1000), new FluidStack(Fluids.STEAM, 250))
-                .outputFluids(new FluidStack(Fluids.WATER, 1000)));
+                .inputFluids(new FluidStack(Fluids.AERATEDWATER,250), new FluidStack(Fluids.STEAM, 250))
+                .outputFluids(new FluidStack(Fluids.WATER, 250)));
 
 		recipes.add(new ChemRecipe(1103,"DSLURPROD", 200)
 			.inputFluids(new FluidStack(Fluids.SULFURIC_ACID,1000))
@@ -568,11 +569,16 @@ public class ChemplantRecipes extends SerializableRecipe {
 		recipes.add(new ChemRecipe(1118,"semtex_production",1200)
 			.inputFluids(new FluidStack(Fluids.NITRIC_ACID,100))
 			.inputItems(new ComparableStack(ModItems.powder_semtex_mix),new ComparableStack(ModItems.ingot_c4))
+			.outputItems(new ItemStack(ModItems.ingot_semtex))
 		);
 		recipes.add(new ChemRecipe(1119,"ACETONE",300)
 			.inputFluids(new FluidStack(Fluids.BENZENE,500), new FluidStack(Fluids.OXYGEN,1000) )
 			.outputFluids(new FluidStack(Fluids.ACETONE,500), new FluidStack(Fluids.WATER,500))
 		);
+		recipes.add(new ChemRecipe(1120, "RESINPAPER", 1200)
+			.inputFluids(new FluidStack(Fluids.RESIN, 250))
+			.inputItems(new ComparableStack(Items.paper, 1))
+			.outputItems(new ItemStack(ModItems.resin_paper, 1)));
 
 
 		// WARNING: NILERED CHEMISTRY ZONE //

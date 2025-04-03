@@ -2458,6 +2458,7 @@ public class ModItems {
 	public static Item crude_pcb;
 	public static Item tungsten_hammer;
 	public static Item calcium_carbide;
+	public static Item resin_paper;
 
 	public static void initializeItem()
 	{
@@ -5509,7 +5510,7 @@ public class ModItems {
 
 
 		//HBM_HARD
-
+		resin_paper = new Item().setUnlocalizedName("resin_paper").setTextureName(RefStrings.MODID + ":resin_paper");
 		crude_circuit = new Item().setUnlocalizedName("crude_circuit").setTextureName(RefStrings.MODID + ":crude_circuit");
 		crude_cap = new Item().setUnlocalizedName("crude_cap").setTextureName(RefStrings.MODID + ":crude_cap");
 		crude_pcb = new Item().setUnlocalizedName("crude_pcb").setTextureName(RefStrings.MODID + ":crude_pcb");
@@ -7893,10 +7894,8 @@ public class ModItems {
 		GameRegistry.registerItem(swarm_member, swarm_member.getUnlocalizedName());
 
 
-
-
 		//HBM_hard
-
+		GameRegistry.registerItem(resin_paper, resin_paper.getUnlocalizedName());
 		GameRegistry.registerItem(crude_circuit, crude_circuit.getUnlocalizedName());
 		GameRegistry.registerItem(crude_cap,crude_cap.getUnlocalizedName());
 		GameRegistry.registerItem(crude_pcb,crude_pcb.getUnlocalizedName());

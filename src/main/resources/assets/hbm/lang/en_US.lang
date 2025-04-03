@@ -1701,7 +1701,7 @@ hbmfluid.smilk=Strawberry Milk
 hbmfluid.milk=Milk
 hbmfluid.scutterblood=Scutterblood
 
-//HBM hard fluids
+#HBM Hard Fluids
 hbmfluid.resin=Resin
 hbmfluid.aeratedwater=Aerated Water
 hbmfluid.dirty_water=Dirty Water
@@ -1720,14 +1720,19 @@ hbmfluid.octane=Octane
 hbmfluid.styrene=Styrene
 hbmfluid.butadiene=Butadiene
 hbmfluid.vinyl_chloride=Vinyl Chloride
-hbmfluid.butane= Butane
-hbmfluid.phenol= Phenol
-hbmfluid.acetone= Acetone
+hbmfluid.butane=Butane
+hbmfluid.phenol=Phenol
+hbmfluid.acetone=Acetone
 hbmfluid.octanegasoline=High Octane Gasoline
 hbmfluid.epoxy=Epoxy
-//HBM Hard Pseudo-Fluids
+
+#HBM Hard Pseudo-Fluids
 hbmpseudofluid.dslurry=Acidic Desh Mixture
-//HBM hard chem recipes
+hbmpseudofluid.nupf6=Natural PF6
+hbmpseudofluid.mepf6=Medium Enriched PF6
+hbmpseudofluid.hepf6=Highly Enriched PF6
+
+#HBM Hard Chem Recipes
 chem.RESINPRODUCTION=Resin Production
 chem.RESINBALL=Resin Solidification
 chem.DEAERATION= Water Deaeration
@@ -1742,19 +1747,26 @@ chem.CIRCUITBOARD=Circuit Board Resin Coating
 chem.CIRCUITBOARD2=Circuit Board Phenol Coating
 chem.EPOXY=Epoxy Production
 chem.OCTANEGASOLINE=High Octane Gasoline Production
-//HBM items
-item.crude_circuit.name= Crude Circuit
-item.crude_cap.name= Crude Capacitor
-item.crude_pcb.name= Crude Circuit Board
-item.tungsten_hammer.name= Tungsten Hammer
-item.calcium_carbide.name= Calcium Carbide
+chem.semtex_production=Semtex Production
+chem.ACETONE=Acetone Production
+chem.RESINPAPER=Paper Resin Treating
+chem.RUBBER2=Unsaturated Rubber Production
+chem.BAKELITE2=Alternative Bakelite Manufacturing
+chem.POLYMER2=Polyethylene Polymerization
+
+#HBM Hard Items
+item.resin_paper.name=Resin Treated Paper
+item.crude_circuit.name=Crude Circuit
+item.crude_cap.name=Crude Capacitor
+item.crude_pcb.name=Crude Circuit Board
+item.tungsten_hammer.name=Tungsten Hammer
+item.calcium_carbide.name=Calcium Carbide
 
 hbmpseudofluid.none=Empty
 hbmpseudofluid.heuf6=Highly Enriched UF6
 hbmpseudofluid.meuf6=Medium Enriched UF6
 hbmpseudofluid.leuf6=Low Enriched UF6
 hbmpseudofluid.nuf6=Natural UF6
-hbmpseudofluid.pf6=Plutonium Hexafluoride
 hbmpseudofluid.mud_heavy=Heavy Sludge Fraction
 hbmpseudofluid.mud=Poisonous Sludge Gas
 hbmpseudofluid.minsol=Heavy Mineral Slurry
