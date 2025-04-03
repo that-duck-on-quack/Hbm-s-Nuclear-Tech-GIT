@@ -13,6 +13,7 @@ import com.hbm.dim.CelestialBody;
 import com.hbm.dim.DebugTeleporter;
 import com.hbm.dim.WorldGeneratorCelestial;
 import com.hbm.dim.WorldProviderCelestial;
+import com.hbm.dim.WorldProviderEarth;
 import com.hbm.dim.WorldTypeTeleport;
 import com.hbm.dim.orbit.OrbitalStation;
 import com.hbm.dim.orbit.WorldProviderOrbit;
@@ -72,6 +73,7 @@ import com.hbm.util.*;
 import com.hbm.util.ArmorRegistry.HazardClass;
 import com.hbm.util.ContaminationUtil.ContaminationType;
 import com.hbm.util.ContaminationUtil.HazardType;
+import com.hbm.world.PlanetGen;
 import com.hbm.world.generator.TimedGenerator;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -138,10 +140,6 @@ import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.event.entity.living.LivingHealEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerFlyableFallEvent;
@@ -458,12 +456,10 @@ public class ModEventHandler {
 			if(rand.nextInt(1024) == 0)
 				entity.setCurrentItemOrArmor(3, new ItemStack(ModItems.starmetal_plate, 1, world.rand.nextInt(ModItems.starmetal_plate.getMaxDamage())));
 
-			if(rand.nextInt(128) == 0)
+			if(rand.nextInt(64) == 0)
 				entity.setCurrentItemOrArmor(0, new ItemStack(ModItems.pipe_lead, 1, world.rand.nextInt(100)));
 			if(rand.nextInt(128) == 0)
 				entity.setCurrentItemOrArmor(0, new ItemStack(ModItems.reer_graar, 1, world.rand.nextInt(100)));
-			if(rand.nextInt(128) == 0)
-				entity.setCurrentItemOrArmor(0, new ItemStack(ModItems.pipe_rusty, 1, world.rand.nextInt(100)));
 			if(rand.nextInt(128) == 0)
 				entity.setCurrentItemOrArmor(0, new ItemStack(ModItems.crowbar, 1, world.rand.nextInt(100)));
 			if(rand.nextInt(128) == 0)
@@ -644,48 +640,35 @@ public class ModEventHandler {
 		boolean isFlying = event.entity instanceof EntityPlayer ? ((EntityPlayer) event.entity).capabilities.isFlying : false;
 
 		if(!isFlying) {
-			if(event.entity.worldObj.provider instanceof WorldProviderOrbit) {
-				float gravity = 0;
+			float gravity = CelestialBody.getGravity(event.entityLiving);
 
-				if(HbmLivingProps.hasGravity(event.entityLiving)) {
-					OrbitalStation station = event.entity.worldObj.isRemote
-						? OrbitalStation.clientStation
-						: OrbitalStation.getStationFromPosition((int)event.entityLiving.posX, (int)event.entityLiving.posZ);
-
-					gravity = AstronomyUtil.STANDARD_GRAVITY * station.gravityMultiplier;
-					if(gravity < 0.2) gravity = 0;
-				}
-
+			if(gravity == 0) {
 				event.entityLiving.motionY /= 0.98F;
 				event.entityLiving.motionY += (AstronomyUtil.STANDARD_GRAVITY / 20F);
-				event.entityLiving.motionY -= (gravity / 20F);
 
-				if(event.entity instanceof EntityPlayer && gravity == 0) {
-					EntityPlayer player = (EntityPlayer) event.entity;
+				if(event.entityLiving instanceof EntityPlayer) {
+					EntityPlayer player = (EntityPlayer) event.entityLiving;
 					if(player.isSneaking()) event.entityLiving.motionY -= 0.01F;
 					if(player.isJumping) event.entityLiving.motionY += 0.01F;
+				} else if(event.entity instanceof EntityChicken) {
+					event.entityLiving.motionY = 0;
 				}
 
-				event.entityLiving.motionY *= gravity == 0 ? 0.91F : 0.98F;
-			} else {
-				CelestialBody body = CelestialBody.getBody(event.entity.worldObj);
-				float gravity = body.getSurfaceGravity() * AstronomyUtil.PLAYER_GRAVITY_MODIFIER;
-
+				event.entityLiving.motionY *= 0.91F;
+			} else if(!event.entityLiving.isInWater() && event.entityLiving.ticksExisted > 20 && (gravity < 1.5F || gravity > 1.7F)) {
 				// If gravity is basically the same as normal, do nothing
 				// Also do nothing in water, or if we've been alive less than a second (so we don't glitch into the ground)
-				if(!event.entityLiving.isInWater() && event.entityLiving.ticksExisted > 20 && (gravity < 1.5F || gravity > 1.7F)) {
 
-					// Minimum gravity to prevent floating bug
-					if(gravity < 0.2F) gravity = 0.2F;
+				// Minimum gravity to prevent floating bug
+				if(gravity < 0.2F) gravity = 0.2F;
 
-					// Undo falling, and add our intended falling speed
-					// On high gravity planets, only apply falling speed when descending, so we can still jump up single blocks
-					if((gravity < 1.5F || event.entityLiving.motionY < 0) && !(event.entity instanceof EntityChicken)) {
-						event.entityLiving.motionY /= 0.98F;
-						event.entityLiving.motionY += (AstronomyUtil.STANDARD_GRAVITY / 20F);
-						event.entityLiving.motionY -= (gravity / 20F);
-						event.entityLiving.motionY *= 0.98F;
-					}
+				// Undo falling, and add our intended falling speed
+				// On high gravity planets, only apply falling speed when descending, so we can still jump up single blocks
+				if((gravity < 1.5F || event.entityLiving.motionY < 0) && !(event.entity instanceof EntityChicken)) {
+					event.entityLiving.motionY /= 0.98F;
+					event.entityLiving.motionY += (AstronomyUtil.STANDARD_GRAVITY / 20F);
+					event.entityLiving.motionY -= (gravity / 20F);
+					event.entityLiving.motionY *= 0.98F;
 				}
 			}
 		}
@@ -755,6 +738,10 @@ public class ModEventHandler {
 		BobmazonOfferFactory.init();
 
 		updateWaterOpacity(event.world);
+
+		if(!(event.world.provider instanceof WorldProviderEarth)) {
+			PlanetGen.overrideOverworldProvider();
+		}
 	}
 
 	@SubscribeEvent
@@ -1172,18 +1159,13 @@ public class ModEventHandler {
 
 		EntityLivingBase e = event.entityLiving;
 
-		if(event.entity.worldObj.provider instanceof WorldProviderOrbit) {
-			event.distance = 0;
-		} else {
-			CelestialBody body = CelestialBody.getBody(event.entity.worldObj);
-			float gravity = body.getSurfaceGravity() * AstronomyUtil.PLAYER_GRAVITY_MODIFIER;
+		float gravity = CelestialBody.getGravity(e);
 
-			// Reduce fall damage on low gravity bodies
-			if(gravity < 0.3F) {
-				event.distance = 0;
-			} else if(gravity < 1.5F) {
-				event.distance *= gravity / AstronomyUtil.STANDARD_GRAVITY;
-			}
+		// Reduce fall damage on low gravity bodies
+		if(gravity < 0.3F) {
+			event.distance = 0;
+		} else if(gravity < 1.5F) {
+			event.distance *= gravity / AstronomyUtil.STANDARD_GRAVITY;
 		}
 
 		if(e instanceof EntityPlayer && ((EntityPlayer)e).inventory.armorInventory[2] != null && ((EntityPlayer)e).inventory.armorInventory[2].getItem() instanceof ArmorFSB)

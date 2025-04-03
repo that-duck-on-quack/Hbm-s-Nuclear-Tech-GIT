@@ -1377,6 +1377,8 @@ public class ModEventHandlerClient {
 					RenderOverhead.renderThermalSight(event.partialTicks);
 			}
 		}
+
+		RenderOverhead.renderActionPreview(event.partialTicks);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)

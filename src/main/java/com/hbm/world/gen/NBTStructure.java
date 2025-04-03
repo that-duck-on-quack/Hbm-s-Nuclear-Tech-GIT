@@ -794,6 +794,7 @@ public class NBTStructure {
 
 	}
 
+
 	// Each jigsaw block in a structure will instance one of these
 	private static class JigsawConnection {
 
@@ -1227,7 +1228,7 @@ public class NBTStructure {
 		private SpawnCondition findSpawn(BiomeGenBase biome) {
 			List<SpawnCondition> spawnList = weightedMap.get(worldObj.provider.dimensionId);
 
-			for(int i = 0; i < 64; i++) {
+			for(int i = 0; i < 256; i++) {
 				SpawnCondition spawn = spawnList.get(rand.nextInt(spawnList.size()));
 				if(spawn.isValid(biome)) return spawn;
 			}
