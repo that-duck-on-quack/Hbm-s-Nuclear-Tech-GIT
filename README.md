@@ -27,7 +27,6 @@ For 1.18, try Martin's remake: https://codeberg.org/MartinTheDragon/Nuclear-Tech
 ## Downloading pre-compiled versions from GitHub
 
 Simply navigate to "Releases" on the right side of the page, download links for the compiled JAR as well as the corresponding source code are under the "Assets" category below the changelog. Make sure to review all changelogs when updating!
-Exceeeeeeeeeept...we don't have any! :DDDDD you'll have to wait until we're done with the Big-Ass List of Bullshit.
 
 ## Building from source
 
