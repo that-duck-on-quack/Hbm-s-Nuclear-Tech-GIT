@@ -545,7 +545,7 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.outputFluids(new FluidStack(Fluids.VINYL_CHLORIDE, 1000), new FluidStack(Fluids.HCL, 250))
 		);
 		recipes.add(new ChemRecipe(1108, "ETHYLENE", 200)
-			.inputFluids(new FluidStack(Fluids.ETHANE, 500), new FluidStack(Fluids.STEAM, 1000))
+			.inputFluids(new FluidStack(Fluids.ETHANE, 1000), new FluidStack(Fluids.STEAM, 1000))
 			.outputFluids(new FluidStack(Fluids.ETHYLENE,500))
 		);
 		recipes.add(new ChemRecipe(1109,"CIRCUITBOARD",60)  //fcukkk you :D

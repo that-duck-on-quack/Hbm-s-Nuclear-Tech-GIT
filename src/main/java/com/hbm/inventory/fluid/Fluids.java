@@ -961,7 +961,7 @@ public class Fluids {
 		double complexityCoker = 1.25D;
 		double complexityChemplant = 1.1D;
 		double complexityLubed = 1.15D;
-		double complexityLeaded = 1.8D;
+		double complexityLeaded = 1.6D;
 		double complexityVacuum = 3.0D;
 		double complexityReform = 2.5D;
 		double complexityHydro = 2.0D;
@@ -1063,7 +1063,7 @@ public class Fluids {
 		registerCalculatedFuel(PHENOL, (baseline / 0.40 * flammabilityLow * demandVeryLow * complexityRefinery ), 1D, FuelGrade.LOW); //Actually, this is the middest fuel.
 		registerCalculatedFuel(EPOXY, 1, 1D, FuelGrade.LOW); //WHY?????????
 
-		registerCalculatedFuel(OCTANEGASOLINE, (baseline / 0.15 * flammabilityNormal * demandMedium * complexityRefinery * complexityChemplant ), 3.2D, FuelGrade.HIGH); //Cmon, it's high octane gasoline!
+		registerCalculatedFuel(OCTANEGASOLINE, (baseline / 0.15 * flammabilityNormal * demandHigh * complexityRefinery * complexityChemplant ), 3.2D, FuelGrade.HIGH); //Cmon, it's high octane gasoline!
 
 		File config = new File(folder.getAbsolutePath() + File.separatorChar + "hbmFluidTraits.json");
 		File template = new File(folder.getAbsolutePath() + File.separatorChar + "_hbmFluidTraits.json");
