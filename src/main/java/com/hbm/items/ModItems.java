@@ -2447,6 +2447,7 @@ public class ModItems {
 
 	//HBM_hard
 	public static Item crude_circuit;
+	public static Item epoxy_pcb;
 	public static Item crude_cap;
 	public static Item crude_pcb;
 	public static Item tungsten_hammer;
@@ -5479,6 +5480,7 @@ public class ModItems {
 
 
 		//HBM_HARD
+		epoxy_pcb = new Item().setUnlocalizedName("epoxy_pcb").setTextureName(RefStrings.MODID + ":epoxy_pcb");
 		resin_paper = new Item().setUnlocalizedName("resin_paper").setTextureName(RefStrings.MODID + ":resin_paper");
 		crude_circuit = new Item().setUnlocalizedName("crude_circuit").setTextureName(RefStrings.MODID + ":crude_circuit");
 		crude_cap = new Item().setUnlocalizedName("crude_cap").setTextureName(RefStrings.MODID + ":crude_cap");
@@ -7860,6 +7862,7 @@ public class ModItems {
 
 
 		//HBM_hard
+		GameRegistry.registerItem(epoxy_pcb, epoxy_pcb.getUnlocalizedName());
 		GameRegistry.registerItem(resin_paper, resin_paper.getUnlocalizedName());
 		GameRegistry.registerItem(crude_circuit, crude_circuit.getUnlocalizedName());
 		GameRegistry.registerItem(crude_cap,crude_cap.getUnlocalizedName());
