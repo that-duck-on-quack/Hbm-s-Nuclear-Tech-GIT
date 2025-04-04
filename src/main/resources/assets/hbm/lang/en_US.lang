@@ -1755,6 +1755,7 @@ chem.BAKELITE2=Alternative Bakelite Manufacturing
 chem.POLYMER2=Polyethylene Polymerization
 
 #HBM Hard Items
+item.epoxy_pcb.name=Advanced Circuit Board
 item.resin_paper.name=Resin Treated Paper
 item.crude_circuit.name=Crude Circuit
 item.crude_cap.name=Crude Capacitor
