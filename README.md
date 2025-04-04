@@ -1,4 +1,4 @@
-# HBM's Nuclear Tech Mod + JamesH2 HARDENED for Minecraft 1.7.10
+# HBM's Nuclear Tech Mod + JamesH2 + Homeless for Minecraft 1.7.10
 
 Hi, i am memeing things into existence, dont mind me! im just the bent fork at the end of the table -JamesH_2
 
