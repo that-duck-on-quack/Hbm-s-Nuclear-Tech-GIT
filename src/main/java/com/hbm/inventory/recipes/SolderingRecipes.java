@@ -248,7 +248,7 @@ public class SolderingRecipes extends SerializableRecipe {
 			new AStack[] {new OreDictStack(PB.wireFine(), 16)}
 			));
 		recipes.add(new SolderingRecipe(new ItemStack(ModItems.circuit, 16 , EnumCircuitType.ADVANCED.ordinal()),60,20000,
-			new AStack[] {new ComparableStack(ModItems.circuit, 16, EnumCircuitType.HFCHIP), new ComparableStack(ModItems.circuit, 64, EnumCircuitType.CAPACITOR_TANTALIUM)},
+			new AStack[] {new ComparableStack(ModItems.circuit, 16, EnumCircuitType.HFCHIP), new ComparableStack(ModItems.circuit, 64, EnumCircuitType.CAPACITOR_LANTHANIUM)},
 			new AStack[] {new ComparableStack(ModItems.epoxy_pcb,16)},
 			new AStack[] {new OreDictStack(PB.wireFine(), 64)}
 		));
