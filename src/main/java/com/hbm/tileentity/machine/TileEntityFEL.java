@@ -110,7 +110,7 @@ public class TileEntityFEL extends TileEntityMachineBase implements IEnergyRecei
 
 				for(EntityLivingBase entity : list) {
 					switch(this.mode) {
-					case VISIBLE: entity.addPotionEffect(new PotionEffect(Potion.blindness.id, 60 * 60 * 65536, 0));
+					case VISIBLE: entity.addPotionEffect(new PotionEffect(Potion.blindness.id, 60, 0));
 					case IR:
 					case UV: entity.setFire(10); break;
 					case GAMMA: ContaminationUtil.contaminate(entity, HazardType.RADIATION, ContaminationType.CREATIVE, 25); break;

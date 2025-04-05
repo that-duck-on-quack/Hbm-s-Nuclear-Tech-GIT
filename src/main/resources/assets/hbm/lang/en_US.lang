@@ -1753,6 +1753,8 @@ chem.RESINPAPER=Paper Resin Treating
 chem.RUBBER2=Unsaturated Rubber Production
 chem.BAKELITE2=Alternative Bakelite Manufacturing
 chem.POLYMER2=Polyethylene Polymerization
+chem.MASS_EPOXY_BOARD=Mass Epoxy Board dipping
+chem.EPOXY_BOARD=Epoxy Board dipping
 
 #HBM Hard Items
 item.epoxy_pcb.name=Advanced Circuit Board

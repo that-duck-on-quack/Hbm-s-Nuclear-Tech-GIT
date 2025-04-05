@@ -148,8 +148,8 @@ public class SolderingRecipes extends SerializableRecipe {
 						new ComparableStack(ModItems.circuit,   16, EnumCircuitType.GASCHIP),
 						new ComparableStack(ModItems.circuit, lbsm ? 8 : 32, EnumCircuitType.CAPACITOR_LANTHANIUM)},
 				new AStack[] {
-						new ComparableStack(ModItems.circuit, 1, EnumCircuitType.CONTROLLER_CHASSIS),
-						new ComparableStack(ModItems.upgrade_speed_3)},
+						new ComparableStack(ModItems.circuit, 3, EnumCircuitType.CONTROLLER),
+						new ComparableStack(ModItems.epoxy_pcb,16)},
 				new AStack[] {
 						new OreDictStack(PB.wireFine(), 24)}
 		));

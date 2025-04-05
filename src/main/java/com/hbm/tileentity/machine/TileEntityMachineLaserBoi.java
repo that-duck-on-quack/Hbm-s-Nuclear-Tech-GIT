@@ -8,7 +8,6 @@ import com.hbm.inventory.gui.GUIMachineLaserBoi;
 import com.hbm.inventory.recipes.MachineRecipes;
 import com.hbm.items.ModItems;
 import com.hbm.items.machine.ItemCircuit;
-import com.hbm.items.machine.ItemFELCrystal;
 import com.hbm.lib.Library;
 import com.hbm.main.MainRegistry;
 import com.hbm.sound.AudioWrapper;
@@ -119,23 +118,12 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	}
 
 	public boolean canProcess() {
-		if (slots[0] == null && slots[2] == null)
-		{
-			return false;
+		if ( slots[0] != null && slots[2] != null&& (MachineRecipes.mODE(slots[0], OreDictManager.SI.billet()) || MachineRecipes.mODE(slots[0], OreDictManager.GAAS.billet()) ) && slots[2] != null
+			&& (slots[2].getItem() == ModItems.laser_crystal_bismuth || slots[2].getItem() == ModItems.laser_crystal_co2 || slots[2].getItem() == ModItems.laser_crystal_cmb|| slots[2].getItem() == ModItems.laser_crystal_digamma|| slots[2].getItem() == ModItems.laser_crystal_dnt|| slots[2].getItem() == ModItems.laser_crystal_iron)
+			&& (slots[1] == null) && (power > 0) ) {
+			return true;
 		}
-		if (!(MachineRecipes.mODE(slots[0], OreDictManager.SI.billet()) || MachineRecipes.mODE(slots[0], OreDictManager.GAAS.billet())) )
-		{
-			return false;
-		}
-		if (!(slots[2].getItem() instanceof ItemFELCrystal))
-		{
-			return false;
-		}
-		if (slots[1].getItem() == null)
-		{
-			return false;
-		}
-		return power > 0;
+		return false;
 	}
 
 
@@ -153,23 +141,21 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 
 			process = 0;
 
-			if(slots[0].getItem() == ModItems.billet_silicon)
-			{
+			if (slots[1] == null && slots[0].getItem() == ModItems.billet_silicon) {
 				slots[1] = OreDictManager.DictFrame.fromOne(ModItems.circuit, EnumCircuitType.SILICON);
-				slots[0].stackSize--;
-				if (slots[0].stackSize <= 0) {
-					slots[0] = null;
-				}
+			} else if (slots[1] != null && slots[0].getItem() == ModItems.billet_silicon) {
+				slots[1].stackSize++;
 			}
-			if(slots[0].getItem() == ModItems.billet_gaas)
-			{
+			if (slots[1] == null && slots[0].getItem() == ModItems.billet_gaas) {
 				slots[1] = OreDictManager.DictFrame.fromOne(ModItems.circuit, EnumCircuitType.GAAS);
-				slots[0].stackSize--;
-				if (slots[0].stackSize <= 0) {
-					slots[0] = null;
-				}
+			}  else if (slots[1] != null && slots[0].getItem() == ModItems.billet_gaas) {
+				slots[1].stackSize++;
 			}
 
+			slots[0].stackSize--;
+			if (slots[0].stackSize <= 0) {
+				slots[0] = null;
+			}
 
 			this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "ambient.weather.thunder", 10000.0F,
 				0.8F + this.worldObj.rand.nextFloat() * 0.2F);
