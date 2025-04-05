@@ -217,6 +217,31 @@ public class SolderingRecipes extends SerializableRecipe {
 				new AStack[] {}
 		));
 
+		//hbm hard stuff
+		recipes.add(new SolderingRecipe(new ItemStack(ModItems.circuit, 1, EnumCircuitType.CAPACITOR_LANTHANIUM.ordinal()), 20, 1000,
+			new FluidStack(Fluids.VINYL_CHLORIDE, 250),
+			new AStack[] {
+				new OreDictStack(ANY_HARDPLASTIC.ingot(), 1)
+			},
+			new AStack[] {
+				new OreDictStack(LA.nugget(),4)
+			},
+			new AStack[] {
+				new OreDictStack(CU.wireFine(), 4)}
+		));
+		recipes.add(new SolderingRecipe(new ItemStack(ModItems.circuit, 1, EnumCircuitType.BISMOID.ordinal()), 60, 10000,
+			new FluidStack(Fluids.EPOXY, 250),
+			new AStack[] {
+				new OreDictStack(ANY_HARDPLASTIC.ingot(), 2),
+				new ComparableStack(ModItems.circuit,2 , EnumCircuitType.GAAS),
+				new ComparableStack(ModItems.plate_polymer, 4)
+			},
+			new AStack[] {
+				new ComparableStack(ModItems.circuit, 3, EnumCircuitType.PCB)
+			},
+			new AStack[] {
+				new OreDictStack(PB.wireFine(), 16)}
+		));
 
 
 		addFirstUpgrade(ModItems.upgrade_speed_1, ModItems.upgrade_speed_2);

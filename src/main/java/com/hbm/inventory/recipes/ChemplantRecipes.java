@@ -579,6 +579,17 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.inputFluids(new FluidStack(Fluids.RESIN, 250))
 			.inputItems(new ComparableStack(Items.paper, 1))
 			.outputItems(new ItemStack(ModItems.resin_paper, 1)));
+		recipes.add(new ChemRecipe(1121, "EPOXY_BOARD",100)
+			.inputFluids(new FluidStack(Fluids.EPOXY,100))
+			.inputItems(new ComparableStack(ModItems.circuit, 1, EnumCircuitType.PCB))
+			.outputItems(new ItemStack(ModItems.epoxy_pcb))
+			);
+		recipes.add(new ChemRecipe(1122, "MASS_EPOXY_BOARD",100)
+			.inputFluids(new FluidStack(Fluids.EPOXY,5000))
+			.inputItems(new ComparableStack(ModItems.circuit, 64, EnumCircuitType.PCB))
+			.outputItems(new ItemStack(ModItems.epoxy_pcb,64))
+		);
+
 
 
 		// WARNING: NILERED CHEMISTRY ZONE //

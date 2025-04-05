@@ -104,7 +104,7 @@ public class MixerRecipes extends SerializableRecipe {
 		register(Fluids.MINSOL, new MixerRecipe(500, 50).setStack1(new FluidStack(Fluids.NITRIC_ACID, 500)).setSolid(new ComparableStack(ModBlocks.ore_mineral, 1, OreDictionary.WILDCARD_VALUE)));
 		register(Fluids.REDMUD, new MixerRecipe(50, 100).setStack1(new FluidStack(Fluids.HCL, 1400)).setSolid(new ComparableStack(ModBlocks.duna_sands, 4)));
 
-		register(Fluids.DICYANOACETYLENE, new MixerRecipe(750, 50).setStack1(new FluidStack(Fluids.AMMONIA, 300)).setStack2(new FluidStack(Fluids.UNSATURATEDS, 500))); //too powerful, needs change
+		register(Fluids.DICYANOACETYLENE, new MixerRecipe(750, 50).setStack1(new FluidStack(Fluids.AMMONIA, 300)).setStack2(new FluidStack(Fluids.ACETYLENE, 500))); //too powerful, needs change
 
 		register(Fluids.CHLOROCALCITE_SOLUTION, new MixerRecipe(500, 50).setStack1(new FluidStack(Fluids.WATER, 250)).setStack2(new FluidStack(Fluids.NITRIC_ACID, 250)).setSolid(new OreDictStack(CHLOROCALCITE.dust())));
 		register(Fluids.CHLOROCALCITE_MIX, new MixerRecipe(1000, 50).setStack1(new FluidStack(Fluids.CHLOROCALCITE_SOLUTION, 500)).setStack2(new FluidStack(Fluids.SULFURIC_ACID, 500)).setSolid(new ComparableStack(ModItems.powder_flux)));
@@ -119,6 +119,9 @@ public class MixerRecipes extends SerializableRecipe {
 
 		register(Fluids.PERFLUOROMETHYL, new MixerRecipe(1000, 20).setStack1(new FluidStack(Fluids.PETROLEUM, 1000)).setStack2(new FluidStack(Fluids.UNSATURATEDS, 500)).setSolid(new OreDictStack(F.dust())));
 
+
+		//hbm homeless spork
+		register(Fluids.DIESEL_REFORM, new MixerRecipe(12000,400).setStack1(new FluidStack(Fluids.DIESEL,12000)).setStack2(new FluidStack(Fluids.OCTANE,1000)));
 	}
 
 	public static void register(FluidType type, MixerRecipe... rec) {

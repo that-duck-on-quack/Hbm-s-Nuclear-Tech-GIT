@@ -21,6 +21,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 
 public class RefineryRecipes {
 
@@ -141,13 +142,6 @@ public class RefineryRecipes {
 			new FluidStack(Fluids.ETHANE,4),
 			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRACK)
 		));
-		//refinery.put(Fluids.NAPHTHA_CRACK, new Quintet(
-			//new FluidStack(Fluids.TOULENE,15),
-			//new FluidStack(Fluids.PROPANE,5),
-			//new FluidStack(Fluids.ETHANE,15),
-			//new FluidStack(Fluids.ETHYLENE,65),
-			//DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRACK)
-		//));
 		refinery.put(Fluids.NAPHTHA_CRACK, new Quintet(
 			new FluidStack(Fluids.GASOLINE,30),
 			new FluidStack(Fluids.PROPANE,5),
@@ -185,10 +179,18 @@ public class RefineryRecipes {
 		));
 		refinery.put(Fluids.COALOIL, new Quintet(
 			new FluidStack(Fluids.LIGHTOIL,10),
-			new FluidStack(Fluids.PETROLEUM,15),
+			new FluidStack(Fluids.COALCREOSOTE,15),
 			new FluidStack(Fluids.HEAVYOIL,20),
 			new FluidStack(Fluids.BITUMEN,45),
 			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.COAL)
+		));
+
+		refinery.put(Fluids.UNSATURATEDS,new Quintet(
+			new FluidStack(Fluids.PETROLEUM,10),
+			new FluidStack(Fluids.ETHYLENE,20),
+			new FluidStack(Fluids.BUTADIENE,20),
+			new FluidStack(Fluids.ACETYLENE,20),
+			DictFrame.fromOne(ModItems.oil_tar, EnumTarType.CRACK)
 		));
 
 

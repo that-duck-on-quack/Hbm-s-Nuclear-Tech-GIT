@@ -16,6 +16,7 @@ import com.hbm.items.machine.ItemFluidIcon;
 import com.hbm.util.Tuple.Pair;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 
 public class CrackingRecipes extends SerializableRecipe {
 
@@ -48,8 +49,8 @@ public class CrackingRecipes extends SerializableRecipe {
 		cracking.put(Fluids.SMEAR,					new Pair(new FluidStack(Fluids.NAPHTHA,			smear_crack_napht),	new FluidStack(Fluids.PETROLEUM,	smear_crack_petro)));
 		// cracking.put(Fluids.GAS,					new Pair(new FluidStack(Fluids.PETROLEUM,		gas_crack_petro),	new FluidStack(Fluids.UNSATURATEDS,	gas_crack_unsat)));
 		cracking.put(Fluids.DIESEL,					new Pair(new FluidStack(Fluids.KEROSENE,		diesel_crack_kero),	new FluidStack(Fluids.PETROLEUM,	diesel_crack_petro)));
-		cracking.put(Fluids.DIESEL_REFORM,			new Pair(new FluidStack(Fluids.KEROSENE_REFORM,	diesel_crack_kero),	new FluidStack(Fluids.PETROLEUM,	diesel_crack_petro)));
-		cracking.put(Fluids.DIESEL_CRACK,			new Pair(new FluidStack(Fluids.KEROSENE,		diesel_crack_kero),	new FluidStack(Fluids.PETROLEUM,	diesel_crack_petro)));
+		cracking.put(Fluids.DIESEL_REFORM,			new Pair(new FluidStack(Fluids.KEROSENE_REFORM,	diesel_crack_kero),	new FluidStack(Fluids.OCTANE,	7)));
+		cracking.put(Fluids.DIESEL_CRACK,			new Pair(new FluidStack(Fluids.KEROSENE,		diesel_crack_kero),	new FluidStack(Fluids.OCTANE,	20)));
 		cracking.put(Fluids.DIESEL_CRACK_REFORM,	new Pair(new FluidStack(Fluids.KEROSENE_REFORM,	diesel_crack_kero),	new FluidStack(Fluids.PETROLEUM,	diesel_crack_petro)));
 		cracking.put(Fluids.KEROSENE,				new Pair(new FluidStack(Fluids.PETROLEUM,		kero_crack_petro),	new FluidStack(Fluids.NONE,			0)));
 		cracking.put(Fluids.WOODOIL,				new Pair(new FluidStack(Fluids.HEATINGOIL,		wood_crack_heat),	new FluidStack(Fluids.AROMATICS,	wood_crack_aroma)));
@@ -59,12 +60,14 @@ public class CrackingRecipes extends SerializableRecipe {
 		cracking.put(Fluids.TEKTOAIR,				new Pair(new FluidStack(Fluids.METHANOL,	tekto_crack_atmo),		new FluidStack(Fluids.AROMATICS,	tekto_crack_hydride)));
 		cracking.put(Fluids.ELBOWGREASE,			new Pair(new FluidStack(Fluids.MERCURY,	70),					new FluidStack(Fluids.SOURGAS,	50)));
 		cracking.put(Fluids.MORKINE,				new Pair(new FluidStack(Fluids.METHANOL,	40),				new FluidStack(Fluids.REFORMGAS,	20)));
+//hbm homeless spork here
 		cracking.put(Fluids.PETROLEUM, 				new Pair(new FluidStack(Fluids.BUTANE,50),						new FluidStack(Fluids.PROPANE,50)));
 		cracking.put(Fluids.LIGHTOIL_CRACK, 		new Pair(new FluidStack(Fluids.OCTANE,10),						new FluidStack(Fluids.GASOLINE,50)));
 		cracking.put(Fluids.LIGHTOIL, 				new Pair(new FluidStack(Fluids.LIGHTOIL_CRACK,70),				new FluidStack(Fluids.PETROLEUM, 20)));
 		cracking.put(Fluids.NAPHTHA, 				new Pair(new FluidStack(Fluids.NAPHTHA_CRACK,70),				new FluidStack(Fluids.PETROLEUM, 20)));
-		cracking.put(Fluids.ETHANE, 				new Pair(new FluidStack(Fluids.ETHYLENE,70),				new FluidStack(Fluids.ACETYLENE, 20)));
-		cracking.put(Fluids.BUTENE, 				new Pair(new FluidStack(Fluids.BUTADIENE,30),				new FluidStack(Fluids.PETROLEUM, 50)));
+		cracking.put(Fluids.ETHANE, 				new Pair(new FluidStack(Fluids.ETHYLENE,70),					new FluidStack(Fluids.ACETYLENE, 20)));
+		cracking.put(Fluids.BUTENE, 				new Pair(new FluidStack(Fluids.BUTADIENE,30),					new FluidStack(Fluids.PETROLEUM, 50)));
+		cracking.put(Fluids.AROMATICS,				new Pair(new FluidStack(Fluids.BENZENE,50),						new FluidStack(Fluids.TOULENE,30)));
 
 	}
 
