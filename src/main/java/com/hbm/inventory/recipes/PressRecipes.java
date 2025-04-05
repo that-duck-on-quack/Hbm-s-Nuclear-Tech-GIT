@@ -26,6 +26,7 @@ import com.hbm.items.machine.ItemCircuit.EnumCircuitType;
 import com.hbm.items.machine.ItemStamp.StampType;
 import com.hbm.util.Tuple.Pair;
 
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -79,6 +80,8 @@ public class PressRecipes extends SerializableRecipe {
 		makeRecipe(StampType.PLATE, new OreDictStack(WEAPONSTEEL.ingot()),	ModItems.plate_weaponsteel);
 		makeRecipe(StampType.PLATE, new OreDictStack(BIGMT.ingot()),		ModItems.plate_saturnite);
 		makeRecipe(StampType.PLATE, new OreDictStack(DURA.ingot()),			ModItems.plate_dura_steel);
+		makeRecipe(StampType.FLAT, new OreDictStack(ANY_COKE.gem()),		ModItems.ingot_graphite);
+
 
 		for(NTMMaterial mat : Mats.orderedList) {
 			if(mat.autogen.contains(MaterialShapes.WIRE) && OreDictionary.doesOreNameExist(MaterialShapes.INGOT.make(mat))) {

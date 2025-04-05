@@ -20,6 +20,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import scala.xml.dtd.ANY;
 
 public class SmeltingRecipes {
 
@@ -205,6 +206,7 @@ public class SmeltingRecipes {
 		GameRegistry.addSmelting(ModItems.ingot_meteorite_forged, ItemHot.heatUp(new ItemStack(ModItems.ingot_meteorite_forged)), 0.0F);
 		GameRegistry.addSmelting(ModItems.blade_meteorite, ItemHot.heatUp(new ItemStack(ModItems.blade_meteorite)), 0.0F);
 		GameRegistry.addSmelting(ModItems.meteorite_sword, ItemHot.heatUp(new ItemStack(ModItems.meteorite_sword_seared)), 0.0F);
+
 
 		GameRegistry.addSmelting(new ItemStack(ModItems.scrap_plastic, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.ingot_polymer), 0.1F);
 

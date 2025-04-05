@@ -16,7 +16,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import com.hbm.blocks.BlockEnums;
 import com.hbm.blocks.ModBlocks;
+import com.hbm.handler.indexing.HbmMaterials;
 import com.hbm.inventory.FluidStack;
+import com.hbm.inventory.OreDictManager;
 import com.hbm.inventory.RecipesCommon.AStack;
 import com.hbm.inventory.RecipesCommon.ComparableStack;
 import com.hbm.inventory.RecipesCommon.OreDictStack;
@@ -52,6 +54,10 @@ public class RotaryFurnaceRecipes extends SerializableRecipe {
 		recipes.add(new RotaryFurnaceRecipe(new MaterialStack(MAT_SATURN, INGOT.q(4)), 200, 300, new FluidStack(Fluids.REFORMGAS, 250), new OreDictStack(DURA.dust(), 4), new OreDictStack(CU.dust()), new OreDictStack(BORAX.dust())));
 		recipes.add(new RotaryFurnaceRecipe(new MaterialStack(MAT_ALUMINIUM, INGOT.q(2)), 100, 400, new FluidStack(Fluids.SODIUM_ALUMINATE, 150)));
 		recipes.add(new RotaryFurnaceRecipe(new MaterialStack(MAT_ALUMINIUM, INGOT.q(3)), 40, 200, new FluidStack(Fluids.SODIUM_ALUMINATE, 150), new ComparableStack(ModItems.powder_flux, 2)));
+
+
+		//hbm homeless spork
+		recipes.add(new RotaryFurnaceRecipe(new MaterialStack(MAT_STEEL, INGOT.q(3)),60,200, new ComparableStack(ModItems.powder_flux, 2), new ComparableStack(DictFrame.fromOne(ModBlocks.stone_resource, BlockEnums.EnumStoneType.HEMATITE,3))));
 	}
 
 	public static HashMap getRecipes() {

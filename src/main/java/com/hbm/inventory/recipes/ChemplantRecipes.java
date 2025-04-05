@@ -137,7 +137,7 @@ public class ChemplantRecipes extends SerializableRecipe {
 				new FluidStack(Fluids.BUTADIENE, 500))
 			.outputItems(new ItemStack(ModItems.ingot_rubber)));
 		recipes.add(new ChemRecipe(1112, "RUBBER2", 100)
-			.inputItems(new OreDictStack(S.dust(), 2))
+			.inputItems(new OreDictStack(S.dust(), 2), new OreDictStack(ZI.dust()))
 			.inputFluids(
 				new FluidStack(Fluids.UNSATURATEDS, 2000))
 			.outputItems(new ItemStack(ModItems.ingot_rubber)));
@@ -555,7 +555,7 @@ public class ChemplantRecipes extends SerializableRecipe {
 		);
 		recipes.add(new ChemRecipe(1110,"EPOXY",300)
 			.inputFluids(new FluidStack(Fluids.ACETONE,500), new FluidStack(Fluids.PHENOL,500))
-			.outputFluids(new FluidStack(Fluids.EPOXY, 500))
+			.outputFluids(new FluidStack(Fluids.EPOXY, 1000))
 		);
 		recipes.add(new ChemRecipe(1116,"OCTANEGASOLINE",300)
 			.inputFluids(new FluidStack(Fluids.OCTANE,100),new FluidStack(Fluids.GASOLINE,1000))

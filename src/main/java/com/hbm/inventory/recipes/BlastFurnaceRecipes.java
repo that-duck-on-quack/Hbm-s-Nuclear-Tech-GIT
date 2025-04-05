@@ -68,7 +68,7 @@ public class BlastFurnaceRecipes extends SerializableRecipe {
 
 		//hbm hard stuff
 		addRecipe(ANY_COKE, 							ModItems.powder_calcium, 						new ItemStack(ModItems.calcium_carbide, 1));
-		addRecipe(ModItems.powder_flux, 				new ComparableStack(DictFrame.fromOne(ModBlocks.stone_resource, EnumStoneType.HEMATITE)), new ItemStack(ModItems.ingot_steel,2));
+		addRecipe(ModItems.powder_flux, 				new ComparableStack(DictFrame.fromOne(ModBlocks.stone_resource, EnumStoneType.HEMATITE)), new ItemStack(ModItems.ingot_steel,1));
 
 		if(GeneralConfig.enableLBSM && GeneralConfig.enableLBSMSimpleChemsitry) {
 			addRecipe(ModItems.canister_empty, COAL, new ItemStack(ModItems.canister_full, 1, Fluids.OIL.getID()));

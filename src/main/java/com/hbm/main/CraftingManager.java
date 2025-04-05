@@ -769,7 +769,6 @@ public class CraftingManager {
 		addRecipeAuto(new ItemStack(ModItems.briquette), " # ","# #"," # ", '#', ModItems.powder_coal);
 		addRecipeAuto(new ItemStack(ModItems.briquette,1,1), " # ","# #"," # ", '#', ModItems.powder_lignite);
 		addRecipeAuto(new ItemStack(ModItems.briquette,1,2), " # ","# #"," # ", '#', ModItems.powder_sawdust);
-		addRecipeAuto(new ItemStack(ModItems.ingot_graphite),"# #", " # ", "# #", '#', ModItems.briquette);
 		addRecipeAuto(new ItemStack(ModItems.biomass_compressed), " # ","# #"," # ", '#', ModItems.biomass);
 
 		//Book pages
