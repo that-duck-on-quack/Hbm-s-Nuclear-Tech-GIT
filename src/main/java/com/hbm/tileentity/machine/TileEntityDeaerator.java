@@ -42,7 +42,7 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 
 	@Override
 	public String getConfigName() {
-		return "condenser";
+		return "deaerator";
 	}
 
 	@Override
@@ -75,7 +75,6 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 				this.daTimer--;
 
 			int convert = Math.min(tanks[0].getFill(), tanks[1].getMaxFill() - tanks[1].getFill());
-			convert += (int) (tanks[2].getFill() * .01D);
 			this.throughput = convert;
 
 			if(extraCondition(convert)) {
@@ -89,7 +88,7 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 
 				if(tanks[2].getFill() > convert/2){
 					tanks[1].setFill(tanks[1].getFill() + convert);
-					tanks[2].setFill(tanks[2].getFill() - convert/2);
+					tanks[2].setFill(tanks[2].getFill() - convert/100);
 				}
 				postConvert(convert);
 			}
