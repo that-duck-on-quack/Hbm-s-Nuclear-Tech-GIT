@@ -35,9 +35,9 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 
 	public TileEntityDeaerator() {
 		tanks = new FluidTank[3];
-		tanks[0] = new FluidTank(Fluids.STEAM, inputTankSize);
+		tanks[0] = new FluidTank(Fluids.AERATEDWATER, inputTankSize);
 		tanks[1] = new FluidTank(Fluids.WATER, outputTankSize);
-		tanks[2] = new FluidTank(Fluids.AERATEDWATER, daTankSize);
+		tanks[2] = new FluidTank(Fluids.SPENTSTEAM, daTankSize);
 	}
 
 	@Override
