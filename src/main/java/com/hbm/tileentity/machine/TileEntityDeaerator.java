@@ -56,7 +56,7 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 	public void writeConfig(JsonWriter writer) throws IOException {
 		writer.name("I:inputTankSize").value(inputTankSize);
 		writer.name("I:outputTankSize").value(outputTankSize);
-		writer.name("I:evTankSize").value(daTankSize);
+		writer.name("I:daTankSize").value(daTankSize);
 	}
 
 
@@ -86,7 +86,7 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 				int light = this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, this.xCoord, this.yCoord, this.zCoord);
 
 
-				if(tanks[2].getFill() > convert/2){
+				if(tanks[2].getFill() > convert/100){
 					tanks[1].setFill(tanks[1].getFill() + convert);
 					tanks[2].setFill(tanks[2].getFill() - convert/100);
 				}
