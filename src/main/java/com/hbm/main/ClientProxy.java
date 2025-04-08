@@ -459,6 +459,7 @@ public class ClientProxy extends ServerProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDysonConverterTU.class, new RenderDysonConverterTU());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDysonLauncher.class, new RenderDysonLauncher());
 		//NTM Hard Stuff
+		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDeaerator.class, new RenderDeaerator());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineLaserBoi.class, new RenderLaserBoi());
 	}
 

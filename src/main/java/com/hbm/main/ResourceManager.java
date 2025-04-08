@@ -1688,8 +1688,10 @@ public class ResourceManager {
 	// public static final IModelCustom template = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/your/path/template.obj")).asVBO();
 	// public static final ResourceLocation template_tex = new ResourceLocation(RefStrings.MODID, "textures/models/your/path/here/template.png");
 	public static final ResourceLocation  engraver_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/engraver.png");
+	public static final ResourceLocation  dahaf_tex = new ResourceLocation(RefStrings.MODID, "textures/models/machines/deaeratorhaf.png");
 	//broken idk why kill me now
 	public static final IModelCustom engraver =  new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/engraver.obj")).asVBO();
+	public static final IModelCustom dahaf = new HFRWavefrontObject(new ResourceLocation(RefStrings.MODID, "models/machines/deaeratorhaf.obj")).asVBO();
 
 
 }
