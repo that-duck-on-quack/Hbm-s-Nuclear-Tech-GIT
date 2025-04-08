@@ -2660,7 +2660,7 @@ public class ModBlocks {
 		wand_jigsaw = new BlockWandJigsaw().setBlockName("wand_jigsaw").setBlockTextureName(RefStrings.MODID + ":wand_jigsaw");
 
 		// NTM Hard Stuff
-		deaerator = new MachineDeaerator(Material.iron).setBlockName("deaerator").setHardness(1.8F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel_machine");
+		deaerator = new MachineDeaerator(Material.iron).setBlockName("deaerator").setHardness(1.8F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":condenser");
 		machine_laserboi = new MachineLaserBoi(Material.iron).setBlockName("machine_laserboi").setHardness(1.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel_machine");
 
 
