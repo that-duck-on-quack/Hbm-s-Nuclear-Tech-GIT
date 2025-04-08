@@ -1585,11 +1585,12 @@ public class AssemblerRecipes extends SerializableRecipe {
 			new ComparableStack(ModItems.rtg_unit, 2)
 		}, 250);
 		makeRecipe(new ComparableStack(ModBlocks.deaerator, 1), new AStack[]{
-			new OreDictStack(STEEL.plateWelded(), 8),
-			new OreDictStack(ANY_PLASTIC.ingot(), 32),
+			new OreDictStack(STAINLESS.plate(), 16),
+			new OreDictStack(ANY_HARDPLASTIC.ingot(), 32),
 			new OreDictStack(STEEL.pipe(), 16),
-			new ComparableStack(ModItems.circuit, 2, EnumCircuitType.BASIC),
-			new ComparableStack(ModItems.motor, 12)
+			new ComparableStack(ModItems.circuit, 2, EnumCircuitType.ADVANCED),
+			new OreDictStack(NI.ingot(), 12),
+			new ComparableStack(ModItems.motor_desh, 12)
 		}, 12000);
 
 
