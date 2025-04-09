@@ -3924,7 +3924,7 @@ public class ModBlocks {
 		register(wand_jigsaw);
 
 		//NTM Hard Stuff
-		GameRegistry.registerBlock(deaerator, deaerator.getUnlocalizedName());
+		register(deaerator);
 		register(machine_laserboi);
 
 	}

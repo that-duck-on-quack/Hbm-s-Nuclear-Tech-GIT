@@ -6,8 +6,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import com.hbm.dim.CelestialBody;
 import com.hbm.dim.trait.CBT_Atmosphere;
+import com.hbm.inventory.fluid.FluidType;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.fluid.tank.FluidTank;
+import com.hbm.lib.Library;
 import com.hbm.saveddata.TomSaveData;
 import com.hbm.tileentity.IBufPacketReceiver;
 import com.hbm.tileentity.IConfigurableMachine;
@@ -16,6 +18,8 @@ import com.hbm.tileentity.TileEntityLoadedBase;
 import com.hbm.util.CompatEnergyControl;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.EnumSkyBlock;
 
 import java.io.IOException;
@@ -101,6 +105,26 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 		}
 	}
 
+	@Override
+	public void subscribeToAllAround(FluidType type, TileEntity te) {
+		this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord, yCoord, zCoord - 3, Library.NEG_X);
+		this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord - 1, yCoord, zCoord -3, Library.NEG_X);
+		this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord - 1, yCoord, zCoord, Library.NEG_X);
+		this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord, yCoord, zCoord, Library.NEG_X);
+		this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord, yCoord, zCoord - 3, Library.NEG_X);
+		this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord - 1, yCoord, zCoord -3, Library.NEG_X);
+		this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord - 1, yCoord, zCoord, Library.NEG_X);
+		this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord, yCoord, zCoord, Library.NEG_X);
+	}
+
+	@Override
+	public void sendFluidToAll(FluidTank tank, TileEntity te) {
+		this.sendFluid(this.tanks[1], worldObj, xCoord, yCoord, zCoord - 3, Library.NEG_X);
+		this.sendFluid(this.tanks[1], worldObj, xCoord - 1, yCoord, zCoord -3, Library.NEG_X);
+		this.sendFluid(this.tanks[1], worldObj, xCoord - 1, yCoord, zCoord, Library.NEG_X);
+		this.sendFluid(this.tanks[1], worldObj, xCoord, yCoord, zCoord, Library.NEG_X);
+	}
+
 	public void packExtra(NBTTagCompound data) { }
 	public boolean extraCondition(int convert) { return true; }
 	public void postConvert(int convert) { }
@@ -154,12 +178,29 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 
 	@Override
 	public void provideExtraInfo(NBTTagCompound data) {
-		data.setDouble(CompatEnergyControl.D_CONSUMPTION_MB, throughput);
-		data.setDouble(CompatEnergyControl.D_OUTPUT_MB, throughput);
+
 	}
 
 	@Override
 	public FluidTank getTankToPaste() {
 		return null;
+	}
+
+	AxisAlignedBB bb = null;
+
+	@Override
+	public AxisAlignedBB getRenderBoundingBox() {
+
+		if (bb == null) {
+			bb = AxisAlignedBB.getBoundingBox(
+				xCoord - 3,
+				yCoord,
+				zCoord - 3,
+				xCoord + 4,
+				yCoord + 3,
+				zCoord + 4
+			);
+		}
+		return bb;
 	}
 }
