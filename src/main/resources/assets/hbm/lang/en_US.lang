@@ -1756,6 +1756,11 @@ chem.POLYMER2=Polyethylene Polymerization
 chem.MASS_EPOXY_BOARD=Mass Epoxy Board dipping
 chem.EPOXY_BOARD=Epoxy Board dipping
 
+
+#HBM Hard TileEntities and Machines
+tile.deaerator.name=Self-Condensing Deaerator
+
+
 #HBM Hard Items
 item.epoxy_pcb.name=Advanced Circuit Board
 item.resin_paper.name=Resin Treated Paper
