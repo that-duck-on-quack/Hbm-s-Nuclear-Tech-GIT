@@ -19,7 +19,7 @@ public class RenderDeaerator extends TileEntitySpecialRenderer implements IItemR
 		GL11.glTranslated(x + 0.5D, y, z + 0.5D); // Translate the model for alignment.
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glRotatef(270, 0, 1, 0);
+		GL11.glRotatef(0, 0, 1, 0);
 
 		switch(tile.getBlockMetadata() - BlockDummyable.offset) { //Configure model for rotations.
 			case 4: GL11.glRotatef(180, 0F, 1F, 0F); break;

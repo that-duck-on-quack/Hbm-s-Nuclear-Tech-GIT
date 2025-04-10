@@ -63,8 +63,6 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 		writer.name("I:daTankSize").value(daTankSize);
 	}
 
-
-
 	@Override
 	public void updateEntity() {
 
@@ -87,9 +85,6 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 				if(convert > 0)
 					this.daTimer = 20;
 
-				int light = this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, this.xCoord, this.yCoord, this.zCoord);
-
-
 				if(tanks[2].getFill() > convert/100){
 					tanks[1].setFill(tanks[1].getFill() + convert);
 					tanks[2].setFill(tanks[2].getFill() - convert/100);
@@ -103,26 +98,6 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 
 			networkPackNT(150);
 		}
-	}
-
-	@Override
-	public void subscribeToAllAround(FluidType type, TileEntity te) {
-		this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord, yCoord, zCoord - 3, Library.NEG_X);
-		this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord - 1, yCoord, zCoord -3, Library.NEG_X);
-		this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord - 1, yCoord, zCoord, Library.NEG_X);
-		this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord, yCoord, zCoord, Library.NEG_X);
-		this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord, yCoord, zCoord - 3, Library.NEG_X);
-		this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord - 1, yCoord, zCoord -3, Library.NEG_X);
-		this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord - 1, yCoord, zCoord, Library.NEG_X);
-		this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord, yCoord, zCoord, Library.NEG_X);
-	}
-
-	@Override
-	public void sendFluidToAll(FluidTank tank, TileEntity te) {
-		this.sendFluid(this.tanks[1], worldObj, xCoord, yCoord, zCoord - 3, Library.NEG_X);
-		this.sendFluid(this.tanks[1], worldObj, xCoord - 1, yCoord, zCoord -3, Library.NEG_X);
-		this.sendFluid(this.tanks[1], worldObj, xCoord - 1, yCoord, zCoord, Library.NEG_X);
-		this.sendFluid(this.tanks[1], worldObj, xCoord, yCoord, zCoord, Library.NEG_X);
 	}
 
 	public void packExtra(NBTTagCompound data) { }
@@ -178,7 +153,8 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 
 	@Override
 	public void provideExtraInfo(NBTTagCompound data) {
-
+		data.setDouble(CompatEnergyControl.D_CONSUMPTION_MB, throughput);
+		data.setDouble(CompatEnergyControl.D_OUTPUT_MB, throughput);
 	}
 
 	@Override

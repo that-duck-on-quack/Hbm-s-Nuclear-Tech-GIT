@@ -57,6 +57,10 @@ public class MachineDeaerator extends BlockDummyable implements ILookOverlay {
 
 	@Override
 	public void printHook(Pre event, World world, int x, int y, int z) {
+		int[] pos = this.findCore(world, x, y, z);
+
+		if(pos == null)
+			return;
 
 		TileEntity te = world.getTileEntity(x, y, z);
 
