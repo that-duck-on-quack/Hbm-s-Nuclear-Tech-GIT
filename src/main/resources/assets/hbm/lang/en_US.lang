@@ -1755,10 +1755,13 @@ chem.BAKELITE2=Alternative Bakelite Manufacturing
 chem.POLYMER2=Polyethylene Polymerization
 chem.MASS_EPOXY_BOARD=Mass Epoxy Board dipping
 chem.EPOXY_BOARD=Epoxy Board dipping
+chem.CRUDEPHENOL=Crude Phenol Prodduction
+chem.ANTI_KNOCK=Tetraethyllead Production
 
 
 #HBM Hard TileEntities and Machines
 tile.deaerator.name=Self-Condensing Deaerator
+tile.laserboi.name=Laser Engraver
 
 
 #HBM Hard Items

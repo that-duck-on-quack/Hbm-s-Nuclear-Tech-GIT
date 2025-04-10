@@ -24,13 +24,14 @@ public class MachineRecipes {
 	public static MachineRecipes instance() {
 		return new MachineRecipes();
 	}
-	
+
 	//return: FluidType, amount produced, amount required, heat required (°C * 100)
 	public static Object[] getBoilerOutput(FluidType type) {
-		
+
 		if(type == Fluids.OIL) return new Object[] { Fluids.HOTOIL, 5, 5, 35000 };
 		if(type == Fluids.CRACKOIL) return new Object[] { Fluids.HOTCRACKOIL, 5, 5, 35000 };
-		
+		if(type == Fluids.ETHANOL) return new Object[] {Fluids.ETHYLENE, 5, 10, 20000};
+
 		return null;
 	}
 
@@ -51,7 +52,7 @@ public class MachineRecipes {
 		fuels.add(new ItemStack(ModItems.powder_coal));
 		return fuels;
 	}
-	
+
 	/*
 	 * this is the smoldering crater where once the 2016 shredder recipe code was
 	 */
@@ -97,11 +98,11 @@ public class MachineRecipes {
 		fuels.add(new ItemStack(ModItems.blades_desh));
 		return fuels;
 	}
-	
+
 	public static boolean mODE(Item item, String[] names) {
 		return mODE(new ItemStack(item), names);
 	}
-	
+
 	public static boolean mODE(ItemStack item, String[] names) {
 		boolean flag = false;
 		if(names.length > 0) {
@@ -110,33 +111,33 @@ public class MachineRecipes {
 					flag = true;
 			}
 		}
-		
+
 		return flag;
 	}
-	
+
 	public static boolean mODE(Item item, String name) {
 		return mODE(new ItemStack(item), name);
 	}
-	
+
 	//Matches Ore Dict Entry
 	public static boolean mODE(ItemStack stack, String name) {
-		
+
 		int[] ids = OreDictionary.getOreIDs(new ItemStack(stack.getItem(), 1, stack.getItemDamage()));
-		
+
 		for(int i = 0; i < ids.length; i++) {
-			
+
 			String s = OreDictionary.getOreName(ids[i]);
-			
+
 			if(s.length() > 0 && s.equals(name))
 				return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	public Map<Object, Object> getFluidContainers() {
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		
+
 		for(FluidContainer con : FluidContainerRegistry.allContainers) {
 			if(con != null) {
 				ItemStack fluid = new ItemStack(ModItems.fluid_icon, 1, con.type.getID());
@@ -145,7 +146,7 @@ public class MachineRecipes {
 				map.put(fluid, con.fullContainer);
 			}
 		}
-		
+
 		return map;
 	}
 }
