@@ -5,13 +5,8 @@ import api.hbm.tile.IInfoProviderEC;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import com.hbm.blocks.BlockDummyable;
-import com.hbm.dim.CelestialBody;
-import com.hbm.dim.trait.CBT_Atmosphere;
-import com.hbm.inventory.fluid.FluidType;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.fluid.tank.FluidTank;
-import com.hbm.lib.Library;
-import com.hbm.saveddata.TomSaveData;
 import com.hbm.tileentity.IBufPacketReceiver;
 import com.hbm.tileentity.IConfigurableMachine;
 import com.hbm.tileentity.IFluidCopiable;
@@ -20,9 +15,7 @@ import com.hbm.util.CompatEnergyControl;
 import com.hbm.util.fauxpointtwelve.DirPos;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.io.IOException;
@@ -92,7 +85,6 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 					tanks[1].setFill(tanks[1].getFill() + convert);
 					tanks[2].setFill(tanks[2].getFill() - convert/100);
 				}
-				postConvert(convert);
 			}
 
 			for(DirPos pos : getConPos()) {
@@ -117,15 +109,9 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 		};
 	}
 
-
-	public void packExtra(NBTTagCompound data) { }
 	public boolean extraCondition(int convert) {
-		if(tanks[2].getFill() < convert/100){
-			return false;
-		}
-		return true;
+		return tanks[2].getFill() >= convert / 100;
 	}
-	public void postConvert(int convert) { }
 
 	@Override
 	public void serialize(ByteBuf buf) {

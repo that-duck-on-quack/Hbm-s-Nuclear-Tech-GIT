@@ -50,7 +50,6 @@ public class MachineDeaerator extends BlockDummyable implements ILookOverlay {
 		this.makeExtra(world, x - rot.offsetX * 3, y + 1, z - rot.offsetZ * 3);
 		this.makeExtra(world, x - dir.offsetX - rot.offsetX * 3, y, z - dir.offsetZ - rot.offsetZ * 3);
 		this.makeExtra(world, x - dir.offsetX - rot.offsetX * 3, y + 1, z - dir.offsetZ - rot.offsetZ * 3);
-		//DOESN'T FUCKING WORK
 	}
 
 	@Override
