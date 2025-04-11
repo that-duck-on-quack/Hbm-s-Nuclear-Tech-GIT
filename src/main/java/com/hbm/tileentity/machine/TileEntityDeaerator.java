@@ -4,6 +4,7 @@ import api.hbm.fluid.IFluidStandardTransceiver;
 import api.hbm.tile.IInfoProviderEC;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
+import com.hbm.blocks.BlockDummyable;
 import com.hbm.dim.CelestialBody;
 import com.hbm.dim.trait.CBT_Atmosphere;
 import com.hbm.inventory.fluid.FluidType;
@@ -16,11 +17,13 @@ import com.hbm.tileentity.IConfigurableMachine;
 import com.hbm.tileentity.IFluidCopiable;
 import com.hbm.tileentity.TileEntityLoadedBase;
 import com.hbm.util.CompatEnergyControl;
+import com.hbm.util.fauxpointtwelve.DirPos;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.EnumSkyBlock;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.io.IOException;
 
@@ -85,23 +88,43 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 				if(convert > 0)
 					this.daTimer = 20;
 
-				if(tanks[2].getFill() > convert/100){
+				if(tanks[2].getFill() > 1 && tanks[2].getFill() > convert/100){
 					tanks[1].setFill(tanks[1].getFill() + convert);
 					tanks[2].setFill(tanks[2].getFill() - convert/100);
 				}
 				postConvert(convert);
 			}
 
-			this.subscribeToAllAround(tanks[2].getTankType(), this);
-			this.subscribeToAllAround(tanks[0].getTankType(), this);
-			this.sendFluidToAll(tanks[1], this);
+			for(DirPos pos : getConPos()) {
+				this.sendFluid(this.tanks[1], worldObj, pos.getX(), pos.getY(), pos.getZ(), pos.getDir());
+				this.trySubscribe(this.tanks[0].getTankType(), worldObj, pos.getX(), pos.getY(), pos.getZ(), pos.getDir());
+				this.trySubscribe(this.tanks[2].getTankType(), worldObj, pos.getX(), pos.getY(), pos.getZ(), pos.getDir());
+			}
 
 			networkPackNT(150);
 		}
 	}
 
+	private DirPos[] getConPos() {
+		ForgeDirection dir = ForgeDirection.getOrientation(this.getBlockMetadata() - BlockDummyable.offset);
+		ForgeDirection rot = dir.getRotation(ForgeDirection.UP);
+
+		return new DirPos[] {
+			new DirPos(xCoord - rot.offsetX * 4, yCoord, zCoord - rot.offsetZ * 4, dir),
+			new DirPos(xCoord - dir.offsetX - rot.offsetX * 4, yCoord, zCoord - dir.offsetZ - rot.offsetZ * 4, dir.getOpposite()),
+			new DirPos(xCoord - rot.offsetX * 4, yCoord + 1, zCoord - rot.offsetZ * 4, dir),
+			new DirPos(xCoord - dir.offsetX - rot.offsetX * 4, yCoord + 1, zCoord - dir.offsetZ - rot.offsetZ * 4, dir.getOpposite())
+		};
+	}
+
+
 	public void packExtra(NBTTagCompound data) { }
-	public boolean extraCondition(int convert) { return true; }
+	public boolean extraCondition(int convert) {
+		if(tanks[2].getFill() < convert/100){
+			return false;
+		}
+		return true;
+	}
 	public void postConvert(int convert) { }
 
 	@Override

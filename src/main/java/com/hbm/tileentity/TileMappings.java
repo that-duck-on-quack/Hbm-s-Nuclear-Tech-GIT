@@ -267,6 +267,7 @@ public class TileMappings {
 
 
 		//hbm hard stuff
+		put(TileEntityDeaerator.class, "tileentity_deaerator");
 		put(TileEntityMachineLaserBoi.class,"tileentity_LaserBoi");
 
 		putNetwork();

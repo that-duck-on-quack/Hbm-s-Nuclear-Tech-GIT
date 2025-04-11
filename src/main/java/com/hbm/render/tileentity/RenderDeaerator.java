@@ -47,8 +47,8 @@ public class RenderDeaerator extends TileEntitySpecialRenderer implements IItemR
 	public IItemRenderer getRenderer() {
 		return new ItemRenderBase() {
 			public void renderInventory() {
-				GL11.glTranslated(0, -3.5, 0); // Translate item model.
-				double scale = 4; // Scaling
+				GL11.glTranslated(-.5, -3.5, 0); // Translate item model.
+				double scale = 3; // Scaling
 				GL11.glScaled(scale, scale, scale);
 			}
 			public void renderCommon() {

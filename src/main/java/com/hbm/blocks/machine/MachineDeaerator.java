@@ -35,24 +35,22 @@ public class MachineDeaerator extends BlockDummyable implements ILookOverlay {
 	public TileEntity createNewTileEntity(World world, int meta) {
 		if(meta >= 12)
 			return new TileEntityDeaerator();
-
-		if(meta >= 8)
-			return new TileEntityProxyCombo(false, false, true);
+		if(hasExtra(meta))
+			return new TileEntityProxyCombo().fluid();
 
 		return null;
 	}
 
-	@Override
-	public void fillSpace(World world, int x, int y, int z, ForgeDirection dir, int o) {
+	protected void fillSpace(World world, int x, int y, int z, ForgeDirection dir, int o) {
 		super.fillSpace(world, x, y, z, dir, o);
 
-		x = x + dir.offsetX * o;
-		z = z + dir.offsetZ * o;
+		ForgeDirection rot = dir.getRotation(ForgeDirection.UP);
 
-		for(int i = 2; i <= 6; i++) {
-			ForgeDirection dr2 = ForgeDirection.getOrientation(i);
-			this.makeExtra(world, x + dr2.offsetX * 2, y, z + dr2.offsetZ * 2);
-		}
+		this.makeExtra(world, x - rot.offsetX * 3, y, z - rot.offsetZ * 3);
+		this.makeExtra(world, x - rot.offsetX * 3, y + 1, z - rot.offsetZ * 3);
+		this.makeExtra(world, x - dir.offsetX - rot.offsetX * 3, y, z - dir.offsetZ - rot.offsetZ * 3);
+		this.makeExtra(world, x - dir.offsetX - rot.offsetX * 3, y + 1, z - dir.offsetZ - rot.offsetZ * 3);
+		//DOESN'T FUCKING WORK
 	}
 
 	@Override
