@@ -616,7 +616,7 @@ public class AssemblerRecipes extends SerializableRecipe {
 
 		makeRecipe(new ComparableStack(ModBlocks.reactor_zirnox, 1), new AStack[] {
 				!exp ? new OreDictStack(STEEL.shell(), 8) : new OreDictStack(STEEL.heavyComp(), 1),
-				new OreDictStack(STAINLESS.plate(), 16),
+				new OreDictStack(TI.shell(), 8),
 				new OreDictStack(B.ingot(), 8),
 				new OreDictStack(GRAPHITE.ingot(), 32),
 				new OreDictStack(RUBBER.ingot(), 32),
