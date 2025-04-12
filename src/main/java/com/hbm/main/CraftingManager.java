@@ -1043,6 +1043,7 @@ public class CraftingManager {
 		addShapelessAuto(new ItemStack(ModItems.book_of_), new Object[] { DictFrame.fromOne(ModItems.page_of_, EnumPages.PAGE1), DictFrame.fromOne(ModItems.page_of_, EnumPages.PAGE2), DictFrame.fromOne(ModItems.page_of_, EnumPages.PAGE3), DictFrame.fromOne(ModItems.page_of_, EnumPages.PAGE4), DictFrame.fromOne(ModItems.page_of_, EnumPages.PAGE5), DictFrame.fromOne(ModItems.page_of_, EnumPages.PAGE6), DictFrame.fromOne(ModItems.page_of_, EnumPages.PAGE7), DictFrame.fromOne(ModItems.page_of_, EnumPages.PAGE8), ModItems.egg_balefire });
 
 		//HBM_hard
+		addRecipeAuto(new ItemStack(ModItems.stamp_iron_plate), new Object[] {"FIF", "IBI", "FIF", 'F', ModItems.ingot_firebrick, 'I', Items.iron_ingot, 'B', Blocks.iron_block});
 		//addRecipeAuto(new ItemStack(ModItems.crude_circuit), new Object[] { " C "," P "," C ", "P", ModItems.crude_pcb,"C", ModItems.crude_cap});
 
 
