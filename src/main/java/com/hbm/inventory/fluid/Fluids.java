@@ -406,7 +406,7 @@ public class Fluids {
 		WASTEGAS =				new FluidType("WASTEGAS",			0xB8B8B8, 2, 0, 1, EnumSymbol.RADIATION).addTraits(new FT_VentRadiation(0.5F), NOCON, GASEOUS, new FT_Rocket(900, 700_000));
 		GASOLINE =				new FluidType("GASOLINE",			0x445772, 1, 2, 0, EnumSymbol.NONE).addContainers(new CD_Canister(0x2F7747)).addTraits(new FT_Flammable(400_000), new FT_Combustible(FuelGrade.HIGH, 1_000_000), LIQUID, P_FUEL);
 		COALGAS =				new FluidType("COALGAS",			0x445772, 1, 2, 0, EnumSymbol.NONE).addContainers(new CD_Canister(0x2E155F)).addTraits(new FT_Flammable(75_000), new FT_Combustible(FuelGrade.MEDIUM, 150_000), LIQUID, P_FUEL);
-		SPENTSTEAM =			new FluidType("SPENTSTEAM",			0x445772, 2, 0, 0, EnumSymbol.NONE).addTraits(NOCON, GASEOUS);
+		SPENTSTEAM =			new FluidType("SPENTSTEAM",			0x445772, 2, 0, 0, EnumSymbol.NONE).addTraits(NOCON, GASEOUS, new FT_Polluting().release(PollutionType.POISON, POISON_EXTREME), new FT_VentRadiation(1.2F));
 		FRACKSOL =				new FluidType("FRACKSOL",			0x798A6B, 1, 3, 3, EnumSymbol.ACID).addContainers(new CD_Canister(0x4F887F)).addTraits(new FT_Corrosive(15), new FT_Poison(false, 0), LIQUID, VISCOUS);
 		PLASMA_DT =				new FluidType("PLASMA_DT",			0xF7AFDE, 0, 4, 0, EnumSymbol.RADIATION).setTemp(3250).addTraits(NOCON, NOID, PLASMA, new FT_Rocket(12000, 700_000));
 		PLASMA_HD =				new FluidType("PLASMA_HD",			0xF0ADF4, 0, 4, 0, EnumSymbol.RADIATION).setTemp(2500).addTraits(NOCON, NOID, PLASMA, new FT_Rocket(7500, 700_000));
@@ -563,7 +563,7 @@ public class Fluids {
 		ALUMINA =				new FluidType("ALUMINA",		0xDDFFFF, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID);
 		//NTM Hard Fluids
 		RESIN =					 new FluidType("RESIN",		0xFFBF00, 0,1,0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
-		AERATEDWATER = new FluidType("AERATEDWATER", 0x305082, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
+		AERATEDWATER = new FluidType("AERATEDWATER", 0x305082, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE, new FT_Polluting().release(PollutionType.POISON, POISON_EXTREME), new FT_VentRadiation(0.25F));
 		DIRTY_WATER =			new FluidType("DIRTY_WATER", 0x3333FF, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
 		OSLURRY = new FluidType("OSLURRY", 0x4A1C0F, 0, 0, 0, EnumSymbol.NONE).addTraits(new FT_Flammable(15), LIQUID, VISCOUS, P_OIL);
 		DSHSLURRY = new FluidType("DSHSLURRY", 0xD63B27, 0, 0, 0, EnumSymbol.ACID).addTraits(LIQUID, new FT_Corrosive(25));
@@ -880,7 +880,7 @@ public class Fluids {
 
 		double eff_steam_turbine = 1.0D;
 		double eff_steam_cool = 0.5D;
-		STEAM.addTraits(new FT_Coolable(SPENTSTEAM, 100, 1, 200).setEff(CoolingType.TURBINE, eff_steam_turbine).setEff(CoolingType.HEATEXCHANGER, eff_steam_cool));
+		STEAM.addTraits(new FT_Coolable(SPENTSTEAM, 100, 1, 200).setEff(CoolingType.TURBINE, eff_steam_turbine).setEff(CoolingType.HEATEXCHANGER, eff_steam_cool), new FT_Polluting().release(PollutionType.POISON, POISON_MINOR));
 		HOTSTEAM.addTraits(new FT_Coolable(STEAM, 1, 10, 2).setEff(CoolingType.TURBINE, eff_steam_turbine).setEff(CoolingType.HEATEXCHANGER, eff_steam_cool));
 		SUPERHOTSTEAM.addTraits(new FT_Coolable(HOTSTEAM, 1, 10, 18).setEff(CoolingType.TURBINE, eff_steam_turbine).setEff(CoolingType.HEATEXCHANGER, eff_steam_cool));
 		ULTRAHOTSTEAM.addTraits(new FT_Coolable(SUPERHOTSTEAM, 1, 10, 120).setEff(CoolingType.TURBINE, eff_steam_turbine).setEff(CoolingType.HEATEXCHANGER, eff_steam_cool));
