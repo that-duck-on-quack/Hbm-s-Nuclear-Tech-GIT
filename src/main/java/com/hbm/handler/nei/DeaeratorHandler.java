@@ -20,7 +20,7 @@ public class DeaeratorHandler extends NEIUniversalHandler {
 
 	public static HashMap<Object, Object> generateRecipes() {
 		HashMap<Object, Object> map = new HashMap();
-		map.put(ItemFluidIcon.make(Fluids.AERATEDWATER, 1_000), ItemFluidIcon.make(Fluids.WATER, 20));
+		map.put(ItemFluidIcon.make(Fluids.AERATEDWATER, 1_000), ItemFluidIcon.make(Fluids.WATER, 1000));
 		return map;
 	}
 }

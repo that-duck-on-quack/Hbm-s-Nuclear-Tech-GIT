@@ -164,8 +164,8 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.outputItems(new ItemStack(ModItems.ingot_pc)));
 		recipes.add(new ChemRecipe(96, "PVC", 100)
 			.inputFluids(
-				new FluidStack(Fluids.VINYL_CHLORIDE, 1000, GeneralConfig.enable528 ? 2 : 0),
-				new FluidStack(Fluids.OXYGEN, 4000, GeneralConfig.enable528 ? 2 : 0))
+				new FluidStack(Fluids.VINYL_CHLORIDE, 500, GeneralConfig.enable528 ? 2 : 0),
+				new FluidStack(Fluids.OXYGEN, 2000, GeneralConfig.enable528 ? 2 : 0))
 			.outputItems(new ItemStack(ModItems.ingot_pvc, 2)));
 		recipes.add(new ChemRecipe(89, "DYNAMITE", 50)
 			.inputFluids(new FluidStack(Fluids.TOULENE, 100))
@@ -541,7 +541,7 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.outputFluids(new FluidStack(Fluids.STYRENE,1000))
 		);
 		recipes.add(new ChemRecipe(1107,"VINYLCHLORIDE",600)
-			.inputFluids(new FluidStack(Fluids.ETHYLENE, 1000), new FluidStack(Fluids.CHLORINE, 2000))
+			.inputFluids(new FluidStack(Fluids.ETHYLENE, 500), new FluidStack(Fluids.CHLORINE, 1000))
 			.outputFluids(new FluidStack(Fluids.VINYL_CHLORIDE, 1000), new FluidStack(Fluids.HCL, 250))
 		);
 		recipes.add(new ChemRecipe(1108, "ETHYLENE", 200)

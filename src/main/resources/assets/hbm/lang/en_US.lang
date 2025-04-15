@@ -1769,6 +1769,8 @@ chem.BAKELITE2=Alternative Bakelite Manufacturing
 chem.POLYMER2=Polyethylene Polymerization
 chem.MASS_EPOXY_BOARD=Mass Epoxy Board dipping
 chem.EPOXY_BOARD=Epoxy Board dipping
+chem.CRUDEPHENOL=Crude Phenol Prodduction
+chem.ANTI_KNOCK=Tetraethyllead Production
 
 
 #HBM Hard TileEntities and Machines
@@ -3464,7 +3466,7 @@ item.inf_diesel.name=Infinite Diesel Tank
 item.inf_sulfur.name=Infinite Sulfur Tank
 item.inf_tritium.name=Infinite Tritium Tank
 item.inf_water.name=Infinite Water Tank
-item.inf_water_mk2.name=Infinite Water Tank (but a bit better)
+item.inf_water_mk2.name=Heavy Infinite Water Tank
 item.ingot_actinium.name=Actinium-227 Ingot
 item.ingot_advanced_alloy.name=Advanced Alloy Ingot
 item.ingot_aluminium.name=Aluminium Ingot
@@ -3682,6 +3684,8 @@ item.key_red.desc.P11=§4e§r
 item.key_red_cracked.name=Cracked Key
 item.key_red_cracked.desc=???
 item.key_red.key_red_cracked.P11=§4???§r
+item.toolbox.name=Toolbox
+item.toolbox_legacy.name=Toolbox (LEGACY)
 item.laser_crystal_bismuth.desc=Bismuth-Samarium-Uranium-Thorium crystal matrix
 item.laser_crystal_bismuth.name=BiSmUTh Laser Crystal
 item.laser_crystal_cmb.desc=Antischrabidium Suspended in a CMB-Schrabidate Alloy Lattice
