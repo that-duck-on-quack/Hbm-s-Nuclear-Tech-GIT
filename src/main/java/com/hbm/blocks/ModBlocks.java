@@ -7,20 +7,12 @@ import com.hbm.blocks.gas.*;
 import com.hbm.blocks.generic.*;
 import com.hbm.blocks.generic.BlockHazard.ExtDisplayEffect;
 import com.hbm.blocks.machine.*;
-import com.hbm.blocks.machine.albion.BlockPABeamline;
-import com.hbm.blocks.machine.albion.BlockPADetector;
-import com.hbm.blocks.machine.albion.BlockPADipole;
-import com.hbm.blocks.machine.albion.BlockPAQuadrupole;
-import com.hbm.blocks.machine.albion.BlockPARFC;
-import com.hbm.blocks.machine.albion.BlockPASource;
+import com.hbm.blocks.machine.albion.*;
 import com.hbm.blocks.machine.pile.*;
 import com.hbm.blocks.machine.rbmk.*;
 import com.hbm.blocks.network.*;
 import com.hbm.blocks.rail.*;
-import com.hbm.blocks.test.TestCharge;
-import com.hbm.blocks.test.TestCore;
-import com.hbm.blocks.test.TestEventTester;
-import com.hbm.blocks.test.TestObjTester;
+import com.hbm.blocks.test.*;
 import com.hbm.blocks.turret.*;
 import com.hbm.items.block.*;
 import com.hbm.items.bomb.ItemPrototypeBlock;
@@ -311,6 +303,7 @@ public class ModBlocks {
 	public static Block bobblehead;
 	public static Block snowglobe;
 	public static Block plushie;
+	public static Block dungeon_spawner;
 
 	public static Block gravel_obsidian;
 	public static Block gravel_diamond;
@@ -371,12 +364,16 @@ public class ModBlocks {
 	public static Block brick_asbestos;
 	public static Block brick_fire;
 
+	public static Block lightstone;
+
 	public static Block concrete_slab;
 	public static Block concrete_double_slab;
 	public static Block concrete_brick_slab;
 	public static Block concrete_brick_double_slab;
 	public static Block brick_slab;
 	public static Block brick_double_slab;
+	public static Block stones_slab;
+	public static Block stones_double_slab;
 
 	public static Block concrete_smooth_stairs;
 	public static Block concrete_stairs;
@@ -396,6 +393,8 @@ public class ModBlocks {
 	public static Block brick_asbestos_stairs;
 	public static Block brick_fire_stairs;
 	public static Block asphalt_stairs;
+	public static Block lightstone_tile_stairs;
+	public static Block lightstone_bricks_stairs;
 
 	public static Block cmb_brick;
 	public static Block cmb_brick_reinforced;
@@ -775,8 +774,6 @@ public class ModBlocks {
 
 	public static Block machine_furnace_brick_off;
 	public static Block machine_furnace_brick_on;
-	public static Block machine_nuke_furnace_off;
-	public static Block machine_nuke_furnace_on;
 	public static Block machine_rtg_furnace_off;
 	public static Block machine_rtg_furnace_on;
 
@@ -902,6 +899,8 @@ public class ModBlocks {
 	public static Block drone_dock;
 	public static Block drone_crate_provider;
 	public static Block drone_crate_requester;
+
+	public static Block pneumatic_tube;
 
 	public static Block fan;
 
@@ -1074,7 +1073,9 @@ public class ModBlocks {
 
 	public static Block machine_liquefactor;
 	public static Block machine_solidifier;
+	public static Block machine_intake;
 	public static Block machine_compressor;
+	public static Block machine_compressor_compact;
 
 	public static Block machine_chungus;
 	public static Block machine_condenser;
@@ -1277,7 +1278,6 @@ public class ModBlocks {
 	public static Block absorber_green;
 	public static Block absorber_pink;
 	public static Block decon;
-	public static Block transission_hatch;
 
 	public static Block mud_block;
 	public static Fluid mud_fluid;
@@ -1647,6 +1647,7 @@ public class ModBlocks {
 		bobblehead = new BlockBobble().setBlockName("bobblehead").setCreativeTab(MainRegistry.blockTab).setHardness(0.0F).setResistance(0.0F).setBlockTextureName(RefStrings.MODID + ":block_steel");
 		snowglobe = new BlockSnowglobe().setBlockName("snowglobe").setCreativeTab(MainRegistry.blockTab).setHardness(0.0F).setResistance(0.0F).setBlockTextureName(RefStrings.MODID + ":glass_boron");
 		plushie = new BlockPlushie().setBlockName("plushie").setStepSound(Block.soundTypeCloth).setResistance(50_0000.0F).setCreativeTab(MainRegistry.blockTab).setHardness(0.0F).setResistance(0.0F).setBlockTextureName(RefStrings.MODID + ":block_fiberglass_side");
+		dungeon_spawner = new DungeonSpawner().setBlockName("dungeon_spawner").setResistance(50_0000.0F).setBlockUnbreakable().setBlockTextureName(RefStrings.MODID + ":dungeon_spawner");
 
 		gravel_obsidian = new BlockFalling(Material.iron).setBlockName("gravel_obsidian").setCreativeTab(MainRegistry.blockTab).setStepSound(Block.soundTypeGravel).setHardness(5.0F).setResistance(240.0F).setBlockTextureName(RefStrings.MODID + ":gravel_obsidian");
 		gravel_diamond = new BlockFalling(Material.sand).setBlockName("gravel_diamond").setCreativeTab(MainRegistry.blockTab).setStepSound(Block.soundTypeGravel).setHardness(0.6F).setBlockTextureName(RefStrings.MODID + ":gravel_diamond");
@@ -1709,12 +1710,16 @@ public class ModBlocks {
 		brick_ducrete = new BlockGeneric(Material.rock).setBlockName("brick_ducrete").setCreativeTab(MainRegistry.blockTab).setHardness(15.0F).setResistance(750.0F).setBlockTextureName(RefStrings.MODID + ":brick_ducrete");
 		reinforced_ducrete = new BlockGeneric(Material.rock).setBlockName("reinforced_ducrete").setCreativeTab(MainRegistry.blockTab).setHardness(20.0F).setResistance(1000.0F).setBlockTextureName(RefStrings.MODID + ":reinforced_ducrete");
 
+		lightstone = new BlockLightstone(Material.rock, LightstoneType.class, true, true).setBlockName("lightstone").setCreativeTab(MainRegistry.blockTab).setHardness(2F).setResistance(15.0F).setBlockTextureName(RefStrings.MODID + ":lightstone");
+
 		concrete_slab = new BlockMultiSlab(null, Material.rock, concrete_smooth, concrete, concrete_asbestos, ducrete_smooth, ducrete, asphalt).setBlockName("concrete_slab").setCreativeTab(MainRegistry.blockTab);
 		concrete_double_slab = new BlockMultiSlab(concrete_slab, Material.rock, concrete_smooth, concrete, concrete_asbestos, ducrete_smooth, ducrete, asphalt).setBlockName("concrete_double_slab").setCreativeTab(MainRegistry.blockTab);
 		concrete_brick_slab = new BlockMultiSlab(null, Material.rock, brick_concrete, brick_concrete_mossy, brick_concrete_cracked, brick_concrete_broken, brick_ducrete).setBlockName("concrete_brick_slab").setCreativeTab(MainRegistry.blockTab);
 		concrete_brick_double_slab = new BlockMultiSlab(concrete_brick_slab, Material.rock, brick_concrete, brick_concrete_mossy, brick_concrete_cracked, brick_concrete_broken, brick_ducrete).setBlockName("concrete_brick_double_slab").setCreativeTab(MainRegistry.blockTab);
 		brick_slab = new BlockMultiSlab(null, Material.rock, reinforced_stone, reinforced_brick, brick_obsidian, brick_light, brick_compound, brick_asbestos, brick_fire).setBlockName("brick_slab").setCreativeTab(MainRegistry.blockTab);
 		brick_double_slab = new BlockMultiSlab(brick_slab, Material.rock, reinforced_stone, reinforced_brick, brick_obsidian, brick_light, brick_compound, brick_asbestos, brick_fire).setBlockName("brick_double_slab").setCreativeTab(MainRegistry.blockTab);
+		stones_slab = new BlockMultiSlabMeta(null, Material.rock, new Block[] { lightstone, lightstone }, LightstoneType.TILE.ordinal(), LightstoneType.BRICKS.ordinal()).setBlockName("stones_slab").setCreativeTab(MainRegistry.blockTab);
+		stones_double_slab = new BlockMultiSlabMeta(stones_slab, Material.rock, new Block[] { lightstone, lightstone }, LightstoneType.TILE.ordinal(), LightstoneType.BRICKS.ordinal()).setBlockName("stones_double_slab").setCreativeTab(MainRegistry.blockTab);
 
 		concrete_smooth_stairs = new BlockGenericStairs(concrete_smooth, 0).setBlockName("concrete_smooth_stairs").setCreativeTab(MainRegistry.blockTab);
 		concrete_stairs = new BlockGenericStairs(concrete, 0).setBlockName("concrete_stairs").setCreativeTab(MainRegistry.blockTab);
@@ -1734,6 +1739,8 @@ public class ModBlocks {
 		brick_asbestos_stairs = new BlockGenericStairs(brick_asbestos, 0).setBlockName("brick_asbestos_stairs").setCreativeTab(MainRegistry.blockTab);
 		brick_fire_stairs = new BlockGenericStairs(brick_fire, 0).setBlockName("brick_fire_stairs").setCreativeTab(MainRegistry.blockTab);
 		asphalt_stairs = new BlockSpeedyStairs(asphalt, 0, 1.5).setBlockName("asphalt_stairs").setCreativeTab(MainRegistry.blockTab);
+		lightstone_tile_stairs = new BlockGenericStairs(lightstone, LightstoneType.TILE.ordinal()).setBlockName("lightstone_tile_stairs").setCreativeTab(MainRegistry.blockTab);
+		lightstone_bricks_stairs = new BlockGenericStairs(lightstone, LightstoneType.BRICKS.ordinal()).setBlockName("lightstone_bricks_stairs").setCreativeTab(MainRegistry.blockTab);
 
 		vinyl_tile = new BlockEnumMulti(Material.rock, TileType.class, true, true).setBlockName("vinyl_tile").setStepSound(Block.soundTypeGlass).setCreativeTab(MainRegistry.blockTab).setHardness(10.0F).setResistance(60.0F).setBlockTextureName(RefStrings.MODID + ":vinyl_tile");
 
@@ -2024,8 +2031,6 @@ public class ModBlocks {
 
 		machine_furnace_brick_off = new MachineBrickFurnace(false).setBlockName("machine_furnace_brick_off").setHardness(5.0F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab);
 		machine_furnace_brick_on = new MachineBrickFurnace(true).setBlockName("machine_furnace_brick_on").setHardness(5.0F).setLightLevel(1.0F).setResistance(10.0F);
-		machine_nuke_furnace_off = new MachineNukeFurnace(false).setBlockName("machine_nuke_furnace_off").setHardness(5.0F).setResistance(10.0F);
-		machine_nuke_furnace_on = new MachineNukeFurnace(true).setBlockName("machine_nuke_furnace_on").setHardness(5.0F).setLightLevel(1.0F).setResistance(10.0F);
 		machine_rtg_furnace_off = new MachineRtgFurnace(false).setBlockName("machine_rtg_furnace_off").setHardness(5.0F).setResistance(10.0F);
 		machine_rtg_furnace_on = new MachineRtgFurnace(true).setBlockName("machine_rtg_furnace_on").setHardness(5.0F).setLightLevel(1.0F).setResistance(10.0F);
 
@@ -2170,6 +2175,8 @@ public class ModBlocks {
 		drone_dock = new DroneDock().setBlockName("drone_dock").setHardness(0.1F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":drone_dock");
 		drone_crate_provider = new DroneDock().setBlockName("drone_crate_provider").setHardness(0.1F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":drone_crate_provider");
 		drone_crate_requester = new DroneDock().setBlockName("drone_crate_requester").setHardness(0.1F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":drone_crate_requester");
+
+		pneumatic_tube = new PneumoTube().setBlockName("pneumatic_tube").setStepSound(ModSoundTypes.pipe).setHardness(0.1F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":pneumatic_tube");
 
 		chain = new BlockChain(Material.iron).setBlockName("dungeon_chain").setHardness(0.25F).setResistance(2.0F).setCreativeTab(MainRegistry.blockTab).setBlockTextureName(RefStrings.MODID + ":chain");
 
@@ -2489,7 +2496,9 @@ public class ModBlocks {
 
 		machine_liquefactor = new MachineLiquefactor().setBlockName("machine_liquefactor").setHardness(10.0F).setResistance(20.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel_machine");
 		machine_solidifier = new MachineSolidifier().setBlockName("machine_solidifier").setHardness(10.0F).setResistance(20.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel_machine");
+		machine_intake = new MachineIntake().setBlockName("machine_intake").setHardness(10.0F).setResistance(20.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel_machine");
 		machine_compressor = new MachineCompressor().setBlockName("machine_compressor").setHardness(10.0F).setResistance(20.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel_machine");
+		machine_compressor_compact = new MachineCompressorCompact().setBlockName("machine_compressor_compact").setHardness(10.0F).setResistance(20.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel_machine");
 
 		machine_electrolyser = new MachineElectrolyser().setBlockName("machine_electrolyser").setHardness(10.0F).setResistance(20.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel_machine");
 
@@ -2559,7 +2568,6 @@ public class ModBlocks {
 		absorber_green = new BlockAbsorber(Material.iron, 100F).setBlockName("absorber_green").setHardness(5.0F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":absorber_green");
 		absorber_pink = new BlockAbsorber(Material.iron, 10000F).setBlockName("absorber_pink").setHardness(5.0F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":absorber_pink");
 		decon = new BlockDecon(Material.iron).setBlockName("decon").setHardness(5.0F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":decon_side");
-		transission_hatch = new BlockTransission(Material.iron).setBlockName("transission_hatch").setHardness(5.0F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":transission_hatch");
 
 		volcano_core = new BlockVolcano().setBlockName("volcano_core").setBlockUnbreakable().setResistance(10000.0F).setCreativeTab(MainRegistry.nukeTab).setBlockTextureName(RefStrings.MODID + ":volcano_core");
 		volcano_rad_core = new BlockVolcano().setBlockName("volcano_rad_core").setBlockUnbreakable().setResistance(10000.0F).setCreativeTab(MainRegistry.nukeTab).setBlockTextureName(RefStrings.MODID + ":volcano_rad_core");
@@ -2939,6 +2947,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(deco_loot, deco_loot.getUnlocalizedName());
 		GameRegistry.registerBlock(pedestal, pedestal.getUnlocalizedName());
 		register(skeleton_holder);
+		register(dungeon_spawner);
 		GameRegistry.registerBlock(bobblehead, ItemBlockMeta.class, bobblehead.getUnlocalizedName());
 		GameRegistry.registerBlock(snowglobe, ItemBlockMeta.class, snowglobe.getUnlocalizedName());
 		GameRegistry.registerBlock(plushie, ItemBlockBase.class, plushie.getUnlocalizedName());
@@ -3004,6 +3013,13 @@ public class ModBlocks {
 		GameRegistry.registerBlock(brick_light, ItemBlockBlastInfo.class, brick_light.getUnlocalizedName());
 		GameRegistry.registerBlock(brick_asbestos, brick_asbestos.getUnlocalizedName());
 		GameRegistry.registerBlock(brick_fire, ItemBlockBlastInfo.class, brick_fire.getUnlocalizedName());
+
+		//Lightstone and its stair/slab variants
+		register(lightstone);
+		register(lightstone_tile_stairs);
+		register(lightstone_bricks_stairs);
+		register(stones_slab, ItemModSlab.class);
+		register(stones_double_slab, ItemModSlab.class);
 
 		GameRegistry.registerBlock(concrete_slab, ItemModSlab.class, concrete_slab.getUnlocalizedName());
 		GameRegistry.registerBlock(concrete_double_slab, ItemModSlab.class, concrete_double_slab.getUnlocalizedName());
@@ -3432,8 +3448,6 @@ public class ModBlocks {
 		GameRegistry.registerBlock(machine_uf6_tank, machine_uf6_tank.getUnlocalizedName());
 		GameRegistry.registerBlock(machine_puf6_tank, machine_puf6_tank.getUnlocalizedName());
 		GameRegistry.registerBlock(machine_reactor_breeding, machine_reactor_breeding.getUnlocalizedName());
-		GameRegistry.registerBlock(machine_nuke_furnace_off, machine_nuke_furnace_off.getUnlocalizedName());
-		GameRegistry.registerBlock(machine_nuke_furnace_on, machine_nuke_furnace_on.getUnlocalizedName());
 		GameRegistry.registerBlock(machine_rtg_furnace_off, machine_rtg_furnace_off.getUnlocalizedName());
 		GameRegistry.registerBlock(machine_rtg_furnace_on, machine_rtg_furnace_on.getUnlocalizedName());
 		register(machine_wood_burner);
@@ -3574,6 +3588,7 @@ public class ModBlocks {
 		register(drone_dock);
 		register(drone_crate_provider);
 		register(drone_crate_requester);
+		register(pneumatic_tube);
 		register(fan);
 		register(piston_inserter);
 
@@ -3648,7 +3663,9 @@ public class ModBlocks {
 		GameRegistry.registerBlock(machine_atmo_vent, machine_atmo_vent.getUnlocalizedName());
 		GameRegistry.registerBlock(machine_liquefactor, ItemBlockBase.class, machine_liquefactor.getUnlocalizedName());
 		GameRegistry.registerBlock(machine_solidifier, ItemBlockBase.class, machine_solidifier.getUnlocalizedName());
+		register(machine_intake);
 		register(machine_compressor);
+		register(machine_compressor_compact);
 		GameRegistry.registerBlock(machine_electrolyser, machine_electrolyser.getUnlocalizedName());
 		GameRegistry.registerBlock(machine_waste_drum, machine_waste_drum.getUnlocalizedName());
 		GameRegistry.registerBlock(machine_storage_drum, machine_storage_drum.getUnlocalizedName());
@@ -3714,7 +3731,6 @@ public class ModBlocks {
 		GameRegistry.registerBlock(absorber_green, absorber_green.getUnlocalizedName());
 		GameRegistry.registerBlock(absorber_pink, absorber_pink.getUnlocalizedName());
 		GameRegistry.registerBlock(decon, decon.getUnlocalizedName());
-		GameRegistry.registerBlock(transission_hatch, transission_hatch.getUnlocalizedName());
 
 		//Solar Tower Blocks
 		GameRegistry.registerBlock(machine_solar_boiler, machine_solar_boiler.getUnlocalizedName());

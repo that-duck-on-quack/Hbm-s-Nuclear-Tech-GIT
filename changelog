@@ -1,32 +1,5 @@
-Includes all changes and bugfixes from that farken april fools update, minus the fools (no secrets for you) - [X9999 - literal pig swill](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27X9999)
-
-## Added
-* Flippers!
-
-## Changed
-* Jetpacks + gravity reworked
-    * All jetpacks now act like vector packs in zero-g
-* Dyson Receiver recipe changed due to removal of flat magnets
+Includes all changes and bugfixes from the latest upstream NTMain update - [X5299 - now less comically broken](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5299)
 
 ## Fixed
-* Strawberries being utterly busted (would entirely fill saturation from a single berry)
-
-# Upstream changelog
-## Changed
-* .75 bolts now work as advertised
-* Updated lead pipe texture
-* Removed recipes from a few ancient melee weapons, as well as the creative tab listing
-* Removed flat magnets
-* Taint should now also affect non-solid blocks that are full cubes
-* Reduced the AoE size of 7.62mm, .50 BMG and 10 gauge explosive projectiles
-* Removed the old gun mechanism items, turrets now use the new cast parts
-* A secret weapon and its variant have become craftable
-* NEI now shows RBMK fuel rod recycling and cooling
-* Removed most of the old unused siege mobs
-
-## Fixed
-* Fixed taint destroying bedrock
-* Fixed ferrouranium plate not being castable
-* Fixed bayonet not rendering properly in third person
-* Fixed xenon poison gauge in the RBMK control panel not showing up on colums (oops)
-* Fixed hitscan projectiles colliding with dead mobs
+* Biogas gated behind space-grade machinery due to AIR fluid requirement
+* Redstone torches erroneously don't work without O2

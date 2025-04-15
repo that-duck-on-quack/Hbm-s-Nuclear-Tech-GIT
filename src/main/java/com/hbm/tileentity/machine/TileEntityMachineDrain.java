@@ -1,12 +1,11 @@
 package com.hbm.tileentity.machine;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.handler.radiation.ChunkRadiationManager;
 import com.hbm.inventory.fluid.FluidType;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.fluid.tank.FluidTank;
-import com.hbm.inventory.fluid.trait.FT_Flammable;
-import com.hbm.inventory.fluid.trait.FT_Polluting;
-import com.hbm.inventory.fluid.trait.FT_Gaseous;
+import com.hbm.inventory.fluid.trait.*;
 import com.hbm.inventory.fluid.trait.FluidTrait.FluidReleaseType;
 import com.hbm.inventory.fluid.trait.FluidTraitSimple.FT_Amat;
 import com.hbm.inventory.fluid.trait.FluidTraitSimple.FT_Liquid;
@@ -33,13 +32,13 @@ public class TileEntityMachineDrain extends TileEntityLoadedBase implements IFlu
 	public FluidTank tank;
 
 	public TileEntityMachineDrain() {
-		this.tank = new FluidTank(Fluids.NONE, 2_000);
+		this.tank = new FluidTank(Fluids.NONE, 45);
 	}
 
 	@Override
 	public void updateEntity() {
 
-		if(!worldObj.isRemote) {
+		if(!worldObj.isRemote && !(tank.getTankType() == Fluids.SPENTSTEAM)) {
 
 			if(worldObj.getTotalWorldTime() % 20 == 0) {
 				for(DirPos pos : getConPos()) this.trySubscribe(tank.getTankType(), worldObj, pos.getX(), pos.getY(), pos.getZ(), pos.getDir());
@@ -55,8 +54,13 @@ public class TileEntityMachineDrain extends TileEntityLoadedBase implements IFlu
 				int toSpill = Math.max(tank.getFill() / 2, 1);
 				tank.setFill(tank.getFill() - toSpill);
 
-				FT_Polluting.pollute(worldObj, xCoord, yCoord, zCoord, tank.getTankType(), FluidReleaseType.SPILL, toSpill);
-				FT_Gaseous.release(worldObj, tank.getTankType(), toSpill);
+				if(tank.getTankType().hasTrait(FT_VentRadiation.class)){
+					FT_VentRadiation trait = tank.getTankType().getTrait(FT_VentRadiation.class);
+					ChunkRadiationManager.proxy.incrementRad(worldObj, xCoord, yCoord, zCoord, trait.getRadPerMB() * toSpill);
+				}
+
+				FT_Polluting.pollute(worldObj, xCoord, yCoord, zCoord, tank.getTankType(), FluidReleaseType.SPILL, toSpill*2);
+				FT_Gaseous.release(worldObj, tank.getTankType(), toSpill*2);
 
 				if(toSpill >= 100 && worldObj.rand.nextInt(20) == 0 && tank.getTankType().hasTrait(FT_Liquid.class) && tank.getTankType().hasTrait(FT_Viscous.class) && tank.getTankType().hasTrait(FT_Flammable.class)) {
 					ForgeDirection dir = ForgeDirection.getOrientation(this.getBlockMetadata() - 10);
@@ -73,7 +77,7 @@ public class TileEntityMachineDrain extends TileEntityLoadedBase implements IFlu
 				}
 			}
 
-		} else {
+		} else if(tank.getTankType() != Fluids.SPENTSTEAM) {
 
 			if(tank.getFill() > 0 && MainRegistry.proxy.me().getDistance(xCoord, yCoord, zCoord) < 100) {
 				ForgeDirection dir = ForgeDirection.getOrientation(this.getBlockMetadata() - 10);
@@ -83,7 +87,7 @@ public class TileEntityMachineDrain extends TileEntityLoadedBase implements IFlu
 				data.setFloat("base", 0.375F);
 				data.setFloat("max", 3F);
 				data.setInteger("life", 100 + worldObj.rand.nextInt(50));
-				
+
 				if(tank.getTankType().hasTrait(FT_Gaseous.class)) {
 					data.setString("type", "tower");
 				} else {

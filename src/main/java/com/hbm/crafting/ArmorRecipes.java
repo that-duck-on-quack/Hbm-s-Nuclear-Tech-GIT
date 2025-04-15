@@ -37,10 +37,10 @@ public class ArmorRecipes {
 		addChest(	TI.ingot(), ModItems.titanium_plate);
 		addLegs(	TI.ingot(), ModItems.titanium_legs);
 		addBoots(	TI.ingot(), ModItems.titanium_boots);
-		addHelmet(	ALLOY.ingot(), ModItems.alloy_helmet);
-		addChest(	ALLOY.ingot(), ModItems.alloy_plate);
-		addLegs(	ALLOY.ingot(), ModItems.alloy_legs);
-		addBoots(	ALLOY.ingot(), ModItems.alloy_boots);
+		CraftingManager.addRecipeAuto(new ItemStack(ModItems.alloy_helmet, 1), new Object[] {"ATA", "A A", 'A', ALLOY.ingot(), 'T', TI.plateCast()});
+		CraftingManager.addRecipeAuto(new ItemStack(ModItems.alloy_plate, 1), new Object[] {"A A", "ATA", "TTT", 'A', ALLOY.ingot(), 'T', TI.plateCast()});
+		CraftingManager.addRecipeAuto(new ItemStack(ModItems.alloy_legs, 1), new Object[] {"TTT", "A A", "A A", 'A', ALLOY.ingot(), 'T', TI.plateCast()});
+		CraftingManager.addRecipeAuto(new ItemStack(ModItems.alloy_boots, 1), new Object[] {"A A", "T T", 'A', ALLOY.ingot(), 'T', TI.plateCast()});
 		addHelmet(	CMB.ingot(), ModItems.cmb_helmet);
 		addChest(	CMB.ingot(), ModItems.cmb_plate);
 		addLegs(	CMB.ingot(), ModItems.cmb_legs);
