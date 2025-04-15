@@ -77,7 +77,7 @@ public class TileEntityMachineDrain extends TileEntityLoadedBase implements IFlu
 				}
 			}
 
-		} else {
+		} else if(tank.getTankType() != Fluids.SPENTSTEAM) {
 
 			if(tank.getFill() > 0 && MainRegistry.proxy.me().getDistance(xCoord, yCoord, zCoord) < 100) {
 				ForgeDirection dir = ForgeDirection.getOrientation(this.getBlockMetadata() - 10);
