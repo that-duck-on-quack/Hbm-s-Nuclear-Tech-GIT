@@ -38,7 +38,7 @@ public class TileEntityMachineDrain extends TileEntityLoadedBase implements IFlu
 	@Override
 	public void updateEntity() {
 
-		if(!worldObj.isRemote) {
+		if(!worldObj.isRemote && !(tank.getTankType() == Fluids.SPENTSTEAM)) {
 
 			if(worldObj.getTotalWorldTime() % 20 == 0) {
 				for(DirPos pos : getConPos()) this.trySubscribe(tank.getTankType(), worldObj, pos.getX(), pos.getY(), pos.getZ(), pos.getDir());
@@ -46,7 +46,7 @@ public class TileEntityMachineDrain extends TileEntityLoadedBase implements IFlu
 
 			networkPackNT(50);
 
-			if(tank.getFill() > 0 && !(tank.getTankType() == Fluids.SPENTSTEAM)) {
+			if(tank.getFill() > 0) {
 				if(tank.getTankType().hasTrait(FT_Amat.class)) {
 					worldObj.newExplosion(null, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, 10F, true, true);
 					return;
