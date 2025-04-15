@@ -1,15 +1,5 @@
-Includes all changes and bugfixes from the latest upstream NTMain update - [X5298 - scatman john's "invisible man" ft. shelly the android lobster](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5298)
-
-## Changed
-* Meteor Aluminium Ore now produces regular aluminium ingots when smelted
-* Barrels flung away from explosions (and are primed to explode themselves) now spin
-* Translation keys now support Australian English
-* New pneumatic tubes can now use any non-corrosive pressurized gases
-* New air intakes are only decorative, use Atmospheric Compressors to collect gases for pneumatic tubes
+Includes all changes and bugfixes from the latest upstream NTMain update - [X5299 - now less comically broken](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5299)
 
 ## Fixed
-* Sun in orbit is 4x smaller than it should be
-* Leviathans deleting blocks when placed
-* Conveyors without vertical parts placing chutes
-* Structures spawning in incorrect dimensions on Thermos based servers
-* Crash when placing pneumatic tubes on light beams
+* Biogas gated behind space-grade machinery due to AIR fluid requirement
+* Redstone torches erroneously don't work without O2
