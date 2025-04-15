@@ -32,7 +32,7 @@ public class TileEntityMachineDrain extends TileEntityLoadedBase implements IFlu
 	public FluidTank tank;
 
 	public TileEntityMachineDrain() {
-		this.tank = new FluidTank(Fluids.NONE, 100);
+		this.tank = new FluidTank(Fluids.NONE, 25);
 	}
 
 	@Override
