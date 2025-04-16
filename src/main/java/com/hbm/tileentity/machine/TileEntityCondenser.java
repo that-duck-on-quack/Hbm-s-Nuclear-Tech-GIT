@@ -122,15 +122,7 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 
 	public void packExtra(NBTTagCompound data) { }
 	public boolean extraCondition(int convert) {
-		if(heatExchanging && tanks[2].getFill() > convert/2){
-			return true;
-		}
-		else if(!heatExchanging) {
-			return true;
-		}else{
-			return false;
-		}
-
+		return true;
 	}
 	public void postConvert(int convert) { }
 
