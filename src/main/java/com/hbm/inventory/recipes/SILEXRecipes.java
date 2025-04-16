@@ -34,8 +34,8 @@ public class SILEXRecipes {
 		itemTranslation.put(new ComparableStack(ModItems.fluid_icon, 1, Fluids.UF6.getID()), new ComparableStack(ModItems.ingot_uranium));
 		dictTranslation.put(U.dust(), U.ingot());
 		recipes.put(U.ingot(), new SILEXRecipe(900, 100, EnumWavelengths.VISIBLE)
-				.addOut(new ItemStack(ModItems.nugget_u235), 1)
-				.addOut(new ItemStack(ModItems.nugget_u238), 99)
+				.addOut(new ItemStack(ModItems.nugget_u235), 4)
+				.addOut(new ItemStack(ModItems.nugget_u238), 96)
 				);
 
 		recipes.put(new ComparableStack(ModItems.ingot_pu_mix), new SILEXRecipe(900, 100, 2)

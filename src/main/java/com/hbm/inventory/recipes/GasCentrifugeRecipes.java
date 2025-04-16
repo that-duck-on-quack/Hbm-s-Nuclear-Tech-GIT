@@ -23,7 +23,7 @@ public class GasCentrifugeRecipes {
 
 		public static PseudoFluidType NONE = new PseudoFluidType("NONE", 0, 0, null, false, (ItemStack[]) null);
 
-		public static PseudoFluidType HEUF6 = new PseudoFluidType("HEUF6", 2700, 0, NONE, true, new ItemStack(ModItems.nugget_u238, 18), new ItemStack(ModItems.nugget_u235, 1), new ItemStack(ModItems.fluorite, 9));
+		public static PseudoFluidType HEUF6 = new PseudoFluidType("HEUF6", 2700, 0, NONE, true, new ItemStack(ModItems.nugget_u238, 15), new ItemStack(ModItems.nugget_u235, 4), new ItemStack(ModItems.fluorite, 9));
 		public static PseudoFluidType MEUF6 = new PseudoFluidType("MEUF6", 200, 100, HEUF6, false, new ItemStack(ModItems.nugget_u238, 1));
 		public static PseudoFluidType LEUF6 = new PseudoFluidType("LEUF6", 300, 200, MEUF6, false, new ItemStack(ModItems.nugget_u238, 1), new ItemStack(ModItems.fluorite, 1));
 		public static PseudoFluidType NUF6 = new PseudoFluidType("NUF6", 400, 300, LEUF6, false, new ItemStack(ModItems.nugget_u238, 1));

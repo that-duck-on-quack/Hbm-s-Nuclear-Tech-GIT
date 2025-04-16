@@ -56,8 +56,8 @@ public class CombinationRecipes extends SerializableRecipe {
 		recipes.put(NA.dust(),									new Pair(null, new FluidStack(Fluids.SODIUM, 100)));
 		recipes.put(LIMESTONE.dust(),							new Pair(new ItemStack(ModItems.powder_calcium), new FluidStack(Fluids.CARBONDIOXIDE, 50)));
 
+		//HBM: HOMELESS SPORK
 		recipes.put(KEY_LOG, new Pair(new ItemStack(Items.coal, 1 ,1), new FluidStack(Fluids.RESIN,100)));
-
 
 
 		//recipes.put(KEY_LOG,		new Pair(new ItemStack(Items.coal, 1 ,1),							new FluidStack(Fluids.WOODOIL, 250)));

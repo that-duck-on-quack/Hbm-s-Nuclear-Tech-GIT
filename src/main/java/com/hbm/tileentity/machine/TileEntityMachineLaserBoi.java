@@ -157,8 +157,6 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 				slots[0] = null;
 			}
 
-			this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "ambient.weather.thunder", 10000.0F,
-				0.8F + this.worldObj.rand.nextFloat() * 0.2F);
 		}
 	}
 

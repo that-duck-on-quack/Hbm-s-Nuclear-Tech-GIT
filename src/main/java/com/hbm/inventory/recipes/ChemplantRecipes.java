@@ -164,8 +164,8 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.outputItems(new ItemStack(ModItems.ingot_pc)));
 		recipes.add(new ChemRecipe(96, "PVC", 100)
 			.inputFluids(
-				new FluidStack(Fluids.VINYL_CHLORIDE, 1000, GeneralConfig.enable528 ? 2 : 0),
-				new FluidStack(Fluids.OXYGEN, 4000, GeneralConfig.enable528 ? 2 : 0))
+				new FluidStack(Fluids.VINYL_CHLORIDE, 500, GeneralConfig.enable528 ? 2 : 0),
+				new FluidStack(Fluids.OXYGEN, 2000, GeneralConfig.enable528 ? 2 : 0))
 			.outputItems(new ItemStack(ModItems.ingot_pvc, 2)));
 		recipes.add(new ChemRecipe(89, "DYNAMITE", 50)
 			.inputFluids(new FluidStack(Fluids.TOULENE, 100))
@@ -541,7 +541,7 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.outputFluids(new FluidStack(Fluids.STYRENE,1000))
 		);
 		recipes.add(new ChemRecipe(1107,"VINYLCHLORIDE",600)
-			.inputFluids(new FluidStack(Fluids.ETHYLENE, 1000), new FluidStack(Fluids.CHLORINE, 2000))
+			.inputFluids(new FluidStack(Fluids.ETHYLENE, 500), new FluidStack(Fluids.CHLORINE, 1000))
 			.outputFluids(new FluidStack(Fluids.VINYL_CHLORIDE, 1000), new FluidStack(Fluids.HCL, 250))
 		);
 		recipes.add(new ChemRecipe(1108, "ETHYLENE", 200)
@@ -588,6 +588,15 @@ public class ChemplantRecipes extends SerializableRecipe {
 			.inputFluids(new FluidStack(Fluids.EPOXY,5000))
 			.inputItems(new ComparableStack(ModItems.circuit, 64, EnumCircuitType.PCB))
 			.outputItems(new ItemStack(ModItems.epoxy_pcb,64))
+		);
+		recipes.add(new ChemRecipe(1123, "ANTI_KNOCK",200)
+			.inputItems(new OreDictStack(PB.dust(),1),new OreDictStack(NA.dust(),1))
+			.inputFluids(new FluidStack(Fluids.ETHANE, 1000))
+			.outputItems(new ItemStack(ModItems.fuel_additive,3),new ItemStack(ModItems.powder_sodium))
+		);
+		recipes.add(new ChemRecipe(1124, "CRUDEPHENOL",300)
+			.inputFluids(new FluidStack(Fluids.COALCREOSOTE,500))
+			.outputFluids(new FluidStack(Fluids.PHENOL,100))
 		);
 
 
