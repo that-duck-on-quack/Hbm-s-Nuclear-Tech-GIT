@@ -110,20 +110,18 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 				postConvert(convert);
 			}
 
+			this.subscribeToAllAround(tanks[0].getTankType(), this);
+			this.sendFluidToAll(tanks[1], this);
 			if(heatExchanging){
 				this.subscribeToAllAround(tanks[2].getTankType(), this);
 			}
-			this.subscribeToAllAround(tanks[0].getTankType(), this);
-			this.sendFluidToAll(tanks[1], this);
 
 			networkPackNT(150);
 		}
 	}
 
 	public void packExtra(NBTTagCompound data) { }
-	public boolean extraCondition(int convert) {
-		return true;
-	}
+	public boolean extraCondition(int convert) { return true; }
 	public void postConvert(int convert) { }
 
 	@Override
