@@ -33,8 +33,8 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 	public boolean heatExchanging = true;
 
 	//Configurable values
-	public static int inputTankSize = 100;
-	public static int outputTankSize = 100;
+	public static int inputTankSize = 150;
+	public static int outputTankSize = 150;
 	public static int evTankSize = 50;
 
 	public TileEntityCondenser() {
@@ -97,9 +97,9 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 
 				if(shouldEvaporate) { // Make both steam and water evaporate during firestorms and in vacuums
 					tanks[1].setFill(tanks[1].getFill() - convert);
-				} else if(heatExchanging && tanks[2].getFill() > convert/2){
+				} else if(heatExchanging && tanks[2].getFill() > convert/4){
 					tanks[1].setFill(tanks[1].getFill() + convert);
-					tanks[2].setFill(tanks[2].getFill() - convert/2);
+					tanks[2].setFill(tanks[2].getFill() - convert/4);
 				}
 				else if(!heatExchanging)
 				{
@@ -121,7 +121,16 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 	}
 
 	public void packExtra(NBTTagCompound data) { }
-	public boolean extraCondition(int convert) { return true; }
+	public boolean extraCondition(int convert) {
+		if(heatExchanging && tanks[2].getFill() > convert/4){
+			return true;
+		}
+		else if(!heatExchanging)
+		{
+			return true;
+		}
+		return false;
+	}
 	public void postConvert(int convert) { }
 
 	@Override
@@ -147,7 +156,7 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		tanks[0].readFromNBT(nbt, "0");
+		tanks[0].readFromNBT(nbt, "3");
 		tanks[1].readFromNBT(nbt, "1");
 		if(heatExchanging){
 			tanks[2].readFromNBT(nbt, "2");
@@ -157,7 +166,7 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		tanks[0].writeToNBT(nbt, "0");
+		tanks[0].writeToNBT(nbt, "3");
 		tanks[1].writeToNBT(nbt, "1");
 		if(heatExchanging){
 			tanks[2].writeToNBT(nbt, "2");
