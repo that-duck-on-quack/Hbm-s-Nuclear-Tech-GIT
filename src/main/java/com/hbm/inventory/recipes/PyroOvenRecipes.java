@@ -126,7 +126,7 @@ public class PyroOvenRecipes extends SerializableRecipe {
 		//hbm hard stuff
 		recipes.add(new PyroOvenRecipe(2400)
 			.in(new OreDictStack(KEY_LOG,20))
-			.out(new ItemStack(Items.coal, 20 ,1)).out(new FluidStack(WOODOIL,100))
+			.out(new ItemStack(Items.coal, 20 ,1)).out(new FluidStack(WOODOIL,2000))
 		);
 		recipes.add(new PyroOvenRecipe(1200)
 			.in(new OreDictStack(KEY_LOG,20)).in(new FluidStack(AIR,1000))
