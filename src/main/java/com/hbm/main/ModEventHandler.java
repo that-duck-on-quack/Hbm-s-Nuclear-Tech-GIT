@@ -1965,6 +1965,9 @@ public class ModEventHandler {
 					ev.player.getEntityData().setInteger("crateslot", -1);
 					p.inventory.setInventorySlotContents(ev.player.inventory.currentItem, new ItemStack(ModItems.dust));
 				}
+				else{
+					p.getEntityData().setInteger("crateslot", -1);
+				}
 			}
 		}
 	}
