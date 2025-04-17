@@ -49,6 +49,7 @@ import com.hbm.handler.threading.PacketThreading;
 import com.hbm.items.IEquipReceiver;
 import com.hbm.items.ModItems;
 import com.hbm.items.armor.*;
+import com.hbm.items.block.ItemBlockStorageCrate;
 import com.hbm.items.food.ItemConserve.EnumFoodType;
 import com.hbm.items.tool.ItemGuideBook.BookType;
 import com.hbm.items.weapon.ItemGunBase;
@@ -1946,6 +1947,25 @@ public class ModEventHandler {
 			for(WeightedRandomFishable fishable : overworldFish) FishingHooks.addFish(fishable);
 			for(WeightedRandomFishable fishable : overworldJunk) FishingHooks.addJunk(fishable);
 			for(WeightedRandomFishable fishable : overworldTreasure) FishingHooks.addTreasure(fishable);
+		}
+	}
+
+	//The STUPIDEST DupeFix in the history of humanity.
+	@SubscribeEvent
+	public void onTickPlayer(TickEvent.PlayerTickEvent ev){
+		EntityPlayer p = ev.player;
+		if(ev.player.openContainer != ev.player.inventoryContainer && ev.player.getHeldItem() != null){
+			if(ev.player.getEntityData().getInteger("crateslot") != -1 && ev.player.openContainer.getClass().toString().contains("ContainerCrate")){
+				if(ev.player.inventory.currentItem != ev.player.getEntityData().getInteger("crateslot")){
+					p.closeScreen();
+					p.inventory.setInventorySlotContents(ev.player.inventory.currentItem, new ItemStack(ModItems.dust));
+					p.inventory.markDirty();
+					p.addChatComponentMessage(new ChatComponentText("Cher Here, I'll be taking that.").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+					p.worldObj.playSoundEffect(p.posX,p.posY,p.posZ, "ambient.weather.thunder", 10000.0F, 0.8F + p.worldObj.rand.nextFloat() * 0.2F);
+					ev.player.getEntityData().setInteger("crateslot", -1);
+					p.inventory.setInventorySlotContents(ev.player.inventory.currentItem, new ItemStack(ModItems.dust));
+				}
+			}
 		}
 	}
 
