@@ -1955,8 +1955,8 @@ public class ModEventHandler {
 	public void onTickPlayer(TickEvent.PlayerTickEvent ev){
 		EntityPlayer p = ev.player;
 		if(p.openContainer != p.inventoryContainer && p.getHeldItem() != null){
-			if(p.getHeldItem().getUnlocalizedName().contains("container.crate") && p.getEntityData().getInteger("crateslot") != -1 && p.openContainer.getClass().toString().contains("ContainerCrate")){
-				if(ev.player.inventory.currentItem != ev.player.getEntityData().getInteger("crateslot")){
+			if(p.getEntityData().getInteger("crateslot") != -1 && p.openContainer.getClass().toString().contains("ContainerCrate")){
+				if(ev.player.getHeldItem().getItem().getUnlocalizedName().contains("crate") && ev.player.inventory.currentItem != ev.player.getEntityData().getInteger("crateslot")){
 					p.closeScreen();
 					p.inventory.setInventorySlotContents(ev.player.inventory.currentItem, new ItemStack(ModItems.dust));
 					p.inventory.markDirty();
