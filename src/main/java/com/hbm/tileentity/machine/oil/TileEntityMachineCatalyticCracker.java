@@ -29,7 +29,7 @@ public class TileEntityMachineCatalyticCracker extends TileEntityLoadedBase impl
 		tanks[1] = new FluidTank(Fluids.STEAM, 8000);
 		tanks[2] = new FluidTank(Fluids.OIL, 4000);
 		tanks[3] = new FluidTank(Fluids.PETROLEUM, 4000);
-		tanks[4] = new FluidTank(Fluids.SPENTSTEAM, 800);
+		tanks[4] = new FluidTank(Fluids.WATER, 800);
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class TileEntityMachineCatalyticCracker extends TileEntityLoadedBase impl
 			tanks[1].setTankType(Fluids.STEAM);
 			tanks[2].setTankType(quart.getKey().type);
 			tanks[3].setTankType(quart.getValue().type);
-			tanks[4].setTankType(Fluids.SPENTSTEAM);
+			tanks[4].setTankType(Fluids.WATER);
 		} else {
 			tanks[2].setTankType(Fluids.NONE);
 			tanks[3].setTankType(Fluids.NONE);

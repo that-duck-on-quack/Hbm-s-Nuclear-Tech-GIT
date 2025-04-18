@@ -32,13 +32,13 @@ public class TileEntityMachineDrain extends TileEntityLoadedBase implements IFlu
 	public FluidTank tank;
 
 	public TileEntityMachineDrain() {
-		this.tank = new FluidTank(Fluids.NONE, 45);
+		this.tank = new FluidTank(Fluids.NONE, 1250);
 	}
 
 	@Override
 	public void updateEntity() {
 
-		if(!worldObj.isRemote && !(tank.getTankType() == Fluids.SPENTSTEAM)) {
+		if(!worldObj.isRemote && !(tank.getTankType() == Fluids.SPENTSTEAM) && !(tank.getTankType() == Fluids.AERATEDWATER)) {
 
 			if(worldObj.getTotalWorldTime() % 20 == 0) {
 				for(DirPos pos : getConPos()) this.trySubscribe(tank.getTankType(), worldObj, pos.getX(), pos.getY(), pos.getZ(), pos.getDir());

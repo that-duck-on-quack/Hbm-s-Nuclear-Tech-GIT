@@ -47,7 +47,7 @@ public class GUIToolBox extends GuiContainer {
 		String name = I18n.format(this.inventory.getInventoryName());
 
 		if(inventory.hasCustomInventoryName()) {
-			name = inventory.target.getDisplayName();
+			name = inventory.original.getDisplayName();
 		}
 
 		this.fontRendererObj.drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 37, 4210752);
