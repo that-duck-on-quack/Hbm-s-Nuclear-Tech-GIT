@@ -24,31 +24,25 @@ group = "com.hbm" // http://maven.apache.org/guides/mini/guide-naming-convention
 	println(project.version)
 }*/
 
-/*
-processResources {
-	// this will ensure that this task is redone when the versions change.
-	inputs.property("version", project.version)
-	inputs.property("mcversion", project.minecraft.version)
 
-	// replace stuff in mcmod.info, nothing else
-	from(sourceSets.main.resources.srcDirs) {
-		include 'mcmod.info'
-
-		// replace version and mcversion
-		filesMatching('mcmod.info') {
-			// replace version, mcversion and credits
-			expand([
-				version: version_name,
-				credits: project.credits
-			])
-		}
+tasks.processResources {
+	val reps = mapOf<String,String>(
+		"version" to project.version.toString(),
+		"mcversion" to project.minecraft.version.toString(),
+		"credits" to project.property("credits").toString()
+	)
+	reps.forEach { (key, value) ->
+		inputs.property(key, value)
 	}
 
-	// copy everything else, thats not the mcmod.info
-	from(sourceSets.main.resources.srcDirs) {
-		exclude 'mcmod.info'
+	filesMatching("mcmod.info") {
+		expand(reps)
 	}
-}*/
+}
+
+tasks.reobfJar {
+
+}
 
 // A little hack to fix codechicken's crazy maven structure (at least in 1.7.10)
 /*eclipse.classpath.file.whenMerged { cp ->

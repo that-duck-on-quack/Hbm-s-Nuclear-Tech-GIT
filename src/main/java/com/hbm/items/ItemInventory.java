@@ -52,8 +52,8 @@ public abstract class ItemInventory implements IInventory {
 
 		int invSize = this.getSizeInventory();
 
+		// Remove slots that are now empty or overwrite them with the correct item data.
 		for(int i = 0; i < invSize; i++) {
-
 			ItemStack stack = this.getStackInSlot(i);
 			if(stack == null) {
 				nbt.removeTag("slot" + i);
@@ -66,10 +66,11 @@ public abstract class ItemInventory implements IInventory {
 		ItemStack target = original.copy();
 		target.setTagCompound(checkNBT(nbt));
 		int k = -1;
+		// Find the original ItemStack in case it moved and only save to it if size equals 1.
 		for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
 			ItemStack s = player.inventory.getStackInSlot(i);
 			if(s != null) {
-				if(s.isItemEqual(original)){
+				if(s.isItemEqual(original) && s.stackSize == 1){
 					k=i;
 					break;
 				}
