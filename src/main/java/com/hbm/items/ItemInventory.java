@@ -76,6 +76,7 @@ public abstract class ItemInventory implements IInventory {
 		}
 		if(k != -1) {
 			player.inventory.setInventorySlotContents(k, target);
+			original=target;
 		}
 
 	}
