@@ -82,7 +82,7 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 					this.daTimer = 20;
 
 				if(tanks[2].getFill() > 1 && tanks[2].getFill() > convert/100){
-					tanks[1].setFill(tanks[1].getFill() + convert + 1);
+					tanks[1].setFill(tanks[1].getFill() + convert);
 					tanks[2].setFill(tanks[2].getFill() - convert/100);
 				}
 			}
