@@ -163,7 +163,7 @@ public abstract class ItemInventory implements IInventory {
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		return slots[slot].copy();
+		return slots[slot] != null ? slots[slot].copy() : null;
 	}
 
 	@Override
