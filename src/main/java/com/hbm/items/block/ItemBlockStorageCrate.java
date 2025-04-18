@@ -34,10 +34,10 @@ public class ItemBlockStorageCrate extends ItemBlockBase implements IGUIProvider
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		Integer slot = player.inventory.currentItem;
 		player.getEntityData().setInteger("crateslot", slot);
-		ItemStack it = player.inventory.getStackInSlot(slot);
-		Block block = Block.getBlockFromItem(it.getItem());
+		Block block = Block.getBlockFromItem(player.inventory.getStackInSlot(slot).getItem());
+
 		if(block == ModBlocks.mass_storage) return stack; // Genuinely can't figure out how to make this part work, so I'm just not gonna mess with it.
-		player.inventory.currentItem = slot;
+
 		if(!world.isRemote && stack.stackSize == 1) {
 			if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("lock")) {
 				for (ItemStack item : player.inventory.mainInventory) {
@@ -49,18 +49,14 @@ public class ItemBlockStorageCrate extends ItemBlockBase implements IGUIProvider
 						continue;
 					if (item.stackTagCompound.getInteger("pins") == stack.stackTagCompound.getInteger("lock")) { // Check if pins are equal (if it can open it)
 						TileEntityCrateBase.spawnSpiders(player, world, stack);
-						if(player.inventory.currentItem == player.getEntityData().getInteger("crateslot")){
-							player.openGui(MainRegistry.instance, 0, world, 0, 0, 0);
-						}
+						player.openGui(MainRegistry.instance, 0, world, 0, 0, 0);
 						break;
 					}
 				}
 				return stack; // Return early if it was locked.
 			}
 			TileEntityCrateBase.spawnSpiders(player, world, stack);
-			if(player.inventory.currentItem == player.getEntityData().getInteger("crateslot")){
-				player.openGui(MainRegistry.instance, 0, world, 0, 0, 0); // If there is no lock then don't bother checking.
-			}
+			player.openGui(MainRegistry.instance, 0, world, 0, 0, 0); // If there is no lock then don't bother checking.
 		}
 
 		return stack;
@@ -140,7 +136,7 @@ public class ItemBlockStorageCrate extends ItemBlockBase implements IGUIProvider
 		@Override
 		public void markDirty() { // I HATE THIS SO MUCH
 
-			if(player.getEntityWorld().isRemote || !toMarkDirty || player.inventory.currentItem != player.getEntityData().getInteger("crateslot")) { // go the fuck away
+			if(player.getEntityWorld().isRemote || !toMarkDirty) { // go the fuck away
 				return;
 			}
 
@@ -149,13 +145,9 @@ public class ItemBlockStorageCrate extends ItemBlockBase implements IGUIProvider
 			int invSize = this.getSizeInventory();
 
 			for(int i = 0; i < invSize; i++) {
-
 				ItemStack stack = this.getStackInSlot(i);
 				if(stack == null)
 					continue;
-				if(player.inventory.getCurrentItem().getItem() != target.getItem()){
-					return;
-				}
 
 				NBTTagCompound slot = new NBTTagCompound();
 				stack.writeToNBT(slot);
@@ -172,9 +164,7 @@ public class ItemBlockStorageCrate extends ItemBlockBase implements IGUIProvider
 			}
 
 			target.setTagCompound(checkNBT(nbt));
-			if(player.inventory.currentItem == player.getEntityData().getInteger("crateslot")) {
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, target);
-			}
+			player.inventory.setInventorySlotContents(player.getEntityData().getInteger("crateslot"), target);
 		}
 	}
 }
