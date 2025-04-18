@@ -1,6 +1,7 @@
 package com.hbm.inventory.container;
 
 import com.hbm.inventory.SlotNonRetarded;
+import com.hbm.items.ItemInventory;
 import com.hbm.items.block.ItemBlockStorageCrate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -18,6 +19,7 @@ public class ContainerCrateBase extends ContainerBase {
 		tile.openInventory();
 	}
 
+
 	@Override
 	public void playerInv(InventoryPlayer invPlayer, int playerInvX, int playerInvY, int playerHotbarY) {
 		for(int i = 0; i < 3; i++) {
@@ -33,6 +35,23 @@ public class ContainerCrateBase extends ContainerBase {
 
 	@Override
 	public ItemStack slotClick(int index, int button, int mode, EntityPlayer player) {
+		if(tile instanceof ItemInventory){
+			ItemStack original = ((ItemInventory) tile).original;
+			boolean exit = true;
+			for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+				ItemStack s = player.inventory.getStackInSlot(i);
+				if(s != null) {
+					if(s.isItemEqual(original) && s.stackSize == 1){
+						exit = false;
+						break;
+					}
+				}
+			}
+			if(exit) {
+				player.closeScreen();
+				return null;
+			}
+		}
 		// prevents the player from moving around the currently open box
 		if(player.inventory.getStackInSlot(player.inventory.currentItem) != null &&
 			player.inventory.getStackInSlot(player.inventory.currentItem).getItem() instanceof ItemBlockStorageCrate && !(this.crate instanceof TileEntity)) {

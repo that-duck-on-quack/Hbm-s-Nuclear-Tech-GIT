@@ -11,6 +11,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -29,29 +30,26 @@ public abstract class ItemInventory implements IInventory {
 		this.player = player;
 		this.original = target;
 		slots = new ItemStack[this.getSizeInventory()];
-		if(target.stackTagCompound == null)
-			target.stackTagCompound = new NBTTagCompound();
 
-		ItemStack[] fromNBT = ItemStackUtil.readStacksFromNBT(target, slots.length);
-
-		if(fromNBT != null) {
-			System.arraycopy(fromNBT, 0, slots, 0, slots.length);
+		if(target.stackTagCompound != null) {
+			for (int i = 0; i < this.getSizeInventory(); i++) {
+				NBTTagCompound compound = target.stackTagCompound.getCompoundTag("slot" + i);
+				if (compound != null) {
+					this.setInventorySlotContents(i, ItemStack.loadItemStackFromNBT(compound));
+				}
+			}
 		}
-		toMarkDirty = true;
-		this.markDirty();
-		toMarkDirty = false;
 	}
 
 	@Override
 	public void markDirty() {
-		if(player.getEntityWorld().isRemote || !toMarkDirty || player.inventory.currentItem != player.getEntityData().getInteger("crateslot")) { // go the fuck away
+		if(player.getEntityWorld().isRemote || !toMarkDirty) {
 			return;
 		}
 
-		NBTTagCompound nbt = (NBTTagCompound) original.stackTagCompound.copy();
+		NBTTagCompound nbt = original.stackTagCompound != null ? (NBTTagCompound) original.stackTagCompound.copy() : new NBTTagCompound();
 
 		int invSize = this.getSizeInventory();
-
 		// Remove slots that are now empty or overwrite them with the correct item data.
 		for(int i = 0; i < invSize; i++) {
 			ItemStack stack = this.getStackInSlot(i);
@@ -134,7 +132,9 @@ public abstract class ItemInventory implements IInventory {
 		ItemStack stack = getStackInSlot(slot);
 		if (stack != null) {
 			if (stack.stackSize > amount) {
-				stack = stack.splitStack(amount);
+				ItemStack ret = stack.splitStack(amount);
+				setInventorySlotContents(slot, stack);
+				return ret;
 			} else {
 				setInventorySlotContents(slot, null);
 			}
@@ -147,8 +147,10 @@ public abstract class ItemInventory implements IInventory {
 		if(stack != null) {
 			stack.stackSize = Math.min(stack.stackSize, this.getInventoryStackLimit());
 		}
-
 		slots[slot] = stack;
+		toMarkDirty = true;
+		markDirty();
+		toMarkDirty = false;
 	}
 
 	@Override
@@ -160,7 +162,7 @@ public abstract class ItemInventory implements IInventory {
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		return slots[slot];
+		return slots[slot].copy();
 	}
 
 	@Override

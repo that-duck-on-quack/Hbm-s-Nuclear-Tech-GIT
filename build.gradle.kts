@@ -11,7 +11,7 @@ var version_name = version
 val mod_build_number = property("mod_build_number").toString();
 if(!mod_build_number.isEmpty()) {
 	version_name = mod_version + "_X" + mod_build_number + "_H261"
-	version = "[${version_name}]"
+	version = "${version_name}"
 }
 group = "com.hbm" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 //base { archivesBaseName.set("HBM-NTM") }
