@@ -21,25 +21,63 @@ public abstract class ItemInventory implements IInventory {
 
 	public EntityPlayer player;
 	public ItemStack[] slots;
-	public ItemStack target;
+	public ItemStack original;
 
 	public boolean toMarkDirty = false;
 
+	public ItemInventory(EntityPlayer player, ItemStack target) {
+		this.player = player;
+		this.original = target;
+		slots = new ItemStack[this.getSizeInventory()];
+		if(target.stackTagCompound == null)
+			target.stackTagCompound = new NBTTagCompound();
+
+		ItemStack[] fromNBT = ItemStackUtil.readStacksFromNBT(target, slots.length);
+
+		if(fromNBT != null) {
+			System.arraycopy(fromNBT, 0, slots, 0, slots.length);
+		}
+		toMarkDirty = true;
+		this.markDirty();
+		toMarkDirty = false;
+	}
+
 	@Override
 	public void markDirty() {
-
-		if(!toMarkDirty || player.getEntityWorld().isRemote)
+		if(player.getEntityWorld().isRemote || !toMarkDirty || player.inventory.currentItem != player.getEntityData().getInteger("crateslot")) { // go the fuck away
 			return;
-
-		for(int i = 0; i < getSizeInventory(); ++i) {
-			if(getStackInSlot(i) != null && getStackInSlot(i).stackSize == 0) {
-				slots[i] = null;
-			}
 		}
 
-		ItemStackUtil.addStacksToNBT(target, slots); // Maintain compatibility with the containment boxes.
+		NBTTagCompound nbt = (NBTTagCompound) original.stackTagCompound.copy();
 
-		target.setTagCompound(checkNBT(target.getTagCompound()));
+		int invSize = this.getSizeInventory();
+
+		for(int i = 0; i < invSize; i++) {
+
+			ItemStack stack = this.getStackInSlot(i);
+			if(stack == null) {
+				nbt.removeTag("slot" + i);
+			} else {
+				NBTTagCompound slot = new NBTTagCompound();
+				stack.writeToNBT(slot);
+				nbt.setTag("slot" + i, slot);
+			}
+		}
+		ItemStack target = original.copy();
+		target.setTagCompound(checkNBT(nbt));
+		int k = -1;
+		for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+			ItemStack s = player.inventory.getStackInSlot(i);
+			if(s != null) {
+				if(s.isItemEqual(original)){
+					k=i;
+					break;
+				}
+			}
+		}
+		if(k != -1) {
+			player.inventory.setInventorySlotContents(k, target);
+		}
 
 	}
 

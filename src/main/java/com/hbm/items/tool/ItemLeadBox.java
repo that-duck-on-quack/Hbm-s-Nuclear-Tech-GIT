@@ -48,21 +48,7 @@ public class ItemLeadBox extends Item implements IGUIProvider {
 	public static class InventoryLeadBox extends ItemInventory {
 
 		public InventoryLeadBox(EntityPlayer player, ItemStack box) {
-			this.player = player;
-			this.target = box;
-			slots = new ItemStack[this.getSizeInventory()];
-
-			if(!box.hasTagCompound())
-				box.setTagCompound(new NBTTagCompound());
-
-			ItemStack[] fromNBT = ItemStackUtil.readStacksFromNBT(box, slots.length);
-
-			if(fromNBT != null) {
-				System.arraycopy(fromNBT, 0, slots, 0, slots.length);
-			}
-			toMarkDirty = true;
-			this.markDirty();
-			toMarkDirty = false;
+			super(player,box);
 		}
 
 		@Override
@@ -77,7 +63,7 @@ public class ItemLeadBox extends Item implements IGUIProvider {
 
 		@Override
 		public boolean hasCustomInventoryName() {
-			return target.hasDisplayName();
+			return original.hasDisplayName();
 		}
 
 		@Override
