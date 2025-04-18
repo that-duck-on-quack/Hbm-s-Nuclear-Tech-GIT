@@ -1958,12 +1958,8 @@ public class ModEventHandler {
 			if(p.getEntityData().getInteger("crateslot") != -1 && p.openContainer.getClass().toString().contains("ContainerCrate")){
 				if(ev.player.getHeldItem().getItem().getUnlocalizedName().contains("crate") && ev.player.inventory.currentItem != ev.player.getEntityData().getInteger("crateslot")){
 					p.closeScreen();
-					p.inventory.setInventorySlotContents(ev.player.inventory.currentItem, new ItemStack(ModItems.dust));
-					p.inventory.markDirty();
-					p.addChatComponentMessage(new ChatComponentText("Cher Here, I'll be taking that.").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+					p.addChatComponentMessage(new ChatComponentText("Cher Here! Don't do that, Kay?").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.BLUE)));
 					p.worldObj.playSoundEffect(p.posX,p.posY,p.posZ, "ambient.weather.thunder", 10000.0F, 0.8F + p.worldObj.rand.nextFloat() * 0.2F);
-					ev.player.getEntityData().setInteger("crateslot", -1);
-					p.inventory.setInventorySlotContents(ev.player.inventory.currentItem, new ItemStack(ModItems.dust));
 				}
 				else{
 					p.getEntityData().setInteger("crateslot", -1);
