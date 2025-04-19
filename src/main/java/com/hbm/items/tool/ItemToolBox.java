@@ -254,21 +254,7 @@ public class ItemToolBox extends Item implements IGUIProvider {
 	public static class InventoryToolBox extends ItemInventory {
 
 		public InventoryToolBox(EntityPlayer player, ItemStack box) {
-			this.player = player;
-			this.target = box;
-			slots = new ItemStack[this.getSizeInventory()];
-
-			if(!box.hasTagCompound())
-				box.setTagCompound(new NBTTagCompound());
-
-			ItemStack[] fromNBT = ItemStackUtil.readStacksFromNBT(box, slots.length);
-
-			if(fromNBT != null) {
-				System.arraycopy(fromNBT, 0, slots, 0, slots.length);
-			}
-			toMarkDirty = true;
-			this.markDirty();
-			toMarkDirty = false;
+			super(player,box);
 		}
 
 		@Override
@@ -283,13 +269,12 @@ public class ItemToolBox extends Item implements IGUIProvider {
 
 		@Override
 		public boolean hasCustomInventoryName() {
-			return target.hasDisplayName();
+			return original.hasDisplayName();
 		}
 
 		@Override
 		public void closeInventory() {
-			this.target.getTagCompound().removeTag("isOpen");
-			this.player.inventory.setInventorySlotContents(this.player.inventory.currentItem, this.target);
+			this.original.getTagCompound().removeTag("isOpen");
 			super.closeInventory();
 		}
 

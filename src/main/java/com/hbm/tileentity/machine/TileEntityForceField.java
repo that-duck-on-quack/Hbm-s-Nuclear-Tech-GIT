@@ -371,12 +371,11 @@ public class TileEntityForceField extends TileEntityLoadedBase implements ISided
 		outside.clear();
 		inside.clear();
 
-		List<Object> list = worldObj.getEntitiesWithinAABBExcludingEntity(null, AxisAlignedBB.getBoundingBox(xCoord + 0.5 - (rad + 25), yCoord + 0.5 - (rad + 25), zCoord + 0.5 - (rad + 25), xCoord + 0.5 + (rad + 25), yCoord + 0.5 + (rad + 25), zCoord + 0.5 + (rad + 25)));
+		List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(null, AxisAlignedBB.getBoundingBox(xCoord + 0.5 - (rad + 25), yCoord + 0.5 - (rad + 25), zCoord + 0.5 - (rad + 25), xCoord + 0.5 + (rad + 25), yCoord + 0.5 + (rad + 25), zCoord + 0.5 + (rad + 25)));
 
-		for(Object o : list) {
+		for(Entity entity : list) {
 
-			if(o instanceof Entity && !(o instanceof EntityPlayer)) {
-				Entity entity = (Entity)o;
+			if(!(entity instanceof EntityPlayer)) {
 
 				double dist = Math.sqrt(Math.pow(xCoord + 0.5 - entity.posX, 2) + Math.pow(yCoord + 0.5 - entity.posY, 2) + Math.pow(zCoord + 0.5 - entity.posZ, 2));
 
