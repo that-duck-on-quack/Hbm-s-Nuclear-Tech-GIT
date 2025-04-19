@@ -114,7 +114,7 @@ public class ContainerBase extends Container {
 				if(targetStack != null && targetStack.getItem() == stack.getItem() && (!stack.getHasSubtypes() || stack.getItemDamage() == targetStack.getItemDamage()) && ItemStack.areItemStackTagsEqual(stack, targetStack)) {
 					if(targetSlot.isItemValid(stack)) {
 						int l = targetStack.stackSize + stack.stackSize;
-	
+
 						if(l <= maxStackSize) {
 							stack.stackSize = 0;
 							targetStack.stackSize = l;

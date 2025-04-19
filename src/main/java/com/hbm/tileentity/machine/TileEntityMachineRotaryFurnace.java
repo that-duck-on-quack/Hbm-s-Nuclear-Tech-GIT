@@ -77,7 +77,7 @@ public class TileEntityMachineRotaryFurnace extends TileEntityMachinePolluting i
 		tanks = new FluidTank[3];
 		tanks[0] = new FluidTank(Fluids.NONE, 16_000);
 		tanks[1] = new FluidTank(Fluids.STEAM, 12_000);
-		tanks[2] = new FluidTank(Fluids.SPENTSTEAM, 120);
+		tanks[2] = new FluidTank(Fluids.WATER, 120);
 	}
 
 	@Override
@@ -313,7 +313,7 @@ public class TileEntityMachineRotaryFurnace extends TileEntityMachinePolluting i
 		}
 
 		float speed = Math.max((float) burnHeat, 1);
-		
+
 		if(tanks[1].getFill() < recipe.steam * speed) return false;
 		if(tanks[2].getMaxFill() - tanks[2].getFill() < recipe.steam * speed / 100) return false;
 		if(this.steamUsed > 100) return false;

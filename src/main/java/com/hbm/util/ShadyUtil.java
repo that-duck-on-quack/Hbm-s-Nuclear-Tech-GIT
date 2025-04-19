@@ -22,6 +22,7 @@ import java.util.Set;
 public class ShadyUtil {
 
 	//this is a list of UUIDs used for various things, primarily for accessories.
+	//this is a list of UUIDs used for various things, primarily for accessories.
 	//for a comprehensive list, check RenderAccessoryUtility.java
 	public static String HbMinecraft = "192af5d7-ed0f-48d8-bd89-9d41af8524f8";
 	public static String LPkukin = "937c9804-e11f-4ad2-a5b1-42e62ac73077";
@@ -137,7 +138,7 @@ public class ShadyUtil {
 
 	public static void test() {
 		if(!GeneralConfig.enableDebugMode) return; //only run in debug mode
-		
+
 		//unit test for smooshing
 		MainRegistry.logger.debug(smoosh(smTest1, smTest2, smTest3, smTest4));
 

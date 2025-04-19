@@ -11,6 +11,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -21,25 +22,62 @@ public abstract class ItemInventory implements IInventory {
 
 	public EntityPlayer player;
 	public ItemStack[] slots;
-	public ItemStack target;
+	public ItemStack original;
 
 	public boolean toMarkDirty = false;
 
-	@Override
-	public void markDirty() {
+	public ItemInventory(EntityPlayer player, ItemStack target) {
+		this.player = player;
+		this.original = target;
+		slots = new ItemStack[this.getSizeInventory()];
 
-		if(!toMarkDirty || player.getEntityWorld().isRemote)
-			return;
-
-		for(int i = 0; i < getSizeInventory(); ++i) {
-			if(getStackInSlot(i) != null && getStackInSlot(i).stackSize == 0) {
-				slots[i] = null;
+		if(target.stackTagCompound != null) {
+			for (int i = 0; i < this.getSizeInventory(); i++) {
+				NBTTagCompound compound = target.stackTagCompound.getCompoundTag("slot" + i);
+				if (compound != null) {
+					this.setInventorySlotContents(i, ItemStack.loadItemStackFromNBT(compound));
+				}
 			}
 		}
+	}
 
-		ItemStackUtil.addStacksToNBT(target, slots); // Maintain compatibility with the containment boxes.
+	@Override
+	public void markDirty() {
+		if(player.getEntityWorld().isRemote || !toMarkDirty) {
+			return;
+		}
 
-		target.setTagCompound(checkNBT(target.getTagCompound()));
+		NBTTagCompound nbt = original.stackTagCompound != null ? (NBTTagCompound) original.stackTagCompound.copy() : new NBTTagCompound();
+
+		int invSize = this.getSizeInventory();
+		// Remove slots that are now empty or overwrite them with the correct item data.
+		for(int i = 0; i < invSize; i++) {
+			ItemStack stack = this.getStackInSlot(i);
+			if(stack == null) {
+				nbt.removeTag("slot" + i);
+			} else {
+				NBTTagCompound slot = new NBTTagCompound();
+				stack.writeToNBT(slot);
+				nbt.setTag("slot" + i, slot);
+			}
+		}
+		ItemStack target = original.copy();
+		target.setTagCompound(checkNBT(nbt));
+		int k = -1;
+		// Find the original ItemStack in case it moved and only save to it if size equals 1.
+		for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+			ItemStack s = player.inventory.getStackInSlot(i);
+			if(s != null) {
+				if(s.isItemEqual(original) && s.stackSize == 1){
+					k=i;
+					break;
+				}
+			}
+		}
+		if(k != -1) {
+			player.inventory.setInventorySlotContents(k, target);
+			original=target;
+		}
 
 	}
 
@@ -95,7 +133,9 @@ public abstract class ItemInventory implements IInventory {
 		ItemStack stack = getStackInSlot(slot);
 		if (stack != null) {
 			if (stack.stackSize > amount) {
-				stack = stack.splitStack(amount);
+				ItemStack ret = stack.splitStack(amount);
+				setInventorySlotContents(slot, stack);
+				return ret;
 			} else {
 				setInventorySlotContents(slot, null);
 			}
@@ -108,8 +148,10 @@ public abstract class ItemInventory implements IInventory {
 		if(stack != null) {
 			stack.stackSize = Math.min(stack.stackSize, this.getInventoryStackLimit());
 		}
-
 		slots[slot] = stack;
+		toMarkDirty = true;
+		markDirty();
+		toMarkDirty = false;
 	}
 
 	@Override
@@ -121,7 +163,7 @@ public abstract class ItemInventory implements IInventory {
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		return slots[slot];
+		return slots[slot] != null ? slots[slot].copy() : null;
 	}
 
 	@Override

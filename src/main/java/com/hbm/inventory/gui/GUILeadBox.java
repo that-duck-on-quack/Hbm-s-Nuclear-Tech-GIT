@@ -47,7 +47,7 @@ public class GUILeadBox extends GuiContainer {
 		String name = I18n.format(this.inventory.getInventoryName());
 
 		if(inventory.hasCustomInventoryName()) {
-			name = inventory.target.getDisplayName();
+			name = inventory.original.getDisplayName();
 		}
 
 		this.fontRendererObj.drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);

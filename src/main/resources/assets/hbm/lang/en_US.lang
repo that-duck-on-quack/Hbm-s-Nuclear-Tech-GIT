@@ -1749,14 +1749,13 @@ hbmpseudofluid.hepf6=Highly Enriched PF6
 #HBM Hard Chem Recipes
 chem.RESINPRODUCTION=Resin Production
 chem.RESINBALL=Resin Solidification
-chem.DEAERATION= Water Deaeration
-chem.CCH= Calcium Carbide Hydrolysis
-chem.DEAERATION=Water Deaeration
+chem.DEAERATION=Lossy Deaeration Cycle
+chem.CCH=Calcium Carbide Hydrolysis
 chem.DSLURPROD=Rare Earth Acidification
-chem.POLYETHYLENE=Polyethylene Production
+chem.POLYETHYLENE=Ethylene Polymerization
 chem.STYRENE=Styrene Production
 chem.VINYLCHLORIDE=Vinyl-chloride Production
-chem.ETHYLENE=Ethylene Production
+chem.ETHYLENE=Simple Ethane Cracking
 chem.CIRCUITBOARD=Circuit Board Resin Coating
 chem.CIRCUITBOARD2=Circuit Board Phenol Coating
 chem.EPOXY=Epoxy Production
@@ -1766,24 +1765,24 @@ chem.ACETONE=Acetone Production
 chem.RESINPAPER=Paper Resin Treating
 chem.RUBBER2=Unsaturated Rubber Production
 chem.BAKELITE2=Alternative Bakelite Manufacturing
-chem.POLYMER2=Polyethylene Polymerization
-chem.MASS_EPOXY_BOARD=Mass Epoxy Board dipping
-chem.EPOXY_BOARD=Epoxy Board dipping
-chem.CRUDEPHENOL=Crude Phenol Prodduction
+chem.POLYMER2=Polyethylene Mixing & Solidification
+chem.MASS_EPOXY_BOARD=Mass Epoxy Board Dipping
+chem.EPOXY_BOARD=Epoxy Board Dipping
+chem.CRUDEPHENOL=Crude Phenol Production
 chem.ANTI_KNOCK=Tetraethyllead Production
 
 
 #HBM Hard TileEntities and Machines
-tile.deaerator.name=Self-Condensing Deaerator
-tile.machine_laserboi.name=Multi-Point Silicon L.A.S.E.R Engraving System
+tile.deaerator.name=High-Efficiency Deaerator
+tile.machine_laserboi.name=Silicon L.A.S.E.R Engraving System
 
 
 #HBM Hard Items
 item.epoxy_pcb.name=Advanced Circuit Board
 item.resin_paper.name=Resin Treated Paper
 item.crude_circuit.name=Crude Circuit
-item.crude_cap.name=Crude Capacitor
-item.crude_pcb.name=Crude Circuit Board
+item.crude_cap.name=Lead-Based Capacitor
+item.crude_pcb.name=Low-Cost Circuit Board
 item.tungsten_hammer.name=Tungsten Hammer
 item.calcium_carbide.name=Calcium Carbide
 
@@ -3466,7 +3465,7 @@ item.inf_diesel.name=Infinite Diesel Tank
 item.inf_sulfur.name=Infinite Sulfur Tank
 item.inf_tritium.name=Infinite Tritium Tank
 item.inf_water.name=Infinite Water Tank
-item.inf_water_mk2.name=Heavy Infinite Water Tank
+item.inf_water_mk2.name=HEAVIEST EVER INFINITUM WATERIUM CONTAINER
 item.ingot_actinium.name=Actinium-227 Ingot
 item.ingot_advanced_alloy.name=Advanced Alloy Ingot
 item.ingot_aluminium.name=Aluminium Ingot
@@ -6279,7 +6278,7 @@ tile.machine_satlinker.name=Satellite ID Manager
 tile.machine_sawmill.name=Stirling Sawmill
 tile.machine_sawmill.desc=Requires external heat source.$Heat transfer rate: T*0.1 TU/t$Min intake: 100 TU/t, Max intake: 300 TU/t
 tile.machine_schrabidium_battery.name=Schrabidium Energy Storage Block
-tile.machine_schrabidium_transmutator.name=SuperActinide-RadioAlloy (SARAlloy) Transmutation Device
+tile.machine_schrabidium_transmutator.name=SuperActinide Radio-Alloy (SARAlloy) Transmutation Device
 tile.machine_discharger.name=Matter Discharging Device
 tile.machine_selenium.name=Radial Performance Engine
 tile.machine_shredder.name=Shredder

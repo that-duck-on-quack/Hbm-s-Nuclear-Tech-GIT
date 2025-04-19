@@ -516,8 +516,8 @@ public class ChemplantRecipes extends SerializableRecipe {
 				.inputItems(new ComparableStack(ModItems.sulfur, 2))
 				.outputItems(new ItemStack(ModItems.ball_resin,1)));
 
-		recipes.add(new ChemRecipe(1102,"DEAERATION", 3)
-                .inputFluids(new FluidStack(Fluids.AERATEDWATER,250), new FluidStack(Fluids.STEAM, 250))
+		recipes.add(new ChemRecipe(1102,"DEAERATION", 2)
+                .inputFluids(new FluidStack(Fluids.AERATEDWATER,250), new FluidStack(Fluids.STEAM, 185))
                 .outputFluids(new FluidStack(Fluids.WATER, 250)));
 
 		recipes.add(new ChemRecipe(1103,"DSLURPROD", 200)

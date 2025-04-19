@@ -12,6 +12,7 @@ import com.hbm.saveddata.satellites.SatelliteMiner;
 import com.hbm.tileentity.IGUIProvider;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -205,21 +206,20 @@ public class TileEntityMachineSatDock extends TileEntity implements ISidedInvent
                 }
             }
 
-            @SuppressWarnings("unchecked")
-            List<EntityMinerRocket> list = worldObj.getEntitiesWithinAABBExcludingEntity(
+            List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(
                     null,
                     AxisAlignedBB.getBoundingBox(xCoord - 0.25 + 0.5, yCoord + 0.75, zCoord - 0.25 + 0.5, xCoord + 0.25 + 0.5, yCoord + 2, zCoord + 0.25 + 0.5),
                     entity -> entity instanceof EntityMinerRocket
             );
 
-            for (EntityMinerRocket rocket : list) {
+            for (Entity rocket : list) {
                 if (slots[15] != null && ISatChip.getFreqS(slots[15]) != rocket.getDataWatcher().getWatchableObjectInt(17)) {
                     rocket.setDead();
                     ExplosionNukeSmall.explode(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, ExplosionNukeSmall.PARAMS_TOTS);
                     break;
                 }
 
-                if (rocket.getDataWatcher().getWatchableObjectInt(16) == 1 && rocket.timer == 50) {
+                if (rocket.getDataWatcher().getWatchableObjectInt(16) == 1 && ((EntityMinerRocket)rocket).timer == 50) {
                     Satellite sat = data.getSatFromFreq(ISatChip.getFreqS(slots[15]));
                     unloadCargo((SatelliteMiner) sat);
                 }
