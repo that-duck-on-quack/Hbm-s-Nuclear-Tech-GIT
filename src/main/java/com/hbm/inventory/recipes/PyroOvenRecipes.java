@@ -149,8 +149,8 @@ public class PyroOvenRecipes extends SerializableRecipe {
 			.out(DictFrame.fromOne(ModItems.oil_tar, ItemEnums.EnumTarType.COAL)).out(new FluidStack(ACETONE,700))
 		);
 		recipes.add(new PyroOvenRecipe(1800)
-			.in(new OreDictStack(COAL.gem(),1))
-			.out(new FluidStack(COALCREOSOTE,200))
+			.in(new OreDictStack(COAL.gem(),10))
+			.out(new FluidStack(COALCREOSOTE,2000))
 		);
 		recipes.add(new PyroOvenRecipe(1800)
 			.in(new FluidStack(COALCREOSOTE,2000))
@@ -168,7 +168,7 @@ public class PyroOvenRecipes extends SerializableRecipe {
 	}
 	private static void registerSFAuto(FluidType fluid, long tuPerSF, Item fuel) {
 		long tuPerBucket = fluid.getTrait(FT_Flammable.class).getHeatEnergy();
-		double bonus = 0.5D; //double efficiency!!
+		double bonus = 0.8D; //80% efficiency!!!!!!!!!!
 
 		int mB = (int) (tuPerSF * 1000L * bonus / tuPerBucket);
 
