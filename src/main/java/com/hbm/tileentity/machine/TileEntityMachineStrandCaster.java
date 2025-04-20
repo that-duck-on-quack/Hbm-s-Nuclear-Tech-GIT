@@ -45,7 +45,7 @@ public class TileEntityMachineStrandCaster extends TileEntityFoundryCastingBase 
 
 	public TileEntityMachineStrandCaster() {
 		super(7);
-		water = new FluidTank(Fluids.STEAM, 64_000);
+		water = new FluidTank(Fluids.WATER, 64_000);
 		steam = new FluidTank(Fluids.WATER, 64_000); //i'm not gonna bother with this too much
 	}
 
@@ -113,7 +113,7 @@ public class TileEntityMachineStrandCaster extends TileEntityFoundryCastingBase 
 						markChanged();
 
 						water.setFill(water.getFill() - getWaterRequired() * itemsCasted);
-						steam.setFill(steam.getFill() + getWaterRequired() * itemsCasted);
+						steam.setFill((steam.getFill() + getWaterRequired() * itemsCasted)/2);
 
 						lastCastTick = worldObj.getWorldTime();
 					}

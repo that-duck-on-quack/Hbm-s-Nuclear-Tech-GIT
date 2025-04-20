@@ -91,12 +91,39 @@ public class AssemblerRecipes extends SerializableRecipe {
 		makeRecipe(new ComparableStack(ModItems.warhead_incendiary_small, 1), new AStack[] {new ComparableStack(ModItems.warhead_generic_small, 1), new OreDictStack(P_RED.dust(), 4), },100);
 		makeRecipe(new ComparableStack(ModItems.warhead_incendiary_medium, 1), new AStack[] {new ComparableStack(ModItems.warhead_generic_medium, 1), new OreDictStack(P_RED.dust(), 8), },150);
 		makeRecipe(new ComparableStack(ModItems.warhead_incendiary_large, 1), new AStack[] {new ComparableStack(ModItems.warhead_generic_large, 1), new OreDictStack(P_RED.dust(), 16), },200);
-		makeRecipe(new ComparableStack(ModItems.warhead_cluster_small, 1), new AStack[] {new ComparableStack(ModItems.warhead_generic_small, 1), new ComparableStack(ModItems.pellet_cluster, 4), },100);
+		makeRecipe(new ComparableStack(ModItems.warhead_cluster_small, 1), new AStack[] {
+			new ComparableStack(ModItems.warhead_generic_small, 1),
+			new ComparableStack(ModItems.pellet_cluster, 4),
+		},100);
 		makeRecipe(new ComparableStack(ModItems.warhead_cluster_medium, 1), new AStack[] {new ComparableStack(ModItems.warhead_generic_medium, 1), new ComparableStack(ModItems.pellet_cluster, 8), },150);
 		makeRecipe(new ComparableStack(ModItems.warhead_cluster_large, 1), new AStack[] {new ComparableStack(ModItems.warhead_generic_large, 1), new ComparableStack(ModItems.pellet_cluster, 16), },200);
-		makeRecipe(new ComparableStack(ModItems.warhead_buster_small, 1), new AStack[] {new ComparableStack(ModItems.warhead_generic_small, 1), new ComparableStack(ModBlocks.det_cord, 8), },100);
-		makeRecipe(new ComparableStack(ModItems.warhead_buster_medium, 1), new AStack[] {new ComparableStack(ModItems.warhead_generic_medium, 1), new ComparableStack(ModBlocks.det_cord, 4), new ComparableStack(ModBlocks.det_charge, 4), },150);
-		makeRecipe(new ComparableStack(ModItems.warhead_buster_large, 1), new AStack[] {new ComparableStack(ModItems.warhead_generic_large, 1), new ComparableStack(ModBlocks.det_charge, 8), },200);
+		makeRecipe(new ComparableStack(ModItems.warhead_buster_small, 1), new AStack[] {
+			new ComparableStack(ModItems.warhead_generic_small, 1),
+			new ComparableStack(ModBlocks.det_charge, 4),
+			new ComparableStack(ModBlocks.det_cord, 2),
+			new ComparableStack(ModItems.circuit, 2, EnumCircuitType.BASIC),
+			new OreDictStack(U238.ingot(), 2)
+		},100);
+		makeRecipe(new ComparableStack(ModItems.warhead_buster_medium, 1), new AStack[] {
+			new ComparableStack(ModItems.warhead_generic_medium, 1),
+			new ComparableStack(ModBlocks.det_cord, 4),
+			new ComparableStack(ModBlocks.det_charge, 8),
+			new ComparableStack(ModItems.circuit, 2, EnumCircuitType.ADVANCED),
+			new OreDictStack(U238.ingot(), 6)
+		}, 150);
+		makeRecipe(new ComparableStack(ModItems.v1, 1), new AStack[]{
+			new ComparableStack(ModItems.motor_desh, 2),
+			new ComparableStack(ModItems.circuit, 1, EnumCircuitType.ADVANCED),
+			new ComparableStack(Blocks.netherrack, 64),
+			new ComparableStack(ModItems.fluid_tank_full, 2, Fluids.BLOODGAS.getID()),
+			new ComparableStack(ModItems.crt_display, 1)
+		}, 250);
+		makeRecipe(new ComparableStack(ModItems.warhead_buster_large, 1), new AStack[] {
+			new ComparableStack(ModItems.warhead_generic_large, 1),
+			new ComparableStack(ModBlocks.det_charge, 16),
+			new ComparableStack(ModItems.circuit, 2, EnumCircuitType.CONTROLLER), //Buster Controller for yknow, busting at the right time
+			new OreDictStack(U238.ingot(), 12) //Depleted Uranium penetrator
+		},200);
 		makeRecipe(new ComparableStack(ModItems.warhead_nuclear, 1), new AStack[] {new ComparableStack(ModItems.boy_shielding, 1), new ComparableStack(ModItems.boy_target, 1), new ComparableStack(ModItems.boy_bullet, 1), new ComparableStack(ModItems.boy_propellant, 1), new OreDictStack(TI.plateCast(), 12), new ComparableStack(ModItems.circuit, 3, EnumCircuitType.CONTROLLER_ADVANCED) },300);
 		makeRecipe(new ComparableStack(ModItems.warhead_mirv, 1), new AStack[] {new OreDictStack(TI.plateCast(), 12), new OreDictStack(STEEL.plate(), 12), new ComparableStack(ModItems.man_core, 1), new ComparableStack(ModItems.ball_tatb, 8), new OreDictStack(LI.ingot(), 32), new OreDictStack(Fluids.DEUTERIUM.getDict(1_000), 8), new ComparableStack(ModItems.circuit, 4, EnumCircuitType.CONTROLLER_ADVANCED) },500);
 		makeRecipe(new ComparableStack(ModItems.warhead_volcano, 1), new AStack[] {new OreDictStack(TI.plate(), 24), new OreDictStack(STEEL.plate(), 16), new ComparableStack(ModBlocks.det_nuke, 3), new OreDictStack(U238.block(), 24), new ComparableStack(ModItems.circuit, 5, EnumCircuitType.CAPACITOR_BOARD.ordinal()) }, 600);
@@ -109,7 +136,12 @@ public class AssemblerRecipes extends SerializableRecipe {
 		makeRecipe(new ComparableStack(ModItems.chopper_wing, 1), new AStack[] {new OreDictStack(CMB.plate(), 6), new OreDictStack(CMB.ingot(), 3), new OreDictStack(MAGTUNG.wireFine(), 2), },150);
 		makeRecipe(new ComparableStack(ModItems.chopper_blades, 1), new AStack[] {new OreDictStack(CMB.plate(), 8), new OreDictStack(STEEL.plate(), 2), new OreDictStack(CMB.ingot(), 2), },200);
 		makeRecipe(new ComparableStack(ModItems.tritium_deuterium_cake, 1), new AStack[] {new ComparableStack(ModItems.cell_deuterium, 6), new ComparableStack(ModItems.cell_tritium, 2), new OreDictStack(LI.ingot(), 4), },150);
-		makeRecipe(new ComparableStack(ModItems.pellet_cluster, 1), new AStack[] {new OreDictStack(STEEL.plate(), 4), new ComparableStack(Blocks.tnt, 1), }, 50);
+		makeRecipe(new ComparableStack(ModItems.pellet_cluster, 1), new AStack[] {
+			new OreDictStack(STEEL.plate(), 4),
+			new OreDictStack(ANY_PLASTICEXPLOSIVE.ingot(), 8),
+			new ComparableStack(ModBlocks.det_cord, 8),
+			new ComparableStack(ModItems.safety_fuse, 2)
+		}, 50);
 		makeRecipe(new ComparableStack(ModItems.pellet_buckshot, 1), new AStack[] {new OreDictStack(PB.nugget(), 6), }, 50);
 		makeRecipe(new ComparableStack(ModItems.magnetron, 1), new AStack[] {new OreDictStack(CU.plate(), 3), new OreDictStack(W.wireFine(), 4), }, 40);
 		makeRecipe(new ComparableStack(ModItems.redcoil_capacitor, 1), new AStack[] {new OreDictStack(GOLD.plate(), 3), new ComparableStack(ModItems.fuse, 1), new OreDictStack(ALLOY.wireFine(), 4), new ComparableStack(ModItems.coil_advanced_alloy, 6), new ComparableStack(Blocks.redstone_block, 2), },200);
@@ -1591,12 +1623,12 @@ public class AssemblerRecipes extends SerializableRecipe {
 			new ComparableStack(ModItems.rtg_unit, 2)
 		}, 250);
 		makeRecipe(new ComparableStack(ModBlocks.deaerator, 1), new AStack[]{
-			new OreDictStack(STAINLESS.plate(), 16),
-			new OreDictStack(ANY_HARDPLASTIC.ingot(), 32),
-			new OreDictStack(STEEL.pipe(), 16),
-			new ComparableStack(ModItems.circuit, 2, EnumCircuitType.ADVANCED),
-			new OreDictStack(NI.ingot(), 12),
-			new ComparableStack(ModItems.motor_desh, 12)
+			new OreDictStack(STAINLESS.plate(), 8),
+			new OreDictStack(ANY_PLASTIC.ingot(), 16),
+			new OreDictStack(STEEL.pipe(), 8),
+			new ComparableStack(ModItems.circuit, 2, EnumCircuitType.BASIC),
+			new OreDictStack(DURA.ingot(), 12),
+			new ComparableStack(ModItems.motor, 6)
 		}, 12000);
 
 

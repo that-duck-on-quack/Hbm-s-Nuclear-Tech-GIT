@@ -16,6 +16,7 @@ import com.hbm.inventory.RecipesCommon.OreDictStack;
 import com.hbm.inventory.material.MaterialShapes;
 import com.hbm.inventory.material.Mats;
 import com.hbm.inventory.material.NTMMaterial;
+import com.hbm.inventory.recipes.anvil.AnvilRecipes;
 import com.hbm.inventory.recipes.loader.SerializableRecipe;
 import com.hbm.items.ItemEnums.EnumBriquetteType;
 import com.hbm.items.ItemEnums.EnumCasingType;
@@ -81,6 +82,14 @@ public class PressRecipes extends SerializableRecipe {
 		makeRecipe(StampType.PLATE, new OreDictStack(BIGMT.ingot()),		ModItems.plate_saturnite);
 		makeRecipe(StampType.PLATE, new OreDictStack(DURA.ingot()),			ModItems.plate_dura_steel);
 		makeRecipe(StampType.FLAT, new OreDictStack(ANY_COKE.gem()),		ModItems.ingot_graphite);
+
+		makeRecipe(StampType.PLATE, new ComparableStack(ModItems.ingot_u233, 1), ModItems.plate_fuel_u233);
+		makeRecipe(StampType.PLATE, new ComparableStack(ModItems.ingot_u235, 1), ModItems.plate_fuel_u235);
+		makeRecipe(StampType.PLATE, new ComparableStack(ModItems.ingot_mox_fuel, 1), ModItems.plate_fuel_mox);
+		makeRecipe(StampType.PLATE, new ComparableStack(ModItems.ingot_pu239, 1), ModItems.plate_fuel_pu239);
+		makeRecipe(StampType.PLATE, new ComparableStack(ModItems.ingot_schrabidium, 1), ModItems.plate_fuel_sa326);
+		makeRecipe(StampType.PLATE, new ComparableStack(ModItems.billet_ra226be, 1), ModItems.plate_fuel_ra226be);
+		makeRecipe(StampType.PLATE, new ComparableStack(ModItems.billet_pu238be, 1), ModItems.plate_fuel_pu238be);
 
 
 		for(NTMMaterial mat : Mats.orderedList) {
