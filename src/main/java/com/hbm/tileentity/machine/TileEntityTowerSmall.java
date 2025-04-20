@@ -79,14 +79,19 @@ public class TileEntityTowerSmall extends TileEntityCondenser {
 	public void subscribeToAllAround(FluidType type, TileEntity te) {
 		this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord + 3, yCoord, zCoord, Library.POS_X);
 		this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord - 3, yCoord, zCoord, Library.NEG_X);
-		this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord, yCoord, zCoord + 3, Library.POS_Z);
+		this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord, yCoord, zCoord + 3, Library.POS_Z);
 		this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord, yCoord, zCoord - 3, Library.NEG_Z);
+		this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord + 3, yCoord, zCoord, Library.POS_X);
+		this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord - 3, yCoord, zCoord, Library.NEG_X);
+		this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord, yCoord, zCoord + 3, Library.POS_Z);
+		this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord, yCoord, zCoord - 3, Library.NEG_Z);
 	}
 
 	@Override
 	public void sendFluidToAll(FluidTank tank, TileEntity te) {
 		this.sendFluid(this.tanks[1], worldObj, xCoord + 3, yCoord, zCoord, Library.POS_X);
 		this.sendFluid(this.tanks[1], worldObj, xCoord - 3, yCoord, zCoord, Library.NEG_X);
+		this.sendFluid(this.tanks[1], worldObj, xCoord, yCoord, zCoord + 3, Library.POS_Z);
 		this.sendFluid(this.tanks[1], worldObj, xCoord, yCoord, zCoord - 3, Library.NEG_Z);
 	}
 
