@@ -46,7 +46,7 @@ public class TileEntityMachineStrandCaster extends TileEntityFoundryCastingBase 
 	public TileEntityMachineStrandCaster() {
 		super(7);
 		water = new FluidTank(Fluids.WATER, 64_000);
-		steam = new FluidTank(Fluids.SPENTSTEAM, 64_000);
+		steam = new FluidTank(Fluids.WATER, 64_000); //i'm not gonna bother with this too much
 	}
 
 	@Override
@@ -79,42 +79,42 @@ public class TileEntityMachineStrandCaster extends TileEntityFoundryCastingBase 
 			ItemMold.Mold mold = this.getInstalledMold();
 
 			if(mold != null) {
-				
+
 				int itemsCasted = amount / mold.getCost();
-				
+
 				if(canProcess(itemsCasted)) {
 					int minAmount = mold.getCost() * 9;
-	
+
 					// Makes it flush the buffers after 10 seconds of inactivity
 					if(worldObj.getWorldTime() >= lastCastTick + 200) {
 						minAmount = mold.getCost();
 					}
-	
+
 					if(this.amount >= minAmount) {
-	
+
 						for(int j = 0; j < itemsCasted; j++) {
 							this.amount -= mold.getCost();
-	
+
 							ItemStack out = mold.getOutput(type);
-	
+
 							for(int i = 1; i < 7; i++) {
 								if(slots[i] == null) {
 									slots[i] = out.copy();
 									break;
 								}
-	
+
 								if(slots[i].isItemEqual(out) && slots[i].stackSize + out.stackSize <= out.getMaxStackSize()) {
 									slots[i].stackSize += out.stackSize;
 									break;
 								}
-	
+
 							}
 						}
 						markChanged();
-	
+
 						water.setFill(water.getFill() - getWaterRequired() * itemsCasted);
-						steam.setFill(steam.getFill() + getWaterRequired() * itemsCasted);
-	
+						steam.setFill((steam.getFill() + getWaterRequired() * itemsCasted)/2);
+
 						lastCastTick = worldObj.getWorldTime();
 					}
 				}
