@@ -68,7 +68,7 @@ public abstract class ItemInventory implements IInventory {
 		for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
 			ItemStack s = player.inventory.getStackInSlot(i);
 			if(s != null) {
-				if(s.isItemEqual(original) && s.stackSize == 1){
+				if(ItemStack.areItemStacksEqual(s, original) && ItemStack.areItemStackTagsEqual(s, original) && s.stackSize == 1){
 					k=i;
 					break;
 				}
