@@ -43,7 +43,7 @@ public abstract class ItemInventory implements IInventory {
 
 	@Override
 	public void markDirty() {
-		if(player.getEntityWorld().isRemote || !toMarkDirty) {
+		if (player.getEntityWorld().isRemote || !toMarkDirty) {
 			return;
 		}
 
@@ -51,9 +51,9 @@ public abstract class ItemInventory implements IInventory {
 
 		int invSize = this.getSizeInventory();
 		// Remove slots that are now empty or overwrite them with the correct item data.
-		for(int i = 0; i < invSize; i++) {
+		for (int i = 0; i < invSize; i++) {
 			ItemStack stack = this.getStackInSlot(i);
-			if(stack == null) {
+			if (stack == null) {
 				nbt.removeTag("slot" + i);
 			} else {
 				NBTTagCompound slot = new NBTTagCompound();
@@ -65,12 +65,16 @@ public abstract class ItemInventory implements IInventory {
 		target.setTagCompound(checkNBT(nbt));
 		int k = -1;
 		// Find the original ItemStack in case it moved and only save to it if size equals 1.
-		for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-			ItemStack s = player.inventory.getStackInSlot(i);
-			if(s != null) {
-				if(ItemStack.areItemStacksEqual(s, original) && ItemStack.areItemStackTagsEqual(s, original) && s.stackSize == 1){
-					k=i;
-					break;
+		if (ItemStack.areItemStackTagsEqual(player.getHeldItem(),original) && ItemStack.areItemStacksEqual(player.getHeldItem(), original) && player.getHeldItem().stackSize == 1) {
+			k = player.inventory.currentItem;
+		} else {
+			for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+				ItemStack s = player.inventory.getStackInSlot(i);
+				if (s != null) {
+					if (ItemStack.areItemStackTagsEqual(player.getHeldItem(),original) && s.stackSize == 1) {
+						k = i;
+						break;
+					}
 				}
 			}
 		}
@@ -78,7 +82,6 @@ public abstract class ItemInventory implements IInventory {
 			player.inventory.setInventorySlotContents(k, target);
 			original=target;
 		}
-
 	}
 
 	public NBTTagCompound checkNBT(NBTTagCompound nbt) {
