@@ -63,13 +63,8 @@ public abstract class ItemInventory implements IInventory {
 		}
 		ItemStack target = original.copy();
 		target.setTagCompound(checkNBT(nbt));
-		int k = -1;
-		// Find the original ItemStack in case it moved and only save to it if size equals 1.
-		if (ItemStack.areItemStacksEqual(player.getHeldItem(), original) && player.getHeldItem().stackSize == 1) {
-			k = player.inventory.currentItem;
-		}
-		if(k != -1) {
-			player.inventory.setInventorySlotContents(k, target);
+		if(ItemStack.areItemStacksEqual(player.getHeldItem(), original) && player.getHeldItem().stackSize == 1) {
+			player.inventory.setInventorySlotContents(player.inventory.currentItem, target);
 			original=target;
 		}
 	}
@@ -93,8 +88,8 @@ public abstract class ItemInventory implements IInventory {
 
 							while (itemstack.stackSize > 0) {
 								int j1 = itemstack.stackSize;
-								itemstack.stackSize -= j1;
-								setInventorySlotContents(slot,itemstack);
+								// Clear the slot.
+								setInventorySlotContents(slot,null);
 								EntityItem entityitem = new EntityItem(player.worldObj, player.posX + f, player.posY + f1, player.posZ + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
 								if (itemstack.hasTagCompound()) {
