@@ -87,9 +87,10 @@ public abstract class ItemInventory implements IInventory {
 							float f2 = random.nextFloat() * 0.8F + 0.1F;
 
 							while (itemstack.stackSize > 0) {
-								int j1 = itemstack.stackSize;
-								// Clear the slot.
-								setInventorySlotContents(slot,null);
+								int j1 = Math.min(itemstack.stackSize,itemstack.getMaxStackSize());
+								itemstack.stackSize-=j1;
+								// Update the slot.
+								setInventorySlotContents(slot,itemstack);
 								EntityItem entityitem = new EntityItem(player.worldObj, player.posX + f, player.posY + f1, player.posZ + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
 								if (itemstack.hasTagCompound()) {
