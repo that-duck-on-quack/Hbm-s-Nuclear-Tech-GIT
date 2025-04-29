@@ -44,7 +44,9 @@ public class TileEntityHeatBoiler extends TileEntityLoadedBase implements IBufPa
 	public boolean hasExploded = false;
 
 	private AudioWrapper audio;
+	private AudioWrapper song;
 	private int audioTime;
+	private int songTime;
 
 	/* CONFIGURABLE */
 	public static int maxHeat = 3_200_000;
@@ -100,6 +102,25 @@ public class TileEntityHeatBoiler extends TileEntityLoadedBase implements IBufPa
 		} else {
 
 			if(this.isOn) audioTime = 20;
+			if(tanks[1].getFill() > tanks[1].getMaxFill() * 0.9 && canExplode) songTime = 240; //I hate myself for this.
+
+			if(songTime > 0){
+				songTime--;
+
+				if(song == null){
+					song = createSongLoop();
+					song.startSound();
+				} else if(!song.isPlaying()){
+					song = rebootAudio(song);
+				}
+				song.updateVolume(getVolume(.6F));
+				song.keepAlive();
+			} else{
+				if(song != null){
+					song.stopSound();
+					song = null;
+				}
+			}
 
 			if(audioTime > 0) {
 
@@ -128,6 +149,9 @@ public class TileEntityHeatBoiler extends TileEntityLoadedBase implements IBufPa
 	@Override
 	public AudioWrapper createAudioLoop() {
 		return MainRegistry.proxy.getLoopedSound("hbm:block.boiler", xCoord, yCoord, zCoord, 0.125F, 10F, 1.0F, 20);
+	}
+	public AudioWrapper createSongLoop() {
+		return MainRegistry.proxy.getLoopedSound("hbm:block.boilerSong", xCoord, yCoord, zCoord, 0.005F, 10F, 1, 120);
 	}
 
 	@Override
