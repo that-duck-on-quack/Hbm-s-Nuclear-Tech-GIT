@@ -33,7 +33,6 @@ public class ItemBlockStorageCrate extends ItemBlockBase implements IGUIProvider
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		Integer slot = player.inventory.currentItem;
-		player.getEntityData().setInteger("crateslot", slot);
 		ItemStack it = player.inventory.getStackInSlot(slot);
 		Block block = Block.getBlockFromItem(it.getItem());
 		if(block == ModBlocks.mass_storage) return stack; // Genuinely can't figure out how to make this part work, so I'm just not gonna mess with it.
@@ -49,18 +48,14 @@ public class ItemBlockStorageCrate extends ItemBlockBase implements IGUIProvider
 						continue;
 					if (item.stackTagCompound.getInteger("pins") == stack.stackTagCompound.getInteger("lock")) { // Check if pins are equal (if it can open it)
 						TileEntityCrateBase.spawnSpiders(player, world, stack);
-						if(player.inventory.currentItem == player.getEntityData().getInteger("crateslot")){
-							player.openGui(MainRegistry.instance, 0, world, 0, 0, 0);
-						}
+						player.openGui(MainRegistry.instance, 0, world, 0, 0, 0);
 						break;
 					}
 				}
 				return stack; // Return early if it was locked.
 			}
 			TileEntityCrateBase.spawnSpiders(player, world, stack);
-			if(player.inventory.currentItem == player.getEntityData().getInteger("crateslot")){
-				player.openGui(MainRegistry.instance, 0, world, 0, 0, 0); // If there is no lock then don't bother checking.
-			}
+			player.openGui(MainRegistry.instance, 0, world, 0, 0, 0); // If there is no lock then don't bother checking.
 		}
 
 		return stack;

@@ -37,19 +37,8 @@ public class ContainerCrateBase extends ContainerBase {
 	public ItemStack slotClick(int index, int button, int mode, EntityPlayer player) {
 		if(tile instanceof ItemInventory){
 			ItemStack original = ((ItemInventory) tile).original;
-			boolean exit = true;
-			for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-				ItemStack s = player.inventory.getStackInSlot(i);
-				if(s != null) {
-					if(s.isItemEqual(original) && s.stackSize == 1){
-						exit = false;
-						break;
-					}
-				}
-			}
-			if(exit) {
+			if(!ItemStack.areItemStacksEqual(player.getHeldItem(),original) || player.getHeldItem() != 1){
 				player.closeScreen();
-				return null;
 			}
 		}
 		// prevents the player from moving around the currently open box

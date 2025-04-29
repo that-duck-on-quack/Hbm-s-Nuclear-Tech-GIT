@@ -65,18 +65,8 @@ public abstract class ItemInventory implements IInventory {
 		target.setTagCompound(checkNBT(nbt));
 		int k = -1;
 		// Find the original ItemStack in case it moved and only save to it if size equals 1.
-		if (ItemStack.areItemStackTagsEqual(player.getHeldItem(),original) && ItemStack.areItemStacksEqual(player.getHeldItem(), original) && player.getHeldItem().stackSize == 1) {
+		if (ItemStack.areItemStacksEqual(player.getHeldItem(), original) && player.getHeldItem().stackSize == 1) {
 			k = player.inventory.currentItem;
-		} else {
-			for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-				ItemStack s = player.inventory.getStackInSlot(i);
-				if (s != null) {
-					if (ItemStack.areItemStackTagsEqual(player.getHeldItem(),original) && s.stackSize == 1) {
-						k = i;
-						break;
-					}
-				}
-			}
 		}
 		if(k != -1) {
 			player.inventory.setInventorySlotContents(k, target);
@@ -93,8 +83,8 @@ public abstract class ItemInventory implements IInventory {
 
 				if (abyte.length > 6000) {
 					player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Warning: Container NBT exceeds 6kB, contents will be ejected!"));
-					for (int i1 = 0; i1 < this.getSizeInventory(); ++i1) {
-						ItemStack itemstack = this.getStackInSlot(i1);
+					for (int slot = 0; slot < this.getSizeInventory(); ++slot) {
+						ItemStack itemstack = this.getStackInSlot(slot);
 
 						if (itemstack != null) {
 							float f = random.nextFloat() * 0.8F + 0.1F;
@@ -102,13 +92,9 @@ public abstract class ItemInventory implements IInventory {
 							float f2 = random.nextFloat() * 0.8F + 0.1F;
 
 							while (itemstack.stackSize > 0) {
-								int j1 = random.nextInt(21) + 10;
-
-								if (j1 > itemstack.stackSize) {
-									j1 = itemstack.stackSize;
-								}
-
+								int j1 = itemstack.stackSize;
 								itemstack.stackSize -= j1;
+								setInventorySlotContents(slot,itemstack);
 								EntityItem entityitem = new EntityItem(player.worldObj, player.posX + f, player.posY + f1, player.posZ + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
 								if (itemstack.hasTagCompound()) {
