@@ -1629,8 +1629,43 @@ public class AssemblerRecipes extends SerializableRecipe {
 			new ComparableStack(ModItems.circuit, 2, EnumCircuitType.BASIC),
 			new OreDictStack(DURA.ingot(), 12),
 			new ComparableStack(ModItems.motor, 6)
-		}, 12000);
+		}, 650);
 
+		//Speck "Automation n Suffering" stuff
+		//Makes it so Anvil things (like the Blast Furnace and the Assembly Machine) are able to be crafted in the Assembly Machine.
+		//However, some things may be cheaper, some may not, what matters is it's automatable.
+		makeRecipe(new ComparableStack(ModBlocks.machine_assembler, 1), new AStack[]{
+			new OreDictStack(KEY_CLEARGLASS, 4), // Glass because it's cool af
+			new OreDictStack(STEEL.plate(), 8), // Body
+			new OreDictStack(CU.plateCast(), 2), // Body
+			new ComparableStack(ModItems.motor, 4), // Because y'know?
+			new ComparableStack(ModItems.circuit, 4, EnumCircuitType.VACUUM_TUBE.ordinal()) //TECHNOLOGY!
+		}, 210);
+		makeRecipe(new ComparableStack(ModBlocks.machine_industrial_boiler, 1), new AStack[]{
+			new OreDictStack(STEEL.plate(), 16), // Rest of the boiler?
+			new OreDictStack(STEEL.shell(), 2), // Boiler body
+			new OreDictStack(MINGRADE.ingot(), 8), // MinGrade is a great conductor, but also a great heat exchanger!
+			new OreDictStack(STEEL.pipe(), 4), // Boiler piping, since it's bigger and better, needs more.
+			new OreDictStack(ANY_PLASTIC.ingot(), 4) // Plastic for...idk, just progression really.
+		}, 125);
+		makeRecipe(new ComparableStack(ModBlocks.machine_boiler, 1), new AStack[]{
+			new OreDictStack(STEEL.plate(), 8), // Boiler base
+			new OreDictStack(CU.plateCast(), 4), // Boiler body
+			new OreDictStack(MINGRADE.ingot(), 2), // MinGrade is a great conductor, but also a great heat exchanger!
+			new OreDictStack(STEEL.pipe(), 4), // Boiler piping, since it's bigger and better, needs more.
+			new ComparableStack(ModItems.plate_polymer, 8) // I guess?
+		}, 100);
+		makeRecipe(new ComparableStack(ModItems.motor, 1), new AStack[]{ // Might make this a welder recipe instead.
+			new OreDictStack(STEEL.plate(), 2), // Steel Body for Stronger Motor!
+			new ComparableStack(ModItems.coil_copper), // Copper Torus
+			new ComparableStack(ModItems.coil_copper_torus), // Copper Torus
+			new OreDictStack(ANY_PLASTIC.ingot(), 2), // Plastic for better motor!!!!!
+		}, 100);
+		makeRecipe(new ComparableStack(ModBlocks.machine_difurnace_off, 1), new AStack[]{ // Industrial Blast Furnace? Electric? I wish, just alt recipe.
+			new ComparableStack(Blocks.stonebrick, 4), // We keep the bricks.
+			new OreDictStack(DURA.ingot(), 2), // High Speed Steel for Increased Efficiency or sum shit
+			new OreDictStack(CU.block(), 1) // Copper Body instead of purely BRICK
+		}, 100);
 
 
 		if(GeneralConfig.enableMekanismChanges && Loader.isModLoaded("Mekanism")) {
