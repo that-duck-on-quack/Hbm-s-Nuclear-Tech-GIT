@@ -133,6 +133,9 @@ public class ArcWelderRecipes extends SerializableRecipe {
 
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModBlocks.machine_xenon_thruster), 200, 50_000L, new FluidStack(Fluids.ARGON, 1_000), new OreDictStack(W.plateWelded(), 2), new ComparableStack(ModItems.plate_stainless, 6), new ComparableStack(ModItems.arc_electrode, 1, EnumElectrodeType.GRAPHITE)));
 
+		//Speck "Automation n Suffering" Stuff
+		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.motor), 150, 25_000L, new FluidStack(Fluids.ACETYLENE, 1_000), new OreDictStack(STEEL.plate(), 2), new ComparableStack(ModItems.coil_copper_torus), new ComparableStack(ModItems.coil_copper)));
+
 	}
 
 	public static HashMap getRecipes() {
