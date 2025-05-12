@@ -43,7 +43,7 @@ public class BlockTaint extends Block implements ITooltipProvider {
 
 		int meta = world.getBlockMetadata(x, y, z);
 		if(meta >= 15) return;
-		if(GeneralConfig.enableVirus) {
+		if(GeneralConfig.enableTaintEffects) {
 			for (int i = -3; i <= 3; i++)
 				for (int j = -3; j <= 3; j++)
 					for (int k = -3; k <= 3; k++) {
@@ -68,6 +68,9 @@ public class BlockTaint extends Block implements ITooltipProvider {
 							world.spawnEntityInWorld(falling);
 						}
 					}
+		}
+		else{
+			world.setBlock(x, y, z, Blocks.grass);
 		}
 	}
 

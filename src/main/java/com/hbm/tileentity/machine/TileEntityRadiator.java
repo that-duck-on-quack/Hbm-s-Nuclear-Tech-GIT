@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import com.hbm.blocks.BlockDummyable;
+import com.hbm.config.GeneralConfig;
 import com.hbm.inventory.fluid.FluidType;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.fluid.tank.FluidTank;
@@ -24,7 +25,7 @@ public class TileEntityRadiator extends TileEntityCondenser {
 	public TileEntityRadiator() {
 		tanks = new FluidTank[2];
 		tanks[0] = new FluidTank(Fluids.SPENTSTEAM, inputTankSize);
-		tanks[1] = new FluidTank(Fluids.AERATEDWATER, outputTankSize);
+		tanks[1] = new FluidTank(GeneralConfig.enableHardSteam ? Fluids.AERATEDWATER : Fluids.WATER, outputTankSize);
 		vacuumOptimised = true;
 		heatExchanging = false;
 	}

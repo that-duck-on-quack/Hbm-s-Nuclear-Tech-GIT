@@ -28,7 +28,7 @@ public class TileEntityTowerLarge extends TileEntityCondenser {
 	public TileEntityTowerLarge() {
 		tanks = new FluidTank[3];
 		tanks[0] = new FluidTank(Fluids.SPENTSTEAM, inputTankSizeTL);
-		tanks[1] = new FluidTank(Fluids.AERATEDWATER, outputTankSizeTL);
+		tanks[1] = new FluidTank(GeneralConfig.enableHardSteam ? Fluids.AERATEDWATER : Fluids.WATER, outputTankSizeTL);
 		tanks[2] = new FluidTank(Fluids.WATER, evTankSizeTL);
 		heatExchanging = true;
 	}
@@ -82,8 +82,11 @@ public class TileEntityTowerLarge extends TileEntityCondenser {
 			ForgeDirection dir = ForgeDirection.getOrientation(i);
 			ForgeDirection rot = dir.getRotation(ForgeDirection.UP);
 			this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord + dir.offsetX * 5, yCoord, zCoord + dir.offsetZ * 5, dir);
+			this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord + dir.offsetX * 5, yCoord, zCoord + dir.offsetZ * 5, dir);
+			this.trySubscribe(this.tanks[0].getTankType(), worldObj, xCoord + dir.offsetX * 5 + rot.offsetX * 3, yCoord, zCoord + dir.offsetZ * 5 + rot.offsetZ * 3, dir);
 			this.trySubscribe(this.tanks[2].getTankType(), worldObj, xCoord + dir.offsetX * 5 + rot.offsetX * 3, yCoord, zCoord + dir.offsetZ * 5 + rot.offsetZ * 3, dir);
 			this.trySubscribe(this.tanks[0].getTankType(),worldObj,  xCoord + dir.offsetX * 5 + rot.offsetX * -3, yCoord, zCoord + dir.offsetZ * 5 + rot.offsetZ * -3, dir);
+			this.trySubscribe(this.tanks[2].getTankType(),worldObj,  xCoord + dir.offsetX * 5 + rot.offsetX * -3, yCoord, zCoord + dir.offsetZ * 5 + rot.offsetZ * -3, dir);
 		}
 	}
 

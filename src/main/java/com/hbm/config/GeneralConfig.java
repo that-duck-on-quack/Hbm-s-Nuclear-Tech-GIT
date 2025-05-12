@@ -74,6 +74,13 @@ public class GeneralConfig {
 	public static boolean enableSacrilege = false;
 	public static boolean enableHardcoreDarkness = false;
 
+	//Configs added by Speck
+	public static boolean enableCrateBackpacks = false;
+	public static double caliberDamageModifier = 1;
+	public static double meleeDamageModifier = 1;
+	public static boolean enableTaintEffects = true;
+	public static boolean enableHardSteam = true;
+
 	public static void loadFromConfig(Configuration config) {
 
 		final String CATEGORY_GENERAL = CommonConfig.CATEGORY_GENERAL;
@@ -120,7 +127,6 @@ public class GeneralConfig {
 		enableThreadedAtmospheres = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.42_threadedAtmospheres", "If enabled, will run atmosphere blobbing in a separate thread for performance", true);
 		enableSacrilege = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.43_serverSafety", "Allows for automated entity culling to function properly.", false);
 		enableHardcoreDarkness = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.44_hardcoreDarkness", "If enabled, sets night-time minimum fog to zero, to complement hardcore darkness mods", false);
-
 		enableExpensiveMode = config.get(CATEGORY_GENERAL, "1.99_enableExpensiveMode", false, "It does what the name implies.").getBoolean(false);
 
 		final String CATEGORY_528 = CommonConfig.CATEGORY_528;
@@ -168,5 +174,18 @@ public class GeneralConfig {
 		schrabRate = CommonConfig.createConfigInt(config, CATEGORY_LBSM, "LBSM_schrabOreRate", "Changes the amount of uranium ore needed on average to create one schrabidium ore using nukes. Standard mode value is 100", 20);
 
 		if(enable528) enableLBSM = false;
+
+		final String CATEGORY_SPECK = CommonConfig.CATEGORY_SPECK;
+
+		config.addCustomCategoryComment(CATEGORY_SPECK,
+			"These configs are related to the Speck/Blork fork!\n"
+				+ "These are mainly tied to QoL features, things we don't want to bother with and useful modifiers.\n"
+				+ "If something in here doesn't work, go bother Cher, not Bob.");
+
+		enableCrateBackpacks = CommonConfig.createConfigBool(config, CATEGORY_SPECK, "H1.0_crateBackpacks", "If enabled, allows players to open crates in their inventory like backpacks. Prone to bugs.", false);
+		caliberDamageModifier = CommonConfig.createConfigDouble(config, CATEGORY_SPECK, "H1.1_caliberMod", "A Integer modifier to weapon damage by tapping into the damage made by calibers. Not sure if it works.", 1);
+		meleeDamageModifier = CommonConfig.createConfigDouble(config, CATEGORY_SPECK, "H1.2_meleeMod", "A modifier for the damage of certain melee weapons, not all are affected currently.", 1);
+		enableTaintEffects = CommonConfig.createConfigBool(config, CATEGORY_SPECK, "H1.3_enableTaint", "Enables Taint Spread, Poison Effects and makes it so Taint Blocks, if existing, turn to Grass (Untested).", true);
+		enableHardSteam = CommonConfig.createConfigBool(config, CATEGORY_SPECK, "H1.4_enableAeration", "Enables Water Aeration, making it so condensers return Aerated Water instead of Water directly. I'd be happy if you kept this enabled but you do you.", true);
 	}
 }

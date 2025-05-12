@@ -1,6 +1,7 @@
 package com.hbm.items;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.config.GeneralConfig;
 import com.hbm.config.VersatileConfig;
 import com.hbm.handler.BucketHandler;
 import com.hbm.handler.ToolAbility;
@@ -2452,9 +2453,11 @@ public class ModItems {
 	public static Item tungsten_hammer;
 	public static Item calcium_carbide;
 	public static Item resin_paper;
+	public static double meleeMod;
 
 	public static void initializeItem()
 	{
+		meleeMod = GeneralConfig.meleeDamageModifier;
 		redstone_sword = new RedstoneSword(ToolMaterial.STONE).setUnlocalizedName("redstone_sword").setCreativeTab(CreativeTabs.tabCombat).setTextureName(RefStrings.MODID + ":redstone_sword");
 		big_sword = new BigSword(ToolMaterial.EMERALD).setUnlocalizedName("big_sword").setCreativeTab(CreativeTabs.tabCombat).setTextureName(RefStrings.MODID + ":big_sword");
 		butter_sword = new BSword(ToolMaterial.WOOD).setUnlocalizedName("butter_sword").setCreativeTab(CreativeTabs.tabCombat).setTextureName(RefStrings.MODID + ":budder_sword");
@@ -4923,7 +4926,7 @@ public class ModItems {
 				.addHitAbility(new WeaponAbility.ChainsawAbility(10))
 				.addHitAbility(new WeaponAbility.BeheaderAbility()).setShears().setUnlocalizedName("chainsaw").setTextureName(RefStrings.MODID + ":chainsaw");
 
-		schrabidium_sword = new ItemSwordAbility(75, 0, MainRegistry.tMatSchrab)
+		schrabidium_sword = new ItemSwordAbility((float) (75 * meleeMod), 0, MainRegistry.tMatSchrab)
 				.addHitAbility(new WeaponAbility.RadiationAbility(50F))
 				.addHitAbility(new WeaponAbility.VampireAbility(2F))
 				.setRarity(EnumRarity.rare).setUnlocalizedName("schrabidium_sword").setTextureName(RefStrings.MODID + ":schrabidium_sword");
