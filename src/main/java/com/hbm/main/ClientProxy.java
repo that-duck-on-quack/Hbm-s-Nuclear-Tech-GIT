@@ -26,10 +26,7 @@ import com.hbm.entity.missile.*;
 import com.hbm.entity.missile.EntityMissileTier0.*;
 import com.hbm.entity.missile.EntityMissileTier1.*;
 import com.hbm.entity.missile.EntityMissileTier2.*;
-import com.hbm.entity.missile.EntityMissileTier3.EntityMissileBurst;
-import com.hbm.entity.missile.EntityMissileTier3.EntityMissileDrill;
-import com.hbm.entity.missile.EntityMissileTier3.EntityMissileInferno;
-import com.hbm.entity.missile.EntityMissileTier3.EntityMissileRain;
+import com.hbm.entity.missile.EntityMissileTier3.*;
 import com.hbm.entity.missile.EntityMissileTier4.*;
 import com.hbm.entity.missile.EntityRideableRocket.EntityRideableRocketDummy;
 import com.hbm.entity.mob.*;
@@ -41,9 +38,7 @@ import com.hbm.entity.particle.*;
 import com.hbm.entity.projectile.*;
 import com.hbm.entity.train.EntityRailCarBase.BoundingBoxDummyEntity;
 import com.hbm.entity.train.EntityRailCarRidable.SeatDummyEntity;
-import com.hbm.entity.train.TrainCargoTram;
-import com.hbm.entity.train.TrainCargoTramTrailer;
-import com.hbm.entity.train.TrainTunnelBore;
+import com.hbm.entity.train.*;
 import com.hbm.handler.CasingEjector;
 import com.hbm.handler.HbmKeybinds;
 import com.hbm.handler.HbmKeybinds.EnumKeybind;
@@ -74,9 +69,13 @@ import com.hbm.render.item.block.ItemRenderBlock;
 import com.hbm.render.item.block.ItemRenderDecoBlock;
 import com.hbm.render.item.weapon.*;
 import com.hbm.render.loader.HmfModelLoader;
+import com.hbm.render.model.ModelDepthSquid;
 import com.hbm.render.model.ModelMoonCow;
 import com.hbm.render.model.ModelPigeon;
+import com.hbm.render.model.ModelScrapFish;
 import com.hbm.render.model.ModelScutter;
+import com.hbm.render.model.ModelScuttlecrab;
+import com.hbm.render.model.ModelSifterEel;
 import com.hbm.render.tileentity.*;
 import com.hbm.render.util.MissilePart;
 import com.hbm.render.util.RenderInfoSystem;
@@ -296,6 +295,7 @@ public class ClientProxy extends ServerProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineEPress.class, new RenderEPress());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineAmmoPress.class, new RenderAmmoPress());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineRadGen.class, new RenderRadGen());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGeiger.class, new RenderGeiger());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineRadarNT.class, new RenderRadar());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineRadarLarge.class, new RenderRadarLarge());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineRadarScreen.class, new RenderRadarScreen());
@@ -590,7 +590,6 @@ public class ClientProxy extends ServerProxy {
 		//guns
 		MinecraftForgeClient.registerItemRenderer(ModItems.gun_b92, new ItemRenderGunAnim());
 		MinecraftForgeClient.registerItemRenderer(ModItems.gun_fireext, new ItemRenderFireExt());
-		MinecraftForgeClient.registerItemRenderer(ModItems.gun_cryocannon, new ItemRenderWeaponCryoCannon());
 		MinecraftForgeClient.registerItemRenderer(ModItems.detonator_laser, new ItemRenderDetonatorLaser());
 		//multitool
 		MinecraftForgeClient.registerItemRenderer(ModItems.multitool_dig, new ItemRenderMultitool());
@@ -638,7 +637,6 @@ public class ClientProxy extends ServerProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinerRocket.class, new RenderMinerRocket());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBobmazon.class, new RenderMinerRocket());
 		RenderingRegistry.registerEntityRenderingHandler(EntityTom.class, new RenderTom());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAAShell.class, new RenderMirv());
 		RenderingRegistry.registerEntityRenderingHandler(EntityChopperMine.class, new RenderChopperMine());
 		RenderingRegistry.registerEntityRenderingHandler(EntityRubble.class, new RenderRubble());
 		RenderingRegistry.registerEntityRenderingHandler(EntityShrapnel.class, new RenderShrapnel());
@@ -727,7 +725,6 @@ public class ClientProxy extends ServerProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMissileNuclear.class, new RenderMissileNuclear());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMissileMirv.class, new RenderMissileNuclear());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMissileVolcano.class, new RenderMissileNuclear());
-		RenderingRegistry.registerEntityRenderingHandler(EntityMIRV.class, new RenderMirv());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMissileDoomsday.class, new RenderMissileNuclear());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMissileDoomsdayRusted.class, new RenderMissileNuclear());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoyuz.class, new RenderSoyuz());
@@ -764,7 +761,6 @@ public class ClientProxy extends ServerProxy {
 		RenderingRegistry.registerEntityRenderingHandler(BoundingBoxDummyEntity.class, new RenderEmpty());
 		RenderingRegistry.registerEntityRenderingHandler(TrainCargoTram.class, new RenderTrainCargoTram());
 		RenderingRegistry.registerEntityRenderingHandler(TrainCargoTramTrailer.class, new RenderTrainCargoTramTrailer());
-		RenderingRegistry.registerEntityRenderingHandler(TrainTunnelBore.class, new RenderTunnelBore());
 		//items
 		RenderingRegistry.registerEntityRenderingHandler(EntityMovingItem.class, new RenderMovingItem());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMovingPackage.class, new RenderMovingPackage());
@@ -810,6 +806,10 @@ public class ClientProxy extends ServerProxy {
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityMoonCow.class, new RenderMoonCow(new ModelMoonCow(), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityScutterfish.class, new RenderScutter(new ModelScutter(), 0.3F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityScuttlecrab.class, new RenderEntityMulti(new ModelScuttlecrab(), EntityScuttlecrab.Scuttlecrab.class, 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDepthSquid.class, new RenderEntityMulti(new ModelDepthSquid(), EntityDepthSquid.DepthSquid.class, 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityScrapFish.class, new RenderEntityMulti(new ModelScrapFish(), EntityScrapFish.ScrapFish.class, 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySifterEel.class, new RenderEntityMulti(new ModelSifterEel(), EntitySifterEel.SifterEel.class, 0.5F));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityDummy.class, new RenderDummy());
 		RenderingRegistry.registerEntityRenderingHandler(EntityUndeadSoldier.class, new RenderUndeadSoldier());

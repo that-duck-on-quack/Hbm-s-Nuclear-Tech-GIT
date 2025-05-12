@@ -233,6 +233,8 @@ public class CraftingManager {
 		addRecipeAuto(new ItemStack(ModBlocks.radio_torch_receiver, 4), new Object[] { "G", "R", "I", 'G', "dustGlowstone", 'R', Blocks.redstone_torch, 'I', IRON.ingot() });
 		addRecipeAuto(new ItemStack(ModBlocks.radio_torch_logic, 4), new Object[] { "G", "R", "I", 'G', "dustGlowstone", 'R', Blocks.redstone_torch, 'I', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.CHIP) });
 		addRecipeAuto(new ItemStack(ModBlocks.radio_torch_counter, 4), new Object[] { "G", "R", "I", 'G', "dustGlowstone", 'R', Blocks.redstone_torch, 'I', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.VACUUM_TUBE) });
+		addRecipeAuto(new ItemStack(ModBlocks.radio_torch_reader, 4), new Object[] { " G ", "IRI", 'G', "dustGlowstone", 'R', Blocks.redstone_torch, 'I', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.VACUUM_TUBE) });
+		addRecipeAuto(new ItemStack(ModBlocks.radio_torch_controller, 4), new Object[] { " G ", "IRI", 'G', "dustGlowstone", 'R', Blocks.redstone_torch, 'I', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.VACUUM_TUBE) });
 		addRecipeAuto(new ItemStack(ModBlocks.radio_telex, 2), new Object[] { "SCR", "W#W", "WWW", 'S', ModBlocks.radio_torch_sender, 'C', ModItems.crt_display, 'R', ModBlocks.radio_torch_receiver, 'W', KEY_PLANKS, '#', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ANALOG) });
 
 		addRecipeAuto(DictFrame.fromOne(ModItems.conveyor_wand, ConveyorType.REGULAR, 16), new Object[] { "LLL", "I I", "LLL", 'L', Items.leather, 'I', IRON.ingot() });
@@ -659,6 +661,8 @@ public class CraftingManager {
 		addRecipeAuto(new ItemStack(ModItems.containment_box, 1), new Object[] { "LUL", "UCU", "LUL", 'L', PB.plate(), 'U', U238.billet(), 'C', ModBlocks.crate_steel });
 		addRecipeAuto(new ItemStack(ModItems.casing_bag, 1), new Object[] { " L ", "LGL", " L ", 'L', Items.leather, 'G', GUNMETAL.plate() });
 		addRecipeAuto(new ItemStack(ModItems.casing_bag, 1), new Object[] { " L ", "LGL", " L ", 'L', ANY_RUBBER.ingot(), 'G', GUNMETAL.plate() });
+		addRecipeAuto(new ItemStack(ModItems.ammo_bag, 1), new Object[] { "LLL", "MGM", "LLL", 'L', Items.leather, 'G', WEAPONSTEEL.plate(), 'M', WEAPONSTEEL.mechanism() });
+		addRecipeAuto(new ItemStack(ModItems.ammo_bag, 1), new Object[] { "LLL", "MGM", "LLL", 'L', ANY_RUBBER.ingot(), 'G', WEAPONSTEEL.plate(), 'M', WEAPONSTEEL.mechanism() });
 
 		addRecipeAuto(new ItemStack(ModBlocks.absorber, 1), new Object[] { "ICI", "CPC", "ICI", 'I', CU.ingot(), 'C', ANY_COAL_COKE.dust(), 'P', PB.dust() });
 		addRecipeAuto(new ItemStack(ModBlocks.absorber_red, 1), new Object[] { "ICI", "CPC", "ICI", 'I', TI.ingot(), 'C', ANY_COAL_COKE.dust(), 'P', ModBlocks.absorber });
@@ -679,6 +683,7 @@ public class CraftingManager {
 		addRecipeAuto(new ItemStack(ModItems.door_metal, 1), new Object[] { "II", "SS", "II", 'I', IRON.plate(), 'S', STEEL.plate() });
 		addRecipeAuto(new ItemStack(ModItems.door_office, 1), new Object[] { "II", "SS", "II", 'I', KEY_PLANKS, 'S', IRON.plate() });
 		addRecipeAuto(new ItemStack(ModItems.door_bunker, 1), new Object[] { "II", "SS", "II", 'I', STEEL.plate(), 'S', PB.plate() });
+		addRecipeAuto(new ItemStack(ModItems.fence_gate, 1), new Object[] { "II", "II", "II", 'I', ModBlocks.fence_metal });
 
 		addShapelessAuto(new ItemStack(Items.paper, 1), new Object[] { new ItemStack(ModItems.assembly_template, 1, OreDictionary.WILDCARD_VALUE) });
 		addShapelessAuto(new ItemStack(Items.paper, 1), new Object[] { new ItemStack(ModItems.chemistry_template, 1, OreDictionary.WILDCARD_VALUE) });
@@ -1087,14 +1092,14 @@ public class CraftingManager {
 			addRecipeAuto(new ItemStack(ModItems.neutron_reflector, 4), new Object[] { "##", "##", '#', W.ingot() });
 
 			for(NTMMaterial mat : Mats.orderedList) {
-				if(mat.autogen.contains(MaterialShapes.WIRE)) for(String name : mat.names) addRecipeAuto(new ItemStack(ModItems.wire_fine, 24, mat.id), new Object[] { "###", '#', MaterialShapes.INGOT.prefixes[0] + name });
+				if(mat.autogen.contains(MaterialShapes.WIRE)) for(String name : mat.names) addRecipeAuto(new ItemStack(ModItems.wire_fine, 24, mat.id), new Object[] { "###", '#', MaterialShapes.INGOT.name() + name });
 			}
 
 			addRecipeAuto(new ItemStack(ModItems.book_of_), new Object[] { "BGB", "GAG", "BGB", 'B', ModItems.egg_balefire_shard, 'G', GOLD.ingot(), 'A', Items.book });
 		}
 
 		for(NTMMaterial mat : Mats.orderedList) {
-			if(mat.autogen.contains(MaterialShapes.BOLT)) for(String name : mat.names) addRecipeAuto(new ItemStack(ModItems.bolt, 16, mat.id), new Object[] { "#", "#", '#', MaterialShapes.INGOT.prefixes[0] + name });
+			if(mat.autogen.contains(MaterialShapes.BOLT)) for(String name : mat.names) addRecipeAuto(new ItemStack(ModItems.bolt, 16, mat.id), new Object[] { "#", "#", '#', MaterialShapes.INGOT.name() + name });
 		}
 
 		if(!GeneralConfig.enable528) {
@@ -1104,7 +1109,6 @@ public class CraftingManager {
 			addRecipeAuto(new ItemStack(ModItems.reactor_sensor, 1), new Object[] { "WPW", "CMC", "PPP", 'W', W.wireFine(), 'P', PB.plate(), 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.BASIC), 'M', ModItems.magnetron });
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_console, 1), new Object[] { "BBB", "DGD", "DCD", 'B', B.ingot(), 'D', ModBlocks.deco_rbmk, 'G', KEY_ANYPANE, 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ANALOG) });
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_crane_console, 1), new Object[] { "BCD", "DDD", 'B', B.ingot(), 'D', ModBlocks.deco_rbmk, 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ANALOG) });
-			addRecipeAuto(new ItemStack(ModBlocks.hadron_core, 1), new Object[] { "CCC", "DSD", "CCC", 'C', ModBlocks.hadron_coil_alloy, 'D', ModBlocks.hadron_diode, 'S', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ADVANCED) });
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_rod, 1), new Object[] { "C", "R", "C", 'C', STEEL.shell(), 'R', ModBlocks.rbmk_blank });
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_rod_mod, 1), new Object[] { "BGB", "GRG", "BGB", 'G', GRAPHITE.block(), 'R', ModBlocks.rbmk_rod, 'B', ModItems.nugget_bismuth });
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_boiler, 1), new Object[] { "CPC", "CRC", "CPC", 'C', CU.pipe(), 'P', CU.shell(), 'R', ModBlocks.rbmk_blank });

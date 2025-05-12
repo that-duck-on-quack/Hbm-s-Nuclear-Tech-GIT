@@ -673,6 +673,8 @@ public class ModBlocks {
 	public static Block door_bunker;
 	public static Block door_red;
 
+	public static Block fence_gate;
+
 	public static Block barbed_wire;
 	public static Block barbed_wire_fire;
 	public static Block barbed_wire_poison;
@@ -875,6 +877,8 @@ public class ModBlocks {
 	public static Block radio_torch_receiver;
 	public static Block radio_torch_counter;
 	public static Block radio_torch_logic;
+	public static Block radio_torch_reader;
+	public static Block radio_torch_controller;
 	public static Block radio_telex;
 
 	public static Block conveyor;
@@ -931,11 +935,7 @@ public class ModBlocks {
 	public static Block machine_transformer_dnt;
 	public static Block machine_transformer_dnt_20;
 
-	public static Block bomb_multi_large;
-	public static final int guiID_bomb_multi_large = 18;
-
 	public static Block machine_solar_boiler;
-	public static final int guiID_solar_boiler = 18;
 	public static Block solar_mirror;
 
 	public static Block struct_launcher;
@@ -1395,13 +1395,13 @@ public class ModBlocks {
 		test_charge = new TestCharge(Material.iron).setBlockName("test_charge").setCreativeTab(null).setHardness(2.5F).setResistance(10.0F);
 		structure_anchor = new BlockGeneric(Material.iron).setBlockName("structure_anchor").setCreativeTab(null).setHardness(2.5F).setResistance(10.0F).setBlockTextureName(RefStrings.MODID + ":structure_anchor");
 
-		ore_iron = new BlockOre(Material.rock).setBlockName("ore_iron").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_iron");
-		ore_gold = new BlockOre(Material.rock).setBlockName("ore_gold").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_gold");
-		ore_redstone = new BlockOre(Material.rock).setBlockName("ore_redstone").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_redstone");
-		ore_lapis = new BlockOre(Material.rock).setBlockName("ore_lapis").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_lapis");
-		ore_emerald = new BlockOre(Material.rock).setBlockName("ore_emerald").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_emerald");
-		ore_quartz = new BlockOre(Material.rock).setBlockName("ore_quartz").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_quartz");
-		ore_diamond = new BlockOre(Material.rock).setBlockName("ore_diamond").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_diamond");
+		ore_iron = new BlockOre(Material.rock, Blocks.iron_ore).setBlockName("ore_iron").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_iron");
+		ore_gold = new BlockOre(Material.rock, Blocks.gold_ore).setBlockName("ore_gold").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_gold");
+		ore_redstone = new BlockOre(Material.rock, Blocks.redstone_ore).setBlockName("ore_redstone").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_redstone");
+		ore_lapis = new BlockOre(Material.rock, Blocks.lapis_ore).setBlockName("ore_lapis").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_lapis");
+		ore_emerald = new BlockOre(Material.rock, Blocks.emerald_ore).setBlockName("ore_emerald").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_emerald");
+		ore_quartz = new BlockOre(Material.rock, Blocks.quartz_ore).setBlockName("ore_quartz").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_quartz");
+		ore_diamond = new BlockOre(Material.rock, Blocks.diamond_ore).setBlockName("ore_diamond").setCreativeTab(MainRegistry.blockTab).setHardness(3.0F).setResistance(5.0F).setBlockTextureName(RefStrings.MODID + ":ore_diamond");
 
 		ore_uranium = new BlockOreOutgas(Material.rock, true, 5, true).setBlockName("ore_uranium").setCreativeTab(MainRegistry.blockTab).setHardness(5.0F).setResistance(10.0F).setBlockTextureName(RefStrings.MODID + ":ore_uranium");
 		ore_uranium_scorched = new BlockOutgas(Material.rock, true, 5, true).setBlockName("ore_uranium_scorched").setCreativeTab(MainRegistry.blockTab).setHardness(5.0F).setResistance(10.0F).setBlockTextureName(RefStrings.MODID + ":ore_uranium_scorched");
@@ -1942,7 +1942,7 @@ public class ModBlocks {
 		nuke_solinium = new NukeSolinium(Material.iron).setBlockName("nuke_solinium").setCreativeTab(MainRegistry.nukeTab).setHardness(5.0F).setResistance(200.0F).setBlockTextureName(RefStrings.MODID + ":nuke_solinium");
 		nuke_n2 = new NukeN2(Material.iron).setBlockName("nuke_n2").setCreativeTab(MainRegistry.nukeTab).setHardness(5.0F).setResistance(200.0F).setBlockTextureName(RefStrings.MODID + ":nuke_n2");
 		nuke_fstbmb = new NukeBalefire(Material.iron).setBlockName("nuke_fstbmb").setCreativeTab(MainRegistry.nukeTab).setHardness(5.0F).setResistance(200.0F).setBlockTextureName(RefStrings.MODID + ":nuke_fstbmb");
-		nuke_antimatter = new NukeAntimatter(Material.iron).setBlockName("nuke_antimatter").setCreativeTab(MainRegistry.nukeTab).setHardness(5.0F).setResistance(6000.0F).setBlockTextureName(RefStrings.MODID + ":nuke_antimatter");
+		nuke_antimatter = new NukeAntimatter(Material.iron).setBlockName("nuke_antimatter").setCreativeTab(MainRegistry.nukeTab).setHardness(5.0F).setResistance(6000.0F).setBlockTextureName(RefStrings.MODID + ":theGadget");
 
 		bomb_multi = new BombMulti(Material.iron).setBlockName("bomb_multi").setCreativeTab(MainRegistry.nukeTab).setResistance(200.0F).setBlockTextureName(RefStrings.MODID + ":bomb_multi1");
 
@@ -2150,6 +2150,8 @@ public class ModBlocks {
 		radio_torch_receiver = new RadioTorchReceiver().setBlockName("radio_torch_receiver").setHardness(0.1F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab);
 		radio_torch_counter = new RadioTorchCounter().setBlockName("radio_torch_counter").setHardness(0.1F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rtty_counter");
 		radio_torch_logic = new RadioTorchLogic().setBlockName("radio_torch_logic").setHardness(0.1F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab);
+		radio_torch_reader = new RadioTorchReader().setBlockName("radio_torch_reader").setHardness(0.1F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rtty_reader");
+		radio_torch_controller = new RadioTorchController().setBlockName("radio_torch_controller").setHardness(0.1F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rtty_controller");
 		radio_telex = new RadioTelex().setBlockName("radio_telex").setHardness(3F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":radio_telex");
 
 		conveyor = new BlockConveyor().setBlockName("conveyor").setHardness(2.0F).setResistance(2.0F).setCreativeTab(null).setBlockTextureName(RefStrings.MODID + ":conveyor");
@@ -2306,6 +2308,8 @@ public class ModBlocks {
 		door_office = new BlockModDoor(Material.iron).setBlockName("door_office").setHardness(10.0F).setResistance(10.0F).setBlockTextureName(RefStrings.MODID + ":door_office");
 		door_bunker = new BlockModDoor(Material.iron).setBlockName("door_bunker").setHardness(10.0F).setResistance(100.0F).setBlockTextureName(RefStrings.MODID + ":door_bunker");
 		door_red = new BlockModDoor(Material.iron).setBlockName("door_red").setHardness(10.0F).setResistance(100.0F).setBlockTextureName(RefStrings.MODID + ":door_red");
+
+		fence_gate = new BlockFenceGate(Material.iron).setBlockName("fence_gate").setHardness(5.0F).setResistance(1.0F).setBlockTextureName(RefStrings.MODID + ":fence_metal");
 
 		barbed_wire = new BarbedWire(Material.iron).setBlockName("barbed_wire").setHardness(5.0F).setResistance(10.0F).setCreativeTab(MainRegistry.blockTab).setBlockTextureName(RefStrings.MODID + ":barbed_wire_model");
 		barbed_wire_fire = new BarbedWire(Material.iron).setBlockName("barbed_wire_fire").setHardness(5.0F).setResistance(10.0F).setCreativeTab(MainRegistry.blockTab).setBlockTextureName(RefStrings.MODID + ":barbed_wire_fire_model");
@@ -2730,8 +2734,8 @@ public class ModBlocks {
 		GameRegistry.registerBlock(ore_shale, ItemBlockBase.class, ore_shale.getUnlocalizedName());
 
 		//Rare Minerals
-		GameRegistry.registerBlock(ore_australium, ItemOreBlock.class, ore_australium.getUnlocalizedName());
-		GameRegistry.registerBlock(ore_rare, ItemOreBlock.class, ore_rare.getUnlocalizedName());
+		GameRegistry.registerBlock(ore_australium, ItemBlockBase.class, ore_australium.getUnlocalizedName());
+		GameRegistry.registerBlock(ore_rare, ItemBlockBase.class, ore_rare.getUnlocalizedName());
 		GameRegistry.registerBlock(ore_cobalt, ItemBlockBase.class, ore_cobalt.getUnlocalizedName());
 		GameRegistry.registerBlock(ore_cinnebar, ItemBlockBase.class, ore_cinnebar.getUnlocalizedName());
 		GameRegistry.registerBlock(ore_coltan, ItemBlockBase.class, ore_coltan.getUnlocalizedName());
@@ -3363,6 +3367,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(door_office, door_office.getUnlocalizedName());
 		GameRegistry.registerBlock(door_bunker, door_bunker.getUnlocalizedName());
 		GameRegistry.registerBlock(door_red, door_red.getUnlocalizedName());
+		GameRegistry.registerBlock(fence_gate, fence_gate.getUnlocalizedName());
 		GameRegistry.registerBlock(secure_access_door, secure_access_door.getUnlocalizedName());
 		GameRegistry.registerBlock(large_vehicle_door, large_vehicle_door.getUnlocalizedName());
 		GameRegistry.registerBlock(qe_containment, qe_containment.getUnlocalizedName());
@@ -3566,6 +3571,8 @@ public class ModBlocks {
 		register(radio_torch_receiver);
 		register(radio_torch_counter);
 		register(radio_torch_logic);
+		register(radio_torch_reader);
+		register(radio_torch_controller);
 		register(radio_telex);
 
 		register(crane_extractor);

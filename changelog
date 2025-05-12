@@ -1,5 +1,15 @@
-Includes all changes and bugfixes from the latest upstream NTMain update - [X5299 - now less comically broken](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5299)
+Includes all changes and bugfixes from the latest upstream NTMain update - [X5320 - crunking out is an important step in a person's life, how about you read a fucking book](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5320)
+
+## Added
+* All new Laythe fauna!
+    * Scuttlecrabs - a source of clay for those stranded on Laythe
+    * Sifter Eels - drops nothing (yet)
+    * Scrapfish - drops scrap
+    * Depth squids - drops ink
+
+## Changed
+* Saltleaf can be used as furnace fuel
+* Mining laser nullification upgrade now oredict aware (will now trash planetary stone/sand/cobble)
 
 ## Fixed
-* Biogas gated behind space-grade machinery due to AIR fluid requirement
-* Redstone torches erroneously don't work without O2
+* Translucent connected texture blocks (see: uranium glass) crashing when enclosed on all 6 sides by solid blocks

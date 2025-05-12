@@ -30,12 +30,12 @@ import net.minecraft.item.ItemStack;
  * @author hbm
  */
 public class WeaponRecipes {
-
+	
 	public static void register() {
 
 		//Weapon mod table
 		CraftingManager.addRecipeAuto(new ItemStack(ModBlocks.machine_weapon_table, 1), new Object[] { "PPP", "TCT", "TST", 'P', GUNMETAL.plate(), 'T', STEEL.ingot(), 'C', Blocks.crafting_table, 'S', STEEL.block() });
-
+		
 		//SEDNA Parts
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.part_stock, 1, Mats.MAT_WOOD.id), new Object[] { "WWW", "  W", 'W', KEY_PLANKS });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.part_grip, 1, Mats.MAT_WOOD.id), new Object[] { "W ", " W", " W", 'W', KEY_PLANKS });
@@ -53,7 +53,7 @@ public class WeaponRecipes {
 		CraftingManager.addRecipeAuto(DictFrame.fromOne(ModItems.casing, EnumCasingType.SHOTSHELL, 2), new Object[] { "P", "C", 'P', GUNMETAL.plate(), 'C', DictFrame.fromOne(ModItems.casing, EnumCasingType.LARGE) });
 		CraftingManager.addRecipeAuto(DictFrame.fromOne(ModItems.casing, EnumCasingType.BUCKSHOT, 2), new Object[] { "P", "C", 'P', ANY_PLASTIC.ingot(), 'C', DictFrame.fromOne(ModItems.casing, EnumCasingType.LARGE) });
 		CraftingManager.addRecipeAuto(DictFrame.fromOne(ModItems.casing, EnumCasingType.BUCKSHOT_ADVANCED, 2), new Object[] { "P", "C", 'P', ANY_PLASTIC.ingot(), 'C', DictFrame.fromOne(ModItems.casing, EnumCasingType.LARGE_STEEL) });
-
+		
 		//SEDNA Guns
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_pepperbox, 1), new Object[] { "IIW", "  C", 'I', IRON.ingot(), 'W', KEY_PLANKS, 'C', CU.ingot() });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_light_revolver, 1), new Object[] { "BRM", "  G", 'B', STEEL.lightBarrel(), 'R', STEEL.lightReceiver(), 'M', GUNMETAL.mechanism(), 'G', WOOD.grip() });
@@ -76,6 +76,7 @@ public class WeaponRecipes {
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_spas12, 1), new Object[] { "BRM", "BGS", 'B', DESH.lightBarrel(), 'R', DESH.lightReceiver(), 'M', GUNMETAL.mechanism(), 'G', ANY_PLASTIC.grip(), 'S', DESH.stock() });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_panzerschreck, 1), new Object[] { "BBB", "PGM", 'B', DESH.heavyBarrel(), 'P', STEEL.plateCast(), 'G', DESH.grip(), 'M', GUNMETAL.mechanism() });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_g3, 1), new Object[] { "BRM", "WGS", 'B', WEAPONSTEEL.lightBarrel(), 'R', WEAPONSTEEL.lightReceiver(), 'M', WEAPONSTEEL.mechanism(), 'W', WOOD.grip(), 'G', RUBBER.grip(), 'S', WOOD.stock() });
+		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_g3_zebra, 1), new Object[] { " M ", "MPM", " M ", 'M', BIGMT.mechanism(), 'P', ModItems.gun_g3 });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_stinger, 1), new Object[] { "BBB", "PGM", 'B', WEAPONSTEEL.heavyBarrel(), 'P', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ADVANCED), 'G', WEAPONSTEEL.grip(), 'M', WEAPONSTEEL.mechanism() });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_chemthrower, 1), new Object[] { "MHW", "PSS", 'M', WEAPONSTEEL.mechanism(), 'H', RUBBER.pipe(), 'W', ModItems.wrench, 'P', WEAPONSTEEL.heavyBarrel(), 'S', WEAPONSTEEL.shell() });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_m2, 1), new Object[] { "  G", "BRM", "  G", 'G', WOOD.grip(), 'B', FERRO.heavyBarrel(), 'R', FERRO.heavyReceiver(), 'M', WEAPONSTEEL.mechanism() });
@@ -86,7 +87,9 @@ public class WeaponRecipes {
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_minigun, 1), new Object[] { "BMG", "BRE", "BGM", 'B', ANY_RESISTANTALLOY.lightBarrel(), 'M', WEAPONSTEEL.mechanism(), 'G', ANY_PLASTIC.grip(), 'R', ANY_RESISTANTALLOY.heavyReceiver(), 'E', ModItems.motor_desh });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_missile_launcher, 1), new Object[] { " CM", "BBB", "G  ", 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ADVANCED), 'M', WEAPONSTEEL.mechanism(), 'B', ANY_RESISTANTALLOY.heavyBarrel(), 'G', ANY_PLASTIC.grip() });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_tesla_cannon, 1), new Object[] { "CCC", "BRB", "MGE", 'C', ModItems.coil_advanced_alloy, 'B', ANY_RESISTANTALLOY.heavyBarrel(), 'R', ANY_RESISTANTALLOY.heavyReceiver(), 'M', WEAPONSTEEL.mechanism(), 'G', ANY_PLASTIC.grip(), 'E', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ADVANCED) });
-		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_stg77, 1), new Object[] { " D ", "BRS", "GM ", 'D', DIAMOND.gem(), 'B', BIGMT.lightBarrel(), 'R', BIGMT.lightReceiver(), 'S', ANY_HARDPLASTIC.stock(), 'G', ANY_HARDPLASTIC.grip(), 'M', BIGMT.mechanism() });
+		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_laser_pistol, 1), new Object[] { "CRM", "GG ", 'C', ModItems.crystal_redstone, 'R', BIGMT.lightReceiver(), 'M', BIGMT.mechanism(), 'G', ANY_HARDPLASTIC.grip() });
+		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_laser_pistol_pew_pew, 1), new Object[] { " M ", "MPM", " M ", 'M', BIGMT.mechanism(), 'P', ModItems.gun_laser_pistol });
+		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_stg77, 1), new Object[] { " D ", "BRS", "GGM", 'D', DictFrame.fromOne(ModItems.weapon_mod_special, EnumModSpecial.SCOPE), 'B', BIGMT.lightBarrel(), 'R', BIGMT.lightReceiver(), 'S', ANY_HARDPLASTIC.stock(), 'G', ANY_HARDPLASTIC.grip(), 'M', BIGMT.mechanism() });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_fatman, 1), new Object[] { "PPP", "BSR", "G M", 'P', BIGMT.plate(), 'B', BIGMT.heavyBarrel(), 'S', BIGMT.shell(), 'R', BIGMT.heavyReceiver(), 'G', ANY_HARDPLASTIC.grip(), 'M', BIGMT.mechanism() });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_tau, 1), new Object[] { " RD", "CTT", "GMS", 'D', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.BISMOID), 'C', CU.pipe(), 'T', ModItems.coil_advanced_torus, 'G', ANY_HARDPLASTIC.grip(), 'R', BIGMT.lightReceiver(), 'M', BIGMT.mechanism(), 'S', ANY_HARDPLASTIC.stock() });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_lasrifle, 1), new Object[] { "DLC", "BRS", "MG ", 'D', ModItems.crystal_redstone, 'L', DictFrame.fromOne(ModItems.weapon_mod_special, EnumModSpecial.SCOPE), 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.BISMOID), 'B', ANY_BISMOIDBRONZE.lightBarrel(), 'R', ANY_BISMOIDBRONZE.lightReceiver(), 'S', ANY_HARDPLASTIC.stock(), 'M', BIGMT.mechanism(), 'G', ANY_HARDPLASTIC.grip() });
@@ -133,7 +136,7 @@ public class WeaponRecipes {
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.weapon_mod_special, 1, EnumModSpecial.LAS_SHOTGUN.ordinal()), new Object[] { "PPP", "RCR", "PPP", 'P', ANY_HARDPLASTIC.ingot(), 'R', ModItems.crystal_redstone, 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ADVANCED) });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.weapon_mod_special, 1, EnumModSpecial.LAS_CAPACITOR.ordinal()), new Object[] { "CCC", "PIP", 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.CAPACITOR_TANTALIUM), 'P', ANY_HARDPLASTIC.ingot(), 'I', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.CHIP_BISMOID) });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.weapon_mod_special, 1, EnumModSpecial.LAS_AUTO.ordinal()), new Object[] { " C ", "RFR", " C ", 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.CHIP_BISMOID), 'R', ModItems.crystal_redstone, 'F', ANY_BISMOIDBRONZE.heavyReceiver() });
-
+		
 		//Nitra!
 		CraftingManager.addShapelessAuto(DictFrame.fromOne(ModItems.ammo_standard, EnumAmmo.M357_SP, 6), new Object[] { DictFrame.fromOne(ModItems.ammo_standard, EnumAmmo.M357_SP), ModItems.nitra });
 		CraftingManager.addShapelessAuto(DictFrame.fromOne(ModItems.ammo_standard, EnumAmmo.M44_SP, 6), new Object[] { DictFrame.fromOne(ModItems.ammo_standard, EnumAmmo.M44_SP), ModItems.nitra });
@@ -149,14 +152,14 @@ public class WeaponRecipes {
 		CraftingManager.addShapelessAuto(DictFrame.fromOne(ModItems.ammo_secret, EnumAmmoSecret.M44_EQUESTRIAN, 6), new Object[] { DictFrame.fromOne(ModItems.ammo_standard, EnumAmmo.M44_JHP), DictFrame.fromOne(ModItems.item_secret, EnumSecretType.SELENIUM_STEEL) });
 		CraftingManager.addShapelessAuto(DictFrame.fromOne(ModItems.ammo_secret, EnumAmmoSecret.G12_EQUESTRIAN, 6), new Object[] { DictFrame.fromOne(ModItems.ammo_standard, EnumAmmo.G12), DictFrame.fromOne(ModItems.item_secret, EnumSecretType.SELENIUM_STEEL) });
 		CraftingManager.addShapelessAuto(DictFrame.fromOne(ModItems.ammo_secret, EnumAmmoSecret.BMG50_EQUESTRIAN, 6), new Object[] { DictFrame.fromOne(ModItems.ammo_standard, EnumAmmo.BMG50_FMJ), DictFrame.fromOne(ModItems.item_secret, EnumSecretType.SELENIUM_STEEL) });
-
+		
 		//Missiles
 		CraftingManager.addShapelessAuto(new ItemStack(ModItems.missile_taint, 1), new Object[] { ModItems.missile_assembly, ModItems.bucket_mud, ModItems.powder_spark_mix, ModItems.powder_magic });
 		CraftingManager.addShapelessAuto(new ItemStack(ModItems.missile_micro, 1), new Object[] { ModItems.missile_assembly, ModItems.ducttape, DictFrame.fromOne(ModItems.ammo_standard, EnumAmmo.NUKE_HIGH) });
 		CraftingManager.addShapelessAuto(new ItemStack(ModItems.missile_bhole, 1), new Object[] { ModItems.missile_assembly, ModItems.ducttape, ModItems.grenade_black_hole });
 		CraftingManager.addShapelessAuto(new ItemStack(ModItems.missile_schrabidium, 1), new Object[] { ModItems.missile_assembly, ModItems.ducttape, ModItems.cell_anti_schrabidium, ANY_HARDPLASTIC.ingot() });
 		CraftingManager.addShapelessAuto(new ItemStack(ModItems.missile_emp, 1), new Object[] { ModItems.missile_assembly, ModItems.ducttape, ModBlocks.emp_bomb });
-
+		
 		//Missile fins
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_stability_10_flat, 1), new Object[] { "PSP", "P P", 'P', STEEL.plate(), 'S', ModBlocks.steel_scaffold });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_stability_10_cruise, 1), new Object[] { "ASA", " S ", "PSP", 'A', TI.plate(), 'P', STEEL.plate(), 'S', ModBlocks.steel_scaffold });
@@ -166,7 +169,7 @@ public class WeaponRecipes {
 
 		//Missile thrusters
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_thruster_15_balefire_large_rad, 1), new Object[] { "CCC", "CTC", "CCC", 'C', CU.plateCast(), 'T', ModItems.mp_thruster_15_balefire_large });
-
+		
 		//Missile fuselages
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_fuselage_10_kerosene_insulation, 1), new Object[] { "CCC", "CTC", "CCC", 'C', ANY_RUBBER.ingot(), 'T', ModItems.mp_fuselage_10_kerosene });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_fuselage_10_long_kerosene_insulation, 1), new Object[] { "CCC", "CTC", "CCC", 'C', ANY_RUBBER.ingot(), 'T', ModItems.mp_fuselage_10_long_kerosene });
@@ -178,30 +181,30 @@ public class WeaponRecipes {
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_fuselage_10_kerosene_metal, 1), new Object[] { "ICI", "CTC", "ICI", 'C', STEEL.plate(), 'I', IRON.plate(), 'T', ModItems.mp_fuselage_10_kerosene });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_fuselage_10_long_kerosene_metal, 1), new Object[] { "ICI", "CTC", "ICI", 'C', STEEL.plate(), 'I', IRON.plate(), 'T', ModItems.mp_fuselage_10_long_kerosene });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_fuselage_15_kerosene_metal, 1), new Object[] { "ICI", "CTC", "ICI", 'C', STEEL.plate(), 'I', IRON.plate(), 'T', ModItems.mp_fuselage_15_kerosene });
-
+		
 		//Missile warheads
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_warhead_15_boxcar, 1), new Object[] { "SNS", "CBC", "SFS", 'S', STAR.ingot(), 'N', ModBlocks.det_nuke, 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ADVANCED), 'B', ModBlocks.boxcar, 'F', ModItems.tritium_deuterium_cake });
-
+		
 		//Missile chips
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_chip_1, 1), new Object[] { "P", "C", "S", 'P', ANY_RUBBER.ingot(), 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.VACUUM_TUBE), 'S', ModBlocks.steel_scaffold });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_chip_2, 1), new Object[] { "P", "C", "S", 'P', ANY_RUBBER.ingot(), 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ANALOG), 'S', ModBlocks.steel_scaffold });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_chip_3, 1), new Object[] { "P", "C", "S", 'P', ANY_RUBBER.ingot(), 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.BASIC), 'S', ModBlocks.steel_scaffold });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_chip_4, 1), new Object[] { "P", "C", "S", 'P', ANY_RUBBER.ingot(), 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ADVANCED), 'S', ModBlocks.steel_scaffold });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.mp_chip_5, 1), new Object[] { "P", "C", "S", 'P', ANY_RUBBER.ingot(), 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.BISMOID), 'S', ModBlocks.steel_scaffold });
-
+		
 		//Turrets
 		CraftingManager.addRecipeAuto(new ItemStack(ModBlocks.turret_sentry, 1), new Object[] { "PPL", " MD", " SC", 'P', STEEL.plate(), 'M', ModItems.motor, 'L', GUNMETAL.mechanism(), 'S', ModBlocks.steel_scaffold, 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.BASIC), 'D', ModItems.crt_display });
-
+		
 		//Guns
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_b92), new Object[] { "DDD", "SSC", "  R", 'D', ModItems.plate_dineutronium, 'S', STAR.ingot(), 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.BISMOID), 'R', ModItems.gun_lasrifle });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_b92_ammo, 1), new Object[] { "PSP", "ESE", "PSP", 'P', STEEL.plate(), 'S', STAR.ingot(), 'E', ModItems.powder_spark_mix });
 		CraftingManager.addShapelessAuto(new ItemStack(ModItems.weaponized_starblaster_cell, 1), new Object[] { new ItemStack(ModItems.fluid_tank_full, 1, Fluids.PEROXIDE.getID()), GunB92Cell.getFullCell(), CU.wireFine() });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.gun_fireext, 1), new Object[] { "HB", " T", 'H', STEEL.pipe(), 'B', STEEL.bolt(), 'T', ModItems.tank_steel });
 
-
+		
 		//Ammo assemblies
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.assembly_nuke, 1), new Object[] { " WP", "SEP", " WP", 'W', GOLD.wireFine(), 'P', STEEL.plate(), 'S', STEEL.shell(), 'E', ModItems.ball_tatb });
-
+		
 		//240mm Shells
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.ammo_shell, 4), new Object[] { " T ", "GHG", "CCC", 'T', ModBlocks.tnt, 'G', Items.gunpowder, 'H', STEEL.shell(), 'C', CU.ingot() });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.ammo_shell, 4), new Object[] { " T ", "GHG", "CCC", 'T', ModBlocks.tnt, 'G', ModItems.ballistite, 'H', STEEL.shell(), 'C', CU.ingot() });
@@ -216,7 +219,7 @@ public class WeaponRecipes {
 		CraftingManager.addRecipeAuto(ModItems.ammo_shell.stackFromEnum(4, Ammo240Shell.APFSDS_DU), new Object[] { " I ", "GIG", "CCC", 'I', U238.ingot(), 'G', ModItems.ballistite, 'C', CU.ingot() });
 		CraftingManager.addRecipeAuto(ModItems.ammo_shell.stackFromEnum(6, Ammo240Shell.APFSDS_DU), new Object[] { " I ", "GIG", "CCC", 'I', U238.ingot(), 'G', ModItems.cordite, 'C', CU.ingot() });
 		CraftingManager.addRecipeAuto(ModItems.ammo_shell.stackFromEnum(Ammo240Shell.W9), new Object[] { " P ", "NSN", " P ", 'P', PU239.nugget(), 'N', OreDictManager.getReflector(), 'S', ModItems.ammo_shell.stackFromEnum(Ammo240Shell.EXPLOSIVE) });
-
+		
 		//Artillery Shells
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.ammo_arty, 1, 0), new Object[] { "CIC", "CSC", "CCC", 'C', ModItems.cordite, 'I', IRON.block(), 'S', CU.shell() });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.ammo_arty, 1, 1), new Object[] { " D ", "DSD", " D ", 'D', ModItems.ball_dynamite, 'S', new ItemStack(ModItems.ammo_arty, 1, 0) });
@@ -269,7 +272,7 @@ public class WeaponRecipes {
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.stick_tnt, 4), new Object[] { " S ", "PDP", "PDP", 'S', ModBlocks.det_cord, 'P', Items.paper, 'D', ModItems.ball_tnt });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.stick_semtex, 4), new Object[] { " S ", "PDP", "PDP", 'S', ModBlocks.det_cord, 'P', Items.paper, 'D', ModItems.ingot_semtex });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.stick_c4, 4), new Object[] { " S ", "PDP", "PDP", 'S', ModBlocks.det_cord, 'P', Items.paper, 'D', ModItems.ingot_c4 });
-
+		
 		//Blocks of explosives
 		CraftingManager.addRecipeAuto(new ItemStack(ModBlocks.dynamite, 1), new Object[] { "DDD", "DSD", "DDD", 'D', ModItems.stick_dynamite, 'S', ModItems.safety_fuse });
 		CraftingManager.addRecipeAuto(new ItemStack(ModBlocks.tnt, 1), new Object[] { "DDD", "DSD", "DDD", 'D', ModItems.stick_tnt, 'S', ModItems.safety_fuse });
@@ -277,7 +280,7 @@ public class WeaponRecipes {
 		CraftingManager.addRecipeAuto(new ItemStack(ModBlocks.c4, 1), new Object[] { "DDD", "DSD", "DDD", 'D', ModItems.stick_c4, 'S', ModItems.safety_fuse });
 		CraftingManager.addRecipeAuto(new ItemStack(ModBlocks.fissure_bomb, 1), new Object[] { "SUS", "RPR", "SUS", 'S', ModBlocks.semtex, 'U', U238.block(), 'R', TA.ingot(), 'P', PU239.billet() });
 
-
+		
 		//IF Grenades
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.grenade_if_generic, 1), new Object[] { " C ", "PTP", " P ", 'C', ModItems.coil_tungsten, 'P', STEEL.plate(), 'T', Blocks.tnt });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.grenade_if_he, 1), new Object[] { "A", "G", "A", 'G', ModItems.grenade_if_generic, 'A', Items.gunpowder });
@@ -291,7 +294,7 @@ public class WeaponRecipes {
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.grenade_if_mystery, 1), new Object[] { "A", "G", "A", 'G', ModItems.grenade_if_generic, 'A', ModItems.powder_magic });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.grenade_if_spark, 1), new Object[] { " A ", "AGA", " A ", 'G', ModItems.grenade_if_generic, 'A', ModItems.powder_spark_mix });
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.grenade_if_hopwire, 1), new Object[] { " A ", "AGA", " A ", 'G', ModItems.grenade_if_generic, 'A', ModItems.powder_power });
-		CraftingManager.addRecipeAuto(new ItemStack(ModBlocks.fissure_bomb, 1), new Object[] { "SUS", "RPR", "SUS", 'S', ModBlocks.semtex, 'U', U238.block(), 'R', OreDictManager.getReflector(), 'P', PU239.billet() });
+		CraftingManager.addRecipeAuto(new ItemStack(ModBlocks.fissure_bomb, 1), new Object[] { "SUS", "RPR", "SUS", 'S', ModBlocks.semtex, 'U', U238.block(), 'R', OreDictManager.getReflector(), 'P', PU239.billet() });  
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.grenade_if_null, 1), new Object[] { "BAB", "AGA", "BAB", 'G', ModItems.grenade_if_generic, 'A', ModItems.undefined, 'B', BIGMT.ingot() });
 
 		//Mines
@@ -299,7 +302,7 @@ public class WeaponRecipes {
 		CraftingManager.addRecipeAuto(new ItemStack(ModBlocks.mine_shrap, 1), new Object[] { "L", "M", 'M', ModBlocks.mine_ap, 'L', ModItems.pellet_buckshot });
 		CraftingManager.addRecipeAuto(new ItemStack(ModBlocks.mine_he, 1), new Object[] { " C ", "PTP", 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.BASIC), 'P', STEEL.plate(), 'T', ANY_HIGHEXPLOSIVE.ingot() });
 		CraftingManager.addRecipeAuto(new ItemStack(ModBlocks.mine_fat, 1), new Object[] { "CDN", 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ANALOG), 'D', ModItems.ducttape, 'N', DictFrame.fromOne(ModItems.ammo_standard, EnumAmmo.NUKE_DEMO) });
-
+		
 		//Nuke parts
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.n2_charge, 1), new Object[] { " D ", "ERE", " D ", 'D', ModItems.ducttape, 'E', ModBlocks.det_charge, 'R', REDSTONE.block() });
 

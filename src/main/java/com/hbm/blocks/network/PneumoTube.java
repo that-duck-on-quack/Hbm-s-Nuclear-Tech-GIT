@@ -8,6 +8,7 @@ import com.hbm.inventory.fluid.FluidType;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.fluid.trait.FT_Corrosive;
 import com.hbm.inventory.fluid.trait.FT_Gaseous;
+import com.hbm.inventory.fluid.trait.FluidTraitSimple.FT_Amat;
 import com.hbm.inventory.fluid.trait.FluidTraitSimple.FT_Gaseous_ART;
 import com.hbm.items.machine.IItemFluidIdentifier;
 import com.hbm.lib.Library;
@@ -17,7 +18,6 @@ import com.hbm.tileentity.network.TileEntityPneumoTube;
 import com.hbm.util.Compat;
 
 import api.hbm.block.IToolable;
-import api.hbm.fluidmk2.IFluidConnectorBlockMK2;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -41,7 +41,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class PneumoTube extends BlockContainer implements IToolable, IFluidConnectorBlockMK2, ITooltipProvider {
+public class PneumoTube extends BlockContainer implements IToolable, ITooltipProvider {
 
 	@SideOnly(Side.CLIENT) public IIcon baseIcon;
 	@SideOnly(Side.CLIENT) public IIcon iconIn;
@@ -107,7 +107,7 @@ public class PneumoTube extends BlockContainer implements IToolable, IFluidConne
 					if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof IItemFluidIdentifier) {
 						if(!world.isRemote) {
 							FluidType type = ((IItemFluidIdentifier) player.getHeldItem().getItem()).getType(world, x, y, z, player.getHeldItem());
-							boolean canUse = !type.hasTrait(FT_Corrosive.class) && (type.hasTrait(FT_Gaseous.class) || type.hasTrait(FT_Gaseous_ART.class));
+							boolean canUse = !type.hasTrait(FT_Amat.class) && !type.hasTrait(FT_Corrosive.class) && (type.hasTrait(FT_Gaseous.class) || type.hasTrait(FT_Gaseous_ART.class));
 
 							if(canUse) {
 								tube.compair.setTankType(type);
@@ -245,12 +245,6 @@ public class PneumoTube extends BlockContainer implements IToolable, IFluidConne
 		TileEntity tile = world.getTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
 		if(tile instanceof TileEntityPneumoTube) return false;
 		return Library.canConnectFluid(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir, air);
-	}
-
-	@Override
-	public boolean canConnect(FluidType type, IBlockAccess world, int x, int y, int z, ForgeDirection dir) {
-		TileEntity te = world.getTileEntity(x, y, z);
-		return te instanceof TileEntityPneumoTube && ((TileEntityPneumoTube) te).isCompressor();
 	}
 
 	@Override
