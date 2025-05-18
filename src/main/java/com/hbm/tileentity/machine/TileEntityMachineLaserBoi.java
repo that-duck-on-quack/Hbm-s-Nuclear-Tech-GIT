@@ -55,7 +55,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
 		switch (i) {
 			case 0:
-				if (MachineRecipes.mODE(stack, OreDictManager.SI.billet()))
+				if (MachineRecipes.mODE(stack, OreDictManager.SI.billet()) || MachineRecipes.mODE(stack, OreDictManager.GAAS.billet()))
 					return true;
 				break;
 			case 2:
