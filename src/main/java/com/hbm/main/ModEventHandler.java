@@ -5,10 +5,7 @@ import com.google.common.collect.Multimap;
 import com.hbm.blocks.IStepTickReceiver;
 import com.hbm.blocks.ModBlocks;
 import com.hbm.blocks.generic.BlockAshes;
-import com.hbm.config.GeneralConfig;
-import com.hbm.config.MobConfig;
-import com.hbm.config.RadiationConfig;
-import com.hbm.config.SpaceConfig;
+import com.hbm.config.*;
 import com.hbm.dim.CelestialBody;
 import com.hbm.dim.DebugTeleporter;
 import com.hbm.dim.WorldGeneratorCelestial;
@@ -161,7 +158,7 @@ public class ModEventHandler {
 		if(!event.player.worldObj.isRemote) {
 
 			if(GeneralConfig.enableMOTD) {
-				event.player.addChatMessage(new ChatComponentText("Loaded world with JameH2's & Co. NTM: Speck " + RefStrings.VERSION + " for Minecraft 1.7.10!"));
+				event.player.addChatMessage(new ChatComponentText("Loaded world with Blank + Cher and JameH2's & Co. NTM: Speck " + RefStrings.VERSION + " for Minecraft 1.7.10!"));
 
 				if(HTTPHandler.newVersion) {
 					event.player.addChatMessage(
@@ -169,7 +166,7 @@ public class ModEventHandler {
 							.setChatStyle(new ChatStyle().setColor(EnumChatFormatting.YELLOW))
 							.appendSibling(new ChatComponentText("[here]")
 									.setChatStyle(new ChatStyle()
-										.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/JameH2/Hbm-s-Nuclear-Tech-GIT/releases"))
+										.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/that-duck-on-quack/Hbm-s-Nuclear-Tech-GIT/releases"))
 										.setUnderlined(true)
 										.setColor(EnumChatFormatting.RED)
 									)
@@ -177,6 +174,11 @@ public class ModEventHandler {
 							.appendSibling(new ChatComponentText(" to download!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.YELLOW)))
 							);
 				}
+			}
+
+			if(ServerConfig.Sk_heightLimitToggle.get()){
+				event.player.addChatMessage(new ChatComponentText("Server has Machine Height Limit On!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+				event.player.addChatMessage(new ChatComponentText("You can not place machines under Y").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)).appendSibling(new ChatComponentText(ServerConfig.Sk_heightLimitTrigger.get().toString()).setChatStyle(new ChatStyle().setUnderlined(true).setColor(EnumChatFormatting.RED))));
 			}
 
 			if(MobConfig.enableDucks && event.player instanceof EntityPlayerMP && !event.player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).getBoolean("hasDucked"))

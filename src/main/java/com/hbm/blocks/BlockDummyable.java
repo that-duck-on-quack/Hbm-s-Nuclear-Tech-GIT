@@ -1,5 +1,6 @@
 package com.hbm.blocks;
 
+import com.hbm.config.ServerConfig;
 import com.hbm.handler.MultiblockHandlerXR;
 import com.hbm.handler.ThreeInts;
 import com.hbm.interfaces.ICopiable;
@@ -24,8 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.*;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
@@ -222,7 +222,9 @@ public abstract class BlockDummyable extends BlockContainer implements ICustomBl
 		}
 
 		if(!checkRequirement(world, ox - dir.offsetX * o, oy, oz - dir.offsetZ * o, dir, o)) {
-
+			if(ServerConfig.Sk_heightLimitToggle.get() && y <= ServerConfig.Sk_heightLimitTrigger.get()){
+				pl.addChatMessage(new ChatComponentText("You can not place machines under Y").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)).appendSibling(new ChatComponentText(ServerConfig.Sk_heightLimitTrigger.get().toString()).setChatStyle(new ChatStyle().setUnderlined(true).setColor(EnumChatFormatting.RED))));
+			}
 			if(!pl.capabilities.isCreativeMode) {
 				ItemStack stack = pl.inventory.mainInventory[pl.inventory.currentItem];
 				Item item = Item.getItemFromBlock(this);
@@ -293,6 +295,9 @@ public abstract class BlockDummyable extends BlockContainer implements ICustomBl
 	}
 
 	protected boolean checkRequirement(World world, int x, int y, int z, ForgeDirection dir, int o) {
+		if(ServerConfig.Sk_heightLimitToggle.get() && y <= ServerConfig.Sk_heightLimitTrigger.get()){
+			return false;
+		}
 		return MultiblockHandlerXR.checkSpace(world, x + dir.offsetX * o, y + dir.offsetY * o, z + dir.offsetZ * o, getDimensions(), x, y, z, dir);
 	}
 

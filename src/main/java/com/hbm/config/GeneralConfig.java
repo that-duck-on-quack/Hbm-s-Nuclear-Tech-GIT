@@ -74,11 +74,7 @@ public class GeneralConfig {
 	public static boolean enableHardcoreDarkness = false;
 
 	//Configs added by Speck
-	public static boolean enableCrateBackpacks = false;
-	public static double caliberDamageModifier = 1;
-	public static double meleeDamageModifier = 1;
-	public static boolean enableTaintEffects = true;
-	public static boolean enableHardSteam = true;
+	public static boolean uselessConfig = true;
 
 	public static void loadFromConfig(Configuration config) {
 
@@ -179,11 +175,6 @@ public class GeneralConfig {
 			"These configs are related to the Speck/Blork fork!\n"
 				+ "These are mainly tied to QoL features, things we don't want to bother with and useful modifiers.\n"
 				+ "If something in here doesn't work, go bother Cher, not Bob.");
-
-		enableCrateBackpacks = CommonConfig.createConfigBool(config, CATEGORY_SPECK, "H1.0_crateBackpacks", "If enabled, allows players to open crates in their inventory like backpacks. Prone to bugs.", false);
-		caliberDamageModifier = CommonConfig.createConfigDouble(config, CATEGORY_SPECK, "H1.1_caliberMod", "A Integer modifier to weapon damage by tapping into the damage made by calibers. Not sure if it works.", 1);
-		meleeDamageModifier = CommonConfig.createConfigDouble(config, CATEGORY_SPECK, "H1.2_meleeMod", "A modifier for the damage of certain melee weapons, not all are affected currently.", 1);
-		enableTaintEffects = CommonConfig.createConfigBool(config, CATEGORY_SPECK, "H1.3_enableTaint", "Enables Taint Spread, Poison Effects and makes it so Taint Blocks, if existing, turn to Grass (Untested).", true);
-		enableHardSteam = CommonConfig.createConfigBool(config, CATEGORY_SPECK, "H1.4_enableAeration", "Enables Water Aeration, making it so condensers return Aerated Water instead of Water directly. I'd be happy if you kept this enabled but you do you.", true);
+		uselessConfig = CommonConfig.createConfigBool(config, CATEGORY_SPECK, "H1.0_uselessConfig", "Useless useless useless!.", true);
 	}
 }

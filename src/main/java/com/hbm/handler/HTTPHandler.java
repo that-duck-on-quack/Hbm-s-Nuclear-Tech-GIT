@@ -17,9 +17,9 @@ public class HTTPHandler {
 	public static String versionNumber = "";
 
 	public static void loadStats() {
-		
+
 		Thread versionChecker = new Thread("NTM Version Checker") {
-			
+
 			@Override
 			public void run() {
 				try {
@@ -29,15 +29,15 @@ public class HTTPHandler {
 					MainRegistry.logger.warn("Version checker failed!");
 				}
 			}
-			
+
 		};
-		
+
 		versionChecker.start();
 	}
 
 	private static void loadVersion() throws IOException {
 
-		URL github = new URL("https://raw.githubusercontent.com/JameH2/Hbm-s-Nuclear-Tech-GIT/space-travel-twopointfive/src/main/java/com/hbm/lib/RefStrings.java");
+		URL github = new URL("https://raw.githubusercontent.com/that-duck-on-quack/Hbm-s-Nuclear-Tech-GIT/refs/heads/HBM_harder/src/main/java/com/hbm/lib/RefStrings.java");
 		BufferedReader in = new BufferedReader(new InputStreamReader(github.openStream()));
 
 		MainRegistry.logger.info("Searching for new versions...");

@@ -4,6 +4,7 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 import com.hbm.config.GeneralConfig;
+import com.hbm.config.ServerConfig;
 import com.hbm.items.weapon.sedna.ItemGunBaseNT.LambdaContext;
 import com.hbm.items.weapon.sedna.factory.Lego;
 import com.hbm.items.weapon.sedna.mags.IMagazine;
@@ -122,7 +123,7 @@ public class Receiver {
 	public BiConsumer<ItemStack, LambdaContext> getRecoil(ItemStack stack) {			return WeaponModManager.eval(this.onRecoil_DNA, stack, CON_ONRECOIL, this, parent.index); }
 
 	/* SETTERS */
-	public Receiver dmg(float dmg) {								this.baseDamage_DNA = (float) (dmg * GeneralConfig.caliberDamageModifier);											return this; }
+	public Receiver dmg(float dmg) {								this.baseDamage_DNA = (float) (dmg * ServerConfig.Sk_firearmDamageModifier.get());											return this; }
 	public Receiver delay(int delay) {								this.delayAfterFire_DNA = this.delayAfterDryFire_DNA = delay;		return this; }
 	public Receiver dry(int delay) {								this.delayAfterDryFire_DNA = delay;									return this; }
 	public Receiver rounds(int rounds) {							this.roundsPerCycle_DNA = rounds;									return this; }

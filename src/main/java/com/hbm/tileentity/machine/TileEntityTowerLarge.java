@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import com.hbm.config.ClientConfig;
 import com.hbm.config.GeneralConfig;
+import com.hbm.config.ServerConfig;
 import com.hbm.inventory.fluid.FluidType;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.fluid.tank.FluidTank;
@@ -29,7 +30,7 @@ public class TileEntityTowerLarge extends TileEntityCondenser {
 	public TileEntityTowerLarge() {
 		tanks = new FluidTank[3];
 		tanks[0] = new FluidTank(Fluids.SPENTSTEAM, inputTankSizeTL);
-		tanks[1] = new FluidTank(GeneralConfig.enableHardSteam ? Fluids.AERATEDWATER : Fluids.WATER, outputTankSizeTL);
+		tanks[1] = new FluidTank(ServerConfig.Sk_enableHardSteam.get() ? Fluids.AERATEDWATER : Fluids.WATER, outputTankSizeTL);
 		tanks[2] = new FluidTank(Fluids.WATER, evTankSizeTL);
 		heatExchanging = true;
 	}

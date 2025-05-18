@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hbm.config.GeneralConfig;
+import com.hbm.config.ServerConfig;
 import com.hbm.items.weapon.sedna.BulletConfig;
 import com.hbm.items.weapon.sedna.ItemGunBaseNT;
 import com.hbm.items.weapon.sedna.Receiver;
@@ -29,7 +30,7 @@ public class WeaponModCaliber extends WeaponModBase {
 		this.setPriority(PRIORITY_SET);
 		for(BulletConfig conf : cfg) this.cfg.add(conf);
 		this.count = count;
-		this.baseDamage = (float) (baseDamage * GeneralConfig.caliberDamageModifier);
+		this.baseDamage = (baseDamage * ServerConfig.Sk_firearmDamageModifier.get());
 	}
 
 	@Override

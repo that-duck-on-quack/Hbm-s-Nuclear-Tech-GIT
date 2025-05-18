@@ -6,17 +6,26 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 
 public class ServerConfig extends RunningConfig {
-
+	//I'll probably turn this into a .cfg for easier readability later on, not messing with it for now.
 	public static final Gson gson = new Gson();
 	public static HashMap<String, ConfigWrapper> configMap = new HashMap();
 
-	public static ConfigWrapper<Boolean> DAMAGE_COMPATIBILITY_MODE =	new ConfigWrapper(false);
-	public static ConfigWrapper<Float> MINE_AP_DAMAGE =					new ConfigWrapper(10F);
-	public static ConfigWrapper<Float> MINE_HE_DAMAGE =					new ConfigWrapper(35F);
-	public static ConfigWrapper<Float> MINE_SHRAP_DAMAGE =				new ConfigWrapper(7.5F);
-	public static ConfigWrapper<Float> MINE_NUKE_DAMAGE =				new ConfigWrapper(100F);
-	public static ConfigWrapper<Float> MINE_NAVAL_DAMAGE =				new ConfigWrapper(60F);
-	public static ConfigWrapper<Boolean> TAINT_TRAILS =					new ConfigWrapper(false);
+	public static ConfigWrapper<Boolean> DAMAGE_COMPATIBILITY_MODE = new ConfigWrapper(false);
+	public static ConfigWrapper<Float> MINE_AP_DAMAGE =	new ConfigWrapper(10F);
+	public static ConfigWrapper<Float> MINE_HE_DAMAGE =	new ConfigWrapper(35F);
+	public static ConfigWrapper<Float> MINE_SHRAP_DAMAGE = new ConfigWrapper(7.5F);
+	public static ConfigWrapper<Float> MINE_NUKE_DAMAGE = new ConfigWrapper(100F);
+	public static ConfigWrapper<Float> MINE_NAVAL_DAMAGE = new ConfigWrapper(60F);
+	public static ConfigWrapper<Boolean> TAINT_TRAILS =	new ConfigWrapper(false);
+
+	//Speck configs.
+	public static ConfigWrapper<Boolean> Sk_heightLimitToggle = new ConfigWrapper<>(false);
+	public static ConfigWrapper<Boolean> Sk_enableCrateBackpacks = new ConfigWrapper<>(false);
+	public static ConfigWrapper<Boolean> Sk_enableTaintEffects = new ConfigWrapper<>(true);
+	public static ConfigWrapper<Boolean> Sk_enableHardSteam = new ConfigWrapper<>(true);
+	public static ConfigWrapper<Integer> Sk_heightLimitTrigger = new ConfigWrapper<>(64);
+	public static ConfigWrapper<Float> Sk_meleeDamageModifier = new ConfigWrapper<>(1F);
+	public static ConfigWrapper<Float> Sk_firearmDamageModifier = new ConfigWrapper<>(1F);
 
 	private static void initDefaults() {
 		configMap.put("DAMAGE_COMPATIBILITY_MODE", DAMAGE_COMPATIBILITY_MODE);
@@ -26,6 +35,15 @@ public class ServerConfig extends RunningConfig {
 		configMap.put("MINE_NUKE_DAMAGE", MINE_NUKE_DAMAGE);
 		configMap.put("MINE_NAVAL_DAMAGE", MINE_NAVAL_DAMAGE);
 		configMap.put("TAINT_TRAILS", TAINT_TRAILS);
+
+		//Speck configs.
+		configMap.put("Sk_heightLimitToggle", Sk_heightLimitToggle);
+		configMap.put("Sk_heightLimitTrigger", Sk_heightLimitTrigger);
+		configMap.put("Sk_enableCrateBackpacks", Sk_enableCrateBackpacks);
+		configMap.put("Sk_enableHardSteam", Sk_enableHardSteam);
+		configMap.put("Sk_enableTaintEffects", Sk_enableTaintEffects);
+		configMap.put("Sk_meleeDamageModifier", Sk_meleeDamageModifier);
+		configMap.put("Sk_firearmDamageModifier", Sk_firearmDamageModifier);
 	}
 
 	/** Initializes defaults, then reads the config file if it exists, then writes the config file. */

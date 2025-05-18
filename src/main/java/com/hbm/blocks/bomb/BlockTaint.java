@@ -6,6 +6,7 @@ import java.util.Random;
 
 import com.hbm.blocks.ITooltipProvider;
 import com.hbm.config.GeneralConfig;
+import com.hbm.config.ServerConfig;
 import com.hbm.entity.mob.EntityTaintCrab;
 import com.hbm.entity.mob.EntityCreeperTainted;
 import com.hbm.entity.mob.EntityTeslaCrab;
@@ -43,7 +44,7 @@ public class BlockTaint extends Block implements ITooltipProvider {
 
 		int meta = world.getBlockMetadata(x, y, z);
 		if(meta >= 15) return;
-		if(GeneralConfig.enableTaintEffects) {
+		if(ServerConfig.Sk_enableTaintEffects.get()) {
 			for (int i = -3; i <= 3; i++)
 				for (int j = -3; j <= 3; j++)
 					for (int k = -3; k <= 3; k++) {

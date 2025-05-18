@@ -2,6 +2,7 @@ package com.hbm.items.block;
 
 import com.hbm.blocks.ModBlocks;
 import com.hbm.config.GeneralConfig;
+import com.hbm.config.ServerConfig;
 import com.hbm.inventory.container.*;
 import com.hbm.inventory.gui.*;
 import com.hbm.items.ItemInventory;
@@ -38,7 +39,7 @@ public class ItemBlockStorageCrate extends ItemBlockBase implements IGUIProvider
 		Block block = Block.getBlockFromItem(it.getItem());
 		if(block == ModBlocks.mass_storage) return stack; // Genuinely can't figure out how to make this part work, so I'm just not gonna mess with it.
 		player.inventory.currentItem = slot;
-		if(!world.isRemote && stack.stackSize == 1 && GeneralConfig.enableCrateBackpacks) {
+		if(!world.isRemote && stack.stackSize == 1 && ServerConfig.Sk_enableCrateBackpacks.get()) {
 			if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("lock")) {
 				for (ItemStack item : player.inventory.mainInventory) {
 					if(item == null) // Skip if no item.
