@@ -95,14 +95,14 @@ public abstract class EntityMissileTier3 extends EntityMissileBaseNT {
 		public EntityMissileDrill(World world) { super(world); }
 		public EntityMissileDrill(World world, float x, float y, float z, int a, int b) { super(world, x, y, z, a, b); }
 		@Override public void onImpact() {
-			for(int i = 0; i < 16; i++) {
-				ExplosionNT explosion = new ExplosionNT(worldObj, this, this.posX, this.posY - i, this.posZ, 10F);
+			for(int i = 0; i < 24; i++) {
+				ExplosionNT explosion = new ExplosionNT(worldObj, this, this.posX, this.posY - i, this.posZ, i >= 14 ? 10F : 2F);
 				explosion.addAllAttrib(ExAttrib.ERRODE);
 				explosion.explode(); //an explosion exploded!
 			}
 			ExplosionLarge.spawnParticles(worldObj, this.posX, this.posY, this.posZ, 25);
 			ExplosionLarge.spawnShrapnels(worldObj, this.posX, this.posY, this.posZ, 12);
-			ExplosionLarge.jolt(worldObj, this.posX, this.posY, this.posZ, 10, 50, 1);
+			ExplosionLarge.jolt(worldObj, this.posX, this.posY, this.posZ, 2, 50, 1);
 		}
 		@Override public ItemStack getDebrisRareDrop() { return new ItemStack(ModItems.warhead_buster_large); }
 		@Override public ItemStack getMissileItemForInfo() { return new ItemStack(ModItems.missile_drill); }

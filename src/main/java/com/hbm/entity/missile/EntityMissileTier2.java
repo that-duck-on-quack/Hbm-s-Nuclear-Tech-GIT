@@ -25,7 +25,7 @@ public abstract class EntityMissileTier2 extends EntityMissileBaseNT {
 		list.add(new ItemStack(ModItems.plate_steel, 10));
 		list.add(new ItemStack(ModItems.plate_titanium, 6));
 		list.add(new ItemStack(ModItems.thruster_medium, 1));
-		
+
 		return list;
 	}
 
@@ -75,7 +75,7 @@ public abstract class EntityMissileTier2 extends EntityMissileBaseNT {
 		public EntityMissileBusterStrong(World world) { super(world); }
 		public EntityMissileBusterStrong(World world, float x, float y, float z, int a, int b) { super(world, x, y, z, a, b); }
 		@Override public void onImpact() {
-			for(int i = 0; i < 20; i++) this.worldObj.createExplosion(this, this.posX, this.posY - i, this.posZ, 7.5F, true);
+			for(int i = 0; i < 10; i++) this.worldObj.createExplosion(this, this.posX, this.posY - i, this.posZ, i >= 6 ? 7.5F : 2F, true);
 			ExplosionLarge.spawnParticles(worldObj, this.posX, this.posY, this.posZ, 8);
 			ExplosionLarge.spawnShrapnels(worldObj, this.posX, this.posY, this.posZ, 8);
 			ExplosionLarge.spawnRubble(worldObj, this.posX, this.posY, this.posZ, 8);
