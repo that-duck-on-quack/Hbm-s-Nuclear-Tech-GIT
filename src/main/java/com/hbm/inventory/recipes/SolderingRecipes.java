@@ -218,6 +218,8 @@ public class SolderingRecipes extends SerializableRecipe {
 		));
 
 		//hbm hard stuff
+
+		//lanf cap
 		recipes.add(new SolderingRecipe(new ItemStack(ModItems.circuit, 1, EnumCircuitType.CAPACITOR_LANTHANIUM.ordinal()), 20, 1000,
 			new FluidStack(Fluids.VINYL_CHLORIDE, 250),
 			new AStack[] {
@@ -229,6 +231,8 @@ public class SolderingRecipes extends SerializableRecipe {
 			new AStack[] {
 				new OreDictStack(CU.wireFine(), 4)}
 		));
+
+		//bismoid chip
 		recipes.add(new SolderingRecipe(new ItemStack(ModItems.circuit, 1, EnumCircuitType.CHIP_BISMOID.ordinal()), 60, 10000,
 			new FluidStack(Fluids.EPOXY, 250),
 			new AStack[] {
@@ -242,11 +246,15 @@ public class SolderingRecipes extends SerializableRecipe {
 			new AStack[] {
 				new OreDictStack(PB.wireFine(), 16)}
 		));
+
+		//mil circuit*4
 		recipes.add(new SolderingRecipe(new ItemStack(ModItems.circuit, 4 , EnumCircuitType.ADVANCED.ordinal()),120,10000,
 			new AStack[] {new ComparableStack(ModItems.circuit, 8, EnumCircuitType.GASCHIP), new ComparableStack(ModItems.circuit, 16, EnumCircuitType.CAPACITOR_TANTALIUM)},
 			new AStack[] {new ComparableStack(ModItems.epoxy_pcb,4)},
 			new AStack[] {new OreDictStack(PB.wireFine(), 16)}
 			));
+
+		//mil circuit*16
 		recipes.add(new SolderingRecipe(new ItemStack(ModItems.circuit, 16 , EnumCircuitType.ADVANCED.ordinal()),60,20000,
 			new AStack[] {new ComparableStack(ModItems.circuit, 16, EnumCircuitType.HFCHIP), new ComparableStack(ModItems.circuit, 64, EnumCircuitType.CAPACITOR_LANTHANIUM)},
 			new AStack[] {new ComparableStack(ModItems.epoxy_pcb,16)},
@@ -257,16 +265,21 @@ public class SolderingRecipes extends SerializableRecipe {
 //			new AStack[] {},
 //			new AStack[] {}
 //		));
+
+		//inter ciurcuit *4
 		recipes.add(new SolderingRecipe(new ItemStack(ModItems.circuit, 4 , EnumCircuitType.BASIC.ordinal()),1,1,
 			new AStack[] {new ComparableStack(ModItems.circuit, 8, EnumCircuitType.MOLYCHIP)},
 			new AStack[] {new ComparableStack(ModItems.epoxy_pcb,4)},
 			new AStack[] {new OreDictStack(PB.wireFine(), 8)}
 		));
+		//inter circuit *16
 		recipes.add(new SolderingRecipe(new ItemStack(ModItems.circuit, 16 , EnumCircuitType.BASIC.ordinal()),1,1,
 			new AStack[] {new ComparableStack(ModItems.circuit, 16, EnumCircuitType.GASCHIP)},
 			new AStack[] {new ComparableStack(ModItems.epoxy_pcb,16)},
 			new AStack[] {new OreDictStack(PB.wireFine(), 32)}
 		));
+
+		//mass bismoid x`
 		recipes.add(new SolderingRecipe(new ItemStack(ModItems.circuit, 4, EnumCircuitType.BISMOID.ordinal()), 100, 10_000,
 			new FluidStack(Fluids.EPOXY, 2000),
 			new AStack[] {new ComparableStack(ModItems.circuit, 8, EnumCircuitType.CHIP_BISMOID), new ComparableStack(ModItems.circuit,  16, EnumCircuitType.GASCHIP), new ComparableStack(ModItems.circuit,  16, EnumCircuitType.CAPACITOR_LANTHANIUM)},
