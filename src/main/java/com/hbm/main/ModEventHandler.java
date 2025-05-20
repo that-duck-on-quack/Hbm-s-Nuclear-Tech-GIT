@@ -5,7 +5,11 @@ import com.google.common.collect.Multimap;
 import com.hbm.blocks.IStepTickReceiver;
 import com.hbm.blocks.ModBlocks;
 import com.hbm.blocks.generic.BlockAshes;
-import com.hbm.config.*;
+import com.hbm.config.GeneralConfig;
+import com.hbm.config.MobConfig;
+import com.hbm.config.RadiationConfig;
+import com.hbm.config.ServerConfig;
+import com.hbm.config.SpaceConfig;
 import com.hbm.dim.CelestialBody;
 import com.hbm.dim.DebugTeleporter;
 import com.hbm.dim.WorldGeneratorCelestial;
@@ -84,6 +88,7 @@ import io.netty.buffer.PooledByteBufAllocator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockFire;
+import net.minecraft.block.IGrowable;
 import net.minecraft.command.CommandGameRule;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -630,8 +635,13 @@ public class ModEventHandler {
 	public void onBlockPlaced(PlaceEvent event) {
 		if(event.world.isRemote) return;
 		boolean placeCancelled = ChunkAtmosphereManager.proxy.runEffectsOnBlock(event.world, event.block, event.x, event.y, event.z);
+		if(placeCancelled) return;
 
-		if(SpaceConfig.allowNetherPortals && !placeCancelled && event.world.provider.dimensionId > 1 && event.block instanceof BlockFire) {
+		if(event.block instanceof IGrowable) {
+			ChunkAtmosphereManager.proxy.trackPlant(event.world, event.x, event.y, event.z);
+		}
+
+		if(SpaceConfig.allowNetherPortals && event.world.provider.dimensionId > 1 && event.block instanceof BlockFire) {
 			Blocks.portal.func_150000_e(event.world, event.x, event.y, event.z);
 		}
 	}
@@ -838,6 +848,8 @@ public class ModEventHandler {
 			List loadedEntityList = new ArrayList();
 			loadedEntityList.addAll(event.world.loadedEntityList); // ConcurrentModificationException my balls
 
+			int tickrate = Math.max(1, ServerConfig.ITEM_HAZARD_DROP_TICKRATE.get());
+
 			for(Object e : loadedEntityList) {
 
 				if(e instanceof EntityPlayer) {
@@ -864,7 +876,7 @@ public class ModEventHandler {
 					}
 				}
 
-				if(event.phase == Phase.END) {
+				if(event.phase == Phase.END && event.world.getTotalWorldTime() % tickrate == 0) {
 					if(e instanceof EntityItem) {
 						EntityItem item = (EntityItem) e;
 						HazardSystem.updateDroppedItem(item);

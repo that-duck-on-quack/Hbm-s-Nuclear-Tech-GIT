@@ -28,6 +28,13 @@ public class NTMWorldGenerator implements IWorldGenerator {
 		final List<BiomeGenBase> beachBiomes = Arrays.asList(new BiomeGenBase[] { BiomeGenBase.beach, BiomeGenBase.stoneBeach, BiomeGenBase.coldBeach });
 		final List<BiomeGenBase> lighthouseBiomes = Arrays.asList(new BiomeGenBase[] { BiomeGenBase.ocean, BiomeGenBase.deepOcean, BiomeGenBase.beach, BiomeGenBase.stoneBeach, BiomeGenBase.coldBeach });
 
+		/// SPIRE ///
+		NBTStructure.registerStructure(0, new SpawnCondition() {{
+			canSpawn = biome -> biome.heightVariation <= 0.05F && !invalidBiomes.contains(biome);
+			structure = new JigsawPiece("spire", StructureManager.spire, -1);
+			spawnWeight = 2;
+		}});
+
 		NBTStructure.registerStructure(0, new SpawnCondition() {{
 			canSpawn = biome -> !invalidBiomes.contains(biome);
 			start = d -> new MapGenNTMFeatures.Start(d.getW(), d.getX(), d.getY(), d.getZ());

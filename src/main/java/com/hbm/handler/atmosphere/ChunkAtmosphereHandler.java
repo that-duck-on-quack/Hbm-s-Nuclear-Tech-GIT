@@ -32,6 +32,7 @@ import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.terraingen.SaplingGrowTreeEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -44,6 +45,13 @@ public class ChunkAtmosphereHandler {
 
 	private HashMap<Integer, HashMap<IAtmosphereProvider, AtmosphereBlob>> worldBlobs = new HashMap<>();
 	private final int MAX_BLOB_RADIUS = 256;
+
+	// How much CO2 is converted into O2 from various growing
+	// Balanced around these amounts of plants providing for a single pressurized room:
+	//  * 25 trees (955s to grow), OR
+	//  * 200 crops (300s per stage)
+	public static final int TREE_GROWTH_CONVERSION = 400; // per sapling -> tree
+	public static final int CROP_GROWTH_CONVERSION = 15; // per stage
 
 	/*
 	 * Methods to get information about the current atmosphere
@@ -122,6 +130,10 @@ public class ChunkAtmosphereHandler {
 		return false;
 	}
 
+	protected List<AtmosphereBlob> getBlobsWithinRadius(World world, ThreeInts pos) {
+		return getBlobsWithinRadius(world, pos, MAX_BLOB_RADIUS);
+	}
+
 	protected List<AtmosphereBlob> getBlobsWithinRadius(World world, ThreeInts pos, int radius) {
 		HashMap<IAtmosphereProvider, AtmosphereBlob> blobs = worldBlobs.get(world.provider.dimensionId);
 		List<AtmosphereBlob> list = new LinkedList<AtmosphereBlob>();
@@ -139,8 +151,8 @@ public class ChunkAtmosphereHandler {
 		return list;
 	}
 
-    // Assuming 21% AIR/9% OXY is required for breathable atmosphere
-    public boolean canBreathe(EntityLivingBase entity) {
+	// Assuming 21% AIR/9% OXY is required for breathable atmosphere
+	public boolean canBreathe(EntityLivingBase entity) {
 		CBT_Atmosphere atmosphere = getAtmosphere(entity);
 
 		if(GeneralConfig.enableDebugMode && entity instanceof EntityPlayer && entity.worldObj.getTotalWorldTime() % 20 == 0) {
@@ -154,10 +166,10 @@ public class ChunkAtmosphereHandler {
 		}
 
 		return canBreathe(atmosphere);
-    }
+	}
 
 	public boolean canBreathe(CBT_Atmosphere atmosphere) {
-        return atmosphere != null && (atmosphere.hasFluid(Fluids.AIR, 0.21) || atmosphere.hasFluid(Fluids.OXYGEN, 0.09));
+		return atmosphere != null && (atmosphere.hasFluid(Fluids.AIR, 0.21) || atmosphere.hasFluid(Fluids.OXYGEN, 0.09));
 	}
 
 	// Is the air pressure high enough to support liquids
@@ -258,7 +270,7 @@ public class ChunkAtmosphereHandler {
 	private void onBlockPlaced(World world, ThreeInts pos) {
 		if(!AtmosphereBlob.isBlockSealed(world, pos)) return;
 
-		List<AtmosphereBlob> nearbyBlobs = getBlobsWithinRadius(world, pos, MAX_BLOB_RADIUS);
+		List<AtmosphereBlob> nearbyBlobs = getBlobsWithinRadius(world, pos);
 		for(AtmosphereBlob blob : nearbyBlobs) {
 			if(blob.contains(pos)) {
 				blob.removeBlock(pos);
@@ -269,7 +281,7 @@ public class ChunkAtmosphereHandler {
 	}
 
 	private void onBlockRemoved(World world, ThreeInts pos) {
-		List<AtmosphereBlob> nearbyBlobs = getBlobsWithinRadius(world, pos, MAX_BLOB_RADIUS);
+		List<AtmosphereBlob> nearbyBlobs = getBlobsWithinRadius(world, pos);
 		for(AtmosphereBlob blob : nearbyBlobs) {
 			// Make sure that a block can actually be attached to the blob
 			for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
@@ -293,6 +305,14 @@ public class ChunkAtmosphereHandler {
 	public void receiveWorldUnload(WorldEvent.Unload event) {
 		if(event.world.isRemote) return;
 		worldBlobs.remove(event.world.provider.dimensionId);
+	}
+
+	public void receiveWorldTick(TickEvent.WorldTickEvent tick) {
+		if(tick.world.isRemote || tick.world.getTotalWorldTime() % 20 != 0) return;
+		HashMap<IAtmosphereProvider, AtmosphereBlob> blobs = worldBlobs.get(tick.world.provider.dimensionId);
+		for(AtmosphereBlob blob : blobs.values()) {
+			blob.checkGrowth();
+		}
 	}
 
 	public void receiveBlockPlaced(BlockEvent.PlaceEvent event) {
@@ -350,6 +370,28 @@ public class ChunkAtmosphereHandler {
 		}
 
 		explosions.clear();
+	}
+
+	public void receiveTreeGrow(SaplingGrowTreeEvent event) {
+		ThreeInts pos = new ThreeInts(event.x, event.y, event.z);
+		List<AtmosphereBlob> nearbyBlobs = getBlobsWithinRadius(event.world, pos, MAX_BLOB_RADIUS);
+		for(AtmosphereBlob blob : nearbyBlobs) {
+			if(blob.contains(pos)) {
+				blob.produce(TREE_GROWTH_CONVERSION);
+				break;
+			}
+		}
+	}
+
+	public void trackPlant(World world, int x, int y, int z) {
+		ThreeInts pos = new ThreeInts(x, y, z);
+
+		List<AtmosphereBlob> nearbyBlobs = getBlobsWithinRadius(world, pos);
+		for(AtmosphereBlob blob : nearbyBlobs) {
+			if(blob.contains(pos)) {
+				blob.addPlant(world, x, y, z);
+			}
+		}
 	}
 
 }

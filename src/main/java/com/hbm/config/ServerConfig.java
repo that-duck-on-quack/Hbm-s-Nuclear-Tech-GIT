@@ -6,7 +6,7 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 
 public class ServerConfig extends RunningConfig {
-	//I'll probably turn this into a .cfg for easier readability later on, not messing with it for now.
+
 	public static final Gson gson = new Gson();
 	public static HashMap<String, ConfigWrapper> configMap = new HashMap();
 
@@ -17,6 +17,7 @@ public class ServerConfig extends RunningConfig {
 	public static ConfigWrapper<Float> MINE_NUKE_DAMAGE = new ConfigWrapper(100F);
 	public static ConfigWrapper<Float> MINE_NAVAL_DAMAGE = new ConfigWrapper(60F);
 	public static ConfigWrapper<Boolean> TAINT_TRAILS =	new ConfigWrapper(false);
+	public static ConfigWrapper<Integer> ITEM_HAZARD_DROP_TICKRATE =	new ConfigWrapper(2);
 
 	//Speck configs.
 	public static ConfigWrapper<Boolean> Sk_heightLimitToggle = new ConfigWrapper<>(false);
@@ -35,6 +36,7 @@ public class ServerConfig extends RunningConfig {
 		configMap.put("MINE_NUKE_DAMAGE", MINE_NUKE_DAMAGE);
 		configMap.put("MINE_NAVAL_DAMAGE", MINE_NAVAL_DAMAGE);
 		configMap.put("TAINT_TRAILS", TAINT_TRAILS);
+		configMap.put("ITEM_HAZARD_DROP_TICKRATE", ITEM_HAZARD_DROP_TICKRATE);
 
 		//Speck configs.
 		configMap.put("Sk_heightLimitToggle", Sk_heightLimitToggle);

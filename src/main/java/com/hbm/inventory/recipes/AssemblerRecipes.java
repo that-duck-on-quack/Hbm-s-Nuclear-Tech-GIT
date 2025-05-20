@@ -1530,6 +1530,16 @@ public class AssemblerRecipes extends SerializableRecipe {
 				new ComparableStack(ModItems.circuit, 8, EnumCircuitType.GASCHIP),
 		}, 400);
 
+		makeRecipe(new ComparableStack(ModBlocks.hydrobay, 1), new AStack[] {
+				new OreDictStack(STAINLESS.plate(), 16),
+				new OreDictStack(Fluids.WATER.getDict(16_000)),
+				new OreDictStack(STEEL.pipe(), 6),
+				new OreDictStack(KEY_CLEARGLASS, 8),
+				new ComparableStack(Blocks.dirt, 8),
+				new ComparableStack(ModItems.tank_steel, 2),
+				new OreDictStack(ANY_PLASTIC.ingot(), 2),
+		}, 400);
+
 		//DYSON//
 		makeRecipe(new ComparableStack(ModBlocks.dyson_launcher, 1), new AStack[] {
 			new ComparableStack(ModItems.part_generic, 16, EnumPartType.HDE),
