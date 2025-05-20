@@ -1692,6 +1692,20 @@ public class AssemblerRecipes extends SerializableRecipe {
 			new OreDictStack(CU.block(), 1) // Copper Body instead of purely BRICK
 		}, 100);
 
+		makeRecipe(new ComparableStack(ModBlocks.machine_soldering_station, 1), new AStack[]{
+			new OreDictStack(STEEL.plateWelded(), 1), //TZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+			new ComparableStack(ModItems.coil_copper_torus, 2), //Toruses are more efficient.
+			new OreDictStack(W.ingot(), 2), //We weld the bolts directly into the machine.
+			new ComparableStack(ModItems.circuit, 1, EnumCircuitType.VACUUM_TUBE.ordinal()) //Efficient manufacturing!
+		}, 125);
+
+		makeRecipe(new ComparableStack(ModBlocks.machine_arc_welder, 1), new AStack[]{
+			new OreDictStack(STEEL.plateWelded(), 2), //Using welded plates is more efficient when manufacturing
+			new OreDictStack(W.block(), 2), //Block > Plate
+			new ComparableStack(ModBlocks.machine_lithium_battery, 1), //This battery has a built in transformer???
+			new ComparableStack(ModItems.arc_electrode, 2) //Self-explanatory.
+		}, 200);
+
 		// End of AnS
 
 
