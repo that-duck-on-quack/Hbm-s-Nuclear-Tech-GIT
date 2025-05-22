@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.util.Random;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.config.ServerConfig;
 import com.hbm.potion.HbmPotion;
 
 import cpw.mods.fml.relauncher.Side;
@@ -71,20 +72,20 @@ public class Balefire extends BlockFire {
 					this.tryCatchFire(world, x, y + 1, z, 300, rand, meta, DOWN);
 					this.tryCatchFire(world, x, y, z - 1, 500, rand, meta, SOUTH);
 					this.tryCatchFire(world, x, y, z + 1, 500, rand, meta, NORTH);
-					
+
 					int h = 3;
 
 					for(int ix = x - h; ix <= x + h; ++ix) {
 						for(int iz = z - h; iz <= z + h; ++iz) {
 							for(int iy = y - 1; iy <= y + 4; ++iy) {
-								
+
 								if(ix != x || iy != y || iz != z) {
 									int fireLimit = 100;
 
 									if(iy > y + 1) {
 										fireLimit += (iy - (y + 1)) * 100;
 									}
-									
+
 									if(world.getBlock(ix, iy, iz) == ModBlocks.balefire && world.getBlockMetadata(ix, iy, iz) > meta + 1) {
 										world.setBlock(ix, iy, iz, this, meta + 1, 3);
 										continue;
@@ -111,7 +112,7 @@ public class Balefire extends BlockFire {
 	private void tryCatchFire(World world, int x, int y, int z, int chance, Random rand, int fireMetadata, ForgeDirection face) {
 		int flammability = world.getBlock(x, y, z).getFlammability(world, x, y, z, face);
 
-		if(rand.nextInt(chance) < flammability) {
+		if(ServerConfig.Sk_enableBaleSpread.get() && rand.nextInt(chance) < flammability) {
 			boolean flag = world.getBlock(x, y, z) == Blocks.tnt;
 
 			world.setBlock(x, y, z, this, fireMetadata + 1, 3);
@@ -158,7 +159,7 @@ public class Balefire extends BlockFire {
 
 		if(entity instanceof EntityLivingBase) ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(HbmPotion.radiation.id, 5 * 20, 9));
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
 		int meta = world.getBlockMetadata(x, y, z);

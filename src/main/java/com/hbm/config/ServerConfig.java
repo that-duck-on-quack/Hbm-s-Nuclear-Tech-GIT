@@ -27,6 +27,7 @@ public class ServerConfig extends RunningConfig {
 	public static ConfigWrapper<Integer> Sk_heightLimitTrigger = new ConfigWrapper<>(64);
 	public static ConfigWrapper<Float> Sk_meleeDamageModifier = new ConfigWrapper<>(1F);
 	public static ConfigWrapper<Float> Sk_firearmDamageModifier = new ConfigWrapper<>(1F);
+	public static ConfigWrapper<Boolean> Sk_enableBaleSpread = new ConfigWrapper<>(true);
 
 	private static void initDefaults() {
 		configMap.put("DAMAGE_COMPATIBILITY_MODE", DAMAGE_COMPATIBILITY_MODE);
@@ -46,6 +47,7 @@ public class ServerConfig extends RunningConfig {
 		configMap.put("Sk_enableTaintEffects", Sk_enableTaintEffects);
 		configMap.put("Sk_meleeDamageModifier", Sk_meleeDamageModifier);
 		configMap.put("Sk_firearmDamageModifier", Sk_firearmDamageModifier);
+		configMap.put("Sk_enableBaleSpread", Sk_enableBaleSpread);
 	}
 
 	/** Initializes defaults, then reads the config file if it exists, then writes the config file. */
