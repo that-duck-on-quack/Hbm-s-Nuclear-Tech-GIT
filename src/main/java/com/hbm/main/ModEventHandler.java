@@ -38,6 +38,7 @@ import com.hbm.hazard.HazardSystem;
 import com.hbm.hazard.type.HazardTypeNeutron;
 import com.hbm.interfaces.IBomb;
 import com.hbm.interfaces.Spaghetti;
+import com.hbm.inventory.recipes.loader.SerializableRecipe;
 import com.hbm.handler.HTTPHandler;
 import com.hbm.handler.HbmKeybinds.EnumKeybind;
 import com.hbm.handler.atmosphere.ChunkAtmosphereManager;
@@ -60,6 +61,7 @@ import com.hbm.packet.toclient.AuxParticlePacketNT;
 import com.hbm.packet.PacketDispatcher;
 import com.hbm.packet.toclient.PermaSyncPacket;
 import com.hbm.packet.toclient.PlayerInformPacket;
+import com.hbm.packet.toclient.SerializableRecipePacket;
 import com.hbm.particle.helper.BlackPowderCreator;
 import com.hbm.potion.HbmPotion;
 import com.hbm.tileentity.machine.TileEntityMachineRadarNT;
@@ -73,6 +75,8 @@ import com.hbm.util.ContaminationUtil.ContaminationType;
 import com.hbm.util.ContaminationUtil.HazardType;
 import com.hbm.world.PlanetGen;
 import com.hbm.world.generator.TimedGenerator;
+
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
@@ -81,8 +85,10 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.WorldTickEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ClientDisconnectionFromServerEvent;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
 import net.minecraft.block.Block;
@@ -149,6 +155,7 @@ import net.minecraftforge.event.world.WorldEvent;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.logging.log4j.Level;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -200,17 +207,32 @@ public class ModEventHandler {
 				}
 			}
 
+			if(GeneralConfig.enableServerRecipeSync && FMLCommonHandler.instance().getSide() == Side.SERVER && event.player instanceof EntityPlayerMP) {
+				File recDir = new File(MainRegistry.configDir.getAbsolutePath() + File.separatorChar + "hbmRecipes");
 
-			if(event.player.worldObj.getWorldInfo().getTerrainType() instanceof WorldTypeTeleport) {
-				HbmPlayerProps props = HbmPlayerProps.getData(event.player);
+				MainRegistry.logger.info("Sending recipes to client!");
 
-				if(!props.hasWarped) {
-					WorldTypeTeleport teleport = (WorldTypeTeleport) event.player.worldObj.getWorldInfo().getTerrainType();
-					teleport.onPlayerJoin(event.player);
-					props.hasWarped = true;
+				boolean hasSent = false;
+
+				for(SerializableRecipe recipe : SerializableRecipe.recipeHandlers) {
+					File recFile = new File(recDir.getAbsolutePath() + File.separatorChar + recipe.getFileName());
+					if(recFile.exists() && recFile.isFile()) {
+						MainRegistry.logger.info("Sending recipe file: " + recFile.getName());
+						PacketDispatcher.wrapper.sendTo(new SerializableRecipePacket(recFile), (EntityPlayerMP) event.player);
+						hasSent = true;
+					}
+				}
+
+				if(hasSent) {
+					PacketDispatcher.wrapper.sendTo(new SerializableRecipePacket(true), (EntityPlayerMP) event.player);
 				}
 			}
 		}
+	}
+
+	@SubscribeEvent
+	public void onPlayerLeftClient(ClientDisconnectionFromServerEvent event) {
+		SerializableRecipe.clearReceivedRecipes();
 	}
 
 	@SubscribeEvent

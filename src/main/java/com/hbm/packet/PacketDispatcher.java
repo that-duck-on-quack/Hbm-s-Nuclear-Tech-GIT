@@ -70,6 +70,9 @@ public class PacketDispatcher {
 		//The not-so-convenient but not laggy one
 		wrapper.registerMessage(BufPacket.Handler.class, BufPacket.class, i++, Side.CLIENT);
 
+		//Syncs server recipe configs to the client
+		wrapper.registerMessage(SerializableRecipePacket.Handler.class, SerializableRecipePacket.class, i++, Side.CLIENT);
+
 		// Sends info about currently linked transporters to player
 		wrapper.registerMessage(TransporterLinkerPacket.Handler.class, TransporterLinkerPacket.class, i++, Side.CLIENT);
 

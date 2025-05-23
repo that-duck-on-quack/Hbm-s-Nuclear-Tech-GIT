@@ -1,15 +1,12 @@
 package com.hbm.inventory.recipes.loader;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -37,8 +34,10 @@ import net.minecraft.item.ItemStack;
 public abstract class SerializableRecipe {
 
 	public static final Gson gson = new Gson();
-	public static List<SerializableRecipe> recipeHandlers = new ArrayList();
-	public static List<IRecipeRegisterListener> additionalListeners = new ArrayList();
+	public static List<SerializableRecipe> recipeHandlers = new ArrayList<>();
+	public static List<IRecipeRegisterListener> additionalListeners = new ArrayList<>();
+
+	public static Map<String, InputStream> recipeSyncHandlers = new HashMap<>();
 
 	public boolean modified = false;
 
@@ -116,7 +115,19 @@ public abstract class SerializableRecipe {
 			recipe.deleteRecipes();
 
 			File recFile = new File(recDir.getAbsolutePath() + File.separatorChar + recipe.getFileName());
-			if(recFile.exists() && recFile.isFile()) {
+			if(recipeSyncHandlers.containsKey(recipe.getFileName())) {
+				MainRegistry.logger.info("Reading synced recipe file " + recipe.getFileName());
+				InputStream stream = recipeSyncHandlers.get(recipe.getFileName());
+
+				try {
+					stream.reset();
+					Reader reader = new InputStreamReader(stream);
+					recipe.readRecipeStream(reader);
+					recipe.modified = true;
+				} catch(IOException ex) {
+					MainRegistry.logger.error("Failed to reset synced recipe stream", ex);
+				}
+			} else if(recFile.exists() && recFile.isFile()) {
 				MainRegistry.logger.info("Reading recipe file " + recFile.getName());
 				recipe.readRecipeFile(recFile);
 				recipe.modified = true;
@@ -138,6 +149,17 @@ public abstract class SerializableRecipe {
 		}
 
 		MainRegistry.logger.info("Finished recipe init!");
+	}
+
+	public static void receiveRecipes(String filename, byte[] data) {
+		recipeSyncHandlers.put(filename, new ByteArrayInputStream(data));
+	}
+
+	public static void clearReceivedRecipes() {
+		boolean hasCleared = !recipeSyncHandlers.isEmpty();
+		recipeSyncHandlers.clear();
+
+		if(hasCleared) initialize();
 	}
 
 	/*
@@ -213,12 +235,16 @@ public abstract class SerializableRecipe {
 	public void readRecipeFile(File file) {
 
 		try {
-			JsonObject json = gson.fromJson(new FileReader(file), JsonObject.class);
-			JsonArray recipes = json.get("recipes").getAsJsonArray();
-			for(JsonElement recipe : recipes) {
-				this.readRecipe(recipe);
-			}
+			readRecipeStream(new FileReader(file));
 		} catch(FileNotFoundException ex) { }
+	}
+
+	public void readRecipeStream(Reader reader) {
+		JsonObject json = gson.fromJson(reader, JsonObject.class);
+		JsonArray recipes = json.get("recipes").getAsJsonArray();
+		for(JsonElement recipe : recipes) {
+			this.readRecipe(recipe);
+		}
 	}
 
 	/*
