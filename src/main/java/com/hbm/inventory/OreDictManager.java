@@ -179,7 +179,7 @@ public class OreDictManager {
 	public static final DictFrame MINGRADE = new DictFrame("Mingrade");
 	public static final DictFrame ALLOY = new DictFrame("AdvancedAlloy");
 	/** NICKEL */
-	public static final DictFrame NI = new DictFrame("Nickel");
+	public static final DictFrame NI = new DictFrame("MunNickel");
 	/** TUNGSTEN */
 	public static final DictFrame W = new DictFrame("Tungsten");
 	/** ALUMINUM */
