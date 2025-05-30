@@ -30,12 +30,12 @@ public class BlockCoral extends BlockEnumMulti {
 	public int getRenderType() {
 		return renderID;
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
@@ -45,7 +45,7 @@ public class BlockCoral extends BlockEnumMulti {
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
 		return null;
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return super.canPlaceBlockAt(world, x, y, z) && this.canBlockStay(world, x, y, z) && world.getBlock(x, y + 1, z).getMaterial().isLiquid();
@@ -54,6 +54,11 @@ public class BlockCoral extends BlockEnumMulti {
 	@Override
 	public Item getItemDropped(int parMetadata, Random parRand, int parFortune) {
 	   return ModItems.powder_calcium;
+	}
+
+	@Override
+	public int damageDropped(int meta) {
+		return 0;
 	}
 
 }

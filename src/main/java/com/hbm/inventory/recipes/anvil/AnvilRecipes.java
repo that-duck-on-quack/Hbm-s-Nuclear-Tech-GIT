@@ -276,7 +276,7 @@ public class AnvilRecipes extends SerializableRecipe {
 
 		constructionRecipes.add(new AnvilConstructionRecipe(
 				new AStack[] {
-						new ComparableStack(Blocks.stone, 8),
+						new OreDictStack(KEY_STONE, 8),
 						new OreDictStack(STEEL.plate(), 2),
 						new OreDictStack(IRON.ingot(), 4)
 				}, new AnvilOutput(new ItemStack(ModBlocks.machine_ashpit))).setTier(2));

@@ -1,19 +1,5 @@
-Includes all changes and bugfixes from the latest upstream NTMain update - [X5334 - stalingrad, 1942](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5334)
-
-## Added
-* Industrial Greenhouse
-    * Converts CO2 -> O2 via crop growth
-    * Can be supplied with fertilizer for faster growing
-    * Only sequesters CO2 directly into grown plant material, meaning continuous growth is required
-    * Crops and trees grown regularly will also recycle air in a room!
-    * Approximately 25 trees, or 200 crops will recycle all air in a room continuously, as long as they are replanted once fully grown
-    * 16 ighouses should be sufficient to continuously replenish O2, or just 1 with fertilizer
-
-## Changed
-* Nuclear explosions in a vacuum now produce a sea of charged particles instead of a mushroom cloud, akin to Starfish Prime
-* Air vents detect growing plants, and run on recycled air whenever possible
-* Cryodistil now produces total 100mb of products from 100mb of atmospheric air, instead of varying lossy amounts
-
 ## Fixed
-* Atmospheric compressor in pressurized room creating NONE fluid
-* Nukes in space erroneously changing the biome to "Crater" causing visual bugs
+* Interaction hitboxes for chemplants, assemblers, and various other multiblock machines
+* A bunch of broken English translation keys
+* A lot of recipes not functioning for non-Overworld stone/cobblestone
+    * This fixes Martian progression once again

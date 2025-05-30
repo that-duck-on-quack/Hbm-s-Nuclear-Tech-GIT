@@ -1227,6 +1227,31 @@ public class AssemblerRecipes extends SerializableRecipe {
 				new ComparableStack(ModItems.circuit, 1, EnumCircuitType.BISMOID)
 			}, 100);
 
+
+		/// PLATES ///
+		makeRecipe(new ComparableStack(ModItems.plate_desh, 4), new AStack[] {
+				new OreDictStack(DESH.ingot(), 4),
+				new OreDictStack(ANY_PLASTIC.dust(), 2),
+				new OreDictStack(DURA.ingot(), 1),
+			}, 200);
+		makeRecipe(new ComparableStack(ModItems.plate_bismuth, 1), new AStack[] {
+				new ComparableStack(ModItems.nugget_bismuth, 2),
+				new OreDictStack(U238.billet(), 2),
+				new OreDictStack(NB.dust(), 1),
+			}, 200);
+		makeRecipe(new ComparableStack(ModItems.plate_euphemium, 1), new AStack[] {
+				new OreDictStack(EUPH.ingot(), 4),
+				new OreDictStack(AT.dust(), 3),
+				new OreDictStack(BI.dust(), 1),
+				new OreDictStack(VOLCANIC.gem(), 1),
+				new ComparableStack(ModItems.ingot_osmiridium),
+			}, 600);
+		makeRecipe(new ComparableStack(ModItems.plate_dineutronium, 4), new AStack[] {
+				new OreDictStack(DNT.ingot(), 4),
+				new ComparableStack(ModItems.powder_spark_mix, 2),
+				new OreDictStack(DESH.ingot(), 1),
+			}, 600);
+
 		makeRecipe(new ComparableStack(DictFrame.fromOne(ModBlocks.block_cap, EnumCapBlock.NUKA)), new AStack[] { new ComparableStack(ModItems.cap_nuka, 128) }, 10);
 		makeRecipe(new ComparableStack(DictFrame.fromOne(ModBlocks.block_cap, EnumCapBlock.QUANTUM)), new AStack[] { new ComparableStack(ModItems.cap_quantum, 128) }, 10);
 		makeRecipe(new ComparableStack(DictFrame.fromOne(ModBlocks.block_cap, EnumCapBlock.SPARKLE)), new AStack[] { new ComparableStack(ModItems.cap_sparkle, 128) }, 10);
