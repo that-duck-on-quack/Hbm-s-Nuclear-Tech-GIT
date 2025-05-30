@@ -73,7 +73,6 @@ public class EntityMappings {
 		addEntity(EntityMissileRain.class, "entity_missile_rain", 1000);
 		addEntity(EntityMissileDrill.class, "entity_missile_drill", 1000);
 		addEntity(EntityMissileMirv.class, "entity_missile_mirv", 1000);
-		addEntity(EntityMIRV.class, "entity_mirvlet", 1000);
 		addEntity(EntityGrenadeNuclear.class, "entity_grenade_nuclear", 1000);
 		addEntity(EntityGrenadePlasma.class, "entity_grenade_plasma", 500);
 		addEntity(EntityGrenadeTau.class, "entity_grenade_tau", 500);
@@ -108,7 +107,6 @@ public class EntityMappings {
 		addEntity(EntityNukeExplosionMK5.class, "entity_nuke_mk5", 1000);
 		addEntity(EntityCloudFleijaRainbow.class, "entity_cloud_rainbow", 1000);
 		addEntity(EntityExplosiveBeam.class, "entity_beam_bomb", 1000);
-		addEntity(EntityAAShell.class, "entity_aa_shell", 1000);
 		addEntity(EntityMissileTest.class, "entity_missile_test_mk2", 1000);
 		addEntity(EntityMissileMicro.class, "entity_missile_micronuclear", 1000);
 		addEntity(EntityCloudSolinium.class, "entity_cloud_rainbow", 1000);
@@ -218,7 +216,6 @@ public class EntityMappings {
 		addEntity(BoundingBoxDummyEntity.class, "entity_ntm_bounding_dummy", 250, false);
 		addEntity(TrainCargoTram.class, "entity_ntm_cargo_tram", 250, false);
 		addEntity(TrainCargoTramTrailer.class, "entity_ntm_cargo_tram_trailer", 250, false);
-		addEntity(TrainTunnelBore.class, "entity_ntm_tunnel_bore", 250, false);
 
 		addEntity(EntityDisperserCanister.class, "entity_disperser", 250);
 		addEntity(EntityWaypoint.class, "entity_waypoint", 250, false);
@@ -241,6 +238,10 @@ public class EntityMappings {
 
 		addMob(EntityMoonCow.class, "entity_moon_cow", 0xECD376, 0x262A44);
 		addMob(EntityScutterfish.class, "entity_scutterfish", 0xC8C9CD, 0x858894);
+		addMob(EntityScuttlecrab.class, "entity_scuttlecrab", 0xF17951, 0xEDDABB);
+		addMob(EntityDepthSquid.class, "entity_depthsquid", 0x00B4Df, 0x016085);
+		addMob(EntityScrapFish.class, "entity_scrapfish", 0xDF9835, 0x510E13);
+		addMob(EntitySifterEel.class, "entity_siftereel", 0x5B963E, 0xC0B286);
 
 		addMob(EntityFBI.class, "entity_ntm_fbi", 0x008000, 0x404040);
 		addMob(EntityFBIDrone.class, "entity_ntm_fbi_drone", 0x008000, 0x404040);
@@ -264,36 +265,36 @@ public class EntityMappings {
 		addSpawn(EntityCreeperGold.class, 1, 1, 1, EnumCreatureType.monster, BiomeGenBase.getBiomeGenArray());
 		addSpawn(EntityPlasticBag.class, 1, 1, 3, EnumCreatureType.waterCreature, BiomeDictionary.getBiomesForType(Type.OCEAN));
 		addSpawn(EntityPigeon.class, 1, 5, 10, EnumCreatureType.creature, BiomeDictionary.getBiomesForType(Type.PLAINS));
-		
+
 		int id = 0;
 		for(Quartet<Class<? extends Entity>, String, Integer, Boolean> entry : entityMappings) {
 			EntityRegistry.registerModEntity(entry.getW(), entry.getX(), id++, MainRegistry.instance, entry.getY(), 1, entry.getZ());
 		}
-		
+
 		for(Quartet<Class<? extends Entity>, String, Integer, Integer> entry : mobMappings) {
 			EntityRegistry.registerGlobalEntityID(entry.getW(), entry.getX(), EntityRegistry.findGlobalUniqueEntityId(), entry.getY(), entry.getZ());
 		}
 	}
-	
+
 	private static void addEntity(Class<? extends Entity> clazz, String name, int trackingRange) {
 		addEntity(clazz, name, trackingRange, true);
 	}
-	
+
 	private static void addEntity(Class<? extends Entity> clazz, String name, int trackingRange, boolean velocityUpdates) {
 		entityMappings.add(new Quartet(clazz, name, trackingRange, velocityUpdates));
 	}
-	
+
 	private static void addMob(Class<? extends Entity> clazz, String name, int color1, int color2) {
 		mobMappings.add(new Quartet(clazz, name, color1, color2));
 	}
 
 	public static void addSpawn(Class<? extends EntityLiving> entityClass, int weightedProb, int min, int max, EnumCreatureType typeOfCreature, BiomeGenBase... biomes) {
-		
+
 		for(BiomeGenBase biome : biomes) {
-			
+
 			if(biome == null) continue;
 			if(biome instanceof BiomeGenBaseCelestial) continue;
-			
+
 			List<SpawnListEntry> spawns = biome.getSpawnableList(typeOfCreature);
 
 			for(SpawnListEntry entry : spawns) {

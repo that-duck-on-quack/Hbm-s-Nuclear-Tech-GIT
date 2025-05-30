@@ -276,7 +276,7 @@ public class AnvilRecipes extends SerializableRecipe {
 
 		constructionRecipes.add(new AnvilConstructionRecipe(
 				new AStack[] {
-						new ComparableStack(Blocks.stone, 8),
+						new OreDictStack(KEY_STONE, 8),
 						new OreDictStack(STEEL.plate(), 2),
 						new OreDictStack(IRON.ingot(), 4)
 				}, new AnvilOutput(new ItemStack(ModBlocks.machine_ashpit))).setTier(2));
@@ -298,7 +298,7 @@ public class AnvilRecipes extends SerializableRecipe {
 						new ComparableStack(ModItems.circuit, 1, EnumCircuitType.BASIC.ordinal())
 				}, new AnvilOutput(new ItemStack(ModBlocks.heater_electric))).setTier(3));
 
-		constructionRecipes.add(new AnvilConstructionRecipe(
+		constructionRecipes.add(new AnvilConstructionRecipe( //I assure you that all this isn't enough for a HeatEx
 				new AStack[] {
 						new OreDictStack(RUBBER.ingot(), 4),
 						new OreDictStack(CU.ingot(), 16),

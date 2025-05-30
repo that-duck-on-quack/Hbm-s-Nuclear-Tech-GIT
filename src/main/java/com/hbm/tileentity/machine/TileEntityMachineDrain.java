@@ -38,7 +38,7 @@ public class TileEntityMachineDrain extends TileEntityLoadedBase implements IFlu
 	@Override
 	public void updateEntity() {
 
-		if(!worldObj.isRemote && !(tank.getTankType() == Fluids.SPENTSTEAM) && !(tank.getTankType() == Fluids.AERATEDWATER)) {
+		if(!worldObj.isRemote) {
 
 			if(worldObj.getTotalWorldTime() % 20 == 0) {
 				for(DirPos pos : getConPos()) this.trySubscribe(tank.getTankType(), worldObj, pos.getX(), pos.getY(), pos.getZ(), pos.getDir());
@@ -77,7 +77,7 @@ public class TileEntityMachineDrain extends TileEntityLoadedBase implements IFlu
 				}
 			}
 
-		} else if(tank.getTankType() != Fluids.SPENTSTEAM) {
+		} else{
 
 			if(tank.getFill() > 0 && MainRegistry.proxy.me().getDistance(xCoord, yCoord, zCoord) < 100) {
 				ForgeDirection dir = ForgeDirection.getOrientation(this.getBlockMetadata() - 10);

@@ -8,6 +8,7 @@ import java.util.Random;
 import com.hbm.blocks.IBlockMulti;
 import com.hbm.blocks.ITooltipProvider;
 import com.hbm.blocks.ModBlocks;
+import com.hbm.config.ServerConfig;
 import com.hbm.items.ModItems;
 import com.hbm.items.tool.ItemLock;
 import com.hbm.lib.RefStrings;
@@ -105,6 +106,21 @@ public class BlockStorageCrate extends BlockContainer implements IBlockMulti, IT
 
 	@Override
 	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
+
+		if(!world.isRemote) {
+			dropInv = true;
+			if(!player.capabilities.isCreativeMode) {
+				world.spawnEntityInWorld(new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(this)));
+			}
+			TileEntity inv = world.getTileEntity(x, y, z);
+			if(inv instanceof TileEntityLockableBase) {
+				TileEntityLockableBase lockable = (TileEntityLockableBase) inv;
+				if(lockable.isLocked()) dropInv = false;
+			}
+			boolean flag = world.setBlockToAir(x, y, z);
+			dropInv = true;
+			return flag;
+		}
 
 		if(!player.capabilities.isCreativeMode && !world.isRemote && willHarvest) {
 
@@ -214,18 +230,10 @@ public class BlockStorageCrate extends BlockContainer implements IBlockMulti, IT
 
 		int i = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-		if(i == 0) {
-			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
-		}
-		if(i == 1) {
-			world.setBlockMetadataWithNotify(x, y, z, 5, 2);
-		}
-		if(i == 2) {
-			world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-		}
-		if(i == 3) {
-			world.setBlockMetadataWithNotify(x, y, z, 4, 2);
-		}
+		if(i == 0) world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+		if(i == 1) world.setBlockMetadataWithNotify(x, y, z, 5, 2);
+		if(i == 2) world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+		if(i == 3) world.setBlockMetadataWithNotify(x, y, z, 4, 2);
 	}
 
 	@Override

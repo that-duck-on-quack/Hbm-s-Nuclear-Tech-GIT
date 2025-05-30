@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
+import com.hbm.config.GeneralConfig;
+import com.hbm.config.ServerConfig;
 import com.hbm.dim.CelestialBody;
 import com.hbm.dim.trait.CBT_Atmosphere;
 import com.hbm.inventory.fluid.Fluids;
@@ -40,7 +42,7 @@ public class TileEntityCondenser extends TileEntityLoadedBase implements IFluidS
 	public TileEntityCondenser() {
 		tanks = new FluidTank[3];
 		tanks[0] = new FluidTank(Fluids.SPENTSTEAM, inputTankSize);
-		tanks[1] = new FluidTank(Fluids.AERATEDWATER, outputTankSize);
+		tanks[1] = new FluidTank(ServerConfig.Sk_enableHardSteam.get() ? Fluids.AERATEDWATER : Fluids.WATER, outputTankSize);
 		tanks[2] = new FluidTank(Fluids.WATER, evTankSize);
 	}
 

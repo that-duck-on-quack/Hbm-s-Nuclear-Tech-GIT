@@ -16,6 +16,7 @@ import com.hbm.inventory.RecipesCommon.ComparableStack;
 import com.hbm.inventory.gui.GUIWeaponTable;
 import com.hbm.items.IEquipReceiver;
 import com.hbm.items.IKeybindReceiver;
+import com.hbm.items.armor.ArmorTrenchmaster;
 import com.hbm.items.weapon.sedna.hud.IHUDComponent;
 import com.hbm.items.weapon.sedna.mags.IMagazine;
 import com.hbm.items.weapon.sedna.mods.WeaponModManager;
@@ -125,7 +126,7 @@ public class ItemGunBaseNT extends Item implements IKeybindReceiver, IItemHUD, I
 		this.quality = quality;
 		this.lastShot = new long[cfg.length];
 		for(int i = 0; i < cfg.length; i++) cfg[i].index = i;
-		if(quality == WeaponQuality.A_SIDE || quality == WeaponQuality.SPECIAL) this.setCreativeTab(MainRegistry.weaponTab);
+		if(quality == WeaponQuality.A_SIDE || quality == WeaponQuality.SPECIAL || quality == WeaponQuality.UTILITY) this.setCreativeTab(MainRegistry.weaponTab);
 		if(quality == WeaponQuality.LEGENDARY || quality == WeaponQuality.SECRET) this.secrets.add(this);
 		this.setTextureName(RefStrings.MODID + ":gun_darter");
 	}
@@ -135,6 +136,7 @@ public class ItemGunBaseNT extends Item implements IKeybindReceiver, IItemHUD, I
 		B_SIDE,
 		LEGENDARY,
 		SPECIAL,
+		UTILITY,
 		SECRET,
 		DEBUG
 	}
@@ -181,6 +183,10 @@ public class ItemGunBaseNT extends Item implements IKeybindReceiver, IItemHUD, I
 				}
 			}
 			
+			float maxDura = config.getDurability(stack);
+			int dura = MathHelper.clamp_int((int)((maxDura - this.getWear(stack, i)) * 100 / maxDura), 0, 100);
+			list.add("Condition: " + dura + "%");
+			
 			for(ItemStack upgrade : WeaponModManager.getUpgradeItems(stack, i)) {
 				list.add(EnumChatFormatting.YELLOW + upgrade.getDisplayName());
 			}
@@ -191,6 +197,7 @@ public class ItemGunBaseNT extends Item implements IKeybindReceiver, IItemHUD, I
 		case B_SIDE: list.add(EnumChatFormatting.GOLD + "B-Side"); break;
 		case LEGENDARY: list.add(EnumChatFormatting.RED + "Legendary Weapon"); break;
 		case SPECIAL: list.add(EnumChatFormatting.AQUA + "Special Weapon"); break;
+		case UTILITY: list.add(EnumChatFormatting.GREEN + "Utility"); break;
 		case SECRET: list.add((BobMathUtil.getBlink() ? EnumChatFormatting.DARK_RED : EnumChatFormatting.RED) + "SECRET"); break;
 		case DEBUG: list.add((BobMathUtil.getBlink() ? EnumChatFormatting.YELLOW : EnumChatFormatting.GOLD) + "DEBUG"); break;
 		}
@@ -314,13 +321,14 @@ public class ItemGunBaseNT extends Item implements IKeybindReceiver, IItemHUD, I
 					this.setState(stack, i, GunState.DRAWING);
 					this.setTimer(stack, i, configs[i].getDrawDuration(stack));
 				}
+				this.setLastAnim(stack, i, AnimType.CYCLE); //prevents new guns from initializing with DRAWING, 0
 			}
 			this.setIsAiming(stack, false);
 			this.setReloadCancel(stack, false);
 			return;
 		}
 		
-		for(int i = 0; i < confNo; i++) {
+		for(int i = 0; i < confNo; i++) for(int k = 0; k == 0 || (k < 2 && ArmorTrenchmaster.isTrenchMaster(player) && this.getState(stack, i) == GunState.RELOADING); k++) {
 			BiConsumer<ItemStack, LambdaContext> orchestra = configs[i].getOrchestra(stack);
 			if(orchestra != null) orchestra.accept(stack, ctx[i]);
 			

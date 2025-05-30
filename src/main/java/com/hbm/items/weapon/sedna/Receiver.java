@@ -3,6 +3,8 @@ package com.hbm.items.weapon.sedna;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
+import com.hbm.config.GeneralConfig;
+import com.hbm.config.ServerConfig;
 import com.hbm.items.weapon.sedna.ItemGunBaseNT.LambdaContext;
 import com.hbm.items.weapon.sedna.factory.Lego;
 import com.hbm.items.weapon.sedna.mags.IMagazine;
@@ -14,7 +16,7 @@ import net.minecraft.util.Vec3;
 /**
  * Receivers are the gun's "moving parts", i.e. they determine things like base damage, spread, the ejector and the magazine. Think of this class like the
  * barrel, receiver and chamber of the gun, an underbarrel grenade launcher for example would be a separate receiver instance compared to the regular gun it is attached to.
- * 
+ *
  * @author hbm
  */
 public class Receiver {
@@ -49,11 +51,11 @@ public class Receiver {
 	public static final String FUN_CANFIRE =				"FUN_CANFIRE";
 	public static final String CON_ONFIRE =					"CON_ONFIRE";
 	public static final String CON_ONRECOIL =				"CON_ONRECOIL";
-	
+
 	public Receiver(int index) {
 		this.index = index;
 	}
-	
+
 	protected int index;
 	protected GunConfig parent;
 	protected float baseDamage_DNA;
@@ -86,7 +88,7 @@ public class Receiver {
 	protected BiFunction<ItemStack, LambdaContext, Boolean> canFire_DNA;
 	protected BiConsumer<ItemStack, LambdaContext> onFire_DNA;
 	protected BiConsumer<ItemStack, LambdaContext> onRecoil_DNA;
-	
+
 	/* GETTERS */
 	public float getBaseDamage(ItemStack stack) {				return WeaponModManager.eval(this.baseDamage_DNA, stack, F_BASEDAMAGE, this, parent.index); }
 	public int getDelayAfterFire(ItemStack stack) {				return WeaponModManager.eval(this.delayAfterFire_DNA, stack, I_DELAYAFTERFIRE, this, parent.index); }
@@ -115,13 +117,13 @@ public class Receiver {
 	public IMagazine getMagazine(ItemStack stack) {				return WeaponModManager.eval(this.magazine_DNA, stack, O_MAGAZINE, this, parent.index); }
 	public Vec3 getProjectileOffset(ItemStack stack) {			return WeaponModManager.eval(this.projectileOffset_DNA, stack, O_PROJECTILEOFFSET, this, parent.index); }
 	public Vec3 getProjectileOffsetScoped(ItemStack stack) {	return WeaponModManager.eval(this.projectileOffsetScoped_DNA, stack, O_PROJECTILEOFFSETSCOPED, this, parent.index); }
-	
+
 	public BiFunction<ItemStack, LambdaContext, Boolean> getCanFire(ItemStack stack) {	return WeaponModManager.eval(this.canFire_DNA, stack, FUN_CANFIRE, this, parent.index); }
 	public BiConsumer<ItemStack, LambdaContext> getOnFire(ItemStack stack) {			return WeaponModManager.eval(this.onFire_DNA, stack, CON_ONFIRE, this, parent.index); }
 	public BiConsumer<ItemStack, LambdaContext> getRecoil(ItemStack stack) {			return WeaponModManager.eval(this.onRecoil_DNA, stack, CON_ONRECOIL, this, parent.index); }
 
 	/* SETTERS */
-	public Receiver dmg(float dmg) {								this.baseDamage_DNA = dmg;											return this; }
+	public Receiver dmg(float dmg) {								this.baseDamage_DNA = (float) (dmg * ServerConfig.Sk_firearmDamageModifier.get());											return this; }
 	public Receiver delay(int delay) {								this.delayAfterFire_DNA = this.delayAfterDryFire_DNA = delay;		return this; }
 	public Receiver dry(int delay) {								this.delayAfterDryFire_DNA = delay;									return this; }
 	public Receiver rounds(int rounds) {							this.roundsPerCycle_DNA = rounds;									return this; }
@@ -140,7 +142,7 @@ public class Receiver {
 	public Receiver offset(double f, double u, double s) {			this.projectileOffset_DNA = Vec3.createVectorHelper(f, u, s); this.projectileOffsetScoped_DNA = Vec3.createVectorHelper(f, u, 0);	return this; }
 	public Receiver offsetScoped(double f, double u, double s) {	this.projectileOffsetScoped_DNA = Vec3.createVectorHelper(f, u, s);	return this; }
 	public Receiver jam(int jam) {									this.jamDuration_DNA = jam;											return this; }
-	
+
 	public Receiver reload(int delay) { return reload(0, delay, delay, 0, 0); }
 	public Receiver reload(int begin, int cycle, int end, int cock) { return reload(0, begin, cycle, end, cock); }
 	public Receiver reload(int pre, int begin, int cycle, int end, int post) {
@@ -162,7 +164,7 @@ public class Receiver {
 		this.firePitch_DNA = pitch;
 		return this;
 	}
-	
+
 	public Receiver setupStandardFire() {	return this.canFire(Lego.LAMBDA_STANDARD_CAN_FIRE)	.fire(Lego.LAMBDA_STANDARD_FIRE); }
 	public Receiver setupLockonFire() {		return this.canFire(Lego.LAMBDA_LOCKON_CAN_FIRE)	.fire(Lego.LAMBDA_STANDARD_FIRE); }
 }

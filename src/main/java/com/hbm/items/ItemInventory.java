@@ -43,7 +43,7 @@ public abstract class ItemInventory implements IInventory {
 
 	@Override
 	public void markDirty() {
-		if(player.getEntityWorld().isRemote || !toMarkDirty) {
+		if (player.getEntityWorld().isRemote || !toMarkDirty) {
 			return;
 		}
 
@@ -51,9 +51,9 @@ public abstract class ItemInventory implements IInventory {
 
 		int invSize = this.getSizeInventory();
 		// Remove slots that are now empty or overwrite them with the correct item data.
-		for(int i = 0; i < invSize; i++) {
+		for (int i = 0; i < invSize; i++) {
 			ItemStack stack = this.getStackInSlot(i);
-			if(stack == null) {
+			if (stack == null) {
 				nbt.removeTag("slot" + i);
 			} else {
 				NBTTagCompound slot = new NBTTagCompound();
@@ -63,26 +63,14 @@ public abstract class ItemInventory implements IInventory {
 		}
 		ItemStack target = original.copy();
 		target.setTagCompound(checkNBT(nbt));
-		int k = -1;
-		// Find the original ItemStack in case it moved and only save to it if size equals 1.
-		for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-			ItemStack s = player.inventory.getStackInSlot(i);
-			if(s != null) {
-				if(s.isItemEqual(original) && s.stackSize == 1){
-					k=i;
-					break;
-				}
-			}
-		}
-		if(k != -1) {
-			player.inventory.setInventorySlotContents(k, target);
+		if(ItemStack.areItemStacksEqual(player.getHeldItem(), original) && player.getHeldItem().stackSize == 1) {
+			player.inventory.setInventorySlotContents(player.inventory.currentItem, target);
 			original=target;
 		}
-
 	}
 
 	public NBTTagCompound checkNBT(NBTTagCompound nbt) {
-		if(!nbt.hasNoTags()) {
+		if(nbt != null && !nbt.hasNoTags()) {
 			Random random = new Random();
 
 			try {
@@ -90,8 +78,8 @@ public abstract class ItemInventory implements IInventory {
 
 				if (abyte.length > 6000) {
 					player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Warning: Container NBT exceeds 6kB, contents will be ejected!"));
-					for (int i1 = 0; i1 < this.getSizeInventory(); ++i1) {
-						ItemStack itemstack = this.getStackInSlot(i1);
+					for (int slot = 0; slot < this.getSizeInventory(); ++slot) {
+						ItemStack itemstack = this.getStackInSlot(slot);
 
 						if (itemstack != null) {
 							float f = random.nextFloat() * 0.8F + 0.1F;
@@ -99,13 +87,10 @@ public abstract class ItemInventory implements IInventory {
 							float f2 = random.nextFloat() * 0.8F + 0.1F;
 
 							while (itemstack.stackSize > 0) {
-								int j1 = random.nextInt(21) + 10;
-
-								if (j1 > itemstack.stackSize) {
-									j1 = itemstack.stackSize;
-								}
-
-								itemstack.stackSize -= j1;
+								int j1 = Math.min(itemstack.stackSize,itemstack.getMaxStackSize());
+								itemstack.stackSize-=j1;
+								// Update the slot.
+								setInventorySlotContents(slot,itemstack);
 								EntityItem entityitem = new EntityItem(player.worldObj, player.posX + f, player.posY + f1, player.posZ + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
 								if (itemstack.hasTagCompound()) {

@@ -72,7 +72,7 @@ public abstract class EntityMissileTier1 extends EntityMissileBaseNT {
 		public EntityMissileBunkerBuster(World world) { super(world); }
 		public EntityMissileBunkerBuster(World world, float x, float y, float z, int a, int b) { super(world, x, y, z, a, b); }
 		@Override public void onImpact() {
-			for(int i = 0; i < 15; i++) this.worldObj.createExplosion(this, this.posX, this.posY - i, this.posZ, 5F, true);
+			for(int i = 0; i < 6; i++) this.worldObj.createExplosion(this, this.posX, this.posY - i, this.posZ, i >= 4 ? 5F : 2F, true);
 			ExplosionLarge.spawnParticles(worldObj, this.posX, this.posY, this.posZ, 5);
 			ExplosionLarge.spawnShrapnels(worldObj, this.posX, this.posY, this.posZ, 5);
 			ExplosionLarge.spawnRubble(worldObj, this.posX, this.posY, this.posZ, 5);

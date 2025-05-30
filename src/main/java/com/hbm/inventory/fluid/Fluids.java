@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
-import com.hbm.handler.nei.BoilingHandler;
 import com.hbm.handler.pollution.PollutionHandler;
 import com.hbm.handler.pollution.PollutionHandler.PollutionType;
 import com.hbm.inventory.fluid.trait.*;
@@ -453,7 +452,7 @@ public class Fluids {
 		MINSOL =				new FluidType("MINSOL",				0xFADF6A, 3, 0, 3, EnumSymbol.ACID).addTraits(new FT_Corrosive(10), LIQUID);
 		SYNGAS =				new FluidType("SYNGAS",				0x131313, 1, 4, 2, EnumSymbol.NONE).addContainers(new CD_Gastank(0xFFFFFF, 0x131313)).addTraits(GASEOUS);
 		OXYHYDROGEN =			new FluidType("OXYHYDROGEN",		0x483FC1, 0, 4, 2, EnumSymbol.NONE).addTraits(GASEOUS);
-		RADIOSOLVENT =			new FluidType("RADIOSOLVENT",		0xA4D7DD, 3, 3, 0, EnumSymbol.NONE).addTraits(LIQUID, LEADCON, new FT_Corrosive(50), new FT_VentRadiation(0.01F));
+		RADIOSOLVENT =			new FluidType("RADIOSOLVENT",		0xA4D7DD, 3, 3, 0, EnumSymbol.NONE).addTraits(LIQUID, new FT_Corrosive(50));
 		CHLORINE =				new FluidType("CHLORINE",			0xBAB572, 3, 0, 0, EnumSymbol.OXIDIZER).addContainers(new CD_Gastank(0xBAB572, 0x887B34)).addTraits(GASEOUS, new FT_Corrosive(25));
 		HEAVYOIL_VACUUM =		new FluidType("HEAVYOIL_VACUUM",	0x131214, 2, 1, 0, EnumSymbol.NONE).addTraits(LIQUID, VISCOUS, P_OIL).addContainers(new CD_Canister(0x513F39));
 		REFORMATE =				new FluidType("REFORMATE",			0x835472, 2, 2, 0, EnumSymbol.NONE).addTraits(LIQUID, VISCOUS, P_FUEL).addContainers(new CD_Canister(0xD180D6));
@@ -1206,7 +1205,6 @@ public class Fluids {
 		} else {
 			readTraits(config);
 		}
-		BoilingHandler.isReload=true;
 	}
 	private static void registerCalculatedFuel(FluidType type, double base, double combustMult, FuelGrade grade) {
 

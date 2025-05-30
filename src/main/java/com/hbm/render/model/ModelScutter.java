@@ -21,7 +21,8 @@ public class ModelScutter extends ModelBase {
 			double cy2 = Math.sin(limbSwing % (Math.PI * 2) - Math.PI * 0.4);
 			double cy3 = Math.sin(limbSwing % (Math.PI * 2) - Math.PI * 0.6);
 
-			GL11.glTranslatef(0, 0.5F, 0);
+			GL11.glRotatef(180.0F, 0, 0, 1);
+			GL11.glTranslatef(0, -1.5F, 0);
 
 			ResourceManager.scutterfish.renderPart("body");
 

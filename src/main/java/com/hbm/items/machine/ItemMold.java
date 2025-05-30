@@ -39,6 +39,8 @@ public class ItemMold extends Item {
 		this.setMaxDamage(0);
 
 		blockOverrides.put(Mats.MAT_STONE,		new ItemStack(Blocks.stone));
+		blockOverrides.put(Mats.MAT_GLOWSTONE, new ItemStack(Blocks.glowstone));
+		blockOverrides.put(Mats.MAT_QUARTZ, new ItemStack(Blocks.quartz_block));
 		blockOverrides.put(Mats.MAT_OBSIDIAN,	new ItemStack(Blocks.obsidian));
 
 		int S = 0;

@@ -92,6 +92,8 @@ public class CrystallizerRecipes extends SerializableRecipe {
 		registerRecipe(LI.ore(),		new CrystallizerRecipe(ModItems.crystal_lithium, baseTime).prod(0.05F), sulfur);
 		registerRecipe(CO.ore(),		new CrystallizerRecipe(ModItems.crystal_cobalt, baseTime).prod(0.05F), sulfur);
 		registerRecipe(NI.ore(),		new CrystallizerRecipe(ModItems.crystal_nickel, baseTime).prod(0.05F), nitric);
+		registerRecipe(ZI.ore(),		new CrystallizerRecipe(ModItems.crystal_zinc, baseTime).prod(0.05F), nitric);
+
 		registerRecipe(NB.ore(),		new CrystallizerRecipe(ModItems.crystal_niobium, baseTime).prod(0.05F), sulfur);
 		registerRecipe((new ComparableStack(ModBlocks.ore_mineral, 1, OreDictionary.WILDCARD_VALUE)),		new CrystallizerRecipe(ModItems.crystal_mineral, baseTime).prod(0.05F)); //temp
 
@@ -114,7 +116,7 @@ public class CrystallizerRecipes extends SerializableRecipe {
 		registerRecipe(BORAX.dust(),		new CrystallizerRecipe(new ItemStack(ModItems.powder_boron_tiny, 3), baseTime).prod(0.25F), sulfur);
 		registerRecipe(COAL.block(),		new CrystallizerRecipe(ModBlocks.block_graphite, baseTime));
 
-		registerRecipe(new ComparableStack(Blocks.cobblestone),			new CrystallizerRecipe(ModBlocks.reinforced_stone, utilityTime));
+		registerRecipe(KEY_COBBLESTONE,									new CrystallizerRecipe(ModBlocks.reinforced_stone, utilityTime));
 		registerRecipe(new ComparableStack(ModBlocks.gravel_obsidian),	new CrystallizerRecipe(ModBlocks.brick_obsidian, utilityTime));
 		registerRecipe(new ComparableStack(Items.rotten_flesh),			new CrystallizerRecipe(Items.leather, utilityTime).prod(0.25F));
 		registerRecipe(new ComparableStack(ModItems.coal_infernal),		new CrystallizerRecipe(ModItems.solid_fuel, utilityTime));

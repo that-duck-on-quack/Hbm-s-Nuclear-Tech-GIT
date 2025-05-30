@@ -9,7 +9,6 @@ import com.hbm.entity.effect.EntityCloudFleijaRainbow;
 import com.hbm.entity.effect.EntityEMPBlast;
 import com.hbm.entity.logic.EntityNukeExplosionMK3;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
-import com.hbm.explosion.ExplosionChaos;
 import com.hbm.explosion.ExplosionLarge;
 import com.hbm.explosion.ExplosionNukeGeneric;
 import com.hbm.explosion.vanillant.ExplosionVNT;
@@ -57,6 +56,7 @@ import net.minecraft.world.World;
  * - also comes with tons of legacy code to ensure compat (sadly)
  * @author hbm
  */
+@Deprecated
 public class EntityBulletBaseNT extends EntityThrowableInterp implements IBulletBase {
 
 	@Override public double prevX() { return prevRenderX; }
@@ -446,11 +446,6 @@ public class EntityBulletBaseNT extends EntityThrowableInterp implements IBullet
 		if(config.shrapnel > 0 && !worldObj.isRemote)
 			ExplosionLarge.spawnShrapnels(worldObj, posX, posY, posZ, config.shrapnel);
 
-		if(config.chlorine > 0 && !worldObj.isRemote) {
-			ExplosionChaos.spawnChlorine(worldObj, posX, posY, posZ, config.chlorine, 1.5, 0);
-			worldObj.playSoundEffect((double)(posX + 0.5F), (double)(posY + 0.5F), (double)(posZ + 0.5F), "random.fizz", 5.0F, 2.6F + (rand.nextFloat() - rand.nextFloat()) * 0.8F);
-		}
-
 		if(config.rainbow > 0 && !worldObj.isRemote) {
 			EntityNukeExplosionMK3 ex = EntityNukeExplosionMK3.statFacFleija(worldObj, posX, posY, posZ, config.rainbow);
 			if(!ex.isDead) {
@@ -581,27 +576,14 @@ public class EntityBulletBaseNT extends EntityThrowableInterp implements IBullet
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt) {
-		super.readEntityFromNBT(nbt);
-		int cfg = nbt.getInteger("config");
-		this.config = BulletConfigSyncingUtil.pullConfig(cfg);
-		this.dataWatcher.updateObject(16, (byte)this.config.style);
-		this.dataWatcher.updateObject(17, (byte)this.config.trail);
-
-		if(this.config == null) {
-			this.setDead();
-			return;
-		}
-
-		this.overrideDamage = nbt.getFloat("damage");
-		this.dataWatcher.updateObject(18, cfg);
+	public boolean writeToNBTOptional(NBTTagCompound nbt) {
+		return false;
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt) {
-		super.writeEntityToNBT(nbt);
-		nbt.setInteger("config", dataWatcher.getWatchableObjectInt(18));
-		nbt.setFloat("damage", this.overrideDamage);
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		this.setDead();
 	}
 
 	public static interface IBulletHurtBehaviorNT { public void behaveEntityHurt(EntityBulletBaseNT bullet, Entity hit); }

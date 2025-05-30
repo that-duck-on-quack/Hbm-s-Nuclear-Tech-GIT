@@ -156,7 +156,7 @@ public class TileEntityPneumoTube extends TileEntityMachineBase implements IGUIP
 
 	@Override
 	public boolean canConnect(FluidType type, ForgeDirection dir) {
-		return dir != this.insertionDir && dir != this.ejectionDir && type == compair.getTankType();
+		return dir != this.insertionDir && dir != this.ejectionDir && type == compair.getTankType() && this.isCompressor();
 	}
 
 	@Override
@@ -227,6 +227,9 @@ public class TileEntityPneumoTube extends TileEntityMachineBase implements IGUIP
 		this.compair.readFromNBT(nbt, "tank");
 		this.pattern.readFromNBT(nbt);
 
+		this.sendOrder = nbt.getByte("sendOrder");
+		this.receiveOrder = nbt.getByte("receiveOrder");
+		
 		this.whitelist = nbt.getBoolean("whitelist");
 		this.redstone = nbt.getBoolean("redstone");
 	}
@@ -238,6 +241,9 @@ public class TileEntityPneumoTube extends TileEntityMachineBase implements IGUIP
 		nbt.setByte("ejectionDir", (byte) ejectionDir.ordinal());
 		this.compair.writeToNBT(nbt, "tank");
 		this.pattern.writeToNBT(nbt);
+
+		nbt.setByte("sendOrder", sendOrder);
+		nbt.setByte("receiveOrder", receiveOrder);
 
 		nbt.setBoolean("whitelist", whitelist);
 		nbt.setBoolean("redstone", redstone);

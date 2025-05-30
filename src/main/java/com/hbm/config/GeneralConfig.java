@@ -34,7 +34,6 @@ public class GeneralConfig {
 	public static boolean enableFluidContainerCompat = true;
 	public static boolean enableMOTD = true;
 	public static boolean enableGuideBook = true;
-	public static boolean enableSteamParticles = true;
 	public static boolean enableSoundExtension = true;
 	public static boolean enableMekanismChanges = true;
 	public static int normalSoundChannels = 200;
@@ -74,6 +73,9 @@ public class GeneralConfig {
 	public static boolean enableSacrilege = false;
 	public static boolean enableHardcoreDarkness = false;
 
+	//Configs added by Speck
+	public static boolean uselessConfig = true;
+
 	public static void loadFromConfig(Configuration config) {
 
 		final String CATEGORY_GENERAL = CommonConfig.CATEGORY_GENERAL;
@@ -111,7 +113,6 @@ public class GeneralConfig {
 		enableFluidContainerCompat = config.get(CATEGORY_GENERAL, "1.35_enableFluidContainerCompat", true, "If enabled, fluid containers will be oredicted and interchangable in recipes with other mods' containers, as well as TrainCraft's diesel being considered a valid diesel canister.").getBoolean(true);
 		enableMOTD = config.get(CATEGORY_GENERAL, "1.36_enableMOTD", true, "If enabled, shows the 'Loaded mod!' chat message as well as update notifications when joining a world").getBoolean(true);
 		enableGuideBook = config.get(CATEGORY_GENERAL, "1.37_enableGuideBook", true, "If enabled, gives players the guide book when joining the world for the first time").getBoolean(true);
-		enableSteamParticles = config.get(CATEGORY_GENERAL, "1.38_enableSteamParticles", true, "If disabled, auxiliary cooling towers and large cooling towers will not emit steam particles when in use.").getBoolean(true);
 		enableSoundExtension = config.get(CATEGORY_GENERAL, "1.39_enableSoundExtension", true, "If enabled, will change the limit for how many sounds can play at once.").getBoolean(true);
 		enableMekanismChanges = config.get(CATEGORY_GENERAL, "1.40_enableMekanismChanges", true, "If enabled, will change some of Mekanism's recipes.").getBoolean(true);
 		normalSoundChannels = CommonConfig.createConfigInt(config, CATEGORY_GENERAL, "1.41_normalSoundChannels",
@@ -120,7 +121,6 @@ public class GeneralConfig {
 		enableThreadedAtmospheres = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.42_threadedAtmospheres", "If enabled, will run atmosphere blobbing in a separate thread for performance", true);
 		enableSacrilege = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.43_serverSafety", "Allows for automated entity culling to function properly.", false);
 		enableHardcoreDarkness = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.44_hardcoreDarkness", "If enabled, sets night-time minimum fog to zero, to complement hardcore darkness mods", false);
-
 		enableExpensiveMode = config.get(CATEGORY_GENERAL, "1.99_enableExpensiveMode", false, "It does what the name implies.").getBoolean(false);
 
 		final String CATEGORY_528 = CommonConfig.CATEGORY_528;
@@ -168,5 +168,13 @@ public class GeneralConfig {
 		schrabRate = CommonConfig.createConfigInt(config, CATEGORY_LBSM, "LBSM_schrabOreRate", "Changes the amount of uranium ore needed on average to create one schrabidium ore using nukes. Standard mode value is 100", 20);
 
 		if(enable528) enableLBSM = false;
+
+		final String CATEGORY_SPECK = CommonConfig.CATEGORY_SPECK;
+
+		config.addCustomCategoryComment(CATEGORY_SPECK,
+			"These configs are related to the Speck/Blork fork!\n"
+				+ "These are mainly tied to QoL features, things we don't want to bother with and useful modifiers.\n"
+				+ "If something in here doesn't work, go bother Cher, not Bob.");
+		uselessConfig = CommonConfig.createConfigBool(config, CATEGORY_SPECK, "H1.0_uselessConfig", "Useless useless useless!.", true);
 	}
 }

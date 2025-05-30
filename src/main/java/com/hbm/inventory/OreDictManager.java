@@ -179,7 +179,7 @@ public class OreDictManager {
 	public static final DictFrame MINGRADE = new DictFrame("Mingrade");
 	public static final DictFrame ALLOY = new DictFrame("AdvancedAlloy");
 	/** NICKEL */
-	public static final DictFrame NI = new DictFrame("Nickel");
+	public static final DictFrame NI = new DictFrame("MunNickel");
 	/** TUNGSTEN */
 	public static final DictFrame W = new DictFrame("Tungsten");
 	/** ALUMINUM */
@@ -273,6 +273,7 @@ public class OreDictManager {
 	public static final DictFrame BAUXITE = new DictFrame("Bauxite");
 	public static final DictFrame CRYOLITE = new DictFrame("Cryolite");
 	public static final DictFrame RICHMAGMA = new DictFrame("RichMagma");
+	public static final DictFrame FLOUR = new DictFrame("foodFlour");
 	/*
 	 * HAZARDS, MISC
 	 */
@@ -727,7 +728,8 @@ public class OreDictManager {
 		OreDictionary.registerOre(KEY_SAND, eve_silt);
 		OreDictionary.registerOre(KEY_SAND, moon_turf);
 
-		OreDictionary.registerOre(KEY_COBBLESTONE, duna_rock);
+		OreDictionary.registerOre(KEY_STONE, duna_rock);
+		OreDictionary.registerOre(KEY_COBBLESTONE, duna_cobble);
 		OreDictionary.registerOre(KEY_COBBLESTONE, dres_rock);
 		OreDictionary.registerOre(KEY_COBBLESTONE, ike_regolith);
 		OreDictionary.registerOre(KEY_STONE, ike_stone);
