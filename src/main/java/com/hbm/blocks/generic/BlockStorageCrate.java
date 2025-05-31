@@ -107,20 +107,20 @@ public class BlockStorageCrate extends BlockContainer implements IBlockMulti, IT
 	@Override
 	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
 
-		if(!world.isRemote) {
-			dropInv = true;
-			if(!player.capabilities.isCreativeMode) {
-				world.spawnEntityInWorld(new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(this)));
-			}
-			TileEntity inv = world.getTileEntity(x, y, z);
-			if(inv instanceof TileEntityLockableBase) {
-				TileEntityLockableBase lockable = (TileEntityLockableBase) inv;
-				if(lockable.isLocked()) dropInv = false;
-			}
-			boolean flag = world.setBlockToAir(x, y, z);
-			dropInv = true;
-			return flag;
-		}
+		//if(!world.isRemote) {
+		//	dropInv = true;
+		//	if(!player.capabilities.isCreativeMode) {
+		//		world.spawnEntityInWorld(new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(this)));
+		//	}
+		//	TileEntity inv = world.getTileEntity(x, y, z);
+		//	if(inv instanceof TileEntityLockableBase) {
+		//		TileEntityLockableBase lockable = (TileEntityLockableBase) inv;
+		//		if(lockable.isLocked()) dropInv = false;
+		//	}
+		//	boolean flag = world.setBlockToAir(x, y, z);
+		//	dropInv = true;
+		//	return flag;
+		//}
 
 		if(!player.capabilities.isCreativeMode && !world.isRemote && willHarvest) {
 
