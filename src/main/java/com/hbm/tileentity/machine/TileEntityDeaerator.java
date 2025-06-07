@@ -29,9 +29,9 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 	protected int throughput;
 
 	//Configurable values
-	public static int inputTankSize = 2500;
-	public static int outputTankSize = 2500;
-	public static int daTankSize = 500;
+	public static int inputTankSize = 6500;
+	public static int outputTankSize = 6500;
+	public static int daTankSize = 1500;
 
 	public TileEntityDeaerator() {
 		tanks = new FluidTank[3];
@@ -62,29 +62,19 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 	@Override
 	public void updateEntity() {
 
-		if(!worldObj.isRemote) {
+		if(!worldObj.isRemote) { age++; if(age >= 2) { age = 0;}
+			if(this.daTimer > 0) this.daTimer--;
 
-			age++;
-			if(age >= 2) {
-				age = 0;
-			}
+			int chek = Math.min(tanks[0].getFill(), tanks[1].getMaxFill() - tanks[1].getFill());
 
-			if(this.daTimer > 0)
-				this.daTimer--;
+			this.throughput = chek;
 
-			int convert = Math.min(tanks[0].getFill(), tanks[1].getMaxFill() - tanks[1].getFill());
-			this.throughput = convert;
+			if(extraCondition(chek)) {
+				if(chek > 0) this.daTimer = 20;
 
-			if(extraCondition(convert)) {
-				tanks[0].setFill(tanks[0].getFill() - convert);
-
-				if(convert > 0)
-					this.daTimer = 20;
-
-				if(tanks[2].getFill() > 1 && tanks[2].getFill() > convert/100){
-					tanks[1].setFill(tanks[1].getFill() + convert);
-					tanks[2].setFill(tanks[2].getFill() - convert/100);
-				}
+				tanks[0].setFill(tanks[0].getFill() - chek);
+				tanks[1].setFill(tanks[1].getFill() + chek);
+				tanks[2].setFill(tanks[2].getFill() - (chek/101));
 			}
 
 			for(DirPos pos : getConPos()) {
