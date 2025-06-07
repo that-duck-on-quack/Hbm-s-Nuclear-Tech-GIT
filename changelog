@@ -1,5 +1,21 @@
+## Added
+* Planets/moons with many light sources now light up at night when viewed from other bodies
+    * These bodies suffer planetwide blackouts during severe impacts
+* Zinc crystals
+* Flour - efficient production of bread from wheat
+
+## Changed
+* Biome conflicts now crash, rather than silently fuck your world up
+    * Includes helpful error messages, specifically regarding Biomes O' Plenty support
+    * Crash can be disabled in config if absolutely necessary, for old worlds and server operators
+* All default biome IDs moved around to avoid as many conflicts with other mods as possible
+* If EndlessIDs is detected, default biome IDs are incremented by 12,000 to avoid conflicts
+    * Has no effect if your config file is already generated
+
 ## Fixed
-* Interaction hitboxes for chemplants, assemblers, and various other multiblock machines
-* A bunch of broken English translation keys
-* A lot of recipes not functioning for non-Overworld stone/cobblestone
-    * This fixes Martian progression once again
+* Rare crash on closing an empty crate
+* Coral drops unusable calcium item
+* Mods that add worldgen features to the nether erroneously adding those features to atmosphereless bodies
+* Rocket pad dupe
+* Turbine blades cast/craft for 3 ingots but only recover 2 ingots
+* Vanilla furnaces work without oxygen

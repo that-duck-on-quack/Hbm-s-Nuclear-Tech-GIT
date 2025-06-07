@@ -350,6 +350,7 @@ public abstract class ChunkProviderCelestial implements IChunkProvider {
 	@Override
 	public void populate(IChunkProvider provider, int x, int z) {
 		BlockFalling.fallInstantly = true;
+		worldObj.provider.isHellWorld = false; // Prevent other mod world generators thinking this is hell (god damn it MCP)
 
 		int k = x * 16;
 		int l = z * 16;

@@ -43,7 +43,6 @@ public class FractionRecipes extends SerializableRecipe {
 		fractions.put(Fluids.CHLOROCALCITE_MIX,	new Pair(new FluidStack(Fluids.CHLOROCALCITE_CLEANED,	50),		new FluidStack(Fluids.COLLOID,				50)));
 		fractions.put(Fluids.BAUXITE_SOLUTION,	new Pair(new FluidStack(Fluids.REDMUD,					50),		new FluidStack(Fluids.SODIUM_ALUMINATE,		50)));
 		fractions.put(Fluids.METHYLENE,			new Pair(new FluidStack(Fluids.GAS,						70),		new FluidStack(Fluids.CARBONDIOXIDE,		45)));
-		fractions.put(Fluids.MORKINE,			new Pair(new FluidStack(Fluids.UNSATURATEDS,			40),		new FluidStack(Fluids.HYDROGEN,				25)));
 	}
 
 	public static Pair<FluidStack, FluidStack> getFractions(FluidType oil) {

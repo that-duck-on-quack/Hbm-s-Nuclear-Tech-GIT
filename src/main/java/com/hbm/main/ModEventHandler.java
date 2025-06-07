@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import com.hbm.blocks.IStepTickReceiver;
 import com.hbm.blocks.ModBlocks;
 import com.hbm.blocks.generic.BlockAshes;
+import com.hbm.blocks.machine.BlockBeamBase;
 import com.hbm.config.GeneralConfig;
 import com.hbm.config.MobConfig;
 import com.hbm.config.RadiationConfig;
@@ -19,6 +20,7 @@ import com.hbm.dim.WorldTypeTeleport;
 import com.hbm.dim.orbit.OrbitalStation;
 import com.hbm.dim.orbit.WorldProviderOrbit;
 import com.hbm.dim.trait.CBT_Atmosphere;
+import com.hbm.dim.trait.CBT_Lights;
 import com.hbm.entity.mob.EntityCyberCrab;
 import com.hbm.entity.missile.EntityRideableRocket;
 import com.hbm.entity.missile.EntityRideableRocket.RocketState;
@@ -665,6 +667,24 @@ public class ModEventHandler {
 
 		if(SpaceConfig.allowNetherPortals && event.world.provider.dimensionId > 1 && event.block instanceof BlockFire) {
 			Blocks.portal.func_150000_e(event.world, event.x, event.y, event.z);
+		}
+
+		// sneaky sneaky space furnace
+		if(event.block == Blocks.furnace) {
+			event.world.setBlock(event.x, event.y, event.z, ModBlocks.furnace, 0, 2);
+			ModBlocks.furnace.onBlockPlacedBy(event.world, event.x, event.y, event.z, event.player, event.itemInHand);
+		}
+
+		if(event.y >= event.world.provider.getHorizon()) {
+			if(event.block.getLightValue() > 10) {
+				CelestialBody body = CelestialBody.getBody(event.world);
+				CBT_Lights lights = body.getTrait(CBT_Lights.class);
+
+				if(lights == null) lights = new CBT_Lights();
+				lights.addLight(event.block, event.x, event.y, event.z);
+
+				body.modifyTraits(lights);
+			}
 		}
 	}
 
@@ -1640,6 +1660,23 @@ public class ModEventHandler {
 					event.world.setBlock(x, y, z, ModBlocks.gas_coal);
 			}
 		}
+
+		if(event.y > event.world.provider.getHorizon()) {
+			if(event.block.getLightValue() > 10) {
+				// Placing blocks onto beams counts as a break, but doesn't reduce light count
+				if(!(event.block instanceof BlockBeamBase)) {
+					CelestialBody body = CelestialBody.getBody(event.world);
+					CBT_Lights lights = body.getTrait(CBT_Lights.class);
+
+					if(lights == null) lights = new CBT_Lights();
+					lights.removeLight(event.block, event.x, event.y, event.z);
+
+					body.modifyTraits(lights);
+				}
+
+			}
+		}
+
 
 		if(RadiationConfig.enablePollution && RadiationConfig.enableLeadFromBlocks) {
 			if(!ArmorRegistry.hasProtection(player, 3, HazardClass.PARTICLE_FINE)) {

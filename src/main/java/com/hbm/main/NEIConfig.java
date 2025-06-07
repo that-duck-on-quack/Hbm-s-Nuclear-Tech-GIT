@@ -47,7 +47,7 @@ public class NEIConfig implements IConfigureNEI {
 			for(int i = 0; i < EnumAmmoSecret.values().length; i++) API.hideItem(new ItemStack(ModItems.ammo_secret, 1, i));
 			for(int i = 0; i < EnumSecretType.values().length; i++) API.hideItem(new ItemStack(ModItems.item_secret, 1, i));
 		}
-		
+
 		for(int i = 0; i < EnumIngotMetal.values().length; i++) API.hideItem(new ItemStack(ModItems.ingot_metal, 1, i));
 
 		//Some things are even beyond my control...or are they?
@@ -98,6 +98,9 @@ public class NEIConfig implements IConfigureNEI {
 		API.hideItem(new ItemStack(ModBlocks.conveyor_express));
 		API.hideItem(new ItemStack(ModBlocks.conveyor_double));
 		API.hideItem(new ItemStack(ModBlocks.conveyor_triple));
+
+		API.hideItem(new ItemStack(ModBlocks.furnace));
+		API.hideItem(new ItemStack(ModBlocks.lit_furnace));
 
 		for(BedrockOreGrade grade : BedrockOreGrade.values()) {
 			if(grade == BedrockOreGrade.BASE) continue;

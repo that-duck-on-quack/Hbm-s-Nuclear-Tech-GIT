@@ -13,13 +13,18 @@ import net.minecraftforge.client.IRenderHandler;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL14;
+import org.lwjgl.opengl.GLContext;
 
 import com.hbm.dim.SolarSystem.AstroMetric;
 import com.hbm.dim.trait.CBT_Atmosphere;
 import com.hbm.dim.trait.CBT_Dyson;
 import com.hbm.dim.trait.CBT_Impact;
+import com.hbm.dim.trait.CBT_Lights;
 import com.hbm.dim.trait.CelestialBodyTrait.CBT_Destroyed;
 import com.hbm.extprop.HbmLivingProps;
 import com.hbm.lib.RefStrings;
@@ -45,10 +50,17 @@ public class SkyProviderCelestial extends IRenderHandler {
 	private static final ResourceLocation shockwaveTexture = new ResourceLocation(RefStrings.MODID, "textures/particle/shockwave.png");
 	private static final ResourceLocation shockFlareTexture = new ResourceLocation(RefStrings.MODID, "textures/particle/flare.png");
 
+
 	private static final ResourceLocation noise = new ResourceLocation(RefStrings.MODID, "shaders/iChannel1.png");
 
 	protected static final Shader planetShader = new Shader(new ResourceLocation(RefStrings.MODID, "shaders/crescent.frag"));
 	protected static final Shader swarmShader = new Shader(new ResourceLocation(RefStrings.MODID, "shaders/swarm.vert"), new ResourceLocation(RefStrings.MODID, "shaders/swarm.frag"));
+
+	private static final ResourceLocation[] citylights = new ResourceLocation[] {
+		new ResourceLocation(RefStrings.MODID, "textures/misc/space/citylights_0.png"),
+		new ResourceLocation(RefStrings.MODID, "textures/misc/space/citylights_1.png"),
+		new ResourceLocation(RefStrings.MODID, "textures/misc/space/citylights_2.png"),
+	};
 
 	private static final String[] GL_SKY_LIST = new String[] { "glSkyList", "field_72771_w", "G" };
 	private static final String[] GL_SKY_LIST2 = new String[] { "glSkyList2", "field_72781_x", "H" };
@@ -57,16 +69,22 @@ public class SkyProviderCelestial extends IRenderHandler {
 	public static int glSkyList;
 	public static int glSkyList2;
 
+	private static boolean gl14;
+
 	public SkyProviderCelestial() {
-		if (!displayListsInitialized) {
+		if(!displayListsInitialized) {
 			initializeDisplayLists();
 		}
 	}
 
 	private void initializeDisplayLists() {
+        ContextCapabilities contextcapabilities = GLContext.getCapabilities();
+
 		Minecraft mc = Minecraft.getMinecraft();
 		glSkyList = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, GL_SKY_LIST);
 		glSkyList2 = ReflectionHelper.getPrivateValue(RenderGlobal.class, mc.renderGlobal, GL_SKY_LIST2);
+
+		gl14 = contextcapabilities.OpenGL14;
 
 		displayListsInitialized = true;
 	}
@@ -653,6 +671,7 @@ public class SkyProviderCelestial extends IRenderHandler {
 				tessellator.draw();
 
 				if(!renderAsPoint) {
+
 					GL11.glEnable(GL11.GL_BLEND);
 
 					// Draw a shader on top to render celestial phase
@@ -673,11 +692,96 @@ public class SkyProviderCelestial extends IRenderHandler {
 
 					planetShader.stop();
 
+					CBT_Impact impact = metric.body.getTrait(CBT_Impact.class);
+					CBT_Lights light = metric.body.getTrait(CBT_Lights.class);
+
+					double impactTime = impact != null ? (world.getTotalWorldTime() - impact.time) + partialTicks : 0;
+					int lightIntensity = light != null ? light.getIntensity() : 0;
+
+					if(lightIntensity > 0 && impactTime < 40) {
+
+						// Draw ONLY to alpha
+						OpenGlHelper.glBlendFunc(GL11.GL_ZERO, GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_SRC_ALPHA);
+						GL11.glColorMask(false, false, false, true);
+						if(gl14) GL14.glBlendEquation(GL14.GL_MIN);
+
+						// First draw the light alpha into the texture
+						GL11.glColor4d(1.0, 1.0, 1.0, 1.0);
+						mc.renderEngine.bindTexture(citylights[lightIntensity - 1]);
+
+						tessellator.startDrawingQuads();
+						tessellator.addVertexWithUV(-size, 100.0D, -size, 0.0D + uvOffset, 0.0D);
+						tessellator.addVertexWithUV(size, 100.0D, -size, 1.0D + uvOffset, 0.0D);
+						tessellator.addVertexWithUV(size, 100.0D, size, 1.0D + uvOffset, 1.0D);
+						tessellator.addVertexWithUV(-size, 100.0D, size, 0.0D + uvOffset, 1.0D);
+						tessellator.draw();
+
+						// Then mask out the continents
+						if(metric.body.cityMask != null) {
+							GL11.glColor4d(1.0, 1.0, 1.0, 1.0);
+							mc.renderEngine.bindTexture(metric.body.cityMask);
+
+							tessellator.startDrawingQuads();
+							tessellator.addVertexWithUV(-size, 100.0D, -size, 0.0D + uvOffset, 0.0D);
+							tessellator.addVertexWithUV(size, 100.0D, -size, 1.0D + uvOffset, 0.0D);
+							tessellator.addVertexWithUV(size, 100.0D, size, 1.0D + uvOffset, 1.0D);
+							tessellator.addVertexWithUV(-size, 100.0D, size, 0.0D + uvOffset, 1.0D);
+							tessellator.draw();
+						}
+
+						// Mask out any significant blackout events
+						if(impact != null) {
+							int blackoutInterval = 8;
+							int maxBlackouts = 5;
+
+							int activeBlackouts = Math.min((int)(impactTime / blackoutInterval), maxBlackouts);
+							double blsize = size * 0.35;
+
+							long seedBase = (long)(impactTime / (blackoutInterval * (maxBlackouts + 1)));
+							Random rand = new Random(seedBase);
+
+							for (int i = 0; i < activeBlackouts; i++) {
+								double offsetX = (rand.nextDouble() * 2.0 - 1.0) * (size - blsize);
+								double offsetZ = (rand.nextDouble() * 2.0 - 1.0) * (size - blsize);
+
+								GL11.glColor4d(0.0, 0.0, 0.0, 0.0);
+
+								GL11.glDisable(GL11.GL_TEXTURE_2D);
+
+								tessellator.startDrawingQuads();
+								tessellator.addVertexWithUV(-blsize + offsetX, 100.0D, -blsize + offsetZ, 0.0D + uvOffset, 0.0D);
+								tessellator.addVertexWithUV(blsize + offsetX, 100.0D, -blsize + offsetZ, 1.0D + uvOffset, 0.0D);
+								tessellator.addVertexWithUV(blsize + offsetX, 100.0D, blsize + offsetZ, 1.0D + uvOffset, 1.0D);
+								tessellator.addVertexWithUV(-blsize + offsetX, 100.0D, blsize + offsetZ, 0.0D + uvOffset, 1.0D);
+								tessellator.draw();
+
+								GL11.glEnable(GL11.GL_TEXTURE_2D);
+
+							}
+						}
+
+						// Back to normal blending
+						OpenGlHelper.glBlendFunc(GL11.GL_DST_ALPHA, GL11.GL_ONE_MINUS_DST_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
+						GL11.glColorMask(true, true, true, true);
+						if(gl14) GL14.glBlendEquation(GL14.GL_FUNC_ADD);
+
+						// Now draw the actual lights
+						GL11.glColor4d(1.0, 1.0, 1.0, 0.5);
+						mc.renderEngine.bindTexture(citylights[lightIntensity - 1]);
+
+						//man i should REALLY consider a shader...
+
+						tessellator.startDrawingQuads();
+						tessellator.addVertexWithUV(-size, 100.0D, -size, 0.0D + uvOffset, 0.0D);
+						tessellator.addVertexWithUV(size, 100.0D, -size, 1.0D + uvOffset, 0.0D);
+						tessellator.addVertexWithUV(size, 100.0D, size, 1.0D + uvOffset, 1.0D);
+						tessellator.addVertexWithUV(-size, 100.0D, size, 0.0D + uvOffset, 1.0D);
+						tessellator.draw();
+					}
+
 					OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ONE, GL11.GL_ZERO);
 
-					CBT_Impact impact = metric.body.getTrait(CBT_Impact.class);
 					if(impact != null) {
-						double impactTime = (world.getTotalWorldTime() - impact.time) + partialTicks;
 						double lavaAlpha = Math.min(impactTime * 0.1, 1.0);
 
 						double impactSize = (impactTime * 0.1) * size * 0.035;

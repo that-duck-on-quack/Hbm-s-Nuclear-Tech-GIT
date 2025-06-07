@@ -738,6 +738,9 @@ public class ModBlocks {
 	public static Block heater_heatex;
 	public static Block machine_ashpit;
 
+	public static Block furnace;
+	public static Block lit_furnace;
+
 	public static Block furnace_iron;
 	public static Block furnace_steel;
 	public static Block furnace_combination;
@@ -2003,6 +2006,9 @@ public class ModBlocks {
 		heater_electric = new HeaterElectric().setBlockName("heater_electric").setHardness(5.0F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel");
 		heater_heatex = new HeaterHeatex().setBlockName("heater_heatex").setHardness(5.0F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel");
 		machine_ashpit = new MachineAshpit().setBlockName("machine_ashpit").setHardness(5.0F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName("stonebrick");
+
+		furnace = new BlockFurnaceSpace(false).setHardness(3.5F).setStepSound(Block.soundTypePiston).setBlockName("furnace");
+		lit_furnace = new BlockFurnaceSpace(true).setHardness(3.5F).setStepSound(Block.soundTypePiston).setBlockName("lit_furnace").setLightLevel(0.875F);
 
 		furnace_iron = new FurnaceIron().setBlockName("furnace_iron").setHardness(5.0F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_aluminium");
 		furnace_steel = new FurnaceSteel().setBlockName("furnace_steel").setHardness(5.0F).setResistance(10.0F).setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":block_steel");
@@ -3441,6 +3447,8 @@ public class ModBlocks {
 		register(heater_oilburner);
 		register(heater_electric);
 		register(heater_heatex);
+		register(furnace);
+		register(lit_furnace);
 		register(furnace_iron);
 		register(furnace_steel);
 		register(furnace_combination);

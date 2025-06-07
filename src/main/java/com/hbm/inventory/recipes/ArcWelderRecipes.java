@@ -76,6 +76,9 @@ public class ArcWelderRecipes extends SerializableRecipe {
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.plate_welded, 1, Mats.MAT_ALUMINIUM.id), 300, 10_000L,
 			new FluidStack(Fluids.ACETYLENE, 500),
 				new OreDictStack(AL.plateCast(), 2)));
+
+		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.plate_welded, 1, Mats.MAT_STAINLESS.id), 250, 20_000L,
+				new OreDictStack(STAINLESS.plateCast(), 2)));
 		//late-game fusion
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.plate_welded, 1, Mats.MAT_TCALLOY.id), 1_200, 1_000_000L, new FluidStack(Fluids.DICYANOACETYLENE, 1_000),
 				new OreDictStack(TCALLOY.plateCast(), 2)));
@@ -133,9 +136,13 @@ public class ArcWelderRecipes extends SerializableRecipe {
 
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModBlocks.machine_xenon_thruster), 200, 50_000L, new FluidStack(Fluids.ARGON, 1_000), new OreDictStack(W.plateWelded(), 2), new ComparableStack(ModItems.plate_stainless, 6), new ComparableStack(ModItems.arc_electrode, 1, EnumElectrodeType.GRAPHITE)));
 
+		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.rp_fuselage_20_1), 120, 50_000L, new OreDictStack(STAINLESS.plateWelded(), 1), new ComparableStack(ModItems.seg_20), new OreDictStack(TI.shell(), 1)));
+		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.rp_fuselage_20_3), 130, 52_000L, new OreDictStack(STAINLESS.plateWelded(), 2), new ComparableStack(ModItems.seg_20), new OreDictStack(TI.shell(), 2)));
+		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.rp_fuselage_20_6), 140, 56_000L, new OreDictStack(STAINLESS.plateWelded(), 4), new ComparableStack(ModItems.seg_20), new OreDictStack(TI.shell(), 4)));
+		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.rp_fuselage_20_12), 150, 60_000L, new OreDictStack(STAINLESS.plateWelded(), 8), new ComparableStack(ModItems.seg_20), new OreDictStack(TI.shell(), 6)));
+
 		//Speck "Automation n Suffering" Stuff
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.motor), 150, 25_000L, new FluidStack(Fluids.ACETYLENE, 1_000), new OreDictStack(STEEL.plate(), 2), new ComparableStack(ModItems.coil_copper_torus), new ComparableStack(ModItems.coil_copper)));
-
 	}
 
 	public static HashMap getRecipes() {

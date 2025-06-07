@@ -18,6 +18,7 @@ import com.hbm.extprop.HbmLivingProps;
 import com.hbm.inventory.fluid.FluidType;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.items.ItemVOTVdrive.Target;
+import com.hbm.lib.RefStrings;
 import com.hbm.render.shader.Shader;
 import com.hbm.util.AstronomyUtil;
 
@@ -54,6 +55,8 @@ public class CelestialBody {
 	private int minProcessingLevel = 0; // What level of technology can locate this body? This defines the minimum level, automatically adjusted based on stardar location
 
 	public ResourceLocation texture = null;
+	public ResourceLocation biomeMask = null;
+	public ResourceLocation cityMask = null;
 	public float[] color = new float[] {0.4F, 0.4F, 0.4F}; // When too small to render the texture
 
 	public String tidallyLockedTo = null;
@@ -73,7 +76,7 @@ public class CelestialBody {
 
 	public CelestialBody(String name) {
 		this.name = name;
-		this.texture = new ResourceLocation("hbm:textures/misc/space/" + name + ".png");
+		this.texture = new ResourceLocation(RefStrings.MODID, "textures/misc/space/" + name + ".png");
 
 		nameToBodyMap.put(name, this);
 	}
@@ -116,8 +119,18 @@ public class CelestialBody {
 		return this;
 	}
 
-	public CelestialBody withTexture(String path) {
-		this.texture = new ResourceLocation(path);
+	public CelestialBody withTexture(ResourceLocation location) {
+		this.texture = location;
+		return this;
+	}
+
+	public CelestialBody withCityMask(ResourceLocation location) {
+		this.cityMask = location;
+		return this;
+	}
+
+	public CelestialBody withBiomeMask(ResourceLocation location) {
+		this.biomeMask = location;
 		return this;
 	}
 

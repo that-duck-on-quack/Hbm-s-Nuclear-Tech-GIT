@@ -1,6 +1,8 @@
 package com.hbm.blocks.machine;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.dim.CelestialBody;
+import com.hbm.dim.trait.CBT_Lights;
 
 import java.util.Random;
 
@@ -238,6 +240,17 @@ public class Spotlight extends Block implements ISpotlight, INBTTransformable {
 		if(!isBroken(meta)) return;
 
 		world.setBlock(x, y, z, getOn(), meta - 1, 2);
+
+		if(!world.isRemote) {
+			// gwa gwa
+			CelestialBody body = CelestialBody.getBody(world);
+			CBT_Lights lights = body.getTrait(CBT_Lights.class);
+
+			if(lights == null) lights = new CBT_Lights();
+			lights.addLight(getOn(), x, y, z);
+
+			body.modifyTraits(lights);
+		}
 
 		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			int ox = x + dir.offsetX;

@@ -636,6 +636,12 @@ public abstract class WorldProviderCelestial extends WorldProvider {
 		return phase;
 	}
 
+	@Override
+	public double getHorizon() {
+		if(dimensionId == 0) return super.getHorizon();
+		return 63;
+	}
+
 	// This is the vanilla junk table, for replacing fish on dead worlds
 	private static ArrayList<WeightedRandomFishable> junk;
 

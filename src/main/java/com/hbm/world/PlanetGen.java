@@ -58,8 +58,6 @@ public class PlanetGen {
 		GameRegistry.registerWorldGenerator(new WorldGeneratorLaythe(), 1);
 		GameRegistry.registerWorldGenerator(new WorldGeneratorTekto(), 1);
 
-		overrideOverworldProvider();
-
     }
 
 	private static ArrayList<Integer> spaceDimensions = new ArrayList<>();

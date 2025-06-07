@@ -36,7 +36,7 @@ public class SolarSystem {
 		kerbol = new CelestialBody("kerbol")
 			.withMassRadius(1.757e28F, 261_600)
 			.withRotationalPeriod(432_000)
-			.withTexture("textures/environment/sun.png")
+			.withTexture(new ResourceLocation("textures/environment/sun.png"))
 			.withShader(new ResourceLocation(RefStrings.MODID, "shaders/blackhole.frag"), 3) // Only shows when CBT_Destroyed
 			.withSatellites(
 
@@ -63,7 +63,7 @@ public class SolarSystem {
 							.withMassRadius(1.242e17F, 13)
 							.withSemiMajorAxis(31_500)
 							.withRotationalPeriod(28_255)
-							.withTexture("hbm:textures/misc/space/planet.png")
+							.withTexture(new ResourceLocation(RefStrings.MODID, "textures/misc/space/planet.png"))
 
 					),
 
@@ -73,6 +73,8 @@ public class SolarSystem {
 					.withRotationalPeriod(21_549)
 					.withColor(0.608F, 0.914F, 1.0F)
 					.withTraits(new CBT_Atmosphere(Fluids.AIR, 1D), new CBT_Water())
+					.withCityMask(new ResourceLocation(RefStrings.MODID, "textures/misc/space/kerbin_mask.png"))
+					.withBiomeMask(new ResourceLocation(RefStrings.MODID, "textures/misc/space/kerbin_biomes.png"))
 					.withSatellites(
 
 						new CelestialBody("mun", SpaceConfig.moonDimension, Body.MUN)
@@ -99,6 +101,7 @@ public class SolarSystem {
 					.withColor(0.6471f, 0.2824f, 0.1608f)
 					.withBlockTextures(RefStrings.MODID + ":duna_rock", "", "", "")
 					.withTraits(new CBT_Atmosphere(Fluids.DUNAAIR, 0.1D))
+					.withCityMask(new ResourceLocation(RefStrings.MODID, "textures/misc/space/duna_mask.png"))
 					.withSatellites(
 
 						new CelestialBody("ike", SpaceConfig.ikeDimension, Body.IKE)
@@ -132,7 +135,8 @@ public class SolarSystem {
 							.withRotationalPeriod(52_981)
 							.withTidalLockingTo("jool")
 							.withMinProcessingLevel(3)
-							.withTraits(new CBT_Atmosphere(Fluids.AIR, 0.45D).and(Fluids.XENON, 0.15D), new CBT_Water()),
+							.withTraits(new CBT_Atmosphere(Fluids.AIR, 0.45D).and(Fluids.XENON, 0.15D), new CBT_Water())
+							.withCityMask(new ResourceLocation(RefStrings.MODID, "textures/misc/space/laythe_mask.png")),
 
 						new CelestialBody("vall") //probably
 							.withMassRadius(3.109e21F, 300)

@@ -980,8 +980,10 @@ public class MainRegistry {
 		new OreCave(ModBlocks.laythe_silt, 3).setDimension(SpaceConfig.laytheDimension).setThreshold(0.2D).setRangeMult(60).setYLevel(58).setMaxRange(14).setBlockOverride(ModBlocks.laythe_silt).setIgnoreWater(true).setStalagmites(false);
 
 		BedrockOre.init();
+		PlanetGen.overrideOverworldProvider(); // Doing it as late as possible
 
 		Compat.handleRailcraftNonsense();
+		Compat.handleBopBiomeIDs();
 		SuicideThreadDump.register();
 		CommandReloadClient.register();
 
