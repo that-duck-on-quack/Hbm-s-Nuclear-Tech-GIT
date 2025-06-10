@@ -12,6 +12,7 @@ import com.hbm.saveddata.satellites.SatelliteMiner;
 import com.hbm.tileentity.IGUIProvider;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -27,7 +28,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class TileEntityMachineSatDock extends TileEntity implements ISidedInventory, IGUIProvider {
-	
+
 	private ItemStack[] slots;
 	private static final int[] access = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
 
@@ -129,7 +130,7 @@ public class TileEntityMachineSatDock extends TileEntity implements ISidedInvent
 			}
 		}
 		nbt.setTag("items", list);
-		
+
 		if (customName != null) {
 			nbt.setString("name", customName);
 		}
@@ -169,11 +170,15 @@ public class TileEntityMachineSatDock extends TileEntity implements ISidedInvent
 			}
 
 			@SuppressWarnings("unchecked")
-			List<EntityMinerRocket> list = worldObj.getEntitiesWithinAABBExcludingEntity(null,
-					AxisAlignedBB.getBoundingBox(xCoord - 0.25 + 0.5, yCoord + 0.75, zCoord - 0.25 + 0.5, xCoord + 0.25 + 0.5, yCoord + 2, zCoord + 0.25 + 0.5),
-					entity -> entity instanceof EntityMinerRocket);
+			List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(null,
+				AxisAlignedBB.getBoundingBox(xCoord - 0.25 + 0.5, yCoord + 0.75, zCoord - 0.25 + 0.5, xCoord + 0.25 + 0.5, yCoord + 2, zCoord + 0.25 + 0.5),
+				entity -> entity instanceof EntityMinerRocket);
 
-			for(EntityMinerRocket rocket : list) {
+			for(Entity entity : list) {
+				if(!(entity instanceof EntityMinerRocket)){
+					return;
+				}
+				EntityMinerRocket rocket = (EntityMinerRocket) entity;
 				if(slots[15] != null && ISatChip.getFreqS(slots[15]) != rocket.getDataWatcher().getWatchableObjectInt(17)) {
 					rocket.setDead();
 					ExplosionNukeSmall.explode(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, ExplosionNukeSmall.PARAMS_TOTS);
@@ -237,7 +242,7 @@ public class TileEntityMachineSatDock extends TileEntity implements ISidedInvent
 						sta.stackSize = 1;
 
 						if(chest.getStackInSlot(j) != null && chest.getStackInSlot(j).isItemEqual(slots[i]) && ItemStack.areItemStackTagsEqual(chest.getStackInSlot(j), slots[i])
-								&& chest.getStackInSlot(j).stackSize < chest.getStackInSlot(j).getMaxStackSize()) {
+							&& chest.getStackInSlot(j).stackSize < chest.getStackInSlot(j).getMaxStackSize()) {
 
 							slots[i].stackSize--;
 

@@ -4876,7 +4876,7 @@ public class ModItems {
 				.addAbility(IWeaponAbility.CHAINSAW, 1)
 				.addAbility(IWeaponAbility.BEHEADER, 0).setShears().setUnlocalizedName("chainsaw").setTextureName(RefStrings.MODID + ":chainsaw");
 
-		schrabidium_sword = new ItemSwordAbility(75 * meleeMod, 0, MainRegistry.tMatSchrab)
+		schrabidium_sword = new ItemSwordAbility((float) (75 * meleeMod), 0, MainRegistry.tMatSchrab)
 				.addAbility(IWeaponAbility.RADIATION, 1)
 				.addAbility(IWeaponAbility.VAMPIRE, 0)
 				.setRarity(EnumRarity.rare).setUnlocalizedName("schrabidium_sword").setTextureName(RefStrings.MODID + ":schrabidium_sword");
