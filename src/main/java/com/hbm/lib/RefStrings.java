@@ -8,7 +8,7 @@ public class RefStrings {
 	//V T (X)
 	//V -> next release version
 	//T -> build type
-	//X -> random number between 200 and 2600, only even numbers. odds look ugly.
+	//X -> random number between 1268 and 2600, only even numbers. odds look ugly.
 	public static final String CLIENTSIDE = "com.hbm.main.ClientProxy";
 	public static final String SERVERSIDE = "com.hbm.main.ServerProxy";
 }
