@@ -88,6 +88,9 @@ public abstract class SerializableRecipe {
 		recipeHandlers.add(new VacuumCircuitRecipes());
 		recipeHandlers.add(new PedestalRecipes());
 
+		//GENERIC
+		recipeHandlers.add(ChemicalPlantRecipes.INSTANCE);
+
 		recipeHandlers.add(new MatDistribution());
 		recipeHandlers.add(new CryoRecipes());
 
@@ -233,7 +236,6 @@ public abstract class SerializableRecipe {
 	}
 
 	public void readRecipeFile(File file) {
-
 		try {
 			readRecipeStream(new FileReader(file));
 		} catch(FileNotFoundException ex) { }

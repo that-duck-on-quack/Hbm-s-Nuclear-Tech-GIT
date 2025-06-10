@@ -25,7 +25,7 @@ import com.hbm.sound.AudioWrapper;
 import com.hbm.tileentity.machine.TileEntityOrbitalStation;
 import com.hbm.util.BobMathUtil;
 import com.hbm.util.CompatExternal;
-import com.hbm.util.I18nUtil;
+import com.hbm.util.i18n.I18nUtil;
 import com.hbm.util.ParticleUtil;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -123,10 +123,10 @@ public class EntityRideableRocket extends EntityMissileBaseNT implements ILookOv
 		motionX = 0;
 		motionY = 0;
 		motionZ = 0;
-		
+
 		Target from = CelestialBody.getTarget(worldObj, (int)posX, (int)posZ);
 		Target to = getTarget();
-		
+
 		RocketStruct rocket = getRocket();
 		boolean expendStage = rocket.stages.size() > 0;
 		if(getState() == RocketState.UNDOCKING && from.body == to.body) expendStage = false;
@@ -238,24 +238,24 @@ public class EntityRideableRocket extends EntityMissileBaseNT implements ILookOv
 			} else if(state == RocketState.DOCKING) {
 				// we have to wait for docking ports and their associated entities to load
 				// waiting for loading using timers is bad, so maybe refactor this
-				if(stateTimer > 20) { 
+				if(stateTimer > 20) {
 					rocketVelocity = 0.1;
 					rotationPitch = 0;
-	
+
 					if(targetPort == null) targetPort = OrbitalStation.getPort((int)posX, (int)posZ);
-	
+
 					// Just in case no ports have loaded in time, do nothing until they have
 					if(targetPort != null) {
 						posX = targetPort.xCoord + 0.5D;
 						posZ = targetPort.zCoord + 0.5D;
-		
+
 						targetPort.despawnRocket();
 						targetPort.reservePort();
-		
+
 						if(posY + height > targetPort.yCoord + 1.5D) {
 							setState(isReusable() ? RocketState.NEEDSFUEL : RocketState.LANDED);
 							posY = targetPort.yCoord + 1.5D - height;
-							
+
 							targetPort.dockRocket(this);
 							targetPort = null;
 						}
@@ -301,20 +301,20 @@ public class EntityRideableRocket extends EntityMissileBaseNT implements ILookOv
 					if(rider != null) {
 						if(destination.body == SolarSystem.Body.ORBIT) {
 							setState(RocketState.DOCKING);
-	
+
 							// Place the station in the middle of the zone, where the docking ring will always be
 							x = x * OrbitalStation.STATION_SIZE + (OrbitalStation.STATION_SIZE / 2);
 							y = 0;
 							z = z * OrbitalStation.STATION_SIZE + (OrbitalStation.STATION_SIZE / 2);
 						}
-	
+
 						if(worldObj.provider.dimensionId != targetDimensionId) {
 							DebugTeleporter.teleport(rider, targetDimensionId, x + 0.5D, y, z + 0.5D, false);
 						} else {
 							posX = x + 0.5D;
 							posZ = z + 0.5D;
 						}
-	
+
 						// After a successful warp, spawn in a station core if one doesn't yet exist
 						if(destination.body == SolarSystem.Body.ORBIT) {
 							WorldServer targetWorld = DimensionManager.getWorld(targetDimensionId);
@@ -341,7 +341,7 @@ public class EntityRideableRocket extends EntityMissileBaseNT implements ILookOv
 								}
 							}
 						}
-	
+
 						setDead();
 					}
 				}
@@ -384,7 +384,7 @@ public class EntityRideableRocket extends EntityMissileBaseNT implements ILookOv
 						audio = MainRegistry.proxy.getLoopedSound(rocketAudio, (float)posX, (float)posY, (float)posZ, 1.0F, 250.0F, 1.0F, 5);
 						audio.startSound();
 					}
-	
+
 					audio.updatePosition((float)posX, (float)posY, (float)posZ);
 					audio.keepAlive();
 				} else {
@@ -481,7 +481,7 @@ public class EntityRideableRocket extends EntityMissileBaseNT implements ILookOv
 		if(isReusable()) return height - 2.5;
 		return height - 3.0;
 	}
-	
+
 	@Override
 	protected void setSize(float width, float height) {
 		super.setSize(width, height);
@@ -691,7 +691,7 @@ public class EntityRideableRocket extends EntityMissileBaseNT implements ILookOv
 		if(navDrive != null) {
 			NBTTagCompound driveData = new NBTTagCompound();
 			navDrive.writeToNBT(driveData);
-	
+
 			nbt.setTag("drive", driveData);
 		}
 
@@ -861,7 +861,7 @@ public class EntityRideableRocket extends EntityMissileBaseNT implements ILookOv
 			if(parent == null) return false;
 			return parent.attackEntityFrom(source, amount);
 		}
-		
+
 	}
 
 }

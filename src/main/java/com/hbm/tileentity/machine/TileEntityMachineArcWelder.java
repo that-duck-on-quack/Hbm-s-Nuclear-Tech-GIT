@@ -19,9 +19,9 @@ import com.hbm.lib.Library;
 import com.hbm.tileentity.*;
 import com.hbm.packet.toclient.AuxParticlePacketNT;
 import com.hbm.util.BobMathUtil;
-import com.hbm.util.I18nUtil;
 import com.hbm.util.fauxpointtwelve.BlockPos;
 import com.hbm.util.fauxpointtwelve.DirPos;
+import com.hbm.util.i18n.I18nUtil;
 
 import api.hbm.energymk2.IEnergyReceiverMK2;
 import api.hbm.fluid.IFluidStandardReceiver;
@@ -99,7 +99,7 @@ public class TileEntityMachineArcWelder extends TileEntityMachineBase implements
 				this.processTime = recipe.duration - (recipe.duration * redLevel / 6) + (recipe.duration * blueLevel / 3);
 				this.consumption = recipe.consumption + (recipe.consumption * redLevel) - (recipe.consumption * blueLevel / 6);
 				this.consumption *= Math.pow(2, blackLevel);
-				intendedMaxPower = recipe.consumption * 20;
+				intendedMaxPower = consumption * 20;
 
 				if(canProcess(recipe)) {
 					this.progress += (1 + blackLevel);

@@ -109,6 +109,7 @@ public class TileEntityCompactLauncher extends TileEntityLoadedBase implements I
 
 	public void setCustomName(String name) {
 		this.customName = name;
+		markDirty();
 	}
 
 	@Override
@@ -529,6 +530,8 @@ public class TileEntityCompactLauncher extends TileEntityLoadedBase implements I
 				slots[b0] = ItemStack.loadItemStackFromNBT(nbt1);
 			}
 		}
+
+		customName = nbt.getString("name");
 	}
 
 	@Override
@@ -551,6 +554,10 @@ public class TileEntityCompactLauncher extends TileEntityLoadedBase implements I
 			}
 		}
 		nbt.setTag("items", list);
+		
+		if (customName != null) {
+			nbt.setString("name", customName);
+		}
 	}
 
 	@Override

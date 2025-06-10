@@ -39,10 +39,6 @@ public class TileEntityMachineDischarger extends TileEntityMachineBase implement
 
 	private AudioWrapper audio;
 
-	private static final int[] slots_top = new int[] { 0 };
-	private static final int[] slots_bottom = new int[] { 1, 2 };
-	private static final int[] slots_side = new int[] { 3, 2 };
-
 	public TileEntityMachineDischarger() {
 		super(2);
 	}
@@ -104,7 +100,7 @@ public class TileEntityMachineDischarger extends TileEntityMachineBase implement
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
-		return p_94128_1_ == 0 ? slots_bottom : (p_94128_1_ == 1 ? slots_top : slots_side);
+		return new int[] { 0, 1 }; // hi my name is james and I copy paste furnace code without reading it
 	}
 
 	@Override

@@ -217,7 +217,8 @@ public class BlockBobble extends BlockContainer implements IGUIProvider, INBTTra
 		PEEP(			"Peep",								"LePeeperSauvage",	"Coilgun, Leadburster, Congo Lake models, and the 737",											"Fluffy ears can't hide in ash, nor snow.",											true,	ScrapType.CPU_CLOCK),
 		MICROWAVE(		"Microwave",						"Microwave",		"OC Compatibility and massive RBMK/packet optimizations",		"they call me the food heater$john optimization",                                                                    true, ScrapType.BRIDGE_BIOS),
 		MELLOW(			"MELLOWARPEGGIATION",				"Mellow",			"Celestial mechanics, rocketry,$atmospheric chemistry, orbital stations,$Dyson swarms",						"Make something cool now, ask for permission later.",												true,	ScrapType.CARD_PROCESSOR),
-		MRKIMKIMORA(			"MrKimkimora",				"MrKimkimora",			"Part of NTM:Space models,$textures and russian localization",						"I know your IP. Your IP is 127.0.0.1.",												false,	ScrapType.BOARD_BLANK);
+		MRKIMKIMORA(	"MrKimkimora",						"MrKimkimora",		"Part of NTM:Space models,$textures and russian localization",						"I know your IP. Your IP is 127.0.0.1.",												false,	ScrapType.BOARD_BLANK),
+		ABEL(			"Abel1502", 						"Abel1502", 		"Abilities GUI, optimizations and many QoL improvements", 	"NANTO SUBARASHII",																				true,	ScrapType.CPU_REGISTER);
 
 		public String name;			//the title of the tooltip
 		public String label;		//the name engraved in the socket

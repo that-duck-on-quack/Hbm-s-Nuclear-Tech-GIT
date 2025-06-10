@@ -9,6 +9,7 @@ import com.hbm.inventory.fluid.FluidType;
 
 import com.hbm.packet.toclient.AuxParticlePacketNT;
 import com.hbm.util.AstronomyUtil;
+import com.hbm.util.ArmorUtil;
 
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
@@ -66,6 +67,7 @@ public class JetpackBooster extends JetpackFueledBase {
 
 			world.playSoundEffect(player.posX, player.posY, player.posZ, "hbm:weapon.flamethrowerShoot", 0.25F, 1.0F);
 			this.useUpFuel(player, stack, 1);
+			ArmorUtil.resetFlightTime(player);
 		}
 	}
 

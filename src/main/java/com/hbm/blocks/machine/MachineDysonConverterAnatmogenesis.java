@@ -14,7 +14,7 @@ import com.hbm.items.machine.IItemFluidIdentifier;
 import com.hbm.tileentity.TileEntityProxyCombo;
 import com.hbm.tileentity.machine.TileEntityDysonConverterAnatmogenesis;
 import com.hbm.util.AstronomyUtil;
-import com.hbm.util.I18nUtil;
+import com.hbm.util.i18n.I18nUtil;
 
 import api.hbm.block.IToolable;
 import net.minecraft.block.material.Material;

@@ -12,7 +12,7 @@ import com.hbm.inventory.fluid.trait.FT_Rocket;
 import com.hbm.main.MainRegistry;
 import com.hbm.sound.AudioWrapper;
 import com.hbm.tileentity.TileEntityMachineBase;
-import com.hbm.util.I18nUtil;
+import com.hbm.util.i18n.I18nUtil;
 import com.hbm.util.fauxpointtwelve.DirPos;
 
 import api.hbm.fluid.IFluidStandardReceiver;
@@ -115,7 +115,7 @@ public class TileEntityMachineHTR3 extends TileEntityMachineBase implements IPro
 			} else {
 				speed -= 0.05D;
 				if(speed < 0) speed = 0;
-				
+
 				if(audio != null) {
 					audio.stopSound();
 					audio = null;
@@ -137,12 +137,12 @@ public class TileEntityMachineHTR3 extends TileEntityMachineBase implements IPro
 
 	private DirPos[] getConPos() {
 		ForgeDirection dir = ForgeDirection.getOrientation(this.getBlockMetadata() - BlockDummyable.offset).getRotation(ForgeDirection.UP);
-		
+
 		return new DirPos[] {
 			new DirPos(xCoord - dir.offsetX * 6, yCoord, zCoord - dir.offsetZ * 6, dir)
 		};
 	}
-	
+
 	@Override
 	public AudioWrapper createAudioLoop() {
 		return MainRegistry.proxy.getLoopedSound("hbm:misc.htrloop", xCoord, yCoord, zCoord, 0.25F, 27.5F, 1.0F, 20);
@@ -186,7 +186,7 @@ public class TileEntityMachineHTR3 extends TileEntityMachineBase implements IPro
 		buf.writeInt(fuelCost);
 		for(int i = 0; i < tanks.length; i++) tanks[i].serialize(buf);
 	}
-	
+
 	@Override
 	public void deserialize(ByteBuf buf) {
 		super.deserialize(buf);
@@ -213,15 +213,15 @@ public class TileEntityMachineHTR3 extends TileEntityMachineBase implements IPro
 	public boolean isFacingPrograde() {
 		return ForgeDirection.getOrientation(this.getBlockMetadata() - BlockDummyable.offset) == ForgeDirection.SOUTH;
 	}
-	
+
 	AxisAlignedBB bb = null;
-	
+
 	@Override
 	public AxisAlignedBB getRenderBoundingBox() {
 		if(bb == null) bb = AxisAlignedBB.getBoundingBox(xCoord - 10, yCoord - 3, zCoord - 10, xCoord + 11, yCoord + 4, zCoord + 11);
 		return bb;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public double getMaxRenderDistanceSquared() {

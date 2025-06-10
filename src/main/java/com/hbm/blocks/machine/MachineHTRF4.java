@@ -10,7 +10,7 @@ import com.hbm.inventory.fluid.tank.FluidTank;
 import com.hbm.tileentity.TileEntityProxyCombo;
 import com.hbm.tileentity.machine.TileEntityMachineHTRF4;
 import com.hbm.util.BobMathUtil;
-import com.hbm.util.I18nUtil;
+import com.hbm.util.i18n.I18nUtil;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
@@ -71,14 +71,14 @@ public class MachineHTRF4 extends BlockDummyable implements ILookOverlay {
 		if(!CelestialBody.inOrbit(world)) return;
 
 		int[] pos = this.findCore(world, x, y, z);
-		
+
 		if(pos == null) return;
-		
+
 		TileEntity te = world.getTileEntity(pos[0], pos[1], pos[2]);
-		
+
 		if(!(te instanceof TileEntityMachineHTRF4))
 			return;
-		
+
 		TileEntityMachineHTRF4 thruster = (TileEntityMachineHTRF4) te;
 
 		List<String> text = new ArrayList<String>();

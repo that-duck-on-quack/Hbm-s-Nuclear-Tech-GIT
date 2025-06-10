@@ -172,7 +172,7 @@ public class SolarSystemWorldSavedData extends WorldSavedData {
 	}
 
 	public ChunkCoordIntPair findFreeSpace() {
-		int size = SpaceConfig.maxProbeDistance / OrbitalStation.STATION_SIZE;
+		int size = SpaceConfig.maxStationDistance / OrbitalStation.STATION_SIZE;
 
 		// Has a guard so it doesn't loop forever on a spammed out world
 		ChunkCoordIntPair pos = new ChunkCoordIntPair(rand.nextInt(size * 2) - size, rand.nextInt(size * 2) - size);

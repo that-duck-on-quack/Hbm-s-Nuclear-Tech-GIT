@@ -9,7 +9,6 @@ import com.hbm.handler.ArmorModHandler;
 import com.hbm.interfaces.Spaghetti;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.items.ModItems;
-import com.hbm.items.weapon.ItemGunBase;
 import com.hbm.potion.HbmPotion;
 
 import api.hbm.fluidmk2.IFillableItem;
@@ -247,41 +246,6 @@ public class ItemSyringe extends Item {
 
 					ArmorModHandler.applyMod(player.inventory.armorInventory[3], tankStack);
 				}
-			}
-		}
-
-		if(this == ModItems.gun_kit_1 || this == ModItems.gun_kit_2) {
-			if(!world.isRemote) {
-				float repair = 0;
-
-				if(this == ModItems.gun_kit_1) {
-					repair = 0.1F;
-					world.playSoundAtEntity(player, "hbm:item.spray", 1.0F, 1.0F);
-				}
-				if(this == ModItems.gun_kit_2) {
-					repair = 0.5F;
-					world.playSoundAtEntity(player, "hbm:item.repair", 1.0F, 1.0F);
-				}
-
-				for(int i = 0; i < 9; i++) {
-
-					ItemStack gun = player.inventory.mainInventory[i];
-
-					if(gun != null && gun.getItem() instanceof ItemGunBase) {
-
-						int full = ((ItemGunBase) gun.getItem()).mainConfig.durability;
-						int wear = ItemGunBase.getItemWear(gun);
-
-						int nWear = (int) (wear - (full * repair));
-
-						if(nWear < 0)
-							nWear = 0;
-
-						ItemGunBase.setItemWear(gun, nWear);
-					}
-				}
-
-				stack.stackSize--;
 			}
 		}
 
