@@ -40,6 +40,8 @@ public class GasCentrifugeRecipes {
 		public static PseudoFluidType MINSOLSEP = new PseudoFluidType("MINSOLSEP", 500, 0, NONE, false, new ItemStack(ModItems.crystal_cleaned, 1));
 		public static PseudoFluidType MINSOL = new PseudoFluidType("MINSOL", 500, 500, MINSOLSEP, false, new ItemStack(ModItems.powder_iron, 1));
 
+
+
 		public String name;
 		int fluidConsumed;
 		int fluidProduced;
@@ -57,29 +59,12 @@ public class GasCentrifugeRecipes {
 			types.put(name, this);
 		}
 
-		public int getFluidConsumed() {
-			return this.fluidConsumed;
-		}
-
-		public int getFluidProduced() {
-			return this.fluidProduced;
-		}
-
-		public PseudoFluidType getOutputType() {
-			return this.outputFluid;
-		}
-
-		public ItemStack[] getOutput() {
-			return this.output;
-		}
-
-		public boolean getIfHighSpeed() {
-			return this.isHighSpeed;
-		}
-
-		public String getName() {
-			return I18nUtil.resolveKey("hbmpseudofluid.".concat(this.name.toLowerCase(Locale.US)));
-		}
+		public int getFluidConsumed() {				return this.fluidConsumed; }
+		public int getFluidProduced() {				return this.fluidProduced; }
+		public PseudoFluidType getOutputType() {	return this.outputFluid; }
+		public ItemStack[] getOutput() {			return this.output; }
+		public boolean getIfHighSpeed() {			return this.isHighSpeed; }
+		public String getName() {					return I18nUtil.resolveKey("hbmpseudofluid.".concat(this.name.toLowerCase(Locale.US))); }
 
 	}
 

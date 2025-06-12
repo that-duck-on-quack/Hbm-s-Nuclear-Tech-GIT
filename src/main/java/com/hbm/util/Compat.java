@@ -204,25 +204,6 @@ public class Compat {
 		MainRegistry.logger.info("#######################################################");
 	}
 
-	public static void handleBopBiomeIDs() {
-		if(!SpaceConfig.crashOnBiomeConflict) return;
-
-		if(!Loader.isModLoaded(MOD_BOP)) return; // If no Biomes O' Plenty, we're fine
-		if(Loader.isModLoaded(MOD_EIDS)) return; // If we do have BoP, but also have Endless IDs, we're fine
-
-		// We love BoP, but if we're gonna coexist we're gonna have to force modpackers and server operators to do a bit of work, sorry
-
-		MainRegistry.logger.error("#######################################################");
-		MainRegistry.logger.error("| Biomes O' Plenty detected, but no valid biome ID extender mod detected!");
-		MainRegistry.logger.error("| Without one, it is impossible to fit any more biomes in alongside BoP's 83!");
-		MainRegistry.logger.error("| Please install EndlessIDs and modify hbm.cfg to move the NTM: Space biomes (easiest option is to add +1000 to every biome ID)");
-		MainRegistry.logger.error("| Don't forget to add EndlessIDs' dependencies as well: ChunkAPI, FalsePatternLib, Unimixins");
-		MainRegistry.logger.error("| The game will crash now, good luck!");
-		MainRegistry.logger.error("#######################################################");
-
-		throw new BiomeCollisionException("Biome collision inevitable between NTM: Space and Biomes O' Plenty. See above error message for further details.");
-	}
-
 	public static Class getChunkBiomeHook() {
 		try {
 			return Class.forName("com.falsepattern.endlessids.mixin.helpers.ChunkBiomeHook");

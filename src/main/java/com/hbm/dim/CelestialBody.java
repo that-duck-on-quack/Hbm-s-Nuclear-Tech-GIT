@@ -45,9 +45,16 @@ public class CelestialBody {
 
 	public boolean canLand = false; // does this body have an associated dimension and a solid surface?
 
+	// Orbital elements
 	public float massKg = 0;
 	public float radiusKm = 0;
 	public float semiMajorAxisKm = 0; // Distance to the parent body
+	public float semiMinorAxisKm = 0;
+	public float eccentricity = 0;
+	public float inclination = 0;
+	public float ascendingNode = 0;
+	public float argumentPeriapsis = 0;
+
 	private int rotationalPeriod = 6 * 60 * 60; // Day length in seconds
 
 	public float axialTilt = 0;
@@ -99,8 +106,13 @@ public class CelestialBody {
 		return this;
 	}
 
-	public CelestialBody withSemiMajorAxis(float km) {
-		this.semiMajorAxisKm = km;
+	public CelestialBody withOrbitalParameters(float semiMajorAxisKm, float eccentricity, float argumentPeriapsisDegrees, float inclinationDegrees, float ascendingNodeDegrees) {
+		this.semiMajorAxisKm = semiMajorAxisKm;
+		this.semiMinorAxisKm = semiMajorAxisKm * (float)Math.sqrt(1 - eccentricity * eccentricity);
+		this.eccentricity = eccentricity;
+		this.argumentPeriapsis = (float)Math.toRadians(argumentPeriapsisDegrees);
+		this.inclination = (float)Math.toRadians(inclinationDegrees);
+		this.ascendingNode = (float)Math.toRadians(ascendingNodeDegrees);
 		return this;
 	}
 
