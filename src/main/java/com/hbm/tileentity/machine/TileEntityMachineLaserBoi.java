@@ -119,7 +119,6 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	}
 
 	public boolean canProcess() {
-
 		if(slots[0] != null && slots[2] != null && power > 0){ //Base checks. Nested ifs are nasty but i'm prioritizing readability.
 			if(slots[1] == null){
 				return itemList.containsKey(slots[0].getItem()) && crystalList.containsKey(slots[2].getItem());
@@ -163,6 +162,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 			}
 
 			slots[0].stackSize--;
+
 			if (slots[0].stackSize <= 0) {
 				slots[0] = null;
 			}
