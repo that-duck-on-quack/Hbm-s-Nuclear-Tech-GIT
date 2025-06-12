@@ -29,9 +29,9 @@ public class TileEntityDeaerator extends TileEntityLoadedBase implements IFluidS
 	protected int throughput;
 
 	//Configurable values
-	public static int inputTankSize = 6500;
-	public static int outputTankSize = 6500;
-	public static int daTankSize = 1500;
+	public static int inputTankSize = 15000;
+	public static int outputTankSize = 15000;
+	public static int daTankSize = 3000;
 
 	public TileEntityDeaerator() {
 		tanks = new FluidTank[3];
