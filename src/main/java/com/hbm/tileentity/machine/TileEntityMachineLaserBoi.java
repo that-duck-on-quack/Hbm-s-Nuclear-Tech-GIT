@@ -124,7 +124,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 			if(slots[1] == null){
 				return itemList.containsKey(slots[0].getItem()) && crystalList.containsKey(slots[2].getItem());
 			}else {
-				return itemList.containsKey(slots[0].getItem()) && crystalList.containsKey(slots[2].getItem()) && slots[1] == itemList.get(slots[0].getItem());
+				return itemList.containsKey(slots[0].getItem()) && crystalList.containsKey(slots[2].getItem()) && slots[1] == itemList.get(slots[0].getItem()) && slots[1].stackSize <= 64;
 			}
 		}
 		return false;
