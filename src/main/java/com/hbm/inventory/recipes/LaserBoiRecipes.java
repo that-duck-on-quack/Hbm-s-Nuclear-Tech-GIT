@@ -24,6 +24,7 @@ public class LaserBoiRecipes extends SerializableRecipe {
 	public void registerDefaults() {
 		makeRecipe(new ComparableStack(ModItems.billet_silicon, 1), 1, new ComparableStack(OreDictManager.DictFrame.fromOne(ModItems.circuit, ItemCircuit.EnumCircuitType.SILICON)));
 		makeRecipe(new ComparableStack(ModItems.billet_gaas, 1), 1, new ComparableStack(OreDictManager.DictFrame.fromOne(ModItems.circuit, ItemCircuit.EnumCircuitType.GAAS)));
+		makeRecipe(new ComparableStack(ModItems.ingot_dineutronium), 1, new ComparableStack(ModItems.dust_tiny));
 	}
 
 	public String getFileName() { return "hbmLaserBoi.json"; }
