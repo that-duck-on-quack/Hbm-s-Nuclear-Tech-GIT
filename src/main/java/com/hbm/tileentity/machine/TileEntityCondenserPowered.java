@@ -49,7 +49,7 @@ public class TileEntityCondenserPowered extends TileEntityCondenser implements I
 	public TileEntityCondenserPowered() {
 		tanks = new FluidTank[2];
 		tanks[0] = new FluidTank(Fluids.SPENTSTEAM, inputTankSizeP);
-		tanks[1] = new FluidTank(ServerConfig.Sk_enableHardSteam.get() ? Fluids.AERATEDWATER : Fluids.WATER, outputTankSizeP);
+		tanks[1] = new FluidTank(Fluids.WATER, outputTankSizeP);
 		vacuumOptimised = true;
 		heatExchanging = false;
 	}
