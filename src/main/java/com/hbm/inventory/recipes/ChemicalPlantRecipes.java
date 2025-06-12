@@ -15,9 +15,11 @@ import com.hbm.inventory.RecipesCommon.OreDictStack;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.recipes.loader.GenericRecipe;
 import com.hbm.inventory.recipes.loader.GenericRecipes;
+import com.hbm.items.ItemEnums;
 import com.hbm.items.ItemEnums.EnumFuelAdditive;
 import com.hbm.items.ItemGenericPart.EnumPartType;
 import com.hbm.items.ModItems;
+import com.hbm.items.machine.ItemCircuit;
 import com.hbm.items.machine.ItemFluidIcon;
 
 import net.minecraft.init.Blocks;
@@ -353,6 +355,95 @@ public class ChemicalPlantRecipes extends GenericRecipes<GenericRecipe> {
 				.inputItems(new ComparableStack(ModItems.powder_paleogenite), new OreDictStack(F.dust(), 8), new ComparableStack(ModItems.nugget_bismuth, 4))
 				.inputFluids(new FluidStack(Fluids.PEROXIDE, 1_000, 5))
 				.outputFluids(new FluidStack(Fluids.DEATH, 1_000, 0)));
+
+		//hbm hard stuff
+		this.register(new GenericRecipe("chem.resinball").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.RESIN,500))
+			.inputItems(new ComparableStack(ModItems.sulfur, 2))
+			.outputItems(new ItemStack(ModItems.ball_resin,1)));
+
+		this.register(new GenericRecipe("chem.deaeration").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.AERATEDWATER,250), new FluidStack(Fluids.STEAM, 185))
+			.outputFluids(new FluidStack(Fluids.WATER, 250)));
+
+		this.register(new GenericRecipe("chem.dslurprod").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.SULFURIC_ACID,1000))
+			.inputItems(new ComparableStack(DictFrame.fromOne(ModItems.chunk_ore, ItemEnums.EnumChunkType.RARE)))
+			.outputFluids(new FluidStack(Fluids.DSHSLURRY, 100)));
+
+		this.register(new GenericRecipe("chem.cch").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.WATER,2000), new FluidStack(Fluids.COALCREOSOTE, 1000))
+			.inputItems(new ComparableStack(ModItems.calcium_carbide, 3))
+			.outputFluids(new FluidStack(Fluids.ACETYLENE,850),new FluidStack(Fluids.RECLAIMED,150))
+			.outputItems(new ItemStack(ModItems.dust,3))
+		);
+
+		this.register(new GenericRecipe("chem.polyethylene").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.ETHYLENE,1000), new FluidStack(Fluids.OXYGEN, 4000))
+			.outputFluids(new FluidStack(Fluids.POLYTHYLENE,700))
+		);
+		this.register(new GenericRecipe("chem.styrene").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.ETHYLENE,1000), new FluidStack(Fluids.BENZENE, 1000))
+			.outputFluids(new FluidStack(Fluids.STYRENE,1000))
+		);
+		this.register(new GenericRecipe("chem.vinylchloride").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.ETHYLENE, 500), new FluidStack(Fluids.CHLORINE, 1000))
+			.outputFluids(new FluidStack(Fluids.VINYL_CHLORIDE, 1000), new FluidStack(Fluids.HCL, 250))
+		);
+		this.register(new GenericRecipe("chem.ethylene").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.ETHANE, 1000), new FluidStack(Fluids.STEAM, 1000))
+			.outputFluids(new FluidStack(Fluids.ETHYLENE,500))
+		);
+		this.register(new GenericRecipe("chem.circuitboard").setup(240, 1_000)  //fcukkk you :D
+			.inputFluids(new FluidStack(Fluids.RESIN,100))
+			.inputItems(new ComparableStack(ModItems.plate_polymer, 1),  new OreDictStack(CU.wireFine(), 2))
+			.outputItems(new ItemStack(ModItems.circuit, 1, ItemCircuit.EnumCircuitType.PCB.ordinal()))
+		);
+		this.register(new GenericRecipe("chem.epoxy").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.ACETONE,500), new FluidStack(Fluids.PHENOL,500))
+			.outputFluids(new FluidStack(Fluids.EPOXY, 1000))
+		);
+		this.register(new GenericRecipe("chem.octanegasoline").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.OCTANE,100),new FluidStack(Fluids.GASOLINE,1000))
+			.outputFluids(new FluidStack(Fluids.OCTANEGASOLINE,1000))
+		);
+		this.register(new GenericRecipe("chem.circuitboard2").setup(240, 1_000)  //fcukkk you but less
+			.inputFluids(new FluidStack(Fluids.PHENOL,100))
+			.inputItems(new ComparableStack(ModItems.plate_polymer, 1),  new OreDictStack(CU.wireFine(), 2))
+			.outputItems(new ItemStack(ModItems.circuit, 2, ItemCircuit.EnumCircuitType.PCB.ordinal()))
+		);
+		this.register(new GenericRecipe("chem.semtex_production").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.NITRIC_ACID,100))
+			.inputItems(new ComparableStack(ModItems.powder_semtex_mix),new ComparableStack(ModItems.ingot_c4))
+			.outputItems(new ItemStack(ModItems.ingot_semtex))
+		);
+		this.register(new GenericRecipe("chem.acetone").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.BENZENE,500), new FluidStack(Fluids.OXYGEN,1000) )
+			.outputFluids(new FluidStack(Fluids.ACETONE,500), new FluidStack(Fluids.WATER,500))
+		);
+		this.register(new GenericRecipe("chem.resinpaper").setup(1200, 1_000)
+			.inputFluids(new FluidStack(Fluids.RESIN, 250))
+			.inputItems(new ComparableStack(Items.paper, 1))
+			.outputItems(new ItemStack(ModItems.resin_paper, 1)));
+		this.register(new GenericRecipe("chem.epoxy_board").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.EPOXY,100))
+			.inputItems(new ComparableStack(ModItems.circuit, 1, ItemCircuit.EnumCircuitType.PCB))
+			.outputItems(new ItemStack(ModItems.epoxy_pcb))
+		);
+		this.register(new GenericRecipe("chem.mass_epoxy_board").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.EPOXY,5000))
+			.inputItems(new ComparableStack(ModItems.circuit, 64, ItemCircuit.EnumCircuitType.PCB))
+			.outputItems(new ItemStack(ModItems.epoxy_pcb,64))
+		);
+		this.register(new GenericRecipe("chem.anti_knock").setup(240, 1_000)
+			.inputItems(new OreDictStack(PB.dust(),1),new OreDictStack(NA.dust(),1))
+			.inputFluids(new FluidStack(Fluids.ETHANE, 1000))
+			.outputItems(new ItemStack(ModItems.fuel_additive,3),new ItemStack(ModItems.powder_sodium))
+		);
+		this.register(new GenericRecipe("chem.crude_phenol").setup(240, 1_000)
+			.inputFluids(new FluidStack(Fluids.COALCREOSOTE,500))
+			.outputFluids(new FluidStack(Fluids.PHENOL,100))
+		);
 
 	}
 
