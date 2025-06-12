@@ -1,19 +1,15 @@
 package com.hbm.tileentity.machine;
 
-import com.hbm.config.VersatileConfig;
-import com.hbm.inventory.OreDictManager;
-
+import com.hbm.inventory.RecipesCommon;
 import com.hbm.inventory.container.ContainerMachineLaserBoi;
 import com.hbm.inventory.gui.GUIMachineLaserBoi;
-import com.hbm.inventory.recipes.MachineRecipes;
+import com.hbm.inventory.recipes.LaserBoiRecipes;
 import com.hbm.items.ModItems;
-import com.hbm.items.machine.ItemCircuit;
 import com.hbm.lib.Library;
 import com.hbm.main.MainRegistry;
 import com.hbm.sound.AudioWrapper;
 import com.hbm.tileentity.IGUIProvider;
 import com.hbm.tileentity.TileEntityMachineBase;
-import com.hbm.items.machine.ItemCircuit.EnumCircuitType;
 
 import api.hbm.energymk2.IBatteryItem;
 import api.hbm.energymk2.IEnergyReceiverMK2;
@@ -28,7 +24,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import static com.hbm.inventory.OreDictManager.SI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements IEnergyReceiverMK2, IGUIProvider {
 
@@ -37,6 +36,9 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	public static final long maxPower = 100000;
 	public static final int baseprocess = 100;
 	public static final int processSpeed = 60;
+	public static List recipeList = new ArrayList();
+	public static HashMap<Item, ItemStack> itemList = new HashMap<>();
+	public static HashMap<Item, Integer> crystalList = new HashMap<>();
 
 	private AudioWrapper audio;
 
@@ -44,6 +46,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 
 	public TileEntityMachineLaserBoi() {
 		super(4);
+		loadRecipes();
 	}
 
 	@Override
@@ -55,7 +58,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
 		switch (i) {
 			case 0:
-				if (MachineRecipes.mODE(stack, OreDictManager.SI.billet()) || MachineRecipes.mODE(stack, OreDictManager.GAAS.billet()))
+				if (itemList.containsKey(stack.getItem()))
 					return true;
 				break;
 			case 2:
@@ -94,61 +97,75 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	@Override
 	public boolean canExtractItem(int i, ItemStack stack, int j) {
 
-		if(stack.getItem() == ModItems.laser_crystal_co2 || stack.getItem() == ModItems.laser_crystal_bismuth || stack.getItem() == ModItems.laser_crystal_iron || stack.getItem() == ModItems.laser_crystal_digamma || stack.getItem() == ModItems.laser_crystal_dnt || stack.getItem() == ModItems.laser_crystal_cmb) return false;
+		if(stack.getItem() != null && crystalList.containsKey(stack.getItem())) return false;
 
 		if(i == 1) {
 			return true;
 		}
 
 		if(i == 3) {
-			if(stack.getItem() instanceof IBatteryItem && ((IBatteryItem) stack.getItem()).getCharge(stack) == 0)
-				return true;
+			return stack.getItem() instanceof IBatteryItem && ((IBatteryItem) stack.getItem()).getCharge(stack) == 0;
 		}
 
 		return false;
 	}
-
 
 	public long getPowerScaled(long i) {
 		return (power * i) / maxPower;
 	}
 
 	public int getProgressScaled(int i) {
-		return (process * i) / processSpeed;
+		return (process * i) / (processSpeed/(slots[2] != null ? crystalList.get(slots[2].getItem()) : 1));
 	}
 
 	public boolean canProcess() {
+		/*
 		if ( slots[0] != null && slots[2] != null&& (MachineRecipes.mODE(slots[0], OreDictManager.SI.billet()) || MachineRecipes.mODE(slots[0], OreDictManager.GAAS.billet()) ) && slots[2] != null
 			&& (slots[2].getItem() == ModItems.laser_crystal_bismuth || slots[2].getItem() == ModItems.laser_crystal_co2 || slots[2].getItem() == ModItems.laser_crystal_cmb|| slots[2].getItem() == ModItems.laser_crystal_digamma|| slots[2].getItem() == ModItems.laser_crystal_dnt|| slots[2].getItem() == ModItems.laser_crystal_iron)
 			&& (slots[1] == null) && (power > 0) ) {
 			return true;
 		}
+		*/
+
+		if(slots[0] != null && slots[2] != null && power > 0){ //Base checks. Nested ifs are nasty but i'm prioritizing readability.
+			if(slots[1] == null){
+				return itemList.containsKey(slots[0].getItem()) && crystalList.containsKey(slots[2].getItem());
+			}else {
+				return itemList.containsKey(slots[0].getItem()) && crystalList.containsKey(slots[2].getItem()) && slots[1] == itemList.get(slots[0].getItem());
+			}
+		}
 		return false;
 	}
-
-
-
 
 	public boolean isProcessing() {
 		return process > 0;
 	}
 
+	public void loadRecipes(){
+		recipeList = LaserBoiRecipes.getRecipes();
+		for(Object recipe : recipeList){
+			Map.Entry<RecipesCommon.ComparableStack, LaserBoiRecipes.engraverRecipe> entry = (Map.Entry<RecipesCommon.ComparableStack, LaserBoiRecipes.engraverRecipe>) recipe;
+			itemList.put(entry.getValue().input.toStack().getItem(), entry.getKey().toStack());
+			MainRegistry.logger.error("Added recipe for " + entry.getKey().toStack().getUnlocalizedName() + " by using " + entry.getValue().input.toStack().getItem().getUnlocalizedName());
+		}
+		crystalList.put(ModItems.laser_crystal_bismuth, 2);
+		crystalList.put(ModItems.laser_crystal_iron, 6);
+		crystalList.put(ModItems.laser_crystal_co2, 1);
+		crystalList.put(ModItems.laser_crystal_cmb, 4);
+		crystalList.put(ModItems.laser_crystal_digamma, 58);
+		crystalList.put(ModItems.laser_crystal_dnt, 2);
+	}
+
 	public void process() {
 		process++;
-		power=power-1000;
+		power=power-750;
 
-		if (process >= processSpeed) {
-
+		if (process >= processSpeed/crystalList.get(slots[2].getItem())) {
 			process = 0;
 
-			if (slots[1] == null && slots[0].getItem() == ModItems.billet_silicon) {
-				slots[1] = OreDictManager.DictFrame.fromOne(ModItems.circuit, EnumCircuitType.SILICON);
-			} else if (slots[1] != null && slots[0].getItem() == ModItems.billet_silicon) {
-				slots[1].stackSize++;
-			}
-			if (slots[1] == null && slots[0].getItem() == ModItems.billet_gaas) {
-				slots[1] = OreDictManager.DictFrame.fromOne(ModItems.circuit, EnumCircuitType.GAAS);
-			}  else if (slots[1] != null && slots[0].getItem() == ModItems.billet_gaas) {
+			if (slots[1] == null && itemList.containsKey(slots[0].getItem())) {
+				slots[1] = itemList.get(slots[0].getItem());
+			} else if (slots[1] != null && slots[1] == itemList.get(slots[0].getItem())) {
 				slots[1].stackSize++;
 			}
 
@@ -156,7 +173,6 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 			if (slots[0].stackSize <= 0) {
 				slots[0] = null;
 			}
-
 		}
 	}
 

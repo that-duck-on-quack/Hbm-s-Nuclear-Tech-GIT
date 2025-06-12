@@ -1,23 +1,18 @@
 package com.hbm.handler.nei;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.hbm.blocks.ModBlocks;
-import com.hbm.inventory.OreDictManager.DictFrame;
-import com.hbm.inventory.fluid.FluidType;
-import com.hbm.inventory.fluid.Fluids;
-import com.hbm.items.ItemEnums.EnumAshType;
-import com.hbm.items.ModItems;
-import com.hbm.items.machine.ItemCircuit;
-import com.hbm.items.machine.ItemFluidIcon;
+import com.hbm.inventory.RecipesCommon;
+import com.hbm.inventory.recipes.LaserBoiRecipes;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 public class LaserBoiHandler extends NEIUniversalHandler {
 
 	public LaserBoiHandler() {
-		super(ModBlocks.machine_laserboi.getLocalizedName(), new ItemStack[] { new ItemStack(ModBlocks.machine_laserboi), new ItemStack(ModBlocks.machine_laserboi) }, generateRecipes());
+		super("Laser Engraver", new ItemStack[] { new ItemStack(ModBlocks.machine_laserboi), new ItemStack(ModBlocks.machine_laserboi) }, generateRecipes());
 	}
 
 	@Override
@@ -25,15 +20,21 @@ public class LaserBoiHandler extends NEIUniversalHandler {
 		return "ntmLaserboi";
 	}
 
+
 	public static HashMap<Object, Object> generateRecipes() {
-		HashMap<Object, Object> recipes = new HashMap();
+		HashMap<Object, Object> recipes = getRecipes();
+		return recipes;
+	}
 
-		ItemStack[] billetsA = new ItemStack[] {new ItemStack(ModItems.billet_silicon)};
-		ItemStack[] billetsB = new ItemStack[] { new ItemStack(ModItems.billet_gaas)};
-
-		recipes.put(new ItemStack[][] {billetsA}, new ItemStack(ModItems.circuit, 1, ItemCircuit.EnumCircuitType.SILICON.ordinal()) );
-		recipes.put(new ItemStack[][] {billetsB}, new ItemStack(ModItems.circuit, 1, ItemCircuit.EnumCircuitType.GAAS.ordinal()) );
-
+	public static HashMap<Object, Object> getRecipes(){
+		List recipeList = LaserBoiRecipes.getRecipes();
+		HashMap<Object, Object> recipes = new HashMap<>();
+		for(Object recipe : recipeList){
+			Map.Entry<RecipesCommon.ComparableStack, LaserBoiRecipes.engraverRecipe> entry = (Map.Entry<RecipesCommon.ComparableStack, LaserBoiRecipes.engraverRecipe>) recipe;
+			ItemStack input = entry.getValue().input.toStack();
+			ItemStack output = entry.getKey().toStack();
+			recipes.put(input, output);
+		}
 		return recipes;
 	}
 }
