@@ -561,7 +561,6 @@ public class Fluids {
 		SODIUM_ALUMINATE =		new FluidType("SODIUM_ALUMINATE",	0xFFD191, 3, 0, 1, EnumSymbol.ACID).addTraits(new FT_Corrosive(30), LIQUID);
 		BAUXITE_SOLUTION =		new FluidType("BAUXITE_SOLUTION",	0xE2560F, 3, 0, 3, EnumSymbol.ACID).addTraits(new FT_Corrosive(40), LIQUID, VISCOUS);
 		ALUMINA =				new FluidType("ALUMINA",		0xDDFFFF, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID);
-		AQUEOUS_NICKEL =		new FluidType("AQUEOUS_NICKEL",		0xDACEBA, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID);
 		//NTM Hard Fluids
 		RESIN =					 new FluidType("RESIN",		0xFFBF00, 0,1,0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE);
 		AERATEDWATER = new FluidType("AERATEDWATER", 0x305082, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID, UNSIPHONABLE, new FT_Polluting().release(PollutionType.POISON, POISON_MINOR));
@@ -588,6 +587,7 @@ public class Fluids {
 		OCTANEGASOLINE = new FluidType("OCTANEGASOLINE", 0xa06e37 ,1,3,0,EnumSymbol.NONE ).addTraits(new FT_Combustible(FuelGrade.HIGH, 20_000_000), new FT_Polluting().burn(PollutionType.SOOT, SOOT_REFINED_OIL));
 		// ^ ^ ^ ^ ^ ^ ^ ^
 		//ADD NEW FLUIDS HERE
+		AQUEOUS_NICKEL =		new FluidType("AQUEOUS_NICKEL",		0xDACEBA, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID);
 
 		File folder = MainRegistry.configHbmDir;
 		File customTypes = new File(folder.getAbsolutePath() + File.separatorChar + "hbmFluidTypes.json");
@@ -772,7 +772,6 @@ public class Fluids {
 		metaOrder.add(SODIUM_ALUMINATE);
 		metaOrder.add(BAUXITE_SOLUTION);
 		metaOrder.add(ALUMINA);
-		metaOrder.add(AQUEOUS_NICKEL);
 		//solutions and working fluids
 		metaOrder.add(FRACKSOL);
 		metaOrder.add(LYE);
@@ -852,6 +851,7 @@ public class Fluids {
 		metaOrder.add(OCTANEGASOLINE);
 		//ANY INTERNAL RENAMING MUST BE REFLECTED HERE - DON'T FORGET TO CHANGE: LANG FILES + TYPE'S STRING ID + NAME OF TANK/GUI TEXTURE FILES!
 		// V
+		metaOrder.add(AQUEOUS_NICKEL);
 
 		renameMapping.put("ACID", PEROXIDE);
 
