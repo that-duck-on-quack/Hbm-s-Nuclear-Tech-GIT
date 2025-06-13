@@ -22,11 +22,6 @@ public class LaserBoiHandler extends NEIUniversalHandler {
 
 
 	public static HashMap<Object, Object> generateRecipes() {
-		HashMap<Object, Object> recipes = getRecipes();
-		return recipes;
-	}
-
-	public static HashMap<Object, Object> getRecipes(){
 		List recipeList = LaserBoiRecipes.getRecipes();
 		HashMap<Object, Object> recipes = new HashMap<>();
 		for(Object recipe : recipeList){
