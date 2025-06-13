@@ -138,7 +138,6 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 		for(Object recipe : recipeList){
 			Map.Entry<RecipesCommon.ComparableStack, LaserBoiRecipes.engraverRecipe> entry = (Map.Entry<RecipesCommon.ComparableStack, LaserBoiRecipes.engraverRecipe>) recipe;
 			itemList.put(entry.getValue().input.toStack().getItem(), entry.getKey().toStack());
-			MainRegistry.logger.error("Added recipe for " + entry.getKey().toStack().getUnlocalizedName() + " by using " + entry.getValue().input.toStack().getItem().getUnlocalizedName());
 		}
 		crystalList.put(ModItems.laser_crystal_bismuth, 2);
 		crystalList.put(ModItems.laser_crystal_iron, 6);
