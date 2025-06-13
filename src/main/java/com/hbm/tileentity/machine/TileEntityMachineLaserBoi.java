@@ -62,7 +62,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 					return true;
 				break;
 			case 2:
-				if (stack.getItem() == ModItems.laser_crystal_co2 || stack.getItem() == ModItems.laser_crystal_co2 || stack.getItem() == ModItems.laser_crystal_iron || stack.getItem() == ModItems.laser_crystal_digamma || stack.getItem() == ModItems.laser_crystal_dnt || stack.getItem() == ModItems.laser_crystal_cmb)
+				if (crystalList.containsKey(stack.getItem()))
 					return true;
 				break;
 			case 3:
