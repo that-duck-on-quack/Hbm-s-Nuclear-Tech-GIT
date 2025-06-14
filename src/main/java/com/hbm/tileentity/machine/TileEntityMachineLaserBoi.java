@@ -155,7 +155,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 			process = 0;
 
 			if (slots[1] == null && itemList.containsKey(slots[0].getItem())) {
-				slots[1] = itemList.get(slots[0].getItem());
+				slots[1] = itemList.get(slots[0].getItem()).copy();
 			} else if (slots[1] != null && slots[1].getItem() == itemList.get(slots[0].getItem()).getItem()) {
 				slots[1].stackSize++;
 			}
