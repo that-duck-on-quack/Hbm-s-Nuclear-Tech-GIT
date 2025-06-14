@@ -2,6 +2,7 @@ package com.hbm.blocks.machine;
 
 import com.hbm.blocks.BlockDummyable;
 import com.hbm.blocks.ModBlocks;
+import com.hbm.config.ServerConfig;
 import com.hbm.handler.MultiblockHandlerXR;
 import com.hbm.main.MainRegistry;
 import com.hbm.tileentity.TileEntityProxyCombo;
@@ -136,8 +137,10 @@ public class MachinePlasmaHeater extends BlockDummyable {
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int i) {
-
-    	if(i >= 12) {
+		if(ServerConfig.Sk_ultraAdvancedRemovalTools.get() && i >= 12){
+			world.spawnEntityInWorld(new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(ModBlocks.plasma_heater)));
+		}
+    	else if(i >= 12) {
 
             for(int l = 0; l < 2; l++)
             	world.spawnEntityInWorld(new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(ModBlocks.fusion_heater, 64)));
