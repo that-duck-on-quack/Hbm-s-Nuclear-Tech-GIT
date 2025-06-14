@@ -123,7 +123,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 			if(slots[1] == null){
 				return itemList.containsKey(slots[0].getItem()) && crystalList.containsKey(slots[2].getItem());
 			}else {
-				return itemList.containsKey(slots[0].getItem()) && crystalList.containsKey(slots[2].getItem()) && slots[1] == itemList.get(slots[0].getItem()) && slots[1].stackSize < 64;
+				return itemList.containsKey(slots[0].getItem()) && crystalList.containsKey(slots[2].getItem()) && slots[1].getItem() == itemList.get(slots[0].getItem()).getItem() && slots[1].stackSize < slots[1].getMaxStackSize();
 			}
 		}
 		return false;
@@ -159,6 +159,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 			} else if (slots[1] != null && slots[1].getItem() == itemList.get(slots[0].getItem()).getItem()) {
 				slots[1].stackSize++;
 			}
+
 
 			slots[0].stackSize--;
 
