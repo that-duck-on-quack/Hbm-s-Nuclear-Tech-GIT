@@ -57,7 +57,7 @@ public class ShadyUtil {
 	public static String DUODEC_ = "85d54b8c-1862-4c86-b351-5ef1b998aa32";
 	public static String LePeeperSauvage = "433c2bb7-018c-4d51-acfe-27f907432b5e";
 
-	public static final Set<String> hashes = new HashSet();
+	public static final Set<String> hashes = new HashSet<>();
 	static {
 		hashes.add("41de5c372b0589bbdb80571e87efa95ea9e34b0d74c6005b8eab495b7afd9994");
 		hashes.add("31da6223a100ed348ceb3254ceab67c9cc102cb2a04ac24de0df3ef3479b1036");
@@ -88,7 +88,7 @@ public class ShadyUtil {
 	public static String offset(String msg, int o) {
 		byte[] bytes = msg.getBytes();
 		for(int i = 0; i < bytes.length; i++) {
-			bytes[i] += o;
+			bytes[i] += (byte) o;
 		}
 		return new String(bytes);
 	}
@@ -129,10 +129,10 @@ public class ShadyUtil {
 		try {
 			MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
 			byte[] bytes = sha256.digest(inp.getBytes());
-			String str = "";
-			for(int b : bytes) str = str + Integer.toString((b & 0xFF) + 256, 16).substring(1);
-			return str;
-		} catch(NoSuchAlgorithmException e) { }
+			StringBuilder str = new StringBuilder();
+			for(int b : bytes) str.append(Integer.toString((b & 0xFF) + 256, 16).substring(1));
+			return str.toString();
+		} catch(NoSuchAlgorithmException ignored) { }
 		return "";
 	}
 
@@ -143,7 +143,7 @@ public class ShadyUtil {
 		MainRegistry.logger.debug(smoosh(smTest1, smTest2, smTest3, smTest4));
 
 		try {
-			Class test = Class.forName(decode(offset(signature, -2)));
+			Class<?> test = Class.forName(decode(offset(signature, -2)));
 			Field field = ReflectionHelper.findField(test, decode(offset(checksum, -2)));
 			if(field != null) {
 				System.out.println("TEST SECTION START");
@@ -152,6 +152,6 @@ public class ShadyUtil {
 				if(new Random().nextInt(4) == 0) ModEventHandler.reference = toRead;
 				System.out.println("TEST SECTION END");
 			}
-		} catch(Throwable e) { }
+		} catch(Throwable ignored) { }
 	}
 }
