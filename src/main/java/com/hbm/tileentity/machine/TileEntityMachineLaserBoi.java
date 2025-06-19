@@ -24,7 +24,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +33,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	public long power = 0;
 	public int process = 0;
 	public static final long maxPower = 100000;
-	public static final int baseprocess = 100;
 	public static final int processSpeed = 60;
-	public static List recipeList = new ArrayList();
 	public static HashMap<Item, ItemStack> itemList = new HashMap<>();
 	public static HashMap<Item, Integer> crystalList = new HashMap<>();
 
@@ -98,21 +95,16 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	public boolean canExtractItem(int i, ItemStack stack, int j) {
 
 		if(stack.getItem() != null && crystalList.containsKey(stack.getItem())) return false;
-
 		if(i == 1) {
 			return true;
 		}
-
 		if(i == 3) {
 			return stack.getItem() instanceof IBatteryItem && ((IBatteryItem) stack.getItem()).getCharge(stack) == 0;
 		}
-
 		return false;
 	}
 
-	public long getPowerScaled(long i) {
-		return (power * i) / maxPower;
-	}
+	public long getPowerScaled(long i) { return (power * i) / maxPower; }
 
 	public int getProgressScaled(int i) {
 		return (process * i) / (processSpeed/(slots[2] != null ? crystalList.get(slots[2].getItem()) : 1));
@@ -134,7 +126,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	}
 
 	public void loadRecipes(){
-		recipeList = LaserBoiRecipes.getRecipes();
+		List recipeList = LaserBoiRecipes.getRecipes();
 		for(Object recipe : recipeList){
 			Map.Entry<RecipesCommon.ComparableStack, LaserBoiRecipes.engraverRecipe> entry = (Map.Entry<RecipesCommon.ComparableStack, LaserBoiRecipes.engraverRecipe>) recipe;
 			itemList.put(entry.getValue().input.toStack().getItem(), entry.getKey().toStack());
@@ -170,9 +162,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 
 	@Override
 	public void updateEntity() {
-
 		if (!worldObj.isRemote) {
-
 			this.updateConnections();
 
 			power = Library.chargeTEFromItems(slots, 3, power, maxPower);
@@ -184,11 +174,8 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 			}
 
 			this.networkPackNT(50);
-
 		} else {
-
 			if(process > 0) {
-
 				if(audio == null) {
 					audio = createAudioLoop();
 					audio.startSound();
@@ -197,7 +184,6 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 				}
 				audio.updateVolume(getVolume(1F));
 			} else {
-
 				if(audio != null) {
 					audio.stopSound();
 					audio = null;
@@ -226,14 +212,12 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	}
 
 	private void updateConnections() {
-
 		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 			this.trySubscribe(worldObj, xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, dir);
 	}
 
 	@Override
 	public void onChunkUnload() {
-
 		if(audio != null) {
 			audio.stopSound();
 			audio = null;
@@ -242,7 +226,6 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 
 	@Override
 	public void invalidate() {
-
 		super.invalidate();
 
 		if(audio != null) {
@@ -252,19 +235,13 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	}
 
 	@Override
-	public void setPower(long i) {
-		power = i;
-	}
+	public void setPower(long i) { power = i; }
 
 	@Override
-	public long getPower() {
-		return power;
-	}
+	public long getPower() { return power; }
 
 	@Override
-	public long getMaxPower() {
-		return maxPower;
-	}
+	public long getMaxPower() { return maxPower; }
 
 	@Override
 	public Container provideContainer(int ID, EntityPlayer player, World world, int x, int y, int z) {
