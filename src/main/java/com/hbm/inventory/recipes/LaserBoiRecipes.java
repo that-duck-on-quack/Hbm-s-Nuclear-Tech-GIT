@@ -29,16 +29,12 @@ public class LaserBoiRecipes extends SerializableRecipe {
 	public String getFileName() { return "hbmLaserBoi.json"; }
 
 	@Override
-	public Object getRecipeObject() {
-		return recipes;
-	}
+	public Object getRecipeObject() { return recipes; }
 
 	public static List getRecipes() { return new ArrayList(recipes.entrySet()); }
 
 	@Override
-	public void deleteRecipes() {
-		recipes.clear();
-	}
+	public void deleteRecipes() { recipes.clear(); }
 
 	@Override
 	public void readRecipe(JsonElement recipe) {
