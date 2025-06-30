@@ -1829,6 +1829,22 @@ item.crude_pcb.name=Low-Cost Circuit Board
 item.tungsten_hammer.name=Tungsten Hammer
 item.calcium_carbide.name=Calcium Carbide
 
+
+item.ingot_molybdemium.name=Molybdenum ingot
+item.powder_molybdemium.name=Molybdenum powder
+item.ingot_hastelloy.name=Hastelloy ingot
+item.ingot_RTM.name=RTM ingot
+item.ingot_tungsteel.name=Tungsteel ingot
+item.ingot_compsteel.name=Composite steel sheet
+item.ingot_osmium.name=Osmium ingot
+item.ingot_ruthenium.name=Ruthenium ingot
+item.ingot_rhoudium.name=Rhoudium ingot
+item.ingot_platinum.name=Platinum ingot
+
+hbmmat.tungsteel=Tungsteel
+hbmmat.RTM=RTM
+hbmmat.hastelloy=Hastelloy
+
 hbmpseudofluid.none=Empty
 hbmpseudofluid.heuf6=Highly Enriched UF6
 hbmpseudofluid.meuf6=Medium Enriched UF6

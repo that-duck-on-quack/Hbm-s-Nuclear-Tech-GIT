@@ -48,6 +48,8 @@ public class Mats {
 	public static final int _ES = 20_000;
 	/* make that >24_000 */
 	public static final int _EX = 24_000;
+	/* hbm hard corner. if we use all 767 ids kill blankbutnot */
+	public static final int _HH = 30_000;
 
 	//Vanilla and vanilla-like
 	public static final NTMMaterial MAT_WOOD			= makeNonSmeltable(_VS + 03,	WOOD,				0x896727, 0x281E0B, 0x896727).setAutogen(STOCK, GRIP).n();
@@ -188,6 +190,11 @@ public class Mats {
 	public static final NTMMaterial MAT_HARDPLASTIC	= makeNonSmeltable(_ES + 04, 		PC,				0xEDE7C4, 0x908A67, 0xE1DBB8).setAutogen(STOCK, GRIP).n();
 	public static final NTMMaterial MAT_PVC			= makeNonSmeltable(_ES + 05, 		PVC,			0xFCFCFC, 0x9F9F9F, 0xF0F0F0).setAutogen(STOCK, GRIP).n();
 
+	//hbm hard
+	public static final NTMMaterial MAT_TUNGSTEEL 	= makeSmeltable(_HH + 0,		TUNGSTEEL,0x686868,0x000000,0x151515).setAutogen(NUGGET, BLOCK, CASTPLATE,WELDEDPLATE,WIRE, PLATE).m();
+	public static final NTMMaterial MAT_RTM 		= makeSmeltable(_HH + 1,		RTM 	 ,0x3232aa,0x000043,0x010179).setAutogen(NUGGET, BLOCK, CASTPLATE,WELDEDPLATE, PLATE).m();
+	public static final NTMMaterial MAT_HASTELLOY 	= makeSmeltable(_HH + 2,		HASTELLOY 	 ,0xaa90a0,0x432939,0x795f6f).setAutogen(NUGGET, BLOCK, CASTPLATE,WELDEDPLATE, PLATE).m();
+	public static final NTMMaterial MAT_MOLYBDENUM		= makeSmeltable(_HH+3, 		MOLYBDENUM, 	0x000000,0x000000,0x000000).setAutogen(NUGGET, INGOT, DUST).m();
 	public static NTMMaterial makeSmeltable(int id, DictFrame dict, int color) { return makeSmeltable(id, dict, color, color, color); }
 
 

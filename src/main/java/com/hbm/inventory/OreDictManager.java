@@ -278,7 +278,7 @@ public class OreDictManager {
 	public static final DictFrame RICHMAGMA = new DictFrame("RichMagma");
 	public static final DictFrame FLOUR = new DictFrame("foodFlour");
 	public static final DictFrame PENTLANDITE = new DictFrame("Pentlandite");
-	
+
 	/*
 	 * HAZARDS, MISC
 	 */
@@ -368,6 +368,15 @@ public class OreDictManager {
 	/** Any special post-RBMK gating material, namely bismuth and arsenic */
 	public static final DictFrame ANY_BISMOID = new DictFrame("AnyBismoid");
 	public static final DictFrame ANY_ASH = new DictFrame("Ash");
+
+
+
+	//hbm hard stuff
+
+	public static  final DictFrame TUNGSTEEL = new DictFrame("Tungsteel");
+	public static final DictFrame RTM = new DictFrame("RTM");
+	public static final DictFrame HASTELLOY = new DictFrame("HASTELLOY");
+	public static final DictFrame MOLYBDENUM = new DictFrame("Molybdenum");
 
 
 	public static void registerOres() {
@@ -587,6 +596,19 @@ public class OreDictManager {
 		ANY_COKE				.gem(fromAll(coke, EnumCokeType.class))	.dust(fromAll(powder_coke, EnumCokeType.class))	.block(fromAll(block_coke, EnumCokeType.class));
 		ANY_BISMOID				.ingot(ingot_bismuth, ingot_arsenic).nugget(nugget_bismuth, nugget_arsenic).block(block_bismuth);
 		ANY_ASH					.any(fromOne(ModItems.powder_ash, EnumAshType.WOOD), fromOne(ModItems.powder_ash, EnumAshType.COAL), fromOne(ModItems.powder_ash, EnumAshType.MISC), fromOne(ModItems.powder_ash, EnumAshType.FLY), fromOne(ModItems.powder_ash, EnumAshType.SOOT));
+
+
+		//hbm hard stuff
+		TUNGSTEEL				.ingot(ingot_tungsteel);
+		RTM						.ingot(ingot_RTM);
+		HASTELLOY				.ingot(ingot_hastelloy);
+		MOLYBDENUM 				.dust(powder_molybdemium) .ingot(ingot_molybdemium);
+
+
+
+
+
+
 
 		/*
 		 * TAR
@@ -1078,7 +1100,7 @@ public class OreDictManager {
 
 		/**
 		 * Will add a reregistration entry for every mat name of every added DictFrame for the given prefix
-		 * @param prefix The prefix of both the input and result of the reregistration
+		  //@param prefix The prefix of both the input and result of the reregistration
 		 * @return
 		 */
 		public DictGroup addPrefix(MaterialShapes shape, boolean inputPrefix) {

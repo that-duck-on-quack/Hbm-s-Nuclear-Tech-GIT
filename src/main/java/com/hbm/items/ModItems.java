@@ -2457,6 +2457,22 @@ public class ModItems {
 	public static Item resin_paper;
 	public static double meleeMod;
 
+	public static Item ingot_molybdemium;
+	public static Item powder_molybdemium;
+	public static Item ingot_hastelloy;
+	public static Item ingot_RTM;
+	public static Item ingot_tungsteel;
+	public static Item ingot_compsteel;
+	public static Item ingot_platinum;
+	//public static Item iridium;
+	public static Item ingot_osmium;
+	public static Item ingot_ruthenium;
+	public static Item ingot_rhoudium;
+
+
+
+
+
 	public static void initializeItem()
 	{
 		meleeMod = ServerConfig.Sk_meleeDamageModifier.get();
@@ -3271,12 +3287,18 @@ public class ModItems {
 		plate_welded = new ItemAutogen(MaterialShapes.WELDEDPLATE).setUnlocalizedName("plate_welded").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":plate_welded");
 		heavy_component = new ItemAutogen(MaterialShapes.HEAVY_COMPONENT).setUnlocalizedName("heavy_component").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":heavy_component");
 		wire_fine = new ItemAutogen(MaterialShapes.WIRE)
-				.aot(Mats.MAT_ALUMINIUM, "wire_aluminium").aot(Mats.MAT_COPPER, "wire_copper")
-				.aot(Mats.MAT_MINGRADE, "wire_red_copper").aot(Mats.MAT_GOLD, "wire_gold")
-				.aot(Mats.MAT_TUNGSTEN, "wire_tungsten").aot(Mats.MAT_ALLOY, "wire_advanced_alloy")
-				.aot(Mats.MAT_CARBON, "wire_carbon").aot(Mats.MAT_SCHRABIDIUM, "wire_schrabidium")
+				.aot(Mats.MAT_ALUMINIUM, "wire_aluminium")
+				.aot(Mats.MAT_COPPER, "wire_copper")
+				.aot(Mats.MAT_MINGRADE, "wire_red_copper")
+				.aot(Mats.MAT_GOLD, "wire_gold")
+				.aot(Mats.MAT_TUNGSTEN, "wire_tungsten")
+				.aot(Mats.MAT_ALLOY, "wire_advanced_alloy")
+				.aot(Mats.MAT_CARBON, "wire_carbon")
+				.aot(Mats.MAT_SCHRABIDIUM, "wire_schrabidium")
 				.aot(Mats.MAT_ZINC, "wire_zinc")
-				.aot(Mats.MAT_MAGTUNG, "wire_magnetized_tungsten").setUnlocalizedName("wire_fine").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":wire_fine");
+				.aot(Mats.MAT_MAGTUNG, "wire_magnetized_tungsten")
+				//.aot(Mats.MAT_TUNGSTEEL, "wire_tungsteel")
+			.setUnlocalizedName("wire_fine").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":wire_fine");
 		wire_dense = new ItemAutogen(MaterialShapes.DENSEWIRE).setUnlocalizedName("wire_dense").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":wire_dense");
 
 		part_barrel_light = new ItemAutogen(MaterialShapes.LIGHTBARREL).setUnlocalizedName("part_barrel_light").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":part_barrel_light");
@@ -5420,10 +5442,35 @@ public class ModItems {
 		crude_pcb = new Item().setUnlocalizedName("crude_pcb").setTextureName(RefStrings.MODID + ":crude_pcb");
 		tungsten_hammer = new ItemToolAbility(7F, -0.2, MainRegistry.tMatSteel, EnumToolType.PICKAXE).setMaxDamage(100).setMaxStackSize(1).setContainerItem(ModItems.tungsten_hammer).setUnlocalizedName("tungsten_hammer").setTextureName(RefStrings.MODID + ":tungsten_hammer");
 		calcium_carbide = new Item().setUnlocalizedName("calcium_carbide").setTextureName(RefStrings.MODID + ":calcium_carbide");
+		ingot_molybdemium = new Item().setUnlocalizedName("ingot_molybdemium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_molybdmium");
+		powder_molybdemium = new Item().setUnlocalizedName("powder_molybdemium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":powder_molybdium");
+		ingot_hastelloy = new Item().setUnlocalizedName("ingot_hastelloy").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_hastelloy");
+		ingot_RTM = new Item().setUnlocalizedName("ingot_RTM").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_RTM");
+		ingot_tungsteel = new Item().setUnlocalizedName("ingot_tungsteel").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_tungsteel");
+		ingot_compsteel = new Item().setUnlocalizedName("ingot_compsteel").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_compsteel");
+		ingot_platinum = new Item().setUnlocalizedName("ingot_platinum").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_platium");
+		ingot_osmium = new Item().setUnlocalizedName("ingot_osmium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_osmism");
+		ingot_ruthenium = new Item().setUnlocalizedName("ingot_ruthenium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_ruthenium ");
+		ingot_rhoudium = new Item().setUnlocalizedName("ingot_rhoudium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_rhoudium");
+
+
+
 
 	}
 
 	private static void registerItem() {
+		//hbm hard
+		GameRegistry.registerItem(ingot_molybdemium,ingot_molybdemium.getUnlocalizedName());
+		GameRegistry.registerItem(powder_molybdemium,powder_molybdemium.getUnlocalizedName());
+		GameRegistry.registerItem(ingot_hastelloy,ingot_hastelloy.getUnlocalizedName());
+		GameRegistry.registerItem(ingot_RTM,ingot_RTM.getUnlocalizedName());
+		GameRegistry.registerItem(ingot_tungsteel,ingot_tungsteel.getUnlocalizedName());
+		GameRegistry.registerItem(ingot_compsteel,ingot_compsteel.getUnlocalizedName());
+		GameRegistry.registerItem(ingot_platinum,ingot_platinum.getUnlocalizedName());
+		GameRegistry.registerItem(ingot_osmium,ingot_osmium.getUnlocalizedName());
+		GameRegistry.registerItem(ingot_ruthenium,ingot_ruthenium.getUnlocalizedName());
+		GameRegistry.registerItem(ingot_rhoudium,ingot_rhoudium.getUnlocalizedName());
+
 		//Weapons
 		GameRegistry.registerItem(redstone_sword, redstone_sword.getUnlocalizedName());
 		GameRegistry.registerItem(big_sword, big_sword.getUnlocalizedName());
@@ -5773,7 +5820,7 @@ public class ModItems {
 		GameRegistry.registerItem(powder_cement, powder_cement.getUnlocalizedName());
 
 		GameRegistry.registerItem(nickel_salts, nickel_salts.getUnlocalizedName());
-		
+
 		//Powders
 		GameRegistry.registerItem(powder_fire, powder_fire.getUnlocalizedName());
 		GameRegistry.registerItem(powder_ice, powder_ice.getUnlocalizedName());
