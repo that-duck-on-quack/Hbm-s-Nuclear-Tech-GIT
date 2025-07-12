@@ -1842,8 +1842,11 @@ item.ingot_rhoudium.name=Rhoudium ingot
 item.ingot_platinum.name=Platinum ingot
 
 hbmmat.tungsteel=Tungsteel
-hbmmat.RTM=RTM
+hbmmat.rtm=RTM
 hbmmat.hastelloy=Hastelloy
+hbmmat.molybdenum=Molybdenum
+hbmmat.ruthenium=Ruthenium
+hbmmat.munnickel=Nickel
 
 hbmpseudofluid.none=Empty
 hbmpseudofluid.heuf6=Highly Enriched UF6
