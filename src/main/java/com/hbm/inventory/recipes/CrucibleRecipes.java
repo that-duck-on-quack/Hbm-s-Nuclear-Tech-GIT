@@ -138,13 +138,14 @@ public class CrucibleRecipes extends SerializableRecipe {
 				.outputs(new MaterialStack(Mats.MAT_TUNGSTEEL, n*6))
 		);
 		recipes.add(new CrucibleRecipe(23, "crucible.hastelloy",6, new ItemStack(ModItems.ingot_hastelloy))
-			.inputs(new MaterialStack(Mats.MAT_NICKEL,n * 5), new MaterialStack(Mats.MAT_TUNGSTEN,n))
-			.outputs(new MaterialStack(Mats.MAT_TUNGSTEEL, n*6))
+			.inputs(new MaterialStack(Mats.MAT_NICKEL,n * 3), new MaterialStack(Mats.MAT_MOLYBDENUM,n),new MaterialStack(Mats.MAT_IRON,n/2))
+			.outputs(new MaterialStack(Mats.MAT_HASTELLOY, n*6))
 		);
-		recipes.add(new CrucibleRecipe(24, "crucible.tungsteel",6, new ItemStack(ModItems.ingot_tungsteel))
-			.inputs(new MaterialStack(Mats.MAT_STEEL,n * 5), new MaterialStack(Mats.MAT_TUNGSTEN,n))
-			.outputs(new MaterialStack(Mats.MAT_TUNGSTEEL, n*6))
+		recipes.add(new CrucibleRecipe(24, "crucible.RTM",6, new ItemStack(ModItems.ingot_RTM))
+			.inputs(new MaterialStack(Mats.MAT_TUNGSTEN,n),new MaterialStack(Mats.MAT_MOLYBDENUM,n),new MaterialStack(Mats.MAT_RUTHENIUM,n))
+			.outputs(new MaterialStack(Mats.MAT_RTM,n*3))
 		);
+
 
 
 		registerMoldsForNEI();

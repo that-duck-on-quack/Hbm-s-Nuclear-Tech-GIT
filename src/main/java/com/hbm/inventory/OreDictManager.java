@@ -377,6 +377,7 @@ public class OreDictManager {
 	public static final DictFrame RTM = new DictFrame("RTM");
 	public static final DictFrame HASTELLOY = new DictFrame("HASTELLOY");
 	public static final DictFrame MOLYBDENUM = new DictFrame("Molybdenum");
+	public static final DictFrame RUTHENIUM = new DictFrame("Ruthenium");
 
 
 	public static void registerOres() {
@@ -603,6 +604,7 @@ public class OreDictManager {
 		RTM						.ingot(ingot_RTM);
 		HASTELLOY				.ingot(ingot_hastelloy);
 		MOLYBDENUM 				.dust(powder_molybdemium) .ingot(ingot_molybdemium);
+		RUTHENIUM				.ingot(ingot_ruthenium);
 
 
 

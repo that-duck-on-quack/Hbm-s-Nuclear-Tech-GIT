@@ -196,7 +196,7 @@ public class ItemBedrockOreNew extends Item {
 
 			register(
 				SolarSystem.Body.MINMUS,
-				T("light",		o(MAT_COPPER, 18),		o(MAT_TITANIUM, 9),			o(MAT_CHLOROCALCITE, 6),	o(MAT_COPPER, 3)),
+				T("light",		o(MAT_COPPER, 18),		o(MAT_TITANIUM, 9),			o(MAT_CHLOROCALCITE, 6),	o(MAT_RUTHENIUM, 3)),
 				T("heavy",		o(MAT_LEAD, 18),			o(MAT_GOLD, 9),				o(MAT_TUNGSTEN, 6),		o(MAT_BISMUTH, 3)),
 				T("rare",		o(MAT_ZIRCONIUM, 18),	o(MAT_BORON, 9),			o(MAT_COBALT, 6),		o(MAT_STRONTIUM, 3)),
 				T("nonmetal",	o(MAT_SULFUR, 18),		o(MAT_KNO, 9),				o(MAT_FLUORITE, 6),		o(MAT_SILICON, 3)),
@@ -245,7 +245,7 @@ public class ItemBedrockOreNew extends Item {
 
 			register(
 				SolarSystem.Body.IKE,
-				T("light",		o(MAT_COPPER, 18),		o(MAT_BAUXITE, 9),			o(MAT_NICKEL, 6),		o(MAT_SODIUM, 3)),
+				T("light",		o(MAT_COPPER, 18),		o(MAT_BAUXITE, 9),			o(MAT_NICKEL, 6),		o(MAT_RUTHENIUM, 3)),
 				T("heavy",		o(MAT_LEAD, 18),			o(MAT_ZINC, 9),				o(MAT_GOLD, 6),			o(MAT_ARSENIC, 3)),
 				T("rare",		o(MAT_BORON, 18),		o(MAT_NEODYMIUM, 9),		o(MAT_STRONTIUM, 6),		o(MAT_LANTHANIUM, 3)),
 				T("hazard",		o(MAT_URANIUM, 18),		o(MAT_U238, 9),				o(MAT_PLUTONIUM, 6),		o(MAT_TECHNETIUM, 3))
