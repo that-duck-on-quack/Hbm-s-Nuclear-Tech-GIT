@@ -12,6 +12,7 @@ import com.hbm.items.ItemEnums.EnumBriquetteType;
 import com.hbm.items.ItemEnums.EnumChunkType;
 import com.hbm.items.ItemEnums.EnumCokeType;
 import com.hbm.items.ItemEnums.EnumPlantType;
+import com.hbm.items.machine.ItemCircuit;
 import com.hbm.items.special.ItemHot;
 import com.hbm.items.special.ItemBedrockOre.EnumBedrockOre;
 
@@ -212,6 +213,10 @@ public class SmeltingRecipes {
 		GameRegistry.addSmelting(ModItems.blade_meteorite, ItemHot.heatUp(new ItemStack(ModItems.blade_meteorite)), 0.0F);
 		GameRegistry.addSmelting(ModItems.meteorite_sword, ItemHot.heatUp(new ItemStack(ModItems.meteorite_sword_seared)), 0.0F);
 
+
+		//hbm_hard
+		GameRegistry.addSmelting(DictFrame.fromOne(ModItems.circuit, ItemCircuit.EnumCircuitType.ANALOG), new ItemStack(ModItems.crude_circuit),2.0f);
+		GameRegistry.addSmelting(DictFrame.fromOne(ModItems.circuit, ItemCircuit.EnumCircuitType.BASIC), new ItemStack(ModItems.crude_circuit),2.0f);
 
 		GameRegistry.addSmelting(new ItemStack(ModItems.scrap_plastic, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.ingot_polymer), 0.1F);
 

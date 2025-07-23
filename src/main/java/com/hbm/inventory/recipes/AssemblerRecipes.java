@@ -671,12 +671,12 @@ public class AssemblerRecipes extends SerializableRecipe {
 			}, 1200);
 
 		makeRecipe(new ComparableStack(ModItems.sat_gerald, 1), new AStack[] {
-				new OreDictStack(SBD.plateCast(), 128),
-				new OreDictStack(BSCCO.wireDense(), 128),
-				new ComparableStack(ModBlocks.det_nuke, 64),
+				new OreDictStack(SBD.plateCast(), 64),
+				new OreDictStack(BSCCO.wireDense(), 64),
+				new OreDictStack(STEEL.heavyComp(),16),
+				new OreDictStack(HASTELLOY.plateWelded(),64),
 				new ComparableStack(ModItems.part_generic, 256, EnumPartType.HDE),
-				new ComparableStack(ModItems.circuit, 64, EnumCircuitType.CONTROLLER_QUANTUM),
-				new ComparableStack(ModItems.coin_ufo, 1),
+				new ComparableStack(ModItems.circuit, 32, EnumCircuitType.CONTROLLER_QUANTUM),
 			}, 1200, ModItems.journal_bj);
 
 		makeRecipe(new ComparableStack(ModBlocks.vault_door, 1), new AStack[] {
@@ -1582,9 +1582,9 @@ public class AssemblerRecipes extends SerializableRecipe {
 
 		//DYSON//
 		makeRecipe(new ComparableStack(ModBlocks.dyson_launcher, 1), new AStack[] {
-			new ComparableStack(ModItems.part_generic, 16, EnumPartType.HDE),
-				new OreDictStack(STAINLESS.plate(), 64),
-				new ComparableStack(ModBlocks.steel_scaffold, 128),
+				new ComparableStack(ModItems.part_generic, 16, EnumPartType.HDE),
+				new OreDictStack(STAINLESS.plateCast(), 64),
+				new OreDictStack(TUNGSTEEL.plateWelded(),32),
 				new ComparableStack(ModItems.turbine_syngas, 8),
 				new ComparableStack(ModBlocks.machine_transformer_dnt, 2),
 				new ComparableStack(ModItems.plate_dineutronium, 8),
@@ -1593,36 +1593,38 @@ public class AssemblerRecipes extends SerializableRecipe {
 
 		makeRecipe(new ComparableStack(ModBlocks.dyson_receiver, 1), new AStack[] {
 			new ComparableStack(ModItems.part_generic, 8, EnumPartType.HDE),
-				new OreDictStack(W.plateWelded(), 4),
+				new OreDictStack(TUNGSTEEL.plateWelded(), 16),
 				new ComparableStack(ModBlocks.steel_scaffold, 32),
 				new ComparableStack(ModItems.crystal_xen),
-				new ComparableStack(ModBlocks.fusion_conductor, 16),
+				new ComparableStack(ModBlocks.fusion_conductor, 64),
 				new ComparableStack(ModItems.circuit, 4, EnumCircuitType.QUANTUM),
 				new OreDictStack(BSCCO.wireDense(), 128),
 		}, 1200);
 
 		makeRecipe(new ComparableStack(ModBlocks.dyson_converter_he, 1), new AStack[] {
 			new ComparableStack(ModItems.part_generic, 8, EnumPartType.HDE),
+				new OreDictStack(STEEL.heavyComp(),16),
 				new OreDictStack(ALLOY.wireDense(), 64),
 				new OreDictStack(GOLD.wireDense(), 16),
-				new ComparableStack(ModBlocks.machine_transformer_dnt, 4),
+				new ComparableStack(ModBlocks.machine_transformer_dnt, 8),
 				new ComparableStack(ModItems.circuit, 8, EnumCircuitType.BISMOID),
 		}, 1200);
 
 		makeRecipe(new ComparableStack(ModBlocks.dyson_converter_tu, 1), new AStack[] {
 			new ComparableStack(ModItems.part_generic, 8, EnumPartType.HDE),
-				new OreDictStack(W.plateWelded(), 8),
+				new OreDictStack(TUNGSTEEL.plateWelded(), 32),
 				new ComparableStack(ModBlocks.machine_transformer_dnt, 4),
 				new ComparableStack(ModItems.circuit, 8, EnumCircuitType.BISMOID),
-				new OreDictStack(STEEL.pipe(), 12),
+				new OreDictStack(STAINLESS.pipe(), 60),
 		}, 1200);
 
 		makeRecipe(new ComparableStack(ModBlocks.dyson_converter_anatmogenesis, 1), new AStack[] {
-			new ComparableStack(ModItems.part_generic, 8, EnumPartType.HDE),
+			new ComparableStack(ModItems.part_generic, 16, EnumPartType.HDE),
 				new ComparableStack(ModItems.turbine_syngas, 16),
-				new OreDictStack(W.plateWelded(), 8),
+				new OreDictStack(HASTELLOY.plateWelded(), 32),
+				new OreDictStack(DESH.heavyComp(),4),
 				new ComparableStack(ModBlocks.machine_transformer_dnt, 4),
-				new ComparableStack(ModItems.circuit, 8, EnumCircuitType.BISMOID),
+				new ComparableStack(ModItems.circuit, 8, EnumCircuitType.CONTROLLER_QUANTUM),
 		}, 1200);
 
 		makeRecipe(new ComparableStack(ModItems.swarm_member, 1), new AStack[] {
