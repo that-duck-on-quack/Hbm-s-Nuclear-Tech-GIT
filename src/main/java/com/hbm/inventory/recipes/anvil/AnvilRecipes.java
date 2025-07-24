@@ -973,6 +973,16 @@ public class AnvilRecipes extends SerializableRecipe {
 							new AnvilOutput(new ItemStack(ModItems.shell, 2, Mats.MAT_STEEL.id))
 					}).setTier(4));
 			constructionRecipes.add(new AnvilConstructionRecipe(
+				new ComparableStack(ModBlocks.rbmk_rod_smart), new AnvilOutput[]
+				{
+					new AnvilOutput(new ItemStack(ModBlocks.rbmk_rod_mod,1)),
+					new AnvilOutput(DictFrame.fromOne(ModItems.circuit,EnumCircuitType.ADVANCED,2)),
+					new AnvilOutput(new ItemStack(ModItems.motor_bismuth,1)),
+					new AnvilOutput(Mats.MAT_TCALLOY.make(ModItems.plate_cast),1)
+				}
+			).setTier(4));
+
+			constructionRecipes.add(new AnvilConstructionRecipe(
 					new ComparableStack(ModBlocks.rbmk_rod_mod), new AnvilOutput[] {
 							new AnvilOutput(new ItemStack(ModBlocks.rbmk_rod, 1)),
 							new AnvilOutput(new ItemStack(ModBlocks.block_graphite, 4)),

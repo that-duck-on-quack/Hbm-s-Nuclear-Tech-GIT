@@ -245,7 +245,7 @@ public class ItemRBMKRod extends Item {
 		SQUARE_ROOT(EnumChatFormatting.YELLOW + "MEDIUM / SQUARE ROOT"),	//sqrt(x) * 10 * reactivity
 		LINEAR(EnumChatFormatting.RED + "DANGEROUS / LINEAR"),				//x * reactivity
 		QUADRATIC(EnumChatFormatting.RED + "DANGEROUS / QUADRATIC"),		//x^2 / 100 * reactivity
-		SLOW_LINEAR(EnumChatFormatting.YELLOW + "MEDIUM / SLOW LINEAR"),  
+		SLOW_LINEAR(EnumChatFormatting.YELLOW + "MEDIUM / SLOW LINEAR"),
 		EXPERIMENTAL(EnumChatFormatting.RED + "EXPERIMENTAL / SINE SLOPE");		//x * (sin(x) + 1)
 
 		public String title = "";
@@ -366,6 +366,14 @@ public class ItemRBMKRod extends Item {
 	 */
 	public static double getEnrichment(ItemStack stack) {
 		return getYield(stack) / ((ItemRBMKRod) stack.getItem()).yield;
+	}
+
+	/**
+	 * @param stack
+	 * @return depletion [0;1]
+	 */
+	public static double getDepletion(ItemStack stack) {
+		return 1D - getEnrichment(stack);
 	}
 
 	/**
@@ -546,7 +554,7 @@ public class ItemRBMKRod extends Item {
 
 	@Override
 	public double getDurabilityForDisplay(ItemStack stack) {
-		return 1D - getEnrichment(stack);
+		return getDepletion(stack);
 	}
 
 	public static void setDouble(ItemStack stack, String key, double yield) {
