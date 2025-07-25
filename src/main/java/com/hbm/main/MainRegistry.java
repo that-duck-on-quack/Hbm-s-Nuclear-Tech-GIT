@@ -14,6 +14,7 @@ import com.hbm.entity.logic.IChunkLoader;
 import com.hbm.entity.mob.siege.SiegeTier;
 import com.hbm.handler.*;
 import com.hbm.handler.atmosphere.ChunkAtmosphereManager;
+import com.hbm.handler.DecayConversions;
 import com.hbm.handler.imc.IMCBlastFurnace;
 import com.hbm.handler.imc.IMCCentrifuge;
 import com.hbm.handler.imc.IMCCrystallizer;
@@ -316,6 +317,8 @@ public class MainRegistry {
 		MinecraftForge.EVENT_BUS.register(oreMan); //OreRegisterEvent
 		OreDictManager.registerGroups(); //important to run first
 		OreDictManager.registerOres();
+
+		DecayConversions.init();
 
 		if(WorldConfig.enableCraterBiomes) BiomeGenCraterBase.initDictionary();
 		//BiomeGenNoMansLand.initDictionary();
