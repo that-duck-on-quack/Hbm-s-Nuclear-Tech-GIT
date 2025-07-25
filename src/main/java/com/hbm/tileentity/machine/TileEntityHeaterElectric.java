@@ -228,4 +228,11 @@ public class TileEntityHeaterElectric extends TileEntityLoadedBase implements IH
 	public void pasteSettings(NBTTagCompound nbt, int index, World world, EntityPlayer player, int x, int y, int z) {
 		this.setting = nbt.getInteger("setting");
 	}
+
+	public void overfuse() {
+		setting++;
+
+		if(setting > 20)
+			setting = 0;
+	}
 }
