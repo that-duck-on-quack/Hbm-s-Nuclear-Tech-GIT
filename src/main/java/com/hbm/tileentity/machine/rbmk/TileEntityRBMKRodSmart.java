@@ -31,6 +31,8 @@ public class TileEntityRBMKRodSmart extends TileEntityRBMKRod implements IContro
 	public double skinHeatLimit = 2000D;
 	public double columnHeatLimit = 1400D;
 	public double depletionLimit = 0.8D;
+	// Do not use this on the serverside, this is solely here for client gui sync purposes. use ServerConfig.Sk_smartestSmartRod.get() instead.
+	public static boolean enablePoorMansScram = ServerConfig.Sk_smartestSmartRod.get();
 
 	@Override
 	public String getName() {
@@ -95,6 +97,7 @@ public class TileEntityRBMKRodSmart extends TileEntityRBMKRod implements IContro
 		buf.writeDouble(this.skinHeatLimit);
 		buf.writeDouble(this.columnHeatLimit);
 		buf.writeBoolean(this.enableModerator);
+		buf.writeBoolean(ServerConfig.Sk_smartestSmartRod.get());
 	}
 
 	@Override
@@ -121,6 +124,7 @@ public class TileEntityRBMKRodSmart extends TileEntityRBMKRod implements IContro
 		this.skinHeatLimit = buf.readDouble();
 		this.columnHeatLimit = buf.readDouble();
 		this.enableModerator = buf.readBoolean();
+		enablePoorMansScram = buf.readBoolean();
 	}
 
 

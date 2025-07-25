@@ -58,8 +58,13 @@ public class GUIRBMKRodSmart extends GuiInfoContainer {
 			this.fields[i].setMaxStringLength(4);
 		}
 		this.fields[0].setText(String.valueOf((int)(rod.depletionLimit*100)));
-		this.fields[1].setText(String.valueOf((int)rod.skinHeatLimit));
-		this.fields[2].setText(String.valueOf((int)rod.columnHeatLimit));
+		if(TileEntityRBMKRodSmart.enablePoorMansScram) {
+			this.fields[1].setText(String.valueOf((int) rod.skinHeatLimit));
+			this.fields[2].setText(String.valueOf((int) rod.columnHeatLimit));
+		} else {
+			this.fields[1].setText("");
+			this.fields[2].setText("");
+		}
 	}
 
 	@Override
@@ -67,9 +72,13 @@ public class GUIRBMKRodSmart extends GuiInfoContainer {
 		super.drawScreen(mouseX, mouseY, f);
 
 		this.drawCustomInfoStat(mouseX, mouseY, guiLeft + 12, guiTop + 26, 30, 10, mouseX, mouseY, new String[]{ "Depletion Percentage Limit", "If fuel depletion exceeds this value the rod will be extractable." } );
-		this.drawCustomInfoStat(mouseX, mouseY, guiLeft + 12, guiTop + 37, 30, 10, mouseX, mouseY, new String[]{ "Skin Heat Limit", "If skin heat exceeds this value the rod will be extractable." } );
-		this.drawCustomInfoStat(mouseX, mouseY, guiLeft + 12, guiTop + 48, 30, 10, mouseX, mouseY, new String[]{ "Column Heat Limit", "If the column heat exceeds this value the rod will be extractable." } );
-		this.drawCustomInfoStat(mouseX, mouseY, guiLeft + 12, guiTop + 59, 30, 10, mouseX, mouseY, new String[]{ "Moderation Setting", moderated ? "Click to disable moderation" : "Clink to enable moderation"} );
+		if(TileEntityRBMKRodSmart.enablePoorMansScram) {
+			this.drawCustomInfoStat(mouseX, mouseY, guiLeft + 12, guiTop + 37, 30, 10, mouseX, mouseY, new String[]{"Skin Heat Limit", "If skin heat exceeds this value the rod will be extractable."});
+			this.drawCustomInfoStat(mouseX, mouseY, guiLeft + 12, guiTop + 48, 30, 10, mouseX, mouseY, new String[]{"Column Heat Limit", "If the column heat exceeds this value the rod will be extractable."});
+		} else {
+			this.drawCustomInfoStat(mouseX, mouseY, guiLeft + 12, guiTop + 37, 30, 20, mouseX, mouseY, new String[]{"Heat Limit Disabled", "The server has disabled the heat limit feature."});
+		}
+		this.drawCustomInfoStat(mouseX, mouseY, guiLeft + 12, guiTop + 59, 30, 10, mouseX, mouseY, new String[]{ "Moderation Setting", moderated ? "Click to disable moderation" : "Click to enable moderation"} );
 		this.drawCustomInfoStat(mouseX, mouseY, guiLeft + 12, guiTop + 70, 30, 10, mouseX, mouseY, new String[]{ "Save parameters" } );
 	}
 
@@ -77,8 +86,12 @@ public class GUIRBMKRodSmart extends GuiInfoContainer {
 	protected void mouseClicked(int x, int y, int i) {
 		super.mouseClicked(x, y, i);
 
-		for(int j = 0; j < this.fields.length; j++) {
-			this.fields[j].mouseClicked(x, y, i);
+		if(TileEntityRBMKRodSmart.enablePoorMansScram) {
+			for (int j = 0; j < this.fields.length; j++) {
+				this.fields[j].mouseClicked(x, y, i);
+			}
+		} else {
+			this.fields[0].mouseClicked(x, y, i);
 		}
 
 		if(guiLeft + 12 <= x && guiLeft + 12 + 30 > x && guiTop + 59 < y && guiTop + 59 + 10 > y ) {
@@ -107,8 +120,10 @@ public class GUIRBMKRodSmart extends GuiInfoContainer {
 			}
 
 			data.setDouble("depletion", vals[0]/100D);
-			data.setDouble("skin", vals[1]);
-			data.setDouble("column", vals[2]);
+			if(TileEntityRBMKRodSmart.enablePoorMansScram) {
+				data.setDouble("skin", vals[1]);
+				data.setDouble("column", vals[2]);
+			}
 			data.setBoolean("moderated",moderated);
 
 			PacketDispatcher.wrapper.sendToServer(new NBTControlPacket(data, rod.xCoord, rod.yCoord, rod.zCoord));
@@ -138,7 +153,9 @@ public class GUIRBMKRodSmart extends GuiInfoContainer {
 		} else {
 			drawTexturedModalRect(guiLeft+13,guiTop+60, 176, 67+8, 25, 8);
 		}
-
+		if(!TileEntityRBMKRodSmart.enablePoorMansScram){
+			drawTexturedModalRect(guiLeft+12,guiTop+37, 176, 83, 28, 21);
+		}
 		for (int i = 0; i < fields.length; i++) {
 			fields[i].drawTextBox();
 		}
