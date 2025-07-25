@@ -424,6 +424,7 @@ public class TileMappings {
 
 	private static void putRBMK() {
 		put(TileEntityRBMKRod.class, "tileentity_rbmk_rod");
+		put(TileEntityRBMKRodSmart.class, "tileentity_rbmk_rod_smart");
 		put(TileEntityRBMKRodReaSim.class, "tileentity_rbmk_rod_reasim");
 		put(TileEntityRBMKControlManual.class, "tileentity_rbmk_control");
 		put(TileEntityRBMKControlAuto.class, "tileentity_rbmk_control_auto");

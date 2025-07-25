@@ -29,6 +29,7 @@ public class ServerConfig extends RunningConfig {
 	public static ConfigWrapper<Float> Sk_firearmDamageModifier = new ConfigWrapper<>(1F);
 	public static ConfigWrapper<Boolean> Sk_enableBaleSpread = new ConfigWrapper<>(true);
 	public static ConfigWrapper<Boolean> Sk_ultraAdvancedRemovalTools = new ConfigWrapper<>(false);
+	public static ConfigWrapper<Boolean> Sk_smartestSmartRod = new ConfigWrapper<>(false);
 
 	private static void initDefaults() {
 		configMap.put("DAMAGE_COMPATIBILITY_MODE", DAMAGE_COMPATIBILITY_MODE);
@@ -50,6 +51,7 @@ public class ServerConfig extends RunningConfig {
 		configMap.put("Sk_firearmDamageModifier", Sk_firearmDamageModifier);
 		configMap.put("Sk_enableBaleSpread", Sk_enableBaleSpread);
 		configMap.put("Sk_ultraAdvancedRemovalTools", Sk_ultraAdvancedRemovalTools);
+		configMap.put("Sk_smartestSmartRod", Sk_smartestSmartRod);
 	}
 
 	/** Initializes defaults, then reads the config file if it exists, then writes the config file. */

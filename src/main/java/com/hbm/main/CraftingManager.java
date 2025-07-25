@@ -21,6 +21,7 @@ import com.hbm.inventory.material.NTMMaterial;
 
 import static com.hbm.inventory.OreDictManager.*;
 
+import com.hbm.items.ItemEnums;
 import com.hbm.items.ModItems;
 import com.hbm.items.ItemEnums.EnumLegendaryType;
 import com.hbm.items.ItemEnums.EnumPages;
@@ -883,6 +884,7 @@ public class CraftingManager {
 		}
 		addRecipeAuto(new ItemStack(ModBlocks.rbmk_control_mod, 1), new Object[] { "BGB", "GRG", "BGB", 'G', GRAPHITE.block(), 'R', ModBlocks.rbmk_control, 'B', ModItems.nugget_bismuth });
 		addRecipeAuto(new ItemStack(ModBlocks.rbmk_control_auto, 1), new Object[] { "C", "R", "D", 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ADVANCED), 'R', ModBlocks.rbmk_control, 'D', ModItems.crt_display });
+
 		addRecipeAuto(new ItemStack(ModBlocks.rbmk_rod_reasim, 1), new Object[] { "ZCZ", "ZRZ", "ZCZ", 'C', STEEL.shell(), 'R', ModBlocks.rbmk_blank, 'Z', ZR.ingot() });
 		addRecipeAuto(new ItemStack(ModBlocks.rbmk_rod_reasim_mod, 1), new Object[] { "BGB", "GRG", "BGB", 'G', GRAPHITE.block(), 'R', ModBlocks.rbmk_rod_reasim, 'B', ANY_RESISTANTALLOY.ingot() });
 		addRecipeAuto(new ItemStack(ModBlocks.rbmk_outgasser, 1), new Object[] { "GHG", "GRG", "GTG", 'G', ModBlocks.steel_grate, 'H', Blocks.hopper, 'T', ModItems.tank_steel, 'R', ModBlocks.rbmk_blank });
@@ -1123,6 +1125,7 @@ public class CraftingManager {
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_crane_console, 1), new Object[] { "BCD", "DDD", 'B', B.ingot(), 'D', ModBlocks.deco_rbmk, 'C', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.ANALOG) });
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_rod, 1), new Object[] { "C", "R", "C", 'C', STEEL.shell(), 'R', ModBlocks.rbmk_blank });
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_rod_mod, 1), new Object[] { "BGB", "GRG", "BGB", 'G', GRAPHITE.block(), 'R', ModBlocks.rbmk_rod, 'B', ModItems.nugget_bismuth });
+			addRecipeAuto(new ItemStack(ModBlocks.rbmk_rod_smart, 1), new Object[] { "CMC", " R ", " T ", 'C',DictFrame.fromOne(ModItems.circuit,EnumCircuitType.ADVANCED),'M',ModItems.motor_bismuth,'R',ModBlocks.rbmk_rod_mod,'T',Mats.MAT_TCALLOY.make(ModItems.plate_cast)});
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_boiler, 1), new Object[] { "CPC", "CRC", "CPC", 'C', CU.pipe(), 'P', CU.shell(), 'R', ModBlocks.rbmk_blank });
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_heater, 1), new Object[] { "CIC", "PRP", "CIC", 'C', CU.pipe(), 'P', STEEL.shell(), 'R', ModBlocks.rbmk_blank, 'I', ANY_PLASTIC.ingot() });
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_cooler, 1), new Object[] { "IGI", "GCG", "IGI", 'C', ModBlocks.rbmk_blank, 'I', ModItems.plate_polymer, 'G', ModBlocks.steel_grate });
