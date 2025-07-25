@@ -1206,6 +1206,7 @@ public class ModBlocks {
 
 	public static Block rbmk_rod;
 	public static Block rbmk_rod_mod;
+	public static Block rbmk_rod_smart;
 	public static Block rbmk_rod_reasim;
 	public static Block rbmk_rod_reasim_mod;
 	public static Block rbmk_control;
@@ -2382,6 +2383,7 @@ public class ModBlocks {
 
 		rbmk_rod = new RBMKRod(false).setBlockName("rbmk_rod").setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rbmk/rbmk_element");
 		rbmk_rod_mod = new RBMKRod(true).setBlockName("rbmk_rod_mod").setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rbmk/rbmk_element_mod");
+		rbmk_rod_smart = new RBMKSmartRod().setBlockName("rbmk_rod_smart").setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rbmk/rbmk_element_smart");
 		rbmk_rod_reasim = new RBMKRodReaSim(false).setBlockName("rbmk_rod_reasim").setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rbmk/rbmk_element_reasim");
 		rbmk_rod_reasim_mod = new RBMKRodReaSim(true).setBlockName("rbmk_rod_reasim_mod").setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rbmk/rbmk_element_reasim_mod");
 		rbmk_control = new RBMKControl(false).setBlockName("rbmk_control").setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rbmk/rbmk_control");
@@ -3541,6 +3543,7 @@ public class ModBlocks {
 		register(pa_detector);
 
 		GameRegistry.registerBlock(rbmk_rod, rbmk_rod.getUnlocalizedName());
+		GameRegistry.registerBlock(rbmk_rod_smart, rbmk_rod_smart.getUnlocalizedName());
 		GameRegistry.registerBlock(rbmk_rod_mod, rbmk_rod_mod.getUnlocalizedName());
 		GameRegistry.registerBlock(rbmk_rod_reasim, rbmk_rod_reasim.getUnlocalizedName());
 		GameRegistry.registerBlock(rbmk_rod_reasim_mod, rbmk_rod_reasim_mod.getUnlocalizedName());
