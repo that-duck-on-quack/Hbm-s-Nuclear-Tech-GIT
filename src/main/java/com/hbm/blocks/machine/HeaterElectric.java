@@ -9,6 +9,7 @@ import api.hbm.block.IToolable;
 import com.hbm.blocks.BlockDummyable;
 import com.hbm.blocks.ILookOverlay;
 import com.hbm.blocks.ITooltipProvider;
+import com.hbm.config.ServerConfig;
 import com.hbm.tileentity.TileEntityProxyCombo;
 import com.hbm.tileentity.machine.TileEntityHeaterElectric;
 import com.hbm.util.i18n.I18nUtil;
@@ -110,6 +111,7 @@ public class HeaterElectric extends BlockDummyable implements ILookOverlay, IToo
 	@Override
 	public boolean onOverfuse(World world, EntityPlayer player, int x, int y, int z, int side, float fX, float fY, float fZ, ItemStack item) {
 		if(world.isRemote) return true;
+		if(!ServerConfig.Sk_overfuseHeater.get()) return false;
 
 		int[] pos = this.findCore(world, x, y, z);
 
