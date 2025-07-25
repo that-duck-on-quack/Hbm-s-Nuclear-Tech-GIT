@@ -220,7 +220,7 @@ public class SolderingRecipes extends SerializableRecipe {
 		//hbm hard stuff
 
 		//lanf cap
-		recipes.add(new SolderingRecipe(new ItemStack(ModItems.circuit, 1, EnumCircuitType.CAPACITOR_LANTHANIUM.ordinal()), 20, 1000,
+		recipes.add(new SolderingRecipe(new ItemStack(ModItems.circuit, 4, EnumCircuitType.CAPACITOR_LANTHANIUM.ordinal()), 20, 1000,
 			new FluidStack(Fluids.VINYL_CHLORIDE, 250),
 			new AStack[] {
 				new OreDictStack(ANY_HARDPLASTIC.ingot(), 1)
