@@ -1,5 +1,6 @@
 package com.hbm.tileentity.machine.rbmk;
 
+import com.hbm.config.ServerConfig;
 import com.hbm.interfaces.IControlReceiver;
 import com.hbm.inventory.container.ContainerRBMKRod;
 import com.hbm.inventory.container.ContainerRBMKRodSmart;
@@ -59,7 +60,11 @@ public class TileEntityRBMKRodSmart extends TileEntityRBMKRod implements IContro
 
 	public boolean hasFuelExceededLimits(){
 		ItemStack stack = slots[0];
-		return ItemRBMKRod.getDepletion(stack) >= depletionLimit || ItemRBMKRod.getHullHeat(stack) >= skinHeatLimit || heat >= columnHeatLimit;
+		if(ServerConfig.Sk_smartestSmartRod.get()){
+			return ItemRBMKRod.getDepletion(stack) >= depletionLimit || ItemRBMKRod.getHullHeat(stack) >= skinHeatLimit || heat >= columnHeatLimit;
+		}else{
+			return ItemRBMKRod.getDepletion(stack) >= depletionLimit;
+		}
 	}
 
 	@Override
