@@ -32,6 +32,7 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 
 	public long power = 0;
 	public int process = 0;
+	public int speed = 0;
 	public static final long maxPower = 100000;
 	public static final int processSpeed = 60;
 	public static HashMap<Item, ItemStack> itemList = new HashMap<>();
@@ -140,8 +141,9 @@ public class TileEntityMachineLaserBoi extends TileEntityMachineBase implements 
 	}
 
 	public void process() {
+
 		process++;
-		power=power-750;
+		power=power -750*crystalList.get(slots[2].getItem());
 
 		if (process >= processSpeed/crystalList.get(slots[2].getItem())) {
 			process = 0;
