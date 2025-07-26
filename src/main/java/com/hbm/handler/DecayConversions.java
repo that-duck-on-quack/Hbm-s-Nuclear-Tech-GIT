@@ -96,7 +96,6 @@ public class DecayConversions {
 		//Based off of https://en.wikipedia.org/wiki/Isotopes_of_einsteinium, https://en.wikipedia.org/wiki/Isotopes_of_berkelium, and https://en.wikipedia.org/wiki/Isotopes_of_californium
 		map.put(ModItems.ingot_es253,new DecayStats(1F/(VersatileConfig.getShortDecayChance()/4F),new DecayResult(ModItems.ingot_cm245,1)));
 		map.put(ModItems.nugget_es253,new DecayStats(1F/(VersatileConfig.getShortDecayChance()/36F),new DecayResult(ModItems.nugget_cm245,1)));
-
 	}
 
 	public static void addRecipes(HashMap<RecipesCommon.ComparableStack, ItemStack> dest) {
