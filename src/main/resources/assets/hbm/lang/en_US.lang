@@ -1814,6 +1814,7 @@ chem.MASS_EPOXY_BOARD=Mass Epoxy Board Dipping
 chem.EPOXY_BOARD=Epoxy Board Dipping
 chem.CRUDEPHENOL=Crude Phenol Production
 chem.ANTI_KNOCK=Tetraethyllead Production
+chem.IODINE_XENON_DECAY=Xenon From Iodine-131 Decay
 
 
 #HBM Hard TileEntities and Machines

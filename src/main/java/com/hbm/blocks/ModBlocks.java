@@ -2383,7 +2383,7 @@ public class ModBlocks {
 
 		rbmk_rod = new RBMKRod(false).setBlockName("rbmk_rod").setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rbmk/rbmk_element");
 		rbmk_rod_mod = new RBMKRod(true).setBlockName("rbmk_rod_mod").setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rbmk/rbmk_element_mod");
-		rbmk_rod_smart = new RBMKSmartRod().setBlockName("rbmk_rod_smart").setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rbmk/rbmk_element_smart");
+		rbmk_rod_smart = new RBMKRodSmart().setBlockName("rbmk_rod_smart").setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rbmk/rbmk_element_smart");
 		rbmk_rod_reasim = new RBMKRodReaSim(false).setBlockName("rbmk_rod_reasim").setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rbmk/rbmk_element_reasim");
 		rbmk_rod_reasim_mod = new RBMKRodReaSim(true).setBlockName("rbmk_rod_reasim_mod").setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rbmk/rbmk_element_reasim_mod");
 		rbmk_control = new RBMKControl(false).setBlockName("rbmk_control").setCreativeTab(MainRegistry.machineTab).setBlockTextureName(RefStrings.MODID + ":rbmk/rbmk_control");

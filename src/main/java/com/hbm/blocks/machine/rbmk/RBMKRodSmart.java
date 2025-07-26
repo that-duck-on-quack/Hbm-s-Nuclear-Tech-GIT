@@ -7,8 +7,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class RBMKSmartRod extends RBMKBase {
-	public RBMKSmartRod() {
+/**
+ * Block impl for the RBMK Smart Fuel Rod.
+ * @author Jack Andersen
+ */
+public class RBMKRodSmart extends RBMKBase {
+	public RBMKRodSmart() {
 		super();
 	}
 
