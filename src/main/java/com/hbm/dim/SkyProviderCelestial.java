@@ -185,12 +185,13 @@ public class SkyProviderCelestial extends IRenderHandler {
 		OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
 
 		float starBrightness = world.getStarBrightness(partialTicks) * visibility;
-		float celestialAngle = world.getCelestialAngle(partialTicks);
+		float solarAngle = world.getCelestialAngle(partialTicks);
+		float siderealAngle = (float)SolarSystem.calculateSiderealAngle(world, partialTicks, body);
 
 		// Handle any special per-body sunset rendering
 		renderSunset(partialTicks, world, mc);
 
-		renderStars(partialTicks, world, mc, starBrightness, celestialAngle, body.axialTilt);
+		renderStars(partialTicks, world, mc, starBrightness, solarAngle + siderealAngle, body.axialTilt);
 
 
 		GL11.glPushMatrix();
@@ -198,10 +199,10 @@ public class SkyProviderCelestial extends IRenderHandler {
 
 			GL11.glRotatef(body.axialTilt, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(celestialAngle * 360.0F, 1.0F, 0.0F, 0.0F);
+			GL11.glRotatef(solarAngle * 360.0F, 1.0F, 0.0F, 0.0F);
 
 			// Draw DIGAMMA STAR
-			renderDigamma(partialTicks, world, mc, celestialAngle);
+			renderDigamma(partialTicks, world, mc, solarAngle);
 
 			OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ONE, GL11.GL_ZERO);
 
@@ -213,7 +214,7 @@ public class SkyProviderCelestial extends IRenderHandler {
 
 			float blendAmount = hasAtmosphere ? MathHelper.clamp_float(1 - world.getSunBrightnessFactor(partialTicks), 0.25F, 1F) : 1F;
 
-			renderCelestials(partialTicks, world, mc, celestialProvider.metrics, celestialAngle, celestialProvider.tidalLockedBody, planetTint, visibility, blendAmount, null, 24);
+			renderCelestials(partialTicks, world, mc, celestialProvider.metrics, solarAngle, null, planetTint, visibility, blendAmount, null, 24);
 
 			GL11.glEnable(GL11.GL_BLEND);
 
@@ -221,12 +222,12 @@ public class SkyProviderCelestial extends IRenderHandler {
 				// JEFF BOZOS WOULD LIKE TO KNOW YOUR LOCATION
 				// ... to send you a pakedge :)))
 				if(world.provider.dimensionId == 0) {
-					renderSatellite(partialTicks, world, mc, celestialAngle, 1916169, new float[] { 1.0F, 0.534F, 0.385F });
+					renderSatellite(partialTicks, world, mc, solarAngle, 1916169, new float[] { 1.0F, 0.534F, 0.385F });
 				}
 
 				// Light up the sky
 				for(Map.Entry<Integer, Satellite> entry : SatelliteSavedData.getClientSats().entrySet()) {
-					renderSatellite(partialTicks, world, mc, celestialAngle, entry.getKey(), entry.getValue().getColor());
+					renderSatellite(partialTicks, world, mc, solarAngle, entry.getKey(), entry.getValue().getColor());
 				}
 			}
 
@@ -379,7 +380,7 @@ public class SkyProviderCelestial extends IRenderHandler {
 		}
 	}
 
-	protected void renderStars(float partialTicks, WorldClient world, Minecraft mc, float starBrightness, float celestialAngle, float axialTilt) {
+	protected void renderStars(float partialTicks, WorldClient world, Minecraft mc, float starBrightness, float siderealAngle, float axialTilt) {
 		Tessellator tessellator = Tessellator.instance;
 
 		if(starBrightness > 0.0F) {
@@ -396,7 +397,7 @@ public class SkyProviderCelestial extends IRenderHandler {
 
 				GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 
-				GL11.glRotatef(celestialAngle * 360.0F, 1.0F, 0.0F, 0.0F);
+				GL11.glRotatef(siderealAngle * 360.0F, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, starBrightnessAlpha);
 
@@ -623,7 +624,7 @@ public class SkyProviderCelestial extends IRenderHandler {
 		OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ONE, GL11.GL_ZERO);
 	}
 
-	protected void renderCelestials(float partialTicks, WorldClient world, Minecraft mc, List<AstroMetric> metrics, float celestialAngle, CelestialBody tidalLockedBody, Vec3 planetTint, float visibility, float blendAmount, CelestialBody orbiting, float maxSize) {
+	protected void renderCelestials(float partialTicks, WorldClient world, Minecraft mc, List<AstroMetric> metrics, float solarAngle, CelestialBody tidalLockedBody, Vec3 planetTint, float visibility, float blendAmount, CelestialBody orbiting, float maxSize) {
 		Tessellator tessellator = Tessellator.instance;
 		double minSize = 1D;
 		float blendDarken = 0.1F;
@@ -657,12 +658,8 @@ public class SkyProviderCelestial extends IRenderHandler {
 					mc.renderEngine.bindTexture(metric.body.texture);
 				}
 
-				if(metric.body == tidalLockedBody) {
-					GL11.glRotated(celestialAngle * -360.0 - 60.0, 1.0, 0.0, 0.0);
-				} else {
-					GL11.glRotated(metric.angle, 1.0, 0.0, 0.0);
-					GL11.glRotated(metric.inclination, 0.0, 0.0, 1.0);
-				}
+				GL11.glRotated(metric.angle, 1.0, 0.0, 0.0);
+				GL11.glRotated(metric.inclination, 0.0, 0.0, 1.0);
 				GL11.glRotatef(axialTilt + 90.0F, 0.0F, 1.0F, 0.0F);
 
 				tessellator.startDrawingQuads();
@@ -795,7 +792,7 @@ public class SkyProviderCelestial extends IRenderHandler {
 		}
 	}
 
-	protected void renderDigamma(float partialTicks, WorldClient world, Minecraft mc, float celestialAngle) {
+	protected void renderDigamma(float partialTicks, WorldClient world, Minecraft mc, float solarAngle) {
 		Tessellator tessellator = Tessellator.instance;
 
 		GL11.glPushMatrix();
@@ -822,11 +819,11 @@ public class SkyProviderCelestial extends IRenderHandler {
 
 			OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ONE, GL11.GL_ZERO);
 
-			float brightness = (float) Math.sin(celestialAngle * Math.PI);
+			float brightness = (float) Math.sin(solarAngle * Math.PI);
 			brightness *= brightness;
 			GL11.glColor4f(brightness, brightness, brightness, brightness);
 			GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(celestialAngle * 360.0F, 1.0F, 0.0F, 0.0F);
+			GL11.glRotatef(solarAngle * 360.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(140.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(-40.0F, 0.0F, 0.0F, 1.0F);
 
@@ -856,7 +853,7 @@ public class SkyProviderCelestial extends IRenderHandler {
 		return new float[] { r, g, b };
 	}
 
-	protected void renderSatellite(float partialTicks, WorldClient world, Minecraft mc, float celestialAngle, long seed, float[] color) {
+	protected void renderSatellite(float partialTicks, WorldClient world, Minecraft mc, float solarAngle, long seed, float[] color) {
 		Tessellator tessellator = Tessellator.instance;
 
 		double ticks = (double)(System.currentTimeMillis() % (600 * 50)) / 50;
@@ -864,7 +861,7 @@ public class SkyProviderCelestial extends IRenderHandler {
 		GL11.glPushMatrix();
 		{
 
-			GL11.glRotatef(celestialAngle * -360.0F, 1.0F, 0.0F, 0.0F);
+			GL11.glRotatef(solarAngle * -360.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(-40.0F + (float)(seed % 800) * 0.1F - 5.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef((float)(seed % 50) * 0.1F - 20.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef((float)(seed % 80) * 0.1F - 2.5F, 0.0F, 0.0F, 1.0F);

@@ -1,6 +1,5 @@
 package com.hbm.dim.orbit;
 
-import com.hbm.config.SpaceConfig;
 import com.hbm.dim.CelestialBody;
 import com.hbm.dim.SolarSystem;
 import com.hbm.dim.WorldProviderCelestial;
@@ -10,7 +9,9 @@ import com.hbm.handler.atmosphere.ChunkAtmosphereManager;
 import com.hbm.lib.Library;
 import com.hbm.util.AstronomyUtil;
 import com.hbm.util.BobMathUtil;
+import com.hbm.util.Compat;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
@@ -50,7 +51,7 @@ public class WorldProviderOrbit extends WorldProvider {
 
 	@Override
 	public void registerWorldChunkManager() {
-		this.worldChunkMgr = new WorldChunkManagerHell(new BiomeGenOrbit(SpaceConfig.orbitBiome), dimensionId);
+		this.worldChunkMgr = new WorldChunkManagerHell(BiomeGenOrbit.biome, 0.0F);
 	}
 
 	@Override
@@ -65,7 +66,7 @@ public class WorldProviderOrbit extends WorldProvider {
 
 	@Override
 	public void updateWeather() {
-		isHellWorld = !worldObj.isRemote;
+		isHellWorld = !worldObj.isRemote && !Loader.isModLoaded(Compat.MOD_COFH);
 	}
 
 	@Override
@@ -82,7 +83,7 @@ public class WorldProviderOrbit extends WorldProvider {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public float[] calcSunriseSunsetColors(float celestialAngle, float partialTicks) {
+	public float[] calcSunriseSunsetColors(float solarAngle, float partialTicks) {
 		return null;
 	}
 
@@ -103,8 +104,8 @@ public class WorldProviderOrbit extends WorldProvider {
 
 		float distanceFactor = MathHelper.clamp_float((semiMajorAxisKm - distanceStart) / (distanceEnd - distanceStart), 0F, 1F);
 
-		float celestialAngle = worldObj.getCelestialAngle(par1);
-		float celestialPhase = (1 - (celestialAngle + 0.5F) % 1) * 2 - 1;
+		float solarAngle = worldObj.getCelestialAngle(par1);
+		float celestialPhase = (1 - (solarAngle + 0.5F) % 1) * 2 - 1;
 		float starBrightness = (float)Library.smoothstep(Math.abs(celestialPhase), 0.6, 0.75);
 
 		return MathHelper.clamp_float(starBrightness, distanceFactor, 1F);
@@ -116,8 +117,8 @@ public class WorldProviderOrbit extends WorldProvider {
 		if(SolarSystem.kerbol.hasTrait(CBT_Destroyed.class))
 			return 0;
 
-		float celestialAngle = worldObj.getCelestialAngle(par1);
-		float celestialPhase = (1 - (celestialAngle + 0.5F) % 1) * 2 - 1;
+		float solarAngle = worldObj.getCelestialAngle(par1);
+		float celestialPhase = (1 - (solarAngle + 0.5F) % 1) * 2 - 1;
 
 		return 1 - (float)Library.smoothstep(Math.abs(celestialPhase), 0.6, 0.8);
 	}

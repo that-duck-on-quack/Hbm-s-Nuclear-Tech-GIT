@@ -6,7 +6,7 @@ import java.util.List;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import com.hbm.blocks.ModBlocks;
-import com.hbm.dim.SolarSystem;
+import com.hbm.blocks.generic.BlockOreFluid;
 import com.hbm.inventory.container.ContainerMachineOilWell;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.fluid.tank.FluidTank;
@@ -34,16 +34,7 @@ public class TileEntityMachineFrackingTower extends TileEntityOilDrillBase {
 	protected static int consumption = 5000;
 	protected static int solutionRequired = 10;
 	protected static int delay = 20;
-	protected static int oilPerDeposit = 1000;
-	protected static int gasPerDepositMin = 100;
-	protected static int gasPerDepositMax = 500;
-	protected static double drainChance = 0.02D;
-	protected static int oilPerBedrockDepsoit = 100;
-	protected static int gasPerBedrockDepositMin = 10;
-	protected static int gasPerBedrockDepositMax = 50;
 	protected static int destructionRange = 75;
-	protected static int oilPerDunaDeposit = 300;
-	protected static double DunadrainChance = 0.05D; //Duna should yield less oil due to it being mostly a meme and also a dead planet
 
 	public TileEntityMachineFrackingTower() {
 		super();
@@ -95,65 +86,10 @@ public class TileEntityMachineFrackingTower extends TileEntityOilDrillBase {
 	}
 
 	@Override
-	public void doSuck(int x, int y, int z) {
-		super.doSuck(x, y, z);
+	public void onSuck(BlockOreFluid block, int x, int y, int z) {
+		super.onSuck(block, x, y, z);
 
-		if(worldObj.getBlock(x, y, z) == ModBlocks.ore_bedrock_oil) {
-			onSuck(x, y, z);
-		}
-	}
-
-	@Override
-	public void onSuck(int x, int y, int z) {
-
-		Block b = worldObj.getBlock(x, y, z);
-		int meta = worldObj.getBlockMetadata(x, y, z);
-
-		int oil = 0;
-		int gas = 0;
-
-		if(b == ModBlocks.ore_oil) {
-			if(meta == SolarSystem.Body.DUNA.ordinal()) {
-				tanks[0].setTankType(Fluids.OSLURRY);
-
-				oil = oilPerDunaDeposit;
-				gas = gasPerDepositMin + worldObj.rand.nextInt(gasPerDepositMax - gasPerDepositMin + 1);
-
-				if(worldObj.rand.nextDouble() < DunadrainChance) {
-					worldObj.setBlock(x, y, z, ModBlocks.ore_oil_empty, meta, 3);
-				}
-			} else if(meta == SolarSystem.Body.LAYTHE.ordinal()) {
-				tanks[0].setTankType(Fluids.OSLURRY);
-
-				oil = oilPerDeposit;
-				gas = gasPerDepositMin + worldObj.rand.nextInt(gasPerDepositMax - gasPerDepositMin + 1);
-
-				if(worldObj.rand.nextDouble() < drainChance) {
-					worldObj.setBlock(x, y, z, ModBlocks.ore_oil_empty, meta, 3);
-				}
-			} else {
-				tanks[0].setTankType(Fluids.OSLURRY);
-
-				oil = oilPerDeposit;
-				gas = gasPerDepositMin + worldObj.rand.nextInt(gasPerDepositMax - gasPerDepositMin + 1);
-
-				if(worldObj.rand.nextDouble() < drainChance) {
-					worldObj.setBlock(x, y, z, ModBlocks.ore_oil_empty, meta, 3);
-				}
-			}
-		}
-
-		if(b == ModBlocks.ore_bedrock_oil) {
-			oil = oilPerBedrockDepsoit;
-			gas = gasPerBedrockDepositMin + worldObj.rand.nextInt(gasPerBedrockDepositMax - gasPerBedrockDepositMin + 1);
-		}
-
-		this.tanks[0].setFill(this.tanks[0].getFill() + oil);
-		if(this.tanks[0].getFill() > this.tanks[0].getMaxFill()) this.tanks[0].setFill(tanks[0].getMaxFill());
-		this.tanks[1].setFill(this.tanks[1].getFill() + gas);
-		if(this.tanks[1].getFill() > this.tanks[1].getMaxFill()) this.tanks[1].setFill(tanks[1].getMaxFill());
-
-		this.tanks[2].setFill(tanks[2].getFill() - solutionRequired);
+		tanks[2].setFill(tanks[2].getFill() - solutionRequired);
 
 		OilSpot.generateOilSpot(worldObj, xCoord, zCoord, destructionRange, 10, false);
 	}
@@ -202,13 +138,6 @@ public class TileEntityMachineFrackingTower extends TileEntityOilDrillBase {
 		consumption = IConfigurableMachine.grab(obj, "I:consumption", consumption);
 		solutionRequired = IConfigurableMachine.grab(obj, "I:solutionRequired", solutionRequired);
 		delay = IConfigurableMachine.grab(obj, "I:delay", delay);
-		oilPerDeposit = IConfigurableMachine.grab(obj, "I:oilPerDeposit", oilPerDeposit);
-		gasPerDepositMin = IConfigurableMachine.grab(obj, "I:gasPerDepositMin", gasPerDepositMin);
-		gasPerDepositMax = IConfigurableMachine.grab(obj, "I:gasPerDepositMax", gasPerDepositMax);
-		drainChance = IConfigurableMachine.grab(obj, "D:drainChance", drainChance);
-		oilPerBedrockDepsoit = IConfigurableMachine.grab(obj, "I:oilPerBedrockDeposit", oilPerBedrockDepsoit);
-		gasPerBedrockDepositMin = IConfigurableMachine.grab(obj, "I:gasPerBedrockDepositMin", gasPerBedrockDepositMin);
-		gasPerBedrockDepositMax = IConfigurableMachine.grab(obj, "I:gasPerBedrockDepositMax", gasPerBedrockDepositMax);
 		destructionRange = IConfigurableMachine.grab(obj, "I:destructionRange", destructionRange);
 	}
 
@@ -218,13 +147,6 @@ public class TileEntityMachineFrackingTower extends TileEntityOilDrillBase {
 		writer.name("I:consumption").value(consumption);
 		writer.name("I:solutionRequired").value(solutionRequired);
 		writer.name("I:delay").value(delay);
-		writer.name("I:oilPerDeposit").value(oilPerDeposit);
-		writer.name("I:gasPerDepositMin").value(gasPerDepositMin);
-		writer.name("I:gasPerDepositMax").value(gasPerDepositMax);
-		writer.name("D:drainChance").value(drainChance);
-		writer.name("I:oilPerBedrockDeposit").value(oilPerBedrockDepsoit);
-		writer.name("I:gasPerBedrockDepositMin").value(gasPerBedrockDepositMin);
-		writer.name("I:gasPerBedrockDepositMax").value(gasPerBedrockDepositMax);
 		writer.name("I:destructionRange").value(destructionRange);
 	}
 
@@ -243,15 +165,15 @@ public class TileEntityMachineFrackingTower extends TileEntityOilDrillBase {
 	public void provideInfo(UpgradeType type, int level, List<String> info, boolean extendedInfo) {
 		info.add(IUpgradeInfoProvider.getStandardLabel(ModBlocks.machine_fracking_tower));
 		if(type == UpgradeType.SPEED) {
-			info.add(EnumChatFormatting.GREEN + I18nUtil.resolveKey(this.KEY_DELAY, "-" + (level * 25) + "%"));
-			info.add(EnumChatFormatting.RED + I18nUtil.resolveKey(this.KEY_CONSUMPTION, "+" + (level * 25) + "%"));
+			info.add(EnumChatFormatting.GREEN + I18nUtil.resolveKey(KEY_DELAY, "-" + (level * 25) + "%"));
+			info.add(EnumChatFormatting.RED + I18nUtil.resolveKey(KEY_CONSUMPTION, "+" + (level * 25) + "%"));
 		}
 		if(type == UpgradeType.POWER) {
-			info.add(EnumChatFormatting.GREEN + I18nUtil.resolveKey(this.KEY_CONSUMPTION, "-" + (level * 25) + "%"));
-			info.add(EnumChatFormatting.RED + I18nUtil.resolveKey(this.KEY_DELAY, "+" + (level * 10) + "%"));
+			info.add(EnumChatFormatting.GREEN + I18nUtil.resolveKey(KEY_CONSUMPTION, "-" + (level * 25) + "%"));
+			info.add(EnumChatFormatting.RED + I18nUtil.resolveKey(KEY_DELAY, "+" + (level * 10) + "%"));
 		}
 		if(type == UpgradeType.AFTERBURN) {
-			info.add(EnumChatFormatting.GREEN + I18nUtil.resolveKey(this.KEY_BURN, level * 10, level * 50));
+			info.add(EnumChatFormatting.GREEN + I18nUtil.resolveKey(KEY_BURN, level * 10, level * 50));
 		}
 		if(type == UpgradeType.OVERDRIVE) {
 			info.add((BobMathUtil.getBlink() ? EnumChatFormatting.RED : EnumChatFormatting.DARK_GRAY) + "YES");

@@ -3,7 +3,6 @@ package com.hbm.dim.Ike;
 import java.util.ArrayList;
 
 import com.hbm.blocks.ModBlocks;
-import com.hbm.config.SpaceConfig;
 import com.hbm.dim.WorldProviderCelestial;
 
 import net.minecraft.block.Block;
@@ -16,7 +15,7 @@ public class WorldProviderIke extends WorldProviderCelestial {
 
 	@Override
 	public void registerWorldChunkManager() {
-		this.worldChunkMgr = new WorldChunkManagerHell(new BiomeGenIke(SpaceConfig.ikeBiome), dimensionId);
+		this.worldChunkMgr = new WorldChunkManagerHell(BiomeGenIke.biome, 0.0F);
 	}
 
 	@Override

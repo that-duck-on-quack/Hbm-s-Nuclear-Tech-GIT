@@ -12,13 +12,11 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenEveMountains extends BiomeGenBaseEve {
 
-	public static final BiomeGenBase.Height height = new BiomeGenBase.Height(0.525F, 0.4F);
-
 	public BiomeGenEveMountains(int id) {
 		super(id);
 		this.setBiomeName("Eve Mountains");
 
-		this.setHeight(height);
+		this.setHeight(new BiomeGenBase.Height(0.525F, 0.4F));
 	}
 
 	@Override

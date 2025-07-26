@@ -6,7 +6,7 @@ import java.util.List;
 import com.hbm.blocks.ILookOverlay;
 import com.hbm.config.SpaceConfig;
 import com.hbm.dim.CelestialBody;
-import com.hbm.dim.DebugTeleporter;
+import com.hbm.dim.CelestialTeleporter;
 import com.hbm.dim.SolarSystem;
 import com.hbm.dim.orbit.OrbitalStation;
 import com.hbm.explosion.ExplosionLarge;
@@ -309,7 +309,7 @@ public class EntityRideableRocket extends EntityMissileBaseNT implements ILookOv
 						}
 
 						if(worldObj.provider.dimensionId != targetDimensionId) {
-							DebugTeleporter.teleport(rider, targetDimensionId, x + 0.5D, y, z + 0.5D, false);
+							CelestialTeleporter.teleport(rider, targetDimensionId, x + 0.5D, y, z + 0.5D, false);
 						} else {
 							posX = x + 0.5D;
 							posZ = z + 0.5D;
@@ -472,7 +472,7 @@ public class EntityRideableRocket extends EntityMissileBaseNT implements ILookOv
 	}
 
 	@Override
-	public void onImpact() {
+	public void onMissileImpact(MovingObjectPosition mop) {
 		// no boom
 	}
 

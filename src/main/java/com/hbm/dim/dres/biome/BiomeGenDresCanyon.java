@@ -12,13 +12,11 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenDresCanyon extends BiomeGenBaseDres {
 
-	public static final BiomeGenBase.Height height = new BiomeGenBase.Height(-1F, 0.34F);
-
 	public BiomeGenDresCanyon(int id) {
 		super(id);
 		this.setBiomeName("Dres Large Basins");
 
-		this.setHeight(height);
+		this.setHeight(new BiomeGenBase.Height(-1F, 0.34F));
 	}
 
 	@Override

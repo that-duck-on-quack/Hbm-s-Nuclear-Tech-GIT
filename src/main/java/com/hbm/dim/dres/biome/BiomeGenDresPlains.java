@@ -12,13 +12,11 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenDresPlains extends BiomeGenBaseDres {
 
-	public static final BiomeGenBase.Height height = new BiomeGenBase.Height(0.625F, 0.04F);
-
 	public BiomeGenDresPlains(int id) {
 		super(id);
 		this.setBiomeName("Dresian Plains");
 
-		this.setHeight(height);
+		this.setHeight(new BiomeGenBase.Height(0.625F, 0.04F));
 	}
 
 	@Override

@@ -158,6 +158,8 @@ public class WorldGeneratorCelestial implements IWorldGenerator {
 		BlockOre.addValidBody(ModBlocks.ore_asbestos, SolarSystem.Body.KERBIN);
 		BlockOre.addValidBody(ModBlocks.ore_lignite, SolarSystem.Body.KERBIN);
 		BlockOre.addValidBody(ModBlocks.ore_oil, SolarSystem.Body.KERBIN);
+		BlockOre.addValidBody(ModBlocks.ore_bedrock_oil, SolarSystem.Body.KERBIN);
+		BlockOre.addValidBody(ModBlocks.ore_coltan, SolarSystem.Body.KERBIN);
 
 		BlockOre.addAllExcept(ModBlocks.ore_nickel, SolarSystem.Body.KERBIN);
 	}
@@ -299,3 +301,4 @@ public class WorldGeneratorCelestial implements IWorldGenerator {
 	}
 
 }
+

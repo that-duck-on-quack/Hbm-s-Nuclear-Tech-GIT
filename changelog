@@ -1,9 +1,18 @@
-Includes all changes and bugfixes from the latest upstream NTMain update - [X5356 - what did i do these past 3 weeks?](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5356)
+Includes all changes and bugfixes from the latest upstream NTMain update - [X5397 - i need you, i need you, i need you, but i wish you were dead](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT/releases/tag/1.0.27_X5397)
 
 ## Added
-* Fully simulated orbital elements, including inclination and eccentricity
-    * Now the moon may only partially eclipse the sun at times, rather than always fully eclipsing
-* New nickel + copper production chains for Mun and Minmus
+* Celestial Orrery
+    * Shows the current position of all celestial bodies as a hologram
+* Occasionally Heavy Boots
+    * Temporarily increases gravity on low gravity worlds when holding crouch
+* More `en_AU` translations
+* Space specific recipes to the new assembler (let us know if we missed any!)
 
 ## Changed
-* Removed BoP crash, some idiot (read: me) figured the wrong limit months ago and didn't think to double check.
+* DNT flight boost now activated by holding sprint key
+* Day and Night crafting requirement adjusted
+    * whatever that means
+
+## Fixed
+* Flying Laythe squids
+* Missing tank textures for aqueous nickel/copper, and brine

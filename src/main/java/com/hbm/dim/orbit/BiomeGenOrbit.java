@@ -2,12 +2,16 @@ package com.hbm.dim.orbit;
 
 import java.util.Random;
 
+import com.hbm.config.SpaceConfig;
 import com.hbm.dim.BiomeGenBaseCelestial;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenOrbit extends BiomeGenBaseCelestial {
+
+	public static final BiomeGenBase biome = new BiomeGenOrbit(SpaceConfig.orbitBiome);
 
 	public BiomeGenOrbit(int id) {
 		super(id);
@@ -23,5 +27,5 @@ public class BiomeGenOrbit extends BiomeGenBaseCelestial {
 	public void decorate(World world, Random rand, int x, int z) {
 		// EVEN LESS
 	}
-	
+
 }

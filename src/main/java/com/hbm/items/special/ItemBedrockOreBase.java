@@ -11,7 +11,6 @@ import com.hbm.items.special.ItemBedrockOreNew.CelestialBedrockOre;
 import com.hbm.items.special.ItemBedrockOreNew.CelestialBedrockOreType;
 import com.hbm.items.tool.ItemOreDensityScanner;
 import com.hbm.util.i18n.I18nUtil;
-import com.hbm.main.MainRegistry;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,29 +37,30 @@ public class ItemBedrockOreBase extends Item {
 		return data.getDouble(type.suffix);
 	}
 
-	public static CelestialBody getOreBody(ItemStack stack) {
-		return CelestialBody.getBody(stack.getItemDamage());
+	public static SolarSystem.Body getOreBody(ItemStack stack) {
+		return SolarSystem.Body.values()[stack.getItemDamage()];
 	}
 
 	public static void setOreAmount(World world, ItemStack stack, int x, int z) {
 		if(!stack.hasTagCompound()) stack.stackTagCompound = new NBTTagCompound();
 		NBTTagCompound data = stack.getTagCompound();
 
-		CelestialBody body = CelestialBody.getBody(world);
+		SolarSystem.Body body = CelestialBody.getEnum(world);
 
-		stack.setItemDamage(body.dimensionId);
+		stack.setItemDamage(body.ordinal());
 
-		for(CelestialBedrockOreType type : CelestialBedrockOre.get(body.getEnum()).types) {
+		for(CelestialBedrockOreType type : CelestialBedrockOre.get(body).types) {
 			data.setDouble(type.suffix, getOreLevel(world, x, z, type));
 		}
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
-		CelestialBody body = getOreBody(stack);
+		SolarSystem.Body body = getOreBody(stack);
 		list.add("Mined on: " + I18nUtil.resolveKey("body." + body.name));
 
-		for(CelestialBedrockOreType type : CelestialBedrockOre.get(body.getEnum()).types) {
+		for(CelestialBedrockOreType type : CelestialBedrockOre.get(body).types) {
 			double amount = getOreAmount(stack, type);
 			String typeName = StatCollector.translateToLocalFormatted("item.bedrock_ore.type." + type.suffix + ".name");
 			list.add(typeName + ": " + ((int) (amount * 100)) / 100D + " (" + ItemOreDensityScanner.getColor(amount) + StatCollector.translateToLocalFormatted(ItemOreDensityScanner.translateDensity(amount)) + EnumChatFormatting.GRAY + ")");
@@ -84,13 +84,14 @@ public class ItemBedrockOreBase extends Item {
 		return generators.computeIfAbsent(seed, key -> new NoiseGeneratorPerlin(new Random(seed), 4));
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
 
 		for(SolarSystem.Body body : SolarSystem.Body.values()) {
 			if(body == SolarSystem.Body.ORBIT) continue;
-			list.add(new ItemStack(item, 1, body.getDimensionId()));
+			list.add(new ItemStack(item, 1, body.ordinal()));
 		}
 	}
 

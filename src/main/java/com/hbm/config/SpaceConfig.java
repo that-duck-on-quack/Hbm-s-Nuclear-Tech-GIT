@@ -7,8 +7,6 @@ import net.minecraftforge.common.config.Configuration;
 
 public class SpaceConfig {
 
-	public static int dunaoilSpawn = 100;
-
 	// Dimension ID limit is over 4 million, so go crazy
 	public static int moonDimension = 413_015;
 	public static int dunaDimension = 413_016;
@@ -27,7 +25,7 @@ public class SpaceConfig {
 
 	// Vanilla biomes: 0-39
 	// Vanilla mutated variants: 128-167
-	// Biomes O' Plenty: too many, EndlessIDs is required
+	// Biomes O' Plenty: 41-124 (oof)
 	// Aether Legacy: 127
 	// Galacticraft: 102+ (variable, ugh, just assume up to 110 I guess)
 	// Advanced Rocketry: "maxBiomes = 512" - ...that isn't even valid but okay

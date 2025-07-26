@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.hbm.blocks.ModBlocks;
 import com.hbm.config.MobConfig;
+import com.hbm.config.SpaceConfig;
 import com.hbm.dim.BiomeGenBaseCelestial;
 import com.hbm.entity.mob.EntityMoonCow;
 
@@ -15,7 +16,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenMoon extends BiomeGenBaseCelestial {
 
-	public static final BiomeGenBase.Height height = new BiomeGenBase.Height(0.125F, 0.05F);
+	public static final BiomeGenBase biome = new BiomeGenMoon(SpaceConfig.moonBiome);
 
 	public BiomeGenMoon(int id) {
 		super(id);
@@ -28,7 +29,7 @@ public class BiomeGenMoon extends BiomeGenBaseCelestial {
 
 		this.theBiomeDecorator.generateLakes = false;
 
-		this.setHeight(height);
+		this.setHeight(new BiomeGenBase.Height(0.125F, 0.05F));
 
 		this.topBlock = ModBlocks.moon_turf;
 		this.fillerBlock = ModBlocks.moon_rock;

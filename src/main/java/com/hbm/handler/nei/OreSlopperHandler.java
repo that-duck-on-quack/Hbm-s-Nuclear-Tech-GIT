@@ -26,11 +26,11 @@ public class OreSlopperHandler extends NEIUniversalHandler {
 	public String getKey() {
 		return "ntmOreSlopper";
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	public static HashMap getRecipes() {
 		HashMap<Object, Object> recipes = new HashMap<Object, Object>();
-		
+
 		for(SolarSystem.Body body : SolarSystem.Body.values()) {
 			if(body == SolarSystem.Body.ORBIT) continue;
 
@@ -38,9 +38,9 @@ public class OreSlopperHandler extends NEIUniversalHandler {
 			for(CelestialBedrockOreType type : CelestialBedrockOre.get(body).types) outputs.add(ItemBedrockOreNew.make(BedrockOreGrade.BASE, type));
 			outputs.add(ItemFluidIcon.make(Fluids.SLOP, 1000));
 
-			recipes.put(new ItemStack[] {ItemFluidIcon.make(Fluids.WATER, 1000), new ItemStack(ModItems.bedrock_ore_base, 1, body.getDimensionId())}, outputs.toArray(new ItemStack[0]));
+			recipes.put(new ItemStack[] {ItemFluidIcon.make(Fluids.WATER, 1000), new ItemStack(ModItems.bedrock_ore_base, 1, body.ordinal())}, outputs.toArray(new ItemStack[0]));
 		}
-		
+
 		return recipes;
 	}
 }

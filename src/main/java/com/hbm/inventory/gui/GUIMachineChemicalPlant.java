@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import com.hbm.inventory.container.ContainerMachineChemicalPlant;
 import com.hbm.inventory.recipes.ChemicalPlantRecipes;
 import com.hbm.inventory.recipes.loader.GenericRecipe;
+import com.hbm.items.machine.ItemBlueprints;
 import com.hbm.lib.RefStrings;
 import com.hbm.tileentity.machine.TileEntityMachineChemicalPlant;
 
@@ -54,7 +55,7 @@ public class GUIMachineChemicalPlant extends GuiInfoContainer {
 	protected void mouseClicked(int x, int y, int button) {
 		super.mouseClicked(x, y, button);
 		
-		if(this.checkClick(x, y, 7, 125, 18, 18)) GUIScreenRecipeSelector.openSelector(ChemicalPlantRecipes.INSTANCE, chemplant, chemplant.chemplantModule.recipe, 0, this);
+		if(this.checkClick(x, y, 7, 125, 18, 18)) GUIScreenRecipeSelector.openSelector(ChemicalPlantRecipes.INSTANCE, chemplant, chemplant.chemplantModule.recipe, 0, ItemBlueprints.grabPool(chemplant.slots[1]), this);
 	}
 
 	@Override
@@ -80,6 +81,21 @@ public class GUIMachineChemicalPlant extends GuiInfoContainer {
 		}
 		
 		GenericRecipe recipe = ChemicalPlantRecipes.INSTANCE.recipeNameMap.get(chemplant.chemplantModule.recipe);
+		
+		/// LEFT LED
+		if(chemplant.didProcess) {
+			drawTexturedModalRect(guiLeft + 51, guiTop + 121, 195, 0, 3, 6);
+		} else if(recipe != null) {
+			drawTexturedModalRect(guiLeft + 51, guiTop + 121, 192, 0, 3, 6);
+		}
+		
+		/// RIGHT LED
+		if(chemplant.didProcess) {
+			drawTexturedModalRect(guiLeft + 56, guiTop + 121, 195, 0, 3, 6);
+		} else if(recipe != null && chemplant.power >= recipe.power) {
+			drawTexturedModalRect(guiLeft + 56, guiTop + 121, 192, 0, 3, 6);
+		}
+		
 		this.renderItem(recipe != null ? recipe.getIcon() : TEMPLATE_FOLDER, 8, 126);
 		
 		if(recipe != null && recipe.inputItem != null) {

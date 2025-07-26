@@ -8,8 +8,12 @@ import com.hbm.config.SpaceConfig;
 import com.hbm.config.WorldConfig;
 import com.hbm.dim.CelestialBody;
 import com.hbm.dim.SolarSystem;
+import com.hbm.main.StructureManager;
 import com.hbm.world.dungeon.AncientTomb;
+import com.hbm.world.feature.OilBubble;
 import com.hbm.world.gen.NBTStructure;
+import com.hbm.world.gen.NBTStructure.JigsawPiece;
+import com.hbm.world.gen.NBTStructure.SpawnCondition;
 import com.hbm.world.generator.DungeonToolbox;
 
 import cpw.mods.fml.common.IWorldGenerator;
@@ -19,12 +23,19 @@ import net.minecraft.world.chunk.IChunkProvider;
 public class WorldGeneratorIke implements IWorldGenerator {
 
 	public WorldGeneratorIke() {
-		NBTStructure.registerNullWeight(SpaceConfig.ikeDimension, 16);
+		NBTStructure.registerStructure(SpaceConfig.ikeDimension, new SpawnCondition() {{
+			structure = new JigsawPiece("ike_artifact", StructureManager.ike_artifact, -5);
+			spawnWeight = 4;
+		}});
+
+		NBTStructure.registerNullWeight(SpaceConfig.ikeDimension, 12);
 
 		BlockOre.addValidBody(ModBlocks.ore_mineral, SolarSystem.Body.IKE);
 		BlockOre.addValidBody(ModBlocks.ore_lithium, SolarSystem.Body.IKE);
 		BlockOre.addValidBody(ModBlocks.ore_coltan, SolarSystem.Body.IKE);
 		BlockOre.addValidBody(ModBlocks.ore_asbestos, SolarSystem.Body.IKE);
+
+		BlockOre.addValidBody(ModBlocks.ore_brine, SolarSystem.Body.IKE);
 	}
 
 	@Override
@@ -36,6 +47,14 @@ public class WorldGeneratorIke implements IWorldGenerator {
 
 	private void generateIke(World world, Random rand, int i, int j) {
 		int meta = CelestialBody.getMeta(world);
+
+		if(WorldConfig.ikeBrineSpawn > 0 && rand.nextInt(WorldConfig.ikeBrineSpawn) == 0) {
+			int randPosX = i + rand.nextInt(16);
+			int randPosY = rand.nextInt(25);
+			int randPosZ = j + rand.nextInt(16);
+
+			OilBubble.spawnOil(world, randPosX, randPosY, randPosZ, 10 + rand.nextInt(7), ModBlocks.ore_brine, meta, ModBlocks.ike_stone);
+		}
 
 		DungeonToolbox.generateOre(world, rand, i, j, WorldConfig.asbestosSpawn, 8, 3, 22, ModBlocks.ore_asbestos, meta, ModBlocks.ike_stone);
 		DungeonToolbox.generateOre(world, rand, i, j, WorldConfig.copperSpawn, 9, 4, 27, ModBlocks.ore_copper, meta, ModBlocks.ike_stone);

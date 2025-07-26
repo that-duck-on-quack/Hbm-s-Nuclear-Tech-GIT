@@ -182,7 +182,8 @@ public class OreDictManager {
 	public static final DictFrame MINGRADE = new DictFrame("Mingrade");
 	public static final DictFrame ALLOY = new DictFrame("AdvancedAlloy");
 	/** NICKEL */
-	public static final DictFrame NI = new DictFrame("MunNickel");
+	public static final DictFrame NI = new DictFrame("NickelPure");
+	public static final DictFrame NIM = new DictFrame("Nickel"); // Compat with "ferrous metal" so thermal isn't invalidated and neither is our intended progression!
 	/** TUNGSTEN */
 	public static final DictFrame W = new DictFrame("Tungsten");
 	/** ALUMINUM */
@@ -446,6 +447,7 @@ public class OreDictManager {
 		 * STABLE
 		 */
 		NI																	.ingot(ingot_nickel)												.dust(powder_nickel)            .plate(plate_nickel) 			.block(block_nickel)		.oreAll(ore_nickel) 												.nugget(nugget_nickel);
+		NIM																	.dust(fromOne(chunk_ore, EnumChunkType.PENTLANDITE)); // dust selected for compat reasons
 		TI																	.ingot(ingot_titanium)												.dust(powder_titanium)			.plate(plate_titanium)			.block(block_titanium)		.oreAll(ore_titanium);
 		CU																	.ingot(ingot_copper)												.dust(powder_copper)			.plate(plate_copper)			.block(block_copper)		.ore(ore_gneiss_copper) .oreAll(ore_copper);
 		MINGRADE															.ingot(ingot_red_copper)											.dust(powder_red_copper)		.billet(billet_red_copper)		.block(block_red_copper);

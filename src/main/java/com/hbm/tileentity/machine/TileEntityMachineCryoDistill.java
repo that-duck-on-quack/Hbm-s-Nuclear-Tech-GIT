@@ -137,7 +137,7 @@ public class TileEntityMachineCryoDistill extends TileEntityMachineBase implemen
 
 		return new DirPos[] {
 			// Input
-			new DirPos(xCoord + dir.offsetX * -1 + rot.offsetX * -3, yCoord - 2, zCoord + dir.offsetZ * -1 + rot.offsetZ * -3, rot),
+			new DirPos(xCoord + dir.offsetX * -1 + rot.offsetX * -3, yCoord - 2, zCoord + dir.offsetZ * -1 + rot.offsetZ * -3, rot.getOpposite()),
 
 			// Outputs
 			new DirPos(xCoord + dir.offsetX * 4 + rot.offsetX * -2, yCoord - 2, zCoord + dir.offsetZ * 4 + rot.offsetZ * -2, dir),
@@ -146,7 +146,7 @@ public class TileEntityMachineCryoDistill extends TileEntityMachineBase implemen
 			new DirPos(xCoord + dir.offsetX * 4 + rot.offsetX * 2, yCoord - 2, zCoord + dir.offsetZ * 4 + rot.offsetZ * 2, dir),
 
 			// Power
-			new DirPos(xCoord + dir.offsetX * -2 + rot.offsetX * -3, yCoord - 2, zCoord + dir.offsetZ * -2 + rot.offsetZ * -3, rot),
+			new DirPos(xCoord + dir.offsetX * -2 + rot.offsetX * -3, yCoord - 2, zCoord + dir.offsetZ * -2 + rot.offsetZ * -3, rot.getOpposite()),
 		};
 	}
 

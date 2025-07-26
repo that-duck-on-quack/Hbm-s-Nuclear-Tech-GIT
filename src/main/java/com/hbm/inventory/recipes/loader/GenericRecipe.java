@@ -31,9 +31,19 @@ public class GenericRecipe {
 	protected ItemStack icon;
 	public boolean writeIcon = false;
 	public boolean customLocalization = false;
+	protected String[] blueprintPools = null;
 	
 	public GenericRecipe(String name) {
 		this.name = name;
+	}
+	
+	public boolean isPooled() { return blueprintPools != null; }
+	public String[] getPools() { return this.blueprintPools; }
+	
+	public boolean isPartOfPool(String lookingFor) {
+		if(!isPooled()) return false;
+		for(String pool : blueprintPools) if (pool.equals(lookingFor)) return true;
+		return false;
 	}
 	
 	public GenericRecipe setDuration(int duration) { this.duration = duration; return this; }
@@ -45,6 +55,7 @@ public class GenericRecipe {
 	public GenericRecipe setIcon(Item item) { return this.setIcon(new ItemStack(item)); }
 	public GenericRecipe setIcon(Block block) { return this.setIcon(new ItemStack(block)); }
 	public GenericRecipe setNamed() { this.customLocalization = true; return this; }
+	public GenericRecipe setPools(String... pools) { this.blueprintPools = pools; for(String pool : pools) GenericRecipes.addToPool(pool, this); return this; }
 
 	public GenericRecipe inputItems(AStack... input) { this.inputItem = input; return this; }
 	public GenericRecipe inputFluids(FluidStack... input) { this.inputFluid = input; return this; }

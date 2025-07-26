@@ -26,6 +26,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -49,7 +50,7 @@ public class CelestialBody {
 	public float massKg = 0;
 	public float radiusKm = 0;
 	public float semiMajorAxisKm = 0; // Distance to the parent body
-	public float semiMinorAxisKm = 0;
+	public float semiMinorAxisFactor = 0; // has a sqrt so done ahead of time
 	public float eccentricity = 0;
 	public float inclination = 0;
 	public float ascendingNode = 0;
@@ -108,7 +109,7 @@ public class CelestialBody {
 
 	public CelestialBody withOrbitalParameters(float semiMajorAxisKm, float eccentricity, float argumentPeriapsisDegrees, float inclinationDegrees, float ascendingNodeDegrees) {
 		this.semiMajorAxisKm = semiMajorAxisKm;
-		this.semiMinorAxisKm = semiMajorAxisKm * (float)Math.sqrt(1 - eccentricity * eccentricity);
+		this.semiMinorAxisFactor = (float)Math.sqrt(1 - eccentricity * eccentricity);
 		this.eccentricity = eccentricity;
 		this.argumentPeriapsis = (float)Math.toRadians(argumentPeriapsisDegrees);
 		this.inclination = (float)Math.toRadians(inclinationDegrees);
@@ -447,6 +448,8 @@ public class CelestialBody {
 	}
 
 	public static float getGravity(EntityLivingBase entity) {
+		if(entity instanceof EntityWaterMob) return AstronomyUtil.STANDARD_GRAVITY;
+
 		if(inOrbit(entity.worldObj)) {
 			if(HbmLivingProps.hasGravity(entity)) {
 				OrbitalStation station = entity.worldObj.isRemote

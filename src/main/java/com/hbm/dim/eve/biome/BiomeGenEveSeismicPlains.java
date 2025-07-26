@@ -12,13 +12,11 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenEveSeismicPlains extends BiomeGenBaseEve {
 
-	public static final BiomeGenBase.Height height = new BiomeGenBase.Height(0.270F, 0.3F);
-
 	public BiomeGenEveSeismicPlains(int id) {
 		super(id);
 		this.setBiomeName("Eve Seismic Plains");
 
-		this.setHeight(height);
+		this.setHeight(new BiomeGenBase.Height(0.270F, 0.3F));
 
 		this.topBlock = ModBlocks.eve_silt;
 		this.fillerBlock = ModBlocks.eve_silt;

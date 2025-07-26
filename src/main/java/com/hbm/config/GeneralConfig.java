@@ -1,7 +1,7 @@
 package com.hbm.config;
 
 import net.minecraftforge.common.config.Configuration;
-
+import com.hbm.lib.RefStrings;
 public class GeneralConfig {
 
 	public static boolean enableThermosPreventer = true;
@@ -37,6 +37,7 @@ public class GeneralConfig {
 	public static boolean enableSoundExtension = true;
 	public static boolean enableMekanismChanges = true;
 	public static boolean enableServerRecipeSync = false;
+	public static boolean enableLoadScreenReplacement = true;
 	public static int normalSoundChannels = 200;
 
 	public static boolean enableExpensiveMode = false;
@@ -73,7 +74,7 @@ public class GeneralConfig {
 	public static boolean enableThreadedAtmospheres = true;
 	public static boolean enableSacrilege = false;
 	public static boolean enableHardcoreDarkness = false;
-
+	public static String[] preferredOutputMod = new String[] {RefStrings.MODID};
 	//Configs added by Speck
 	public static boolean uselessConfig = true;
 
@@ -124,6 +125,9 @@ public class GeneralConfig {
 		enableThreadedAtmospheres = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.42_threadedAtmospheres", "If enabled, will run atmosphere blobbing in a separate thread for performance", true);
 		enableSacrilege = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.43_serverSafety", "Allows for automated entity culling to function properly.", false);
 		enableHardcoreDarkness = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.44_hardcoreDarkness", "If enabled, sets night-time minimum fog to zero, to complement hardcore darkness mods", false);
+		preferredOutputMod = CommonConfig.createConfigStringList(config,CATEGORY_GENERAL,"1.42_preferredOutputMod",
+				"The mod which is preferred as output when certain machines autogenerate recipes. Currently used for the shredder", new String[] {RefStrings.MODID});
+		enableLoadScreenReplacement = config.get(CATEGORY_GENERAL, "1.43_enableLoadScreenReplacement", true, "Tries to replace the vanilla load screen with the 'tip of the day' one, may clash with other mods trying to do the same.").getBoolean(true);
 		enableExpensiveMode = config.get(CATEGORY_GENERAL, "1.99_enableExpensiveMode", false, "It does what the name implies.").getBoolean(false);
 
 		final String CATEGORY_528 = CommonConfig.CATEGORY_528;

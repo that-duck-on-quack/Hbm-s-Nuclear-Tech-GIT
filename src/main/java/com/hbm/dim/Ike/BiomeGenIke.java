@@ -3,6 +3,7 @@ package com.hbm.dim.Ike;
 import java.util.Random;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.config.SpaceConfig;
 import com.hbm.dim.BiomeDecoratorCelestial;
 import com.hbm.dim.BiomeGenBaseCelestial;
 
@@ -14,7 +15,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenIke extends BiomeGenBaseCelestial {
 
-	public static final BiomeGenBase.Height height = new BiomeGenBase.Height(0.325F, 0.05F);
+	public static final BiomeGenBase biome = new BiomeGenIke(SpaceConfig.ikeBiome);
 
 	public BiomeGenIke(int id) {
 		super(id);
@@ -27,7 +28,7 @@ public class BiomeGenIke extends BiomeGenBaseCelestial {
 		this.theBiomeDecorator = decorator;
 		this.theBiomeDecorator.generateLakes = false;
 
-		this.setHeight(height);
+		this.setHeight(new BiomeGenBase.Height(0.325F, 0.05F));
 
 		this.topBlock = ModBlocks.ike_regolith;
 		this.fillerBlock = ModBlocks.ike_regolith; // thiccer regolith due to uhhhhhh...................

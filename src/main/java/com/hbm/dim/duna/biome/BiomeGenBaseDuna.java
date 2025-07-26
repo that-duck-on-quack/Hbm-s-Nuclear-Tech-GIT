@@ -10,24 +10,24 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 
 public abstract class BiomeGenBaseDuna extends BiomeGenBaseCelestial {
-    
-    public static final BiomeGenBase dunaPlains = new BiomeGenDunaPlains(SpaceConfig.dunaBiome);
-    public static final BiomeGenBase dunaLowlands = new BiomeGenDunaLowlands(SpaceConfig.dunaLowlandsBiome);
-    public static final BiomeGenBase dunaPolar = new BiomeGenDunaPolar(SpaceConfig.dunaPolarBiome);
-    public static final BiomeGenBase dunaHills = new BiomeGenDunaHills(SpaceConfig.dunaHillsBiome);
-    public static final BiomeGenBase dunaPolarHills = new BiomeGenDunaPolarHills(SpaceConfig.dunaPolarHillsBiome);
-    
-    public BiomeGenBaseDuna(int id) {
-        super(id);
-        
-		this.setDisableRain();
-        this.setTemperatureRainfall(-1.0F, 0.0F);
 
-        this.theBiomeDecorator = new BiomeDecoratorCelestial(ModBlocks.duna_rock);
-        this.theBiomeDecorator.generateLakes = false;
-		
+	public static final BiomeGenBase dunaPlains = new BiomeGenDunaPlains(SpaceConfig.dunaBiome);
+	public static final BiomeGenBase dunaLowlands = new BiomeGenDunaLowlands(SpaceConfig.dunaLowlandsBiome);
+	public static final BiomeGenBase dunaPolar = new BiomeGenDunaPolar(SpaceConfig.dunaPolarBiome);
+	public static final BiomeGenBase dunaHills = new BiomeGenDunaHills(SpaceConfig.dunaHillsBiome);
+	public static final BiomeGenBase dunaPolarHills = new BiomeGenDunaPolarHills(SpaceConfig.dunaPolarHillsBiome);
+
+	public BiomeGenBaseDuna(int id) {
+		super(id);
+
+		this.setDisableRain();
+		this.setTemperatureRainfall(-1.0F, 0.0F);
+
+		this.theBiomeDecorator = new BiomeDecoratorCelestial(ModBlocks.duna_rock);
+		this.theBiomeDecorator.generateLakes = false;
+
 		this.topBlock = ModBlocks.duna_sands;
 		this.fillerBlock = ModBlocks.duna_rock;
 		BiomeDictionary.registerBiomeType(this, BiomeDictionary.Type.COLD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.DEAD);
-    }
+	}
 }

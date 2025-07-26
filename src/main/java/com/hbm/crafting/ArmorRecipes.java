@@ -183,6 +183,7 @@ public class ArmorRecipes {
 
 		//Feet
 		CraftingManager.addRecipeAuto(new ItemStack(ModItems.flippers, 1), new Object[] { "R R", "R R", 'R', RUBBER.ingot() });
+		CraftingManager.addRecipeAuto(new ItemStack(ModItems.heavy_boots, 1), new Object[] { "L L", "S S", 'L', Items.leather, 'S', STEEL.ingot() });
 
 		//Configged
 		if(GeneralConfig.enableLBSM && GeneralConfig.enableLBSMSimpleArmorRecipes) {

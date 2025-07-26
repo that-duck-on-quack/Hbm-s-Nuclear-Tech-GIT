@@ -1,7 +1,6 @@
 package com.hbm.inventory.container;
 
 import com.hbm.inventory.SlotNonRetarded;
-import com.hbm.items.ItemInventory;
 import com.hbm.items.block.ItemBlockStorageCrate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -11,14 +10,10 @@ import net.minecraft.tileentity.TileEntity;
 
 public class ContainerCrateBase extends ContainerBase {
 
-	//just there so prev stuff doesnt break
-	protected IInventory crate = tile;
-
 	public ContainerCrateBase(InventoryPlayer invPlayer, IInventory tedf) {
 		super(invPlayer, tedf);
 		tile.openInventory();
 	}
-
 
 	@Override
 	public void playerInv(InventoryPlayer invPlayer, int playerInvX, int playerInvY, int playerHotbarY) {
@@ -29,21 +24,19 @@ public class ContainerCrateBase extends ContainerBase {
 		}
 
 		for(int i = 0; i < 9; i++) {
-			this.addSlotToContainer(new SlotNonRetarded(invPlayer, i, playerInvX + i * 18, playerHotbarY));
+			this.addSlotToContainer(
+				(invPlayer.currentItem == i && this.tile instanceof ItemBlockStorageCrate.InventoryCrate) ?
+				new SlotPlayerCrateLocked(invPlayer, i, playerInvX + i * 18, playerHotbarY) :
+				new SlotNonRetarded(invPlayer, i, playerInvX + i * 18, playerHotbarY)
+			);
 		}
 	}
 
 	@Override
 	public ItemStack slotClick(int index, int button, int mode, EntityPlayer player) {
-		if(tile instanceof ItemInventory){
-			ItemStack original = ((ItemInventory) tile).original;
-			if(!ItemStack.areItemStacksEqual(player.getHeldItem(),original) || player.getHeldItem().stackSize != 1){
-				player.closeScreen();
-			}
-		}
 		// prevents the player from moving around the currently open box
 		if(player.inventory.getStackInSlot(player.inventory.currentItem) != null &&
-			player.inventory.getStackInSlot(player.inventory.currentItem).getItem() instanceof ItemBlockStorageCrate && !(this.crate instanceof TileEntity)) {
+			player.inventory.getStackInSlot(player.inventory.currentItem).getItem() instanceof ItemBlockStorageCrate && !(this.tile instanceof TileEntity)) {
 			if (mode == 2 && button == player.inventory.currentItem) {
 				return null;
 			}
@@ -60,23 +53,22 @@ public class ContainerCrateBase extends ContainerBase {
 		tile.closeInventory();
 	}
 
-	public class SlotPlayerCrate extends SlotNonRetarded {
+	/**
+	 * No touching anything here. No moving around, no taking, no inserting, fuck off.
+	 */
+	public class SlotPlayerCrateLocked extends SlotNonRetarded {
 
-		public SlotPlayerCrate(IInventory inventory, int id, int x, int y) {
+		public SlotPlayerCrateLocked(IInventory inventory, int id, int x, int y) {
 			super(inventory, id, x, y);
 		}
-
-		/**
-		 * This prevents the player from moving containers that are being held *at all*, fixing a decently big dupe.
-		 * I hate that this has to be here but... It is what it is.
-		 */
 		@Override
 		public boolean canTakeStack(EntityPlayer player) {
-			if(player.inventory.currentItem == this.getSlotIndex() && // If this slot is the current held slot.
-				this.getStack() != null && this.getStack().getItem() instanceof ItemBlockStorageCrate && // If the slot contains a storage crate.
-				player.openContainer instanceof ContainerCrateBase && !(ContainerCrateBase.this.crate instanceof TileEntity)) // If the player is currently inside a crate container.
-				return false;
-			return super.canTakeStack(player);
+			return false;
+		}
+
+		@Override
+		public boolean isItemValid(ItemStack item) {
+			return false;
 		}
 	}
 }

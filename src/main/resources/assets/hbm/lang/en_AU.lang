@@ -28,6 +28,8 @@ generator.martian=The Outback
 
 container.bat9000=Fuck-Off Huge Tank 9000
 container.electricFurnace=Electric Barbie
+container.zirnox=BEERNOX Nuclear Reactor
+
 tile.machine_bat9000.name=Fuck-Off Huge Tank 9000
 tile.machine_electric_furnace_off.name=Electric Barbie
 tile.machine_electric_furnace_on.name=Electric Barbie
@@ -42,3 +44,32 @@ tile.snowglobe.name=Souvenir
 tile.tumor.name=Old Mate
 tile.tnt_ntm.name=Legit TNT
 tile.skeleton_holder.name=Fucken hell Darren I told you not to ride the jet powered swing
+tile.machine_zirnox.name=BEERNOX Nuclear Reactor
+tile.zirnox_destroyed.name=Destroyed BEERNOX
+
+item.debris_element.name=Broken BEERNOX Fuel Element
+item.rod_zirnox_empty.name=Empty BEERNOX Bottle
+item.rod_zirnox_natural_uranium_fuel.name=BEERNOX Natural Uranium Fuel Bottle
+item.rod_zirnox_uranium_fuel.name=BEERNOX Uranium Fuel Bottle
+item.rod_zirnox_th232.name=BEERNOX VB Bottle
+item.rod_zirnox_thorium_fuel.name=BEERNOX XXXX Gold Bottle
+item.rod_zirnox_mox_fuel.name=BEERNOX MOX Fuel Bottle
+item.rod_zirnox_plutonium_fuel.name=BEERNOX Plutonium Fuel Bottle
+item.rod_zirnox_u233_fuel.name=BEERNOX Uranium-233 Fuel Bottle
+item.rod_zirnox_u235_fuel.name=BEERNOX Uranium-235 Fuel Bottle
+item.rod_zirnox_les_fuel.name=BEERNOX LES Fuel Bottle
+item.rod_zirnox_lithium.name=BEERNOX Lithium Bottle
+item.rod_zirnox_tritium.name=BEERNOX Tritium Bottle
+item.rod_zirnox_zfb_mox.name=BEERNOX ZFB MOX Fuel Bottle
+item.rod_zirnox_natural_uranium_fuel_depleted.name=Depleted BEERNOX Natural Uranium Fuel Bottle
+item.rod_zirnox_uranium_fuel_depleted.name= Depleted BEERNOX Uranium Fuel Bottle
+item.rod_zirnox_thorium_fuel_depleted.name= Depleted BEERNOX Thorium Fuel Bottle
+item.rod_zirnox_mox_fuel_depleted.name=Depleted BEERNOX MOX Fuel Bottle
+item.rod_zirnox_plutonium_fuel_depleted.name=Depleted BEERNOX Plutonium Fuel Bottle
+item.rod_zirnox_u233_fuel_depleted.name=Depleted BEERNOX Uranium-233 Fuel Bottle
+item.rod_zirnox_u235_fuel_depleted.name=Depleted BEERNOX Uranium-235 Fuel Bottle
+item.rod_zirnox_les_fuel_depleted.name=Depleted BEERNOX LES Fuel Bottle
+item.rod_zirnox_zfb_mox_depleted.name=Depleted BEERNOX ZFB MOX Fuel Bottle
+
+desc.item.zirnoxBreedingRod=§2[BEERNOX Breeding Rod]$§ePlace next to fuel rods to breed$§eLasts %d ticks
+desc.item.zirnoxRod=§a[BEERNOX Fuel Rod]$§eGenerates %1$d heat per tick$§eLasts %2$d ticks

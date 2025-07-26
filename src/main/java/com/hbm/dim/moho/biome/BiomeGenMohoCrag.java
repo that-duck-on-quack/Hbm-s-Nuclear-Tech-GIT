@@ -6,13 +6,11 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenMohoCrag extends BiomeGenBaseMoho {
 
-	public static final BiomeGenBase.Height height = new BiomeGenBase.Height(0.275F, 0.666F);
-
 	public BiomeGenMohoCrag(int id) {
 		super(id);
 		this.setBiomeName("Moho Crag");
 
-		this.setHeight(height);
+		this.setHeight(new BiomeGenBase.Height(0.275F, 0.666F));
 
 		this.topBlock = ModBlocks.moho_regolith;
 		this.fillerBlock = ModBlocks.moho_regolith; // thiccer regolith due to uhhhhhh...................

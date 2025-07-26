@@ -24,7 +24,7 @@ public class NEIRegistry {
 		handlers.add(new GasCentrifugeRecipeHandler());
 		handlers.add(new BreederRecipeHandler());
 		handlers.add(new CyclotronRecipeHandler());
-		handlers.add(new AssemblerRecipeHandler());
+		handlers.add(new AssemblyMachineRecipeHandler());
 		handlers.add(new RefineryRecipeHandler());
 		handlers.add(new VacuumRecipeHandler());
 		handlers.add(new CrackingHandler());
@@ -33,7 +33,6 @@ public class NEIRegistry {
 		handlers.add(new RadiolysisRecipeHandler());
 		handlers.add(new ReformingHandler());
 		handlers.add(new HydrotreatingHandler());
-		handlers.add(new ChemplantRecipeHandler());
 		handlers.add(new ChemicalPlantRecipeHandler());
 		handlers.add(new OreSlopperHandler()); //before acidizing
 		handlers.add(new CrystallizerRecipeHandler());

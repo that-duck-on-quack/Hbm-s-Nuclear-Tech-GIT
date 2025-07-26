@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.blocks.generic.BlockOreFluid;
 import com.hbm.dim.SolarSystem;
 import com.hbm.inventory.UpgradeManagerNT;
 import com.hbm.inventory.RecipesCommon.AStack;
@@ -49,6 +50,7 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -365,49 +367,42 @@ public class TileEntityMachineMiningLaser extends TileEntityMachineBase implemen
 				targetZ + 0.5 + rangeHor
 				));
 
-		for(EntityItem item : items) {
+		for(EntityItem entityItem : items) {
 
-			if(item.isDead) continue;
+			if(entityItem.isDead) continue;
 
-			if(nullifier && isBad(item.getEntityItem())) {
-				item.setDead();
+			if(nullifier && isBad(entityItem.getEntityItem())) {
+				entityItem.setDead();
 				continue;
 			}
 
-			if(item.getEntityItem().getItem() == Item.getItemFromBlock(ModBlocks.ore_oil)) {
+			Item item = entityItem.getEntityItem().getItem();
+			if(item instanceof ItemBlock) {
+				Block block = ((ItemBlock) item).field_150939_a;
 
-				if(item.getEntityItem().getItemDamage() == SolarSystem.Body.LAYTHE.ordinal()) {
-					tank.setTankType(Fluids.OIL_DS);
-				} else {
-					tank.setTankType(Fluids.OIL); // now it seems we must be sure
+				if(block instanceof BlockOreFluid) {
+					int meta = entityItem.getEntityItem().getItemDamage();
+
+					BlockOreFluid oreFluid = (BlockOreFluid) block;
+
+					int toFill = oreFluid.getBlockFluidAmount(meta);
+
+					if(toFill > 0) {
+						tank.setTankType(oreFluid.getPrimaryFluid(meta));
+						tank.setFill(Math.min(tank.getFill() + toFill, tank.getMaxFill()));
+					}
+
+					entityItem.setDead();
+					continue;
 				}
-
-				tank.setFill(tank.getFill() + 500);
-				if(tank.getFill() > tank.getMaxFill())
-					tank.setFill(tank.getMaxFill());
-
-				item.setDead();
-				continue;
 			}
 
-			if(item.getEntityItem().getItem() == Item.getItemFromBlock(ModBlocks.ore_gas)) {
-
-				tank.setTankType(Fluids.GAS); // because the tank can change forever more
-
-				tank.setFill(tank.getFill() + 500);
-				if(tank.getFill() > tank.getMaxFill())
-					tank.setFill(tank.getMaxFill());
-
-				item.setDead();
-				continue;
-			}
-
-			ItemStack stack = InventoryUtil.tryAddItemToInventory(slots, 9, 29, item.getEntityItem().copy());
+			ItemStack stack = InventoryUtil.tryAddItemToInventory(slots, 9, 29, entityItem.getEntityItem().copy());
 
 			if(stack == null)
-				item.setDead();
+				entityItem.setDead();
 			else
-				item.setEntityItemStack(stack.copy()); //copy is not necessary but i'm paranoid due to the kerfuffle of the old drill
+				entityItem.setEntityItemStack(stack.copy()); //copy is not necessary but i'm paranoid due to the kerfuffle of the old drill
 		}
 
 		List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(

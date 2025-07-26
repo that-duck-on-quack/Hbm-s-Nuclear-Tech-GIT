@@ -20,6 +20,14 @@ public class ItemModFlippers extends ItemArmorMod {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
+	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean bool) {
+		list.add(EnumChatFormatting.BLUE + "Increases swim speed");
+		list.add("");
+		super.addInformation(itemstack, player, list, bool);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
 	public void addDesc(List list, ItemStack stack, ItemStack armor) {
 		list.add(EnumChatFormatting.DARK_PURPLE + "  " + stack.getDisplayName() + " (increased swim speed)");
 	}
@@ -29,6 +37,7 @@ public class ItemModFlippers extends ItemArmorMod {
 		if(entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entity;
 
+			// Skip if we already have armor that applies swim speed buff
 			if(armor.getItem() instanceof ArmorEnvsuit) {
 				if(ArmorFSB.hasFSBArmor(player)) return;
 			}

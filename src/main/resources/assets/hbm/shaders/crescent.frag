@@ -16,7 +16,9 @@ vec2 quantize(vec2 inp, vec2 period) {
 float hash(float x){ return fract(cos(x*124.123)*412.0); }
 
 void main() {
-	vec2 fragCoord = quantize(gl_TexCoord[0].xy + vec2(offset, 0), vec2(0.0625, 0.0625)) - vec2(offset, 0);
+	vec2 movingUV = gl_TexCoord[0].xy + vec2(offset, 0);
+
+	vec2 fragCoord = quantize(movingUV, vec2(0.0625, 0.0625)) - vec2(offset, 0);
 	vec2 uv = (2.25 * fragCoord - 1.1);
 	vec2 suv = (2.0 * fragCoord - 1.0);
 
@@ -41,8 +43,8 @@ void main() {
 	brightness = max(brightness, 0.05);
 
 	// Apply night lights and mask out cities
-	gl_FragColor = texture2D(lights, gl_TexCoord[0].xy);
-	gl_FragColor = gl_FragColor * texture2D(cityMask, gl_TexCoord[0].xy) * (0.8 - brightness);
+	gl_FragColor = texture2D(lights, movingUV);
+	gl_FragColor = gl_FragColor * texture2D(cityMask, movingUV) * (0.8 - brightness);
 
 	for (int i = 0; i < blackouts; i++) {
 		float bx = hash(i * 100.0 + 1.0);

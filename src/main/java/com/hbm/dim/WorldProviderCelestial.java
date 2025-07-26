@@ -12,7 +12,9 @@ import com.hbm.handler.ImpactWorldHandler;
 import com.hbm.handler.atmosphere.ChunkAtmosphereManager;
 import com.hbm.inventory.FluidStack;
 import com.hbm.inventory.fluid.Fluids;
+import com.hbm.util.Compat;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
@@ -70,7 +72,7 @@ public abstract class WorldProviderCelestial extends WorldProvider {
 		double pressure = atmosphere != null ? atmosphere.getPressure() : 0;
 
 		// Will prevent water from existing, will be unset immediately before using a bucket if inside a pressurized room
-		isHellWorld = !worldObj.isRemote && pressure <= 0.2F;
+		isHellWorld = !worldObj.isRemote && pressure <= 0.2F && !Loader.isModLoaded(Compat.MOD_COFH);
 
 		if(pressure > 0.5F) {
 			super.updateWeather();
@@ -152,7 +154,6 @@ public abstract class WorldProviderCelestial extends WorldProvider {
 
 	public double eclipseAmount;
 	public List<AstroMetric> metrics;
-	public CelestialBody tidalLockedBody;
 
 	@SideOnly(Side.CLIENT)
 	protected void updateSky(float partialTicks) {
@@ -160,19 +161,17 @@ public abstract class WorldProviderCelestial extends WorldProvider {
 
 		// First fetch the suns true size
 		double sunSize = SolarSystem.calculateSunSize(body);
+		float solarAngle = worldObj.getCelestialAngle(partialTicks);
 
-		float celestialAngle = worldObj.getCelestialAngle(partialTicks);
+		// Get our orrery of bodies, this is cached for reuse in sky rendering
+		metrics = SolarSystem.calculateMetricsFromBody(worldObj, partialTicks, body, solarAngle);
 
-		double longitude = 0;
-		tidalLockedBody = body.tidallyLockedTo != null ? CelestialBody.getBody(body.tidallyLockedTo) : null;
+		// Get our eclipse amount
+		eclipseAmount = getEclipseFactor(metrics, sunSize);
+	}
 
-		if(tidalLockedBody != null) {
-			longitude = SolarSystem.calculateSingleAngle(worldObj, partialTicks, body, tidalLockedBody) + celestialAngle * 360.0 + 60.0;
-		}
-
-		// Get our orrery of bodies
-		metrics = SolarSystem.calculateMetricsFromBody(worldObj, partialTicks, longitude, body);
-		eclipseAmount = 0;
+	private double getEclipseFactor(List<AstroMetric> metrics, double sunSize) {
+		double factor = 0;
 
 		// Calculate eclipse
 		for(AstroMetric metric : metrics) {
@@ -187,21 +186,23 @@ public abstract class WorldProviderCelestial extends WorldProvider {
 			double maxPhase = 1 - (planetArc - sunArc);
 			if(metric.phaseObscure < minPhase) continue;
 
-			double thisEclipseAmount = 1 - (metric.phaseObscure - maxPhase) / (minPhase - maxPhase);
+			double thisFactor = 1 - (metric.phaseObscure - maxPhase) / (minPhase - maxPhase);
 
-			eclipseAmount = Math.min(Math.max(eclipseAmount, thisEclipseAmount), 1.0);
+			factor = Math.min(Math.max(factor, thisFactor), 1.0);
 		}
+
+		return factor;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Vec3 getFogColor(float celestialAngle, float y) {
+	public Vec3 getFogColor(float solarAngle, float y) {
 		CBT_Atmosphere atmosphere = CelestialBody.getTrait(worldObj, CBT_Atmosphere.class);
 
 		// The cold hard vacuum of space
 		if(atmosphere == null) return Vec3.createVectorHelper(0, 0, 0);
 
-		float sun = MathHelper.clamp_float(MathHelper.cos(celestialAngle * (float)Math.PI * 2.0F) * 2.0F + 0.5F, 0.0F, 1.0F);
+		float sun = MathHelper.clamp_float(MathHelper.cos(solarAngle * (float)Math.PI * 2.0F) * 2.0F + 0.5F, 0.0F, 1.0F);
 
 		float sunR = sun;
 		float sunG = sun;
@@ -379,11 +380,11 @@ public abstract class WorldProviderCelestial extends WorldProvider {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public float[] calcSunriseSunsetColors(float celestialAngle, float partialTicks) {
+	public float[] calcSunriseSunsetColors(float solarAngle, float partialTicks) {
 		CBT_Atmosphere atmosphere = CelestialBody.getTrait(worldObj, CBT_Atmosphere.class);
 		if(atmosphere == null || atmosphere.getPressure() < 0.05F) return null;
 
-		float[] colors = super.calcSunriseSunsetColors(celestialAngle, partialTicks);
+		float[] colors = super.calcSunriseSunsetColors(solarAngle, partialTicks);
 		if(colors == null) return null;
 
 		// Mars IRL has inverted blue sunsets, which look cool as
@@ -395,7 +396,7 @@ public abstract class WorldProviderCelestial extends WorldProvider {
 			colors[2] = tmp;
 		} else if (atmosphere.hasFluid(Fluids.EVEAIR)) {
 			float f2 = 0.4F;
-			float f3 = MathHelper.cos((celestialAngle) * (float)Math.PI * 2.0F) - 0.0F;
+			float f3 = MathHelper.cos((solarAngle) * (float)Math.PI * 2.0F) - 0.0F;
 			float f4 = -0.0F;
 
 			if (f3 >= f4 - f2 && f3 <= f4 + f2) {
@@ -598,6 +599,7 @@ public abstract class WorldProviderCelestial extends WorldProvider {
 		return body.getRotationalPeriod() / (1 - (1 / body.getPlanet().getOrbitalPeriod()));
 	}
 
+	// This calculates SOLAR angle, not sidereal/celestial!
 	@Override
 	public float calculateCelestialAngle(long worldTime, float partialTicks) {
 		worldTime = getWorldTime(); // the worldtime passed in is from the fucking overworld
@@ -632,6 +634,20 @@ public abstract class WorldProviderCelestial extends WorldProvider {
 		int phase = Math.round(8 - ((float)SolarSystem.calculateSingleAngle(worldObj, 0, body, body.satellites.get(0)) / 45 + 4));
 		if(phase >= 8) return 0;
 		return phase;
+	}
+
+	public boolean isEclipse() {
+		CelestialBody body = CelestialBody.getBody(worldObj);
+
+		// First fetch the suns true size
+		double sunSize = SolarSystem.calculateSunSize(body);
+		float solarAngle = worldObj.getCelestialAngle(0);
+
+		// Get our orrery of bodies, this is cached for reuse in sky rendering
+		metrics = SolarSystem.calculateMetricsFromBody(worldObj, 0, body, solarAngle);
+
+		// Get our eclipse amount
+		return getEclipseFactor(metrics, sunSize) > 0.0;
 	}
 
 	@Override

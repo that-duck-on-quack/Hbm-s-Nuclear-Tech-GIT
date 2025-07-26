@@ -2,6 +2,7 @@ package com.hbm.blocks.generic;
 
 import java.util.List;
 
+import com.hbm.dim.WorldProviderCelestial;
 import com.hbm.extprop.HbmPlayerProps;
 import com.hbm.inventory.recipes.PedestalRecipes;
 import com.hbm.inventory.recipes.PedestalRecipes.PedestalRecipe;
@@ -129,9 +130,15 @@ public class BlockPedestal extends BlockContainer {
 						if(world.provider.getMoonPhase(world.getWorldTime()) != 0) continue;
 					}
 
+					// Changed requirement to eclipse in spork
 					if(recipe.extra == recipe.extra.NEW_MOON) {
-						if(world.getCelestialAngle(0) < 0.35 || world.getCelestialAngle(0) > 0.65) continue;
-						if(world.provider.getMoonPhase(world.getWorldTime()) != 4) continue;
+						if(world.provider instanceof WorldProviderCelestial) {
+							if(world.getCelestialAngle(0) > 0.15 && world.getCelestialAngle(0) < 0.85) continue;
+							if(!((WorldProviderCelestial) world.provider).isEclipse()) continue;
+						} else {
+							if(world.getCelestialAngle(0) < 0.35 || world.getCelestialAngle(0) > 0.65) continue;
+							if(world.provider.getMoonPhase(world.getWorldTime()) != 4) continue;
+						}
 					}
 
 					if(recipe.extra == recipe.extra.SUN) {

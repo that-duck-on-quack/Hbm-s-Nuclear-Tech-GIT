@@ -3,7 +3,6 @@ package com.hbm.util;
 import com.google.common.collect.Sets;
 import com.hbm.config.GeneralConfig;
 import com.hbm.main.MainRegistry;
-import com.hbm.main.ModEventHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
 import java.lang.reflect.Field;
@@ -21,7 +20,6 @@ import java.util.Set;
  */
 public class ShadyUtil {
 
-	//this is a list of UUIDs used for various things, primarily for accessories.
 	//this is a list of UUIDs used for various things, primarily for accessories.
 	//for a comprehensive list, check RenderAccessoryUtility.java
 	public static String HbMinecraft = "192af5d7-ed0f-48d8-bd89-9d41af8524f8";
@@ -56,6 +54,7 @@ public class ShadyUtil {
 	public static String ege444 = "42ee978c-442a-4cd8-95b6-29e469b6df10";
 	public static String DUODEC_ = "85d54b8c-1862-4c86-b351-5ef1b998aa32";
 	public static String LePeeperSauvage = "433c2bb7-018c-4d51-acfe-27f907432b5e";
+	public static String MellowRPG8 = "99b9efa5-8c38-4b22-86c2-baf97789d2fb";
 
 	public static final Set<String> hashes = new HashSet<>();
 	static {

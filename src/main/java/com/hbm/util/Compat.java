@@ -1,8 +1,6 @@
 package com.hbm.util;
 
 import com.hbm.config.GeneralConfig;
-import com.hbm.config.SpaceConfig;
-import com.hbm.dim.BiomeCollisionException;
 import com.hbm.handler.HazmatRegistry;
 import com.hbm.hazard.HazardRegistry;
 import com.hbm.inventory.FluidContainer;
@@ -40,6 +38,7 @@ public class Compat {
 	public static final String MOD_EIDS = "endlessids";
 	public static final String MOD_ANG = "angelica";
 	public static final String MOD_BOP = "BiomesOPlenty";
+	public static final String MOD_COFH = "CoFHCore";
 
 	public static Item tryLoadItem(String domain, String name) {
 		return (Item) Item.itemRegistry.getObject(getReg(domain, name));
@@ -52,7 +51,29 @@ public class Compat {
 	private static String getReg(String domain, String name) {
 		return domain + ":" + name;
 	}
-
+	
+	public static ItemStack getPreferredOreOutput(List<ItemStack> oreList) {
+		int lowestPref = -1;
+		ItemStack preferredStack = null;
+		
+		for(ItemStack item : oreList) {
+			String modid = ItemStackUtil.getModIdFromItemStack(item);
+			for(int i = 0; i < GeneralConfig.preferredOutputMod.length; i++) {
+				if (modid.equals(GeneralConfig.preferredOutputMod[i])){
+					if (lowestPref<0 || i <lowestPref) {
+						preferredStack = item;
+						lowestPref = i;
+					}
+					break;
+				}
+			}
+		}
+		if (preferredStack != null) {
+			return preferredStack.copy();
+		}
+		return oreList.get(0).copy();
+	}
+	
 	public static boolean isModLoaded(String modid) {
 		return Loader.isModLoaded(modid);
 	}

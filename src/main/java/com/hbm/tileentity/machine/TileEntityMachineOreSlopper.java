@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.hbm.blocks.ModBlocks;
-import com.hbm.dim.CelestialBody;
+import com.hbm.dim.SolarSystem;
 import com.hbm.handler.threading.PacketThreading;
 import com.hbm.inventory.UpgradeManagerNT;
 import com.hbm.inventory.container.ContainerOreSlopper;
@@ -22,8 +22,8 @@ import com.hbm.items.special.ItemBedrockOreNew.CelestialBedrockOreType;
 import com.hbm.lib.Library;
 import com.hbm.lib.ModDamageSource;
 import com.hbm.main.MainRegistry;
-import com.hbm.tileentity.IFluidCopiable;
 import com.hbm.packet.toclient.AuxParticlePacketNT;
+import com.hbm.tileentity.IFluidCopiable;
 import com.hbm.tileentity.IGUIProvider;
 import com.hbm.tileentity.IUpgradeInfoProvider;
 import com.hbm.tileentity.TileEntityMachineBase;
@@ -75,7 +75,7 @@ public class TileEntityMachineOreSlopper extends TileEntityMachineBase implement
 
 	public FluidTank[] tanks;
 	public double[] ores = new double[CelestialBedrockOre.getAllTypes().size()];
-	private CelestialBody fromBody;
+	private SolarSystem.Body fromBody;
 
 	public UpgradeManagerNT upgradeManager = new UpgradeManagerNT();
 
@@ -133,7 +133,7 @@ public class TileEntityMachineOreSlopper extends TileEntityMachineBase implement
 
 					fromBody = ItemBedrockOreBase.getOreBody(slots[2]);
 
-					for(CelestialBedrockOreType type : CelestialBedrockOre.get(fromBody.getEnum()).types) {
+					for(CelestialBedrockOreType type : CelestialBedrockOre.get(fromBody).types) {
 						ores[type.index] += (ItemBedrockOreBase.getOreAmount(slots[2], type) * (1D + efficiency * 0.1));
 					}
 

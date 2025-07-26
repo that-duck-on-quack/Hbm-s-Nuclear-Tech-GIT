@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.blocks.generic.BlockOreFluid;
 import com.hbm.inventory.UpgradeManagerNT;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.inventory.fluid.tank.FluidTank;
@@ -231,14 +232,14 @@ public abstract class TileEntityOilDrillBase extends TileEntityMachineBase imple
 	}
 
 	public boolean canSuckBlock(Block b) {
-		return b == ModBlocks.ore_oil || b == ModBlocks.ore_oil_empty || b == ModBlocks.ore_gas || b == ModBlocks.ore_gas_empty;
+		return (b instanceof BlockOreFluid && b != ModBlocks.ore_bedrock_oil) || BlockOreFluid.getFullBlock(b) != null;
 	}
 
-	protected HashSet<Tuple.Triplet<Integer, Integer, Integer>> trace = new HashSet();
+	protected HashSet<Tuple.Triplet<Integer, Integer, Integer>> trace = new HashSet<>();
 
 	public boolean suckRec(int x, int y, int z, int layer) {
 
-		Triplet<Integer, Integer, Integer> pos = new Triplet(x, y, z);
+		Triplet<Integer, Integer, Integer> pos = new Triplet<>(x, y, z);
 
 		if(trace.contains(pos))
 			return false;
@@ -250,12 +251,12 @@ public abstract class TileEntityOilDrillBase extends TileEntityMachineBase imple
 
 		Block b = worldObj.getBlock(x, y, z);
 
-		if(b == ModBlocks.ore_oil || b == ModBlocks.ore_bedrock_oil || b == ModBlocks.ore_gas) {
-			doSuck(x, y, z);
+		if(b instanceof BlockOreFluid) {
+			onSuck((BlockOreFluid) b, x, y, z);
 			return true;
 		}
 
-		if(b == ModBlocks.ore_oil_empty || b == ModBlocks.ore_gas_empty) {
+		if(BlockOreFluid.getFullBlock(b) != null) {
 			ForgeDirection[] dirs = BobMathUtil.getShuffledDirs();
 
 			for(ForgeDirection dir : dirs) {
@@ -267,15 +268,30 @@ public abstract class TileEntityOilDrillBase extends TileEntityMachineBase imple
 		return false;
 	}
 
-	public void doSuck(int x, int y, int z) {
-		Block b = worldObj.getBlock(x, y, z);
+	public void onSuck(BlockOreFluid block, int x, int y, int z) {
+		int meta = worldObj.getBlockMetadata(x, y, z);
 
-		if(b == ModBlocks.ore_oil || b == ModBlocks.ore_gas) {
-			onSuck(x, y, z);
-		}
+		tanks[0].setTankType(block.getPrimaryFluid(meta));
+		tanks[1].setTankType(block.getSecondaryFluid(meta));
+
+		tanks[0].setFill(Math.min(tanks[0].getFill() + getPrimaryFluidAmount(block, meta), tanks[0].getMaxFill()));
+		if(tanks[1].getTankType() != Fluids.NONE)
+			tanks[1].setFill(Math.min(tanks[1].getFill() + getSecondaryFluidAmount(block, meta), tanks[1].getMaxFill()));
+
+		attemptDrain(block, x, y, z, meta);
 	}
 
-	public abstract void onSuck(int x, int y, int z);
+	protected int getPrimaryFluidAmount(BlockOreFluid block, int meta) {
+		return block.getPrimaryFluidAmount(meta);
+	}
+
+	protected int getSecondaryFluidAmount(BlockOreFluid block, int meta) {
+		return block.getSecondaryFluidAmount(meta);
+	}
+
+	protected void attemptDrain(BlockOreFluid block, int x, int y, int z, int meta) {
+		block.drain(worldObj, x, y, z, meta, 1);
+	}
 
 	@Override
 	public void setPower(long i) {

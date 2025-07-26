@@ -19,6 +19,7 @@ import com.hbm.entity.missile.EntityRideableRocket.EntityRideableRocketDummy;
 import com.hbm.entity.mob.*;
 import com.hbm.entity.mob.botprime.*;
 import com.hbm.entity.mob.glyphid.*;
+import com.hbm.entity.mob.siege.EntitySiegeCraft;
 import com.hbm.entity.particle.*;
 import com.hbm.entity.projectile.*;
 import com.hbm.entity.train.EntityRailCarBase.BoundingBoxDummyEntity;
@@ -33,6 +34,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
+import net.minecraft.world.biome.BiomeGenMushroomIsland;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
@@ -242,6 +244,7 @@ public class EntityMappings {
 		addMob(EntityDepthSquid.class, "entity_depthsquid", 0x00B4Df, 0x016085);
 		addMob(EntityScrapFish.class, "entity_scrapfish", 0xDF9835, 0x510E13);
 		addMob(EntitySifterEel.class, "entity_siftereel", 0x5B963E, 0xC0B286);
+		addMob(EntitySiegeCraft.class, "entity_micro_ufo", 0x5B963E, 0xC0B286);
 
 		addMob(EntityFBI.class, "entity_ntm_fbi", 0x008000, 0x404040);
 		addMob(EntityFBIDrone.class, "entity_ntm_fbi_drone", 0x008000, 0x404040);
@@ -294,6 +297,7 @@ public class EntityMappings {
 
 			if(biome == null) continue;
 			if(biome instanceof BiomeGenBaseCelestial) continue;
+			if(biome instanceof BiomeGenMushroomIsland) continue;
 
 			List<SpawnListEntry> spawns = biome.getSpawnableList(typeOfCreature);
 

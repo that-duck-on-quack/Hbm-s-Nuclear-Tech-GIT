@@ -106,13 +106,21 @@ public class ArmorDNT extends ArmorFSBPowered {
 					player.motionY += 0.4D;
 				else if(player.motionY < -0.1)
 					player.motionY += 0.2D;
+				else if(player.motionY > 0.1)
+					player.motionY -= 0.2D;
+				else if(player.motionY > 1)
+					player.motionY -= 0.4D;
 				else if(player.motionY < 0)
 					player.motionY = 0;
 
-				player.motionX *= 1.05D;
-				player.motionZ *= 1.05D;
+				// Only reduce air friction if actively moving
+				if(player.moveForward != 0 || player.moveStrafing != 0) {
+					player.motionX *= 1.05D;
+					player.motionZ *= 1.05D;
+				}
 
-				if(player.moveForward != 0) {
+				// Only apply flight boost when holding sprint key
+				if(player.moveForward != 0 && player.isSprinting()) {
 					player.motionX += player.getLookVec().xCoord * 0.25 * player.moveForward;
 					player.motionZ += player.getLookVec().zCoord * 0.25 * player.moveForward;
 				}

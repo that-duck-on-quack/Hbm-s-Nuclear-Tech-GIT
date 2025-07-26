@@ -12,13 +12,11 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenEveRiver extends BiomeGenBaseEve {
 
-	public static final BiomeGenBase.Height height = new BiomeGenBase.Height(-0.7F, 0.0F);
-
 	public BiomeGenEveRiver(int id) {
 		super(id);
 		this.setBiomeName("Explodium River");
 
-		this.setHeight(height);
+		this.setHeight(new BiomeGenBase.Height(-0.7F, 0.0F));
 
 		this.topBlock = ModBlocks.eve_silt;
 		this.fillerBlock = ModBlocks.eve_silt;

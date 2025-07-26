@@ -5,7 +5,7 @@ import java.util.List;
 import com.hbm.blocks.ModBlocks;
 import com.hbm.config.SpaceConfig;
 import com.hbm.dim.CelestialBody;
-import com.hbm.dim.DebugTeleporter;
+import com.hbm.dim.CelestialTeleporter;
 import com.hbm.dim.SolarSystem;
 import com.hbm.dim.orbit.WorldProviderOrbit;
 import com.hbm.dim.trait.CBT_Atmosphere;
@@ -43,12 +43,12 @@ public class ItemWandD extends Item {
 				int targetId = stack.stackTagCompound.getInteger("dim");
 
 				if(targetId == 0) {
-					DebugTeleporter.teleport(player, SpaceConfig.orbitDimension, player.posX, 128, player.posZ, false);
+					CelestialTeleporter.teleport(player, SpaceConfig.orbitDimension, player.posX, 128, player.posZ, false);
 					player.addChatMessage(new ChatComponentText("Teleported to: ORBIT"));
 				} else {
 					SolarSystem.Body target = SolarSystem.Body.values()[targetId];
 
-					DebugTeleporter.teleport(player, target.getBody().dimensionId, player.posX, 300, player.posZ, true);
+					CelestialTeleporter.teleport(player, target.getBody().dimensionId, player.posX, 300, player.posZ, true);
 					player.addChatMessage(new ChatComponentText("Teleported to: " + target.getBody().getUnlocalizedName()));
 				}
 

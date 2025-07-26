@@ -3,6 +3,7 @@ package com.hbm.items.block;
 import java.util.List;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.blocks.generic.BlockOreFluid;
 import com.hbm.blocks.generic.RedBarrel;
 
 import net.minecraft.block.Block;
@@ -28,7 +29,7 @@ public class ItemBlockLore extends ItemBlockBase {
 			list.add("Provides infinite charge to tesla coils");
 		}
 
-		if(this.field_150939_a == ModBlocks.ore_oil || this.field_150939_a == ModBlocks.ore_gas) {
+		if(this.field_150939_a instanceof BlockOreFluid) {
 			list.add("You weren't supposed to mine that.");
 			list.add("Come on, get a derrick you doofus.");
 		}

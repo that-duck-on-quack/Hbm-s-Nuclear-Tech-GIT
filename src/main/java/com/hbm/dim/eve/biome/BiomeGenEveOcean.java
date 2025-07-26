@@ -12,13 +12,11 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenEveOcean extends BiomeGenBaseEve {
 
-	public static final BiomeGenBase.Height height = new BiomeGenBase.Height(-0.6F, 0.01F);
-
 	public BiomeGenEveOcean(int id) {
 		super(id);
 		this.setBiomeName("Explodium Ocean");
 
-		this.setHeight(height);
+		this.setHeight(new BiomeGenBase.Height(-0.6F, 0.01F));
 
 		this.topBlock = ModBlocks.eve_silt;
 		this.fillerBlock = ModBlocks.eve_silt;

@@ -1,6 +1,8 @@
 package com.hbm.world.biome;
 
+import com.hbm.config.SpaceConfig;
 import com.hbm.config.WorldConfig;
+import com.hbm.dim.BiomeCollisionException;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,7 +16,7 @@ public class BiomeGenCraterBase extends BiomeGenBase {
 	public static final BiomeGenBase craterBiome = new BiomeGenCrater(WorldConfig.craterBiomeId).setDisableRain().setBiomeName("Crater");
 	public static final BiomeGenBase craterInnerBiome = new BiomeGenCraterInner(WorldConfig.craterBiomeInnerId).setDisableRain().setBiomeName("Inner Crater");
 	public static final BiomeGenBase craterOuterBiome = new BiomeGenCraterOuter(WorldConfig.craterBiomeOuterId).setDisableRain().setBiomeName("Outer Crater");
-	
+
 	public static void initDictionary() {
 		BiomeDictionary.registerBiomeType(craterBiome,		DRY,	DEAD,	WASTELAND);
 		BiomeDictionary.registerBiomeType(craterInnerBiome,	DRY,	DEAD,	WASTELAND);
@@ -27,17 +29,30 @@ public class BiomeGenCraterBase extends BiomeGenBase {
 	}
 
 	public BiomeGenCraterBase(int id) {
-		super(id);
+		super(checkId(id));
 		this.waterColorMultiplier = 0xE0FFAE; //swamp color
 		this.spawnableCreatureList.clear();
 		this.spawnableWaterCreatureList.clear();
 		this.spawnableCaveCreatureList.clear();
 	}
-	
+
+	// Tricking Java into letting us do shit before super is called
+	private static int checkId(int id) {
+		if(!SpaceConfig.crashOnBiomeConflict) return id;
+
+		BiomeGenBase[] biomeList = BiomeGenBase.getBiomeGenArray();
+
+		// If we go outside the bounds, don't crash here, it'll crash elsewhere already, with a more useful message
+		if(id < biomeList.length && biomeList[id] != null && !(biomeList[id] instanceof BiomeGenCraterBase))
+			throw new BiomeCollisionException(biomeList[id]);
+
+		return id;
+	}
+
 	public static class BiomeGenCrater extends BiomeGenCraterBase {
 
 		public BiomeGenCrater(int id) { super(id); }
-		
+
 		@Override @SideOnly(Side.CLIENT)
 		public int getBiomeGrassColor(int x, int y, int z) {
 			double noise = plantNoise.func_151601_a((double) x * 0.225D, (double) z * 0.225D);
@@ -50,11 +65,11 @@ public class BiomeGenCraterBase extends BiomeGenBase {
 		@Override @SideOnly(Side.CLIENT)
 		public int getSkyColorByTemp(float temp) { return 0x525A52; }
 	}
-	
+
 	public static class BiomeGenCraterOuter extends BiomeGenCraterBase {
 
 		public BiomeGenCraterOuter(int id) { super(id); }
-		
+
 		@Override @SideOnly(Side.CLIENT)
 		public int getBiomeGrassColor(int x, int y, int z) {
 			double noise = plantNoise.func_151601_a((double) x * 0.225D, (double) z * 0.225D);
@@ -67,11 +82,11 @@ public class BiomeGenCraterBase extends BiomeGenBase {
 		@Override @SideOnly(Side.CLIENT)
 		public int getSkyColorByTemp(float temp) { return 0x6B9189; }
 	}
-	
+
 	public static class BiomeGenCraterInner extends BiomeGenCraterBase {
 
 		public BiomeGenCraterInner(int id) { super(id); }
-		
+
 		@Override @SideOnly(Side.CLIENT)
 		public int getBiomeGrassColor(int x, int y, int z) {
 			double noise = plantNoise.func_151601_a((double) x * 0.225D, (double) z * 0.225D);

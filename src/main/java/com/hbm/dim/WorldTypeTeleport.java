@@ -7,19 +7,19 @@ import net.minecraft.world.WorldType;
 
 public class WorldTypeTeleport extends WorldType {
 
-    public static WorldType martian;
+	public static WorldType martian;
 
-    public WorldTypeTeleport(String name) {
-        super(name);
-    }
+	public WorldTypeTeleport(String name) {
+		super(name);
+	}
 
-    public static void init() {
-        martian = new WorldTypeTeleport("martian");
-    }
+	public static void init() {
+		martian = new WorldTypeTeleport("martian");
+	}
 
-    public void onPlayerJoin(EntityPlayer player) {
-        if(this == martian)
-            DebugTeleporter.teleport(player, SpaceConfig.dunaDimension, 0, 0, 0, true);
-    }
-    
+	public void onPlayerJoin(EntityPlayer player) {
+		if(this == martian)
+			CelestialTeleporter.teleport(player, SpaceConfig.dunaDimension, 0, 0, 0, true);
+	}
+
 }

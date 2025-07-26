@@ -6,7 +6,7 @@ import java.util.Locale;
 
 import com.hbm.config.SpaceConfig;
 import com.hbm.dim.CelestialBody;
-import com.hbm.dim.DebugTeleporter;
+import com.hbm.dim.CelestialTeleporter;
 import com.hbm.dim.SolarSystem;
 import com.hbm.dim.SolarSystemWorldSavedData;
 import com.hbm.dim.orbit.OrbitalStation;
@@ -36,7 +36,7 @@ public class CommandStations extends CommandBase {
 
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
-		return String.format(Locale.US, 
+		return String.format(Locale.US,
 			"%s/%s launch %s- Spawns a station for the held drive.\n" +
 			"%s/%s tp %s- Teleport to held drive station.\n" +
 			"%s/%s list %s- Lists all active stations.\n" +
@@ -68,7 +68,7 @@ public class CommandStations extends CommandBase {
 			OrbitalStation.addStation(dest.x, dest.z, CelestialBody.getBody(player.worldObj));
 
 			showMessage(sender, "commands.station.launched", false);
-			
+
 			break;
 		case "tp":
 			Destination destination = getStationDestination(sender, player.getHeldItem());
@@ -81,16 +81,16 @@ public class CommandStations extends CommandBase {
 
 			if(dimensionId == SpaceConfig.orbitDimension) {
 				x = x * OrbitalStation.STATION_SIZE + (OrbitalStation.STATION_SIZE / 2);
-				z = z * OrbitalStation.STATION_SIZE + (OrbitalStation.STATION_SIZE / 2);	
+				z = z * OrbitalStation.STATION_SIZE + (OrbitalStation.STATION_SIZE / 2);
 			}
 
 			player.mountEntity(null);
 
 			if(player.dimension != dimensionId) {
 				if(dimensionId == SpaceConfig.orbitDimension) {
-					DebugTeleporter.teleport(player, dimensionId, x + 0.5D, 130.0D, z + 0.5D, false);
+					CelestialTeleporter.teleport(player, dimensionId, x + 0.5D, 130.0D, z + 0.5D, false);
 				} else {
-					DebugTeleporter.teleport(player, dimensionId, x + 0.5D, 300.0D, z + 0.5D, true);
+					CelestialTeleporter.teleport(player, dimensionId, x + 0.5D, 300.0D, z + 0.5D, true);
 				}
 			} else {
 				if(dimensionId == SpaceConfig.orbitDimension) {
@@ -107,7 +107,7 @@ public class CommandStations extends CommandBase {
 			}
 
 			showMessage(sender, "commands.station.teleported", false);
-			
+
 			break;
 		case "list":
 			boolean hasAnyStations = false;
@@ -143,7 +143,7 @@ public class CommandStations extends CommandBase {
 					String stationId = "0x" + Integer.toHexString(new ChunkCoordIntPair(station.dX, station.dZ).hashCode()).toUpperCase();
 					if(station.name.trim().equalsIgnoreCase(toMatch) || stationId.equalsIgnoreCase(toMatch)) {
 						ItemStack drive = new ItemStack(ModItems.full_drive, 1, SolarSystem.Body.ORBIT.ordinal());
-	
+
 						drive.stackTagCompound = new NBTTagCompound();
 						drive.stackTagCompound.setInteger("x", station.dX);
 						drive.stackTagCompound.setInteger("z", station.dZ);
@@ -200,5 +200,5 @@ public class CommandStations extends CommandBase {
 		}
 		return Collections.emptyList();
 	}
-	
+
 }
