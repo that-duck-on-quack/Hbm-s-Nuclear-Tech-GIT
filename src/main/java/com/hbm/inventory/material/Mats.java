@@ -195,7 +195,7 @@ public class Mats {
 	public static final NTMMaterial MAT_RTM 		= makeSmeltable(_HH + 1,		RTM 	 ,0x3232aa,0x000043,0x010179).setAutogen(NUGGET, BLOCK, CASTPLATE,WELDEDPLATE, PLATE).m();
 	public static final NTMMaterial MAT_HASTELLOY 	= makeSmeltable(_HH + 2,		HASTELLOY 	 ,0xaa90a0,0x432939,0x795f6f).setAutogen(NUGGET, BLOCK, CASTPLATE,WELDEDPLATE, PLATE).m();
 	public static final NTMMaterial MAT_MOLYBDENUM	= makeSmeltable(_HH + 3, 		MOLYBDENUM, 	0x000000,0x000000,0x000000).setAutogen(NUGGET, INGOT, DUST).m();
-	public static final NTMMaterial MAT_RUTHENIUM	= makeSmeltable(_HH + 4,		RUTHENIUM,	0x00000,0x00000,0x00000).setAutogen(NUGGET).m()	;
+	public static final NTMMaterial MAT_RUTHENIUM	= makeSmeltable(_HH + 4,		RUTHENIUM,	0x00000,0x00000,0x00000).setAutogen(NUGGET,FRAGMENT).m()	;
 	public static NTMMaterial makeSmeltable(int id, DictFrame dict, int color) { return makeSmeltable(id, dict, color, color, color); }
 
 
