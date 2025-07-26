@@ -1130,6 +1130,7 @@ public class CraftingManager {
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_heater, 1), new Object[] { "CIC", "PRP", "CIC", 'C', CU.pipe(), 'P', STEEL.shell(), 'R', ModBlocks.rbmk_blank, 'I', ANY_PLASTIC.ingot() });
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_cooler, 1), new Object[] { "IGI", "GCG", "IGI", 'C', ModBlocks.rbmk_blank, 'I', ModItems.plate_polymer, 'G', ModBlocks.steel_grate });
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_burner, 1), new Object[] { "IGI", "NCN", "IGI", 'C', ModBlocks.rbmk_blank, 'I', ModBlocks.fluid_duct_neo, 'G', ModItems.tank_steel, 'N', ModItems.plate_nickel });
+			addRecipeAuto(new ItemStack(ModBlocks.rbmk_smelter, 1), new Object[] { "LHL", "LCL", "LHL", 'C', ModBlocks.rbmk_blank, 'H', Blocks.hopper, 'L', ModBlocks.block_lead});
 		}
 
 		addShapelessAuto(new ItemStack(ModItems.launch_code), new Object[] {
