@@ -28,7 +28,7 @@ group = "com.hbm" // http://maven.apache.org/guides/mini/guide-naming-convention
 tasks.processResources {
 	val reps = mapOf<String,String>(
 		"version" to project.version.toString(),
-		"mcversion" to project.minecraft.version.toString(),
+		"mcversion" to project.minecraft.mcVersion.toString(),
 		"credits" to project.property("credits").toString()
 	)
 	reps.forEach { (key, value) ->

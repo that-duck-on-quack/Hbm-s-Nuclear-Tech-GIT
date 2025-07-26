@@ -10,13 +10,19 @@ repositories {
 		url = "https://gregtech.mechaenetia.com/"
 	}
 	maven {
-		url = "http://chickenbones.net/maven/"
+		name = "CurseForge"
+		url = "https://minecraft.curseforge.com/api/maven/"
 	}
 	maven {
-		url = "http://maven.cil.li/"
+		name = "Jitpack"
+		url = "https://jitpack.io"
 	}
-	//maven {
-	//	name = "CurseForge"
-	//	url = "https://minecraft.curseforge.com/api/maven/"
-	//}
+	maven {
+		name = "CurseMaven"
+		url = "https://cursemaven.com"
+	}
+	maven {
+		name = "OpenComputers"
+		url = "https://maven.cil.li/"
+	}
 }
