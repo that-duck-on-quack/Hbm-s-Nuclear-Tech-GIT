@@ -965,11 +965,11 @@ public class AnvilRecipes extends SerializableRecipe {
 						new AnvilOutput(new ItemStack(ModBlocks.crate_steel, 2))
 				}).setTier(4));
 		constructionRecipes.add(new AnvilConstructionRecipe(
-			new ComparableStack(ModBlocks.rbmk_smelter), new AnvilOutput[] {
-			new AnvilOutput(new ItemStack(ModBlocks.rbmk_blank, 1)),
-			new AnvilOutput(new ItemStack(Blocks.hopper, 2)),
-			new AnvilOutput(new ItemStack(ModBlocks.block_lead, 6))
-		}).setTier(4));
+				new ComparableStack(ModBlocks.rbmk_smelter), new AnvilOutput[] {
+						new AnvilOutput(new ItemStack(ModBlocks.rbmk_blank, 1)),
+						new AnvilOutput(new ItemStack(Blocks.hopper, 2)),
+						new AnvilOutput(new ItemStack(ModBlocks.block_lead, 6))
+				}).setTier(4));
 
 		if(!GeneralConfig.enable528) {
 
