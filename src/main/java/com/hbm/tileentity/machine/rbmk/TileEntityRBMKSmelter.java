@@ -7,6 +7,7 @@ import com.hbm.handler.neutron.NeutronStream;
 import com.hbm.handler.neutron.RBMKNeutronHandler;
 import com.hbm.inventory.container.ContainerRBMKSmelter;
 import com.hbm.inventory.gui.GUIRBMKSmelter;
+import com.hbm.inventory.recipes.RBBQRecipes;
 import com.hbm.tileentity.machine.rbmk.TileEntityRBMKConsole.ColumnType;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
@@ -101,7 +102,10 @@ public class TileEntityRBMKSmelter extends TileEntityRBMKSlottedBase implements 
 			}
 		}
 		if(output == null){
-			return null;
+			output = RBBQRecipes.getOutput(input);
+			if(output == null) {
+				return null;
+			}
 		}
 		// Cannot do recipe if the slot has an incompatible item.
 		if(outputSlot != null && (!output.isItemEqual(outputSlot) || outputSlot.getMaxStackSize() == outputSlot.stackSize)){

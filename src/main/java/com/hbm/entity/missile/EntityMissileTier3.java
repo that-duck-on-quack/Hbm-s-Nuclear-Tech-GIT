@@ -11,6 +11,8 @@ import com.hbm.items.ModItems;
 import com.hbm.particle.helper.ExplosionCreator;
 
 import api.hbm.entity.IRadarDetectableNT;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -96,13 +98,17 @@ public abstract class EntityMissileTier3 extends EntityMissileBaseNT {
 		public EntityMissileDrill(World world, float x, float y, float z, int a, int b) { super(world, x, y, z, a, b); }
 		@Override public void onImpact() {
 			for(int i = 0; i < 16; i++) {
-				float blastPower = i >= 21 ? 10F : 2F;
-				if(worldObj.getBlock((int)this.posX,(int)this.posY-i,(int)this.posZ).getExplosionResistance(this) > blastPower){
+				float blastPower = i == 15 ? 10F : 4F;
+				Block block = worldObj.getBlock((int)this.posX,(int)this.posY-i,(int)this.posZ);
+				if(block.getExplosionResistance(this) > blastPower && !ExplosionNT.errosion.containsKey(block)){
+					ExplosionNT explosion = new ExplosionNT(worldObj, this, this.posX, this.posY - i + 1, this.posZ, 10F);
+					explosion.addAllAttrib(ExAttrib.ERRODE);
+					explosion.explode();
 					break;
 				}
 				ExplosionNT explosion = new ExplosionNT(worldObj, this, this.posX, this.posY - i, this.posZ, blastPower);
 				explosion.addAllAttrib(ExAttrib.ERRODE);
-				explosion.explode(); //an explosion exploded!
+				explosion.explode();
 			}
 			ExplosionLarge.spawnParticles(worldObj, this.posX, this.posY, this.posZ, 25);
 			ExplosionLarge.spawnShrapnels(worldObj, this.posX, this.posY, this.posZ, 12);

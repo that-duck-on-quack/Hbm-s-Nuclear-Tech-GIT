@@ -5369,6 +5369,12 @@ item.wrench_flipped.name=Blade on a Wrench
 item.xanax.name=NAXA Anti-Digamma Medication
 item.xanax.desc=Removes 500mDRX
 item.zirconium_legs.name=Zirconium Pants
+item.gsa_hot_dog_raw.name=GSA© Brand Hot Dog
+item.gsa_hot_dog_cooked.name=Reactor-Grade Hot Dog
+item.gsa_hot_dog_bunned.name=Hot Dog
+item.gsa_hot_dog_raw.desc=Made with GSA approved, 100%% ethically sourced beef.
+item.gsa_hot_dog_cooked.desc=Now with 200%% more Pu-239.
+item.gsa_hot_dog_bunned.desc=Now with 200%% more Pu-239, and 100%% more bread.
 
 itemGroup.tabBlocks=NTM Ores and Blocks
 itemGroup.tabConsumable=NTM Consumables and Gear

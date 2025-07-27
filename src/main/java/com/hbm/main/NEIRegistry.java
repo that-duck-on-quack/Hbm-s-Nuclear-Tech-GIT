@@ -64,6 +64,7 @@ public class NEIRegistry {
 		handlers.add(new SawmillHandler());
 		handlers.add(new MixerHandler());
 		handlers.add(new OutgasserHandler());
+		handlers.add(new RBBQHandler());
 		handlers.add(new ElectrolyserFluidHandler());
 		handlers.add(new ElectrolyserMetalHandler());
 		handlers.add(new AshpitHandler());

@@ -1215,6 +1215,9 @@ public class CraftingManager {
 		addRecipeAuto(new ItemStack(ModBlocks.plushie, 1, PlushieType.NUMBERNINE.ordinal()), " C ", "LCR", " C ", 'L', ModItems.cigarette, 'C', ModItems.rag, 'R', COAL.gem());
 		addRecipeAuto(new ItemStack(ModBlocks.machine_difurnace_electric_off), "HBH","HFH","CCC",'H', ModItems.coil_tungsten,'B',ModItems.ingot_beryllium,'F',ModBlocks.machine_difurnace_off,'C',CU.plateCast());
 
+		addRecipeAuto(new ItemStack(ModItems.gsa_hot_dog_raw,2), "   ","  B","   ",'B', Items.beef);
+		addShapelessAuto(new ItemStack(ModItems.gsa_hot_dog_bunned), ModItems.gsa_hot_dog_cooked,Items.bread);
+
 	}
 
 	public static void crumple() {
