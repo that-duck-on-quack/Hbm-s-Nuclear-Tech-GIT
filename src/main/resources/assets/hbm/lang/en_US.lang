@@ -1841,6 +1841,7 @@ item.ingot_osmium.name=Osmium ingot
 item.ingot_ruthenium.name=Ruthenium ingot
 item.ingot_rhoudium.name=Rhoudium ingot
 item.ingot_platinum.name=Platinum ingot
+item.circuit.nukecomp.name= Nuclear Processing Computer
 
 hbmmat.tungsteel=Tungsteel
 hbmmat.rtm=RTM

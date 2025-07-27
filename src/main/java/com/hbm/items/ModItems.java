@@ -2473,6 +2473,7 @@ public class ModItems {
 
 
 
+
 	public static void initializeItem()
 	{
 		meleeMod = ServerConfig.Sk_meleeDamageModifier.get();
