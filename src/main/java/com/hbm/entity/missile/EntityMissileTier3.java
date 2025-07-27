@@ -96,7 +96,11 @@ public abstract class EntityMissileTier3 extends EntityMissileBaseNT {
 		public EntityMissileDrill(World world, float x, float y, float z, int a, int b) { super(world, x, y, z, a, b); }
 		@Override public void onImpact() {
 			for(int i = 0; i < 16; i++) {
-				ExplosionNT explosion = new ExplosionNT(worldObj, this, this.posX, this.posY - i, this.posZ, i >= 21 ? 10F : 2F);
+				float blastPower = i >= 21 ? 10F : 2F;
+				if(worldObj.getBlock((int)this.posX,(int)this.posY-i,(int)this.posZ).getExplosionResistance(this) > blastPower){
+					break;
+				}
+				ExplosionNT explosion = new ExplosionNT(worldObj, this, this.posX, this.posY - i, this.posZ, blastPower);
 				explosion.addAllAttrib(ExAttrib.ERRODE);
 				explosion.explode(); //an explosion exploded!
 			}
