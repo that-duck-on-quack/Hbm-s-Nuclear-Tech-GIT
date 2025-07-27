@@ -3,6 +3,7 @@ package com.hbm.handler.nei;
 import java.util.HashMap;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.handler.DecayConversions;
 import com.hbm.inventory.RecipesCommon.ComparableStack;
 import com.hbm.items.ModItems;
 import com.hbm.items.special.ItemWasteLong;
@@ -33,6 +34,8 @@ public class RBMKWasteDecayHandler extends NEIUniversalHandler {
 			map.put(new ComparableStack(ModItems.nuclear_waste_long, 1, waste), new ItemStack(ModItems.nuclear_waste_long_depleted, 1, waste.ordinal()));
 			map.put(new ComparableStack(ModItems.nuclear_waste_long_tiny, 1, waste), new ItemStack(ModItems.nuclear_waste_long_depleted_tiny, 1, waste.ordinal()));
 		}
+
+		DecayConversions.addRecipes(map);
 
 		return map;
 	}

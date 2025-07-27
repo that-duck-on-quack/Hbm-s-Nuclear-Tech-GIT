@@ -51,7 +51,17 @@ public class TileEntityDiFurnace extends TileEntityMachinePolluting implements I
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i != 3;
+		if(i == 3){
+			return false;
+		}
+		//Makes sure that duplicate items cannot be inserted into both slots.
+		if(i == 0){
+			if(slots[1] != null && slots[1].isItemEqual(stack)) return false;
+		}
+		else if(i == 1){
+			if(slots[0] != null && slots[0].isItemEqual(stack)) return false;
+		}
+		return true;
 	}
 
 	public boolean hasItemPower(ItemStack stack, boolean canBreathe) {
@@ -89,7 +99,7 @@ public class TileEntityDiFurnace extends TileEntityMachinePolluting implements I
 
 		this.fuel = nbt.getInteger("powerTime");
 		this.progress = nbt.getShort("cookTime");
-		
+
 		byte[] modes = nbt.getByteArray("modes");
 		this.sideFuel = modes[0];
 		this.sideUpper = modes[1];
@@ -116,7 +126,7 @@ public class TileEntityDiFurnace extends TileEntityMachinePolluting implements I
 		if(i == 1 && this.sideLower != j) return false;
 		if(i == 2 && this.sideFuel != j) return false;
 		if(i == 3) return false;
-		
+
 		return this.isItemValidForSlot(i, itemStack);
 	}
 
@@ -136,7 +146,7 @@ public class TileEntityDiFurnace extends TileEntityMachinePolluting implements I
 	public boolean canProcess() {
 		if(slots[0] == null || slots[1] == null) return false;
 		if(!this.hasPower()) return false;
-		
+
 		ItemStack output = BlastFurnaceRecipes.getOutput(slots[0], slots[1]);
 		if(output == null) return false;
 		if(slots[3] == null) return true;
@@ -145,7 +155,7 @@ public class TileEntityDiFurnace extends TileEntityMachinePolluting implements I
 		if(slots[3].stackSize + output.stackSize <= slots[3].getMaxStackSize()) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -175,18 +185,18 @@ public class TileEntityDiFurnace extends TileEntityMachinePolluting implements I
 	public void updateEntity() {
 
 		if(!worldObj.isRemote) {
-			
+
 			boolean extension = worldObj.getBlock(xCoord, yCoord + 1, zCoord) == ModBlocks.machine_difurnace_extension;
-			
+
 			for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 				this.sendSmoke(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, dir);
 			}
-			
+
 			if(extension) this.sendSmoke(xCoord, yCoord + 2, zCoord, ForgeDirection.UP);
 
 			boolean markDirty = false;
 			boolean canOperate = breatheAir(0); // checks breathable but doesn't consume air
-			
+
 			if(this.hasItemPower(this.slots[2], canOperate) && this.fuel <= (TileEntityDiFurnace.maxFuel - getItemPower(this.slots[2], canOperate))) {
 				this.fuel += getItemPower(this.slots[2], canOperate);
 				if(this.slots[2] != null) {
@@ -209,13 +219,13 @@ public class TileEntityDiFurnace extends TileEntityMachinePolluting implements I
 					this.processItem();
 					markDirty = true;
 				}
-				
+
 				if(fuel < 0) {
 					fuel = 0;
 				}
 
 				if(worldObj.getTotalWorldTime() % 20 == 0) this.pollute(PollutionType.SOOT, PollutionHandler.SOOT_PER_SECOND * (extension ? 3 : 1));
-				
+
 			} else {
 				progress = 0;
 			}

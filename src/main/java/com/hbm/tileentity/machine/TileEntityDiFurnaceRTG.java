@@ -21,7 +21,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class TileEntityDiFurnaceRTG extends TileEntityMachineBase implements IGUIProvider, IInfoProviderEC {
-	
+
 	public short progress;
 	private short processSpeed = 0;
 	// Edit as needed
@@ -30,7 +30,7 @@ public class TileEntityDiFurnaceRTG extends TileEntityMachineBase implements IGU
 	private String name;
 	public byte sideUpper = 1;
 	public byte sideLower = 1;
-	
+
 	public TileEntityDiFurnaceRTG() {
 		super(9);
 	}
@@ -38,7 +38,7 @@ public class TileEntityDiFurnaceRTG extends TileEntityMachineBase implements IGU
 	public boolean canProcess() {
 		if ((slots[0] == null || slots[1] == null) && !hasPower())
 			return false;
-		
+
 		ItemStack recipeResult = BlastFurnaceRecipes.getOutput(slots[0], slots[1]);
 		if (recipeResult == null)
 			return false;
@@ -53,13 +53,13 @@ public class TileEntityDiFurnaceRTG extends TileEntityMachineBase implements IGU
 		else
 			return slots[2].stackSize < recipeResult.getMaxStackSize();
 	}
-	
+
 	@Override
 	public void updateEntity() {
-		
+
 		if(worldObj.isRemote)
 			return;
-		
+
 		if(canProcess() && hasPower()) {
 			progress += processSpeed;
 			if(progress >= timeRequired) {
@@ -69,7 +69,7 @@ public class TileEntityDiFurnaceRTG extends TileEntityMachineBase implements IGU
 		} else {
 			progress = 0;
 		}
-		
+
 		MachineDiFurnaceRTG.updateBlockState(isProcessing() || (canProcess() && hasPower()), getWorldObj(), xCoord, yCoord, zCoord);
 
 		networkPackNT(10);
@@ -95,7 +95,7 @@ public class TileEntityDiFurnaceRTG extends TileEntityMachineBase implements IGU
 	}
 
 	private void processItem() {
-		
+
 		if(canProcess()) {
 			ItemStack recipeOut = BlastFurnaceRecipes.getOutput(slots[0], slots[1]);
 			if(slots[2] == null)
@@ -105,7 +105,7 @@ public class TileEntityDiFurnaceRTG extends TileEntityMachineBase implements IGU
 
 			for(int i = 0; i < 2; i++) {
 				if(slots[i].stackSize <= 0)
-					slots[i] = new ItemStack(slots[i].getItem().setFull3D());
+					slots[i] = new ItemStack(slots[i].getItem());
 				else
 					slots[i].stackSize--;
 				if(slots[i].stackSize <= 0)
@@ -120,7 +120,7 @@ public class TileEntityDiFurnaceRTG extends TileEntityMachineBase implements IGU
 		super.readFromNBT(nbt);
 		progress = nbt.getShort("progress");
 		processSpeed = nbt.getShort("speed");
-		
+
 		byte[] modes = nbt.getByteArray("modes");
 		this.sideUpper = modes[0];
 		this.sideLower = modes[1];
@@ -182,16 +182,22 @@ public class TileEntityDiFurnaceRTG extends TileEntityMachineBase implements IGU
 
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemStack, int j) {
-		if(i == 0 && this.sideUpper != j) return false;
-		if(i == 1 && this.sideLower != j) return false;
-		
 		return this.isItemValidForSlot(i, itemStack);
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
 		if(i == 2) return false;
-		if(stack.getItem() instanceof ItemRTGPellet) return i > 2;
+		if(i > 2){
+			return stack.getItem() instanceof ItemRTGPellet;
+		}
+		//Makes sure that duplicate items cannot be inserted into both slots.
+		if(i == 0){
+			if(slots[1] != null && slots[1].isItemEqual(stack)) return false;
+		}
+		if(i == 1){
+			if(slots[0] != null && slots[0].isItemEqual(stack)) return false;
+		}
 		return !(stack.getItem() instanceof ItemRTGPellet);
 	}
 
@@ -202,11 +208,11 @@ public class TileEntityDiFurnaceRTG extends TileEntityMachineBase implements IGU
 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack stack, int side) {
-		
+
 		if(slot > 2) {
 			return !(stack.getItem() instanceof ItemRTGPellet);
 		}
-		
+
 		return slot == 2;
 	}
 

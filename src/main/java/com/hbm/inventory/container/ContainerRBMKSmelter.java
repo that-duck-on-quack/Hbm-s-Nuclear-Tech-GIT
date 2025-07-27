@@ -2,22 +2,26 @@ package com.hbm.inventory.container;
 
 import com.hbm.inventory.SlotCraftingOutput;
 import com.hbm.tileentity.machine.rbmk.TileEntityRBMKOutgasser;
-
+import com.hbm.tileentity.machine.rbmk.TileEntityRBMKSmelter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerRBMKOutgasser extends Container {
+/**
+ * {@link ContainerRBMKSmelter}
+ * @author Jack Andersen
+ */
+public class ContainerRBMKSmelter extends Container {
 
-	private TileEntityRBMKOutgasser rbmk;
+	private TileEntityRBMKSmelter rbmk;
 
-	public ContainerRBMKOutgasser(InventoryPlayer invPlayer, TileEntityRBMKOutgasser tedf) {
+	public ContainerRBMKSmelter(InventoryPlayer invPlayer, TileEntityRBMKSmelter tedf) {
 		rbmk = tedf;
 
 		this.addSlotToContainer(new Slot(tedf, 0, 48, 45));
-		this.addSlotToContainer(new SlotCraftingOutput(invPlayer.player, tedf, 1, 112, 69));
+		this.addSlotToContainer(new SlotCraftingOutput(invPlayer.player, tedf, 1, 112, 45));
 
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 9; j++) {
@@ -31,15 +35,15 @@ public class ContainerRBMKOutgasser extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int par2) {
+	public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int index) {
 		ItemStack var3 = null;
-		Slot var4 = (Slot) this.inventorySlots.get(par2);
+		Slot var4 = (Slot) this.inventorySlots.get(index);
 
 		if(var4 != null && var4.getHasStack()) {
 			ItemStack var5 = var4.getStack();
 			var3 = var5.copy();
 
-			if(par2 == 0 || par2 == 1) {
+			if(index == 0 || index == 1) {
 				if(!this.mergeItemStack(var5, rbmk.getSizeInventory(), this.inventorySlots.size(), true)) {
 					return null;
 				}

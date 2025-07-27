@@ -1522,6 +1522,7 @@ public class ModEventHandlerClient {
 			case 10: main.splashText = "Fentanyl!"; break;
 			case 11: main.splashText = "Do drugs!"; break;
 			case 12: main.splashText = "Imagine being scared by splash texts!"; break;
+			case 13: main.splashText = "T H E M O N O L I T H I S W A T C H I N G!"; break;
 			}
 
 			double d = Math.random();

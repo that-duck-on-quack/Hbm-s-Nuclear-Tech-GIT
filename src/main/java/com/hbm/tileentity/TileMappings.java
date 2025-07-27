@@ -340,6 +340,7 @@ public class TileMappings {
 		put(TileEntityMachineAutocrafter.class, "tileentity_autocrafter");
 		put(TileEntityMachineFunnel.class, "tileentity_funnel");
 		put(TileEntityDiFurnaceRTG.class, "tileentity_rtg_difurnace");
+		put(TileEntityDiFurnaceElectric.class, "tileentity_electric_difurnace");
 		put(TileEntityMachineRadiolysis.class, "tileentity_radiolysis");
 		put(TileEntityMachineAutosaw.class, "tileentity_autosaw");
 
@@ -442,6 +443,7 @@ public class TileMappings {
 		put(TileEntityRBMKConsole.class, "tileentity_rbmk_console");
 		put(TileEntityRBMKInlet.class, "tileentity_rbmk_inlet");
 		put(TileEntityRBMKOutlet.class, "tileentity_rbmk_outlet");
+		put(TileEntityRBMKSmelter.class, "tileentity_rbmk_smelter");
 	}
 
 	private static void putNetwork() {
