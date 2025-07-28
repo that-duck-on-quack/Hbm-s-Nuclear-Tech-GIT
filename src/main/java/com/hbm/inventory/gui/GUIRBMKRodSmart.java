@@ -19,6 +19,10 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+/**
+ * GUI for the Smart RBMk rod, combines aspects from {@link GUIRBMKRod} and {@link GUIRBMKControlAuto}
+ * @author Jack Andersen
+ */
 public class GUIRBMKRodSmart extends GuiInfoContainer {
 
 	private static ResourceLocation texture = new ResourceLocation(RefStrings.MODID + ":textures/gui/reactors/gui_rbmk_element_smart.png");

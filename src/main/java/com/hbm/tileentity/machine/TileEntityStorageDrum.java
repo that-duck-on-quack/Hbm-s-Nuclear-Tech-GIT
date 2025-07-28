@@ -3,6 +3,7 @@ package com.hbm.tileentity.machine;
 import java.util.List;
 
 import com.hbm.config.VersatileConfig;
+import com.hbm.handler.DecayConversions;
 import com.hbm.hazard.HazardRegistry;
 import com.hbm.hazard.HazardSystem;
 import com.hbm.hazard.type.HazardTypeNeutron;
@@ -34,6 +35,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class TileEntityStorageDrum extends TileEntityMachineBase implements IFluidStandardSender, IBufPacketReceiver, IGUIProvider, IFluidCopiable {
 
@@ -104,27 +107,11 @@ public class TileEntityStorageDrum extends TileEntityMachineBase implements IFlu
 						slots[i] = new ItemStack(ModItems.nuclear_waste_short_depleted_tiny, 1, meta);
 					}
 
-					if(item == ModItems.ingot_au198 && worldObj.rand.nextInt(VersatileConfig.getShortDecayChance() / 20) == 0) {
-						slots[i] = new ItemStack(ModItems.ingot_mercury, 1, meta);
-					}
-					if(item == ModItems.nugget_au198 && worldObj.rand.nextInt(VersatileConfig.getShortDecayChance() / 100) == 0) {
-						slots[i] = new ItemStack(ModItems.nugget_mercury, 1, meta);
+					@Nullable ItemStack decayConversion = DecayConversions.tryConvert(slots[i]);
+					if(decayConversion != null){
+						slots[i] = decayConversion;
 					}
 
-					if(item == ModItems.ingot_pb209 && worldObj.rand.nextInt(VersatileConfig.getShortDecayChance() / 10) == 0) {
-						slots[i] = new ItemStack(ModItems.ingot_bismuth, 1, meta);
-					}
-					if(item == ModItems.nugget_pb209 && worldObj.rand.nextInt(VersatileConfig.getShortDecayChance() / 50) == 0) {
-						slots[i] = new ItemStack(ModItems.nugget_bismuth, 1, meta);
-					}
-					if(item == ModItems.powder_sr90 && worldObj.rand.nextInt(VersatileConfig.getShortDecayChance() / 10) == 0) {
-						slots[i] = new ItemStack(ModItems.powder_zirconium, 1, meta);
-					}
-					if(item == ModItems.nugget_sr90 && worldObj.rand.nextInt(VersatileConfig.getShortDecayChance() / 50) == 0) {
-						slots[i] = new ItemStack(ModItems.nugget_zirconium, 1, meta);
-					}
-
-					
 					if(slots[i] != null) {
 						HazardTypeNeutron.decay(slots[i], 0.9899916F);
 					}
