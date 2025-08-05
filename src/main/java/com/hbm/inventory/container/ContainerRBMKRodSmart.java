@@ -8,6 +8,10 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+/**
+ * Container for the RBMK Smart Fuel Rod, has the fuel slot shifted.
+ * @author Jack Andersen
+ */
 public class ContainerRBMKRodSmart extends Container {
 
 	private TileEntityRBMKRodSmart rbmk;

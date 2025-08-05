@@ -1579,7 +1579,7 @@ import net.minecraft.item.ItemStack;
 				new OreDictStack(TUNGSTEEL.plateWelded(), 32),
 				new ComparableStack(ModBlocks.machine_transformer_dnt, 4),
 				new ComparableStack(ModItems.circuit, 8, EnumCircuitType.BISMOID),
-				new OreDictStack(STAINLESS.pipe(), 60),
+				new OreDictStack(STEEL.pipe(), 60),
 		}, 1200);
 
 		makeRecipe(new ComparableStack(ModBlocks.dyson_converter_anatmogenesis, 1), new AStack[] {

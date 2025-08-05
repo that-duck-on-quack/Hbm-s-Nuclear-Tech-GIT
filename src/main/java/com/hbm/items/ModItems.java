@@ -2266,7 +2266,7 @@ public class ModItems {
 	public static Item hazmat_paa_boots;
 
 	public static Item rebar_placer;
-	
+
 	public static Item wand;
 	public static Item wand_s;
 	public static Item wand_d;
@@ -2464,6 +2464,12 @@ public class ModItems {
 	public static Item ingot_osmium;
 	public static Item ingot_ruthenium;
 	public static Item ingot_rhoudium;
+	public static Item comp;
+
+	public static Item gsa_hot_dog_raw;
+	public static Item gsa_hot_dog_cooked;
+	public static Item gsa_hot_dog_bunned;
+
 
 	public static Item assembly_ident;
 
@@ -5466,7 +5472,10 @@ public class ModItems {
 		ingot_ruthenium = new Item().setUnlocalizedName("ingot_ruthenium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_ruthenium ");
 		ingot_rhoudium = new Item().setUnlocalizedName("ingot_rhoudium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_rhoudium");
 		assembly_ident = new ItemAssemblyIdent().setUnlocalizedName("assembly_ident").setCreativeTab(MainRegistry.templateTab).setTextureName(RefStrings.MODID + ":assembly_ident");
-
+		comp = new ItemComps().setUnlocalizedName("comp").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":comp");
+		gsa_hot_dog_raw = new ItemNuclearHotDog(2,true,false).setUnlocalizedName("gsa_hot_dog_raw").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":gsa_hot_dog_raw");
+		gsa_hot_dog_cooked = new ItemNuclearHotDog(4,false,false).setUnlocalizedName("gsa_hot_dog_cooked").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":gsa_hot_dog_cooked");
+		gsa_hot_dog_bunned = new ItemNuclearHotDog(6,false,true).setUnlocalizedName("gsa_hot_dog_bunned").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":gsa_hot_dog_bunned");
 	}
 
 	private static void registerItem() {
@@ -5489,6 +5498,9 @@ public class ModItems {
 		GameRegistry.registerItem(crude_pcb,crude_pcb.getUnlocalizedName());
 		GameRegistry.registerItem(tungsten_hammer,tungsten_hammer.getUnlocalizedName());
 		GameRegistry.registerItem(calcium_carbide, calcium_carbide.getUnlocalizedName());
+		GameRegistry.registerItem(gsa_hot_dog_raw,gsa_hot_dog_raw.getUnlocalizedName());
+		GameRegistry.registerItem(gsa_hot_dog_cooked,gsa_hot_dog_cooked.getUnlocalizedName());
+		GameRegistry.registerItem(gsa_hot_dog_bunned,gsa_hot_dog_bunned.getUnlocalizedName());
 
 		//Weapons
 		GameRegistry.registerItem(redstone_sword, redstone_sword.getUnlocalizedName());

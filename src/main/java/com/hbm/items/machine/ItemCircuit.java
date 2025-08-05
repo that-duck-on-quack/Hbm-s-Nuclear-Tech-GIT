@@ -49,6 +49,8 @@ public class ItemCircuit extends ItemEnumMulti {
 		list.add(new ItemStack(item, 1, EnumCircuitType.GASCHIP.ordinal()));
 		list.add(new ItemStack(item, 1, EnumCircuitType.HFCHIP.ordinal()));
 		list.add(new ItemStack(item, 1, EnumCircuitType.MOLYCHIP.ordinal()));
+		list.add(new ItemStack(item, 1, EnumCircuitType.NUKECOMP.ordinal()));
+
 	}
 
 	public static enum EnumCircuitType {
@@ -81,12 +83,13 @@ public class ItemCircuit extends ItemEnumMulti {
 		GASCHIP,
 		HFCHIP,
 		MOLYCHIP,
+		NUKECOMP
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
 		/*List<String> lines = new ArrayList();
-		
+
 		switch(stack.getItemDamage()) {
 		case 0: lines.add("We taught this filament how to think."); break;
 		case 1: lines.add("3300µF"); break;
@@ -101,7 +104,7 @@ public class ItemCircuit extends ItemEnumMulti {
 		case 10: lines.add("Uses that exceptionally stanky 90s yellow PCB."); break;
 		case 11: lines.add("Can do up to three different things (instead of two)!"); break;
 		}
-		
+
 		for(String line : lines) {
 			list.add(EnumChatFormatting.ITALIC + line);
 		}*/

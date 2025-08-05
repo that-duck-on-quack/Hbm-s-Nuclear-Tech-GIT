@@ -180,7 +180,7 @@ public class ItemBedrockOreNew extends Item {
 			register(
 				SolarSystem.Body.KERBIN,
 				T("light",		o(MAT_IRON, 18),			o(MAT_COPPER, 9),			o(MAT_CRYOLITE, 6),		o(MAT_SODIUM, 3)),
-				T("heavy",		o(MAT_TUNGSTEN, 18),		o(MAT_TUNGSTEN, 9),			o(MAT_TUNGSTEN, 6),		o(MAT_ZINC, 3)),
+				T("heavy",		o(MAT_TUNGSTEN, 18),		o(MAT_TUNGSTEN, 9),			o(MAT_ZINC, 6),		o(MAT_PLATNIUM, 3)),
 				T("nonmetal",	o(MAT_COAL, 18),			o(MAT_LIGNITE, 9),			o(MAT_SULFUR, 6),		o(MAT_KNO, 3)),
 				T("crystal",		o(MAT_ASBESTOS, 18),		o(MAT_DIAMOND, 9),			o(MAT_EMERALD, 6),		o(MAT_EMERALD, 3))
 			);
@@ -206,7 +206,7 @@ public class ItemBedrockOreNew extends Item {
 			register(
 				SolarSystem.Body.DUNA,
 				T("light",		o(MAT_IRON, 18),			o(MAT_NICKEL, 9),			o(MAT_TITANIUM, 6),		o(MAT_CHLOROCALCITE, 3)),
-				T("heavy",		o(MAT_BERYLLIUM, 18),	o(MAT_TUNGSTEN, 9),			o(MAT_ZINC, 6),			o(MAT_BISMUTH, 3)),
+				T("heavy",		o(MAT_BERYLLIUM, 18),	o(MAT_TUNGSTEN, 9),			o(MAT_PLATNIUM, 6),			o(MAT_BISMUTH, 3)),
 				T("rare",		o(MAT_RAREEARTH, 18),	o(MAT_BORON, 9),			o(MAT_ZIRCONIUM, 6),		o(MAT_STRONTIUM, 3)),
 				T("actinide",	o(MAT_THORIUM, 18),		o(MAT_RADIUM, 9),			o(MAT_POLONIUM, 6),		o(MAT_U233, 3)),
 				T("nonmetal",	o(MAT_FLUORITE, 18),		o(MAT_SULFUR, 9),			o(MAT_SILICON, 6),		o(MAT_PHOSPHORUS, 3)),

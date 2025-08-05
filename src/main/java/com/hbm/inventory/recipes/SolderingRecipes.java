@@ -286,6 +286,13 @@ public class SolderingRecipes extends SerializableRecipe {
 			new AStack[] {new ComparableStack(ModItems.epoxy_pcb,16), new OreDictStack(ANY_HARDPLASTIC.ingot(), 4)},
 			new AStack[] {new OreDictStack(PB.wireFine(), 32)}
 		));
+		//nuke comp
+		recipes.add(new SolderingRecipe(new ItemStack(ModItems.circuit, 1 , EnumCircuitType.NUKECOMP.ordinal()),2400,1,
+			new FluidStack(Fluids.HCL, 1_000),
+			new AStack[] {new ComparableStack(ModItems.circuit, 3 , EnumCircuitType.CONTROLLER_ADVANCED), new ComparableStack(ModItems.circuit, 16, EnumCircuitType.GASCHIP), new ComparableStack(ModItems.circuit,  32, EnumCircuitType.CAPACITOR_LANTHANIUM)},
+			new AStack[] {new ComparableStack(ModItems.epoxy_pcb,8), new OreDictStack(RTM.plateCast(), 1)},
+			new AStack[] {new OreDictStack(PLATNIUM.wireFine(), 32)}
+		));
 
 
 

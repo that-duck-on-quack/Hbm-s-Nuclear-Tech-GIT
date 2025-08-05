@@ -1061,6 +1061,7 @@ public class CraftingManager {
 		addRecipeAuto(new ItemStack(ModBlocks.brick_fire), new Object[] { "BB", "BB", 'B', ModItems.ingot_firebrick });
 		addShapelessAuto(new ItemStack(ModItems.ingot_firebrick, 4), new Object[] { ModBlocks.brick_fire });
 
+
 		addRecipeAuto(new ItemStack(ModBlocks.machine_drain), new Object[] { "PPP", "T  ", "PPP", 'P', STEEL.plateCast(), 'T', ModItems.tank_steel });
 		addRecipeAuto(new ItemStack(ModBlocks.machine_intake), new Object[] { "GGG", "PMP", "PTP", 'G', ModBlocks.steel_grate, 'P', STEEL.plate(), 'M', ModItems.motor, 'T', ModItems.tank_steel });
 
@@ -1137,6 +1138,7 @@ public class CraftingManager {
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_heater, 1), new Object[] { "CIC", "PRP", "CIC", 'C', CU.pipe(), 'P', STEEL.shell(), 'R', ModBlocks.rbmk_blank, 'I', ANY_PLASTIC.ingot() });
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_cooler, 1), new Object[] { "IGI", "GCG", "IGI", 'C', ModBlocks.rbmk_blank, 'I', ModItems.plate_polymer, 'G', ModBlocks.steel_grate });
 			addRecipeAuto(new ItemStack(ModBlocks.rbmk_burner, 1), new Object[] { "IGI", "NCN", "IGI", 'C', ModBlocks.rbmk_blank, 'I', ModBlocks.fluid_duct_neo, 'G', ModItems.tank_steel, 'N', ModItems.plate_nickel });
+			addRecipeAuto(new ItemStack(ModBlocks.rbmk_smelter, 1), new Object[] { "LHL", "LCL", "LHL", 'C', ModBlocks.rbmk_blank, 'H', Blocks.hopper, 'L', ModBlocks.block_lead});
 		}
 
 		addShapelessAuto(new ItemStack(ModItems.launch_code), new Object[] {
@@ -1218,6 +1220,11 @@ public class CraftingManager {
 
 		addRecipeAuto(new ItemStack(ModBlocks.plushie, 1, PlushieType.YOMI.ordinal()), "LCR", 'L', "cropCarrot", 'C', ModItems.rag, 'R', DictFrame.fromOne(ModItems.circuit, EnumCircuitType.VACUUM_TUBE));
 		addRecipeAuto(new ItemStack(ModBlocks.plushie, 1, PlushieType.NUMBERNINE.ordinal()), " C ", "LCR", " C ", 'L', ModItems.cigarette, 'C', ModItems.rag, 'R', COAL.gem());
+		addRecipeAuto(new ItemStack(ModBlocks.machine_difurnace_electric_off), "HBH","HFH","CCC",'H', ModItems.coil_tungsten,'B',ModItems.ingot_beryllium,'F',ModBlocks.machine_difurnace_off,'C',CU.plateCast());
+
+		addRecipeAuto(new ItemStack(ModItems.gsa_hot_dog_raw,2), "   ","  B","   ",'B', Items.beef);
+		addShapelessAuto(new ItemStack(ModItems.gsa_hot_dog_bunned), ModItems.gsa_hot_dog_cooked,Items.bread);
+
 	}
 
 	public static void crumple() {

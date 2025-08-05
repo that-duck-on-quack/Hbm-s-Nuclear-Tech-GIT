@@ -490,7 +490,6 @@ public class ChemicalPlantRecipes extends GenericRecipes<GenericRecipe> {
 			.inputFluids(new FluidStack(Fluids.COALCREOSOTE,500))
 			.outputFluids(new FluidStack(Fluids.PHENOL,100))
 		);
-
 	}
 
 	public static HashMap getRecipes() {
