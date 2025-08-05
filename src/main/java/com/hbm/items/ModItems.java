@@ -2464,8 +2464,7 @@ public class ModItems {
 	public static Item ingot_ruthenium;
 	public static Item ingot_rhoudium;
 
-
-
+	public static Item assembly_ident;
 
 
 	public static void initializeItem()
@@ -5466,9 +5465,7 @@ public class ModItems {
 		ingot_osmium = new Item().setUnlocalizedName("ingot_osmium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_osmism");
 		ingot_ruthenium = new Item().setUnlocalizedName("ingot_ruthenium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_ruthenium ");
 		ingot_rhoudium = new Item().setUnlocalizedName("ingot_rhoudium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_rhoudium");
-
-
-
+		assembly_ident = new ItemAssemblyIdent().setUnlocalizedName("assembly_ident").setCreativeTab(MainRegistry.templateTab).setTextureName(RefStrings.MODID + ":assembly_ident");
 
 	}
 
@@ -5484,6 +5481,14 @@ public class ModItems {
 		GameRegistry.registerItem(ingot_osmium,ingot_osmium.getUnlocalizedName());
 		GameRegistry.registerItem(ingot_ruthenium,ingot_ruthenium.getUnlocalizedName());
 		GameRegistry.registerItem(ingot_rhoudium,ingot_rhoudium.getUnlocalizedName());
+		GameRegistry.registerItem(assembly_ident, assembly_ident.getUnlocalizedName());
+		GameRegistry.registerItem(epoxy_pcb, epoxy_pcb.getUnlocalizedName());
+		GameRegistry.registerItem(resin_paper, resin_paper.getUnlocalizedName());
+		GameRegistry.registerItem(crude_circuit, crude_circuit.getUnlocalizedName());
+		GameRegistry.registerItem(crude_cap,crude_cap.getUnlocalizedName());
+		GameRegistry.registerItem(crude_pcb,crude_pcb.getUnlocalizedName());
+		GameRegistry.registerItem(tungsten_hammer,tungsten_hammer.getUnlocalizedName());
+		GameRegistry.registerItem(calcium_carbide, calcium_carbide.getUnlocalizedName());
 
 		//Weapons
 		GameRegistry.registerItem(redstone_sword, redstone_sword.getUnlocalizedName());
@@ -7847,16 +7852,6 @@ public class ModItems {
 		GameRegistry.registerItem(conveyor_wand, conveyor_wand.getUnlocalizedName());
 
 		GameRegistry.registerItem(swarm_member, swarm_member.getUnlocalizedName());
-
-
-		//HBM_hard
-		GameRegistry.registerItem(epoxy_pcb, epoxy_pcb.getUnlocalizedName());
-		GameRegistry.registerItem(resin_paper, resin_paper.getUnlocalizedName());
-		GameRegistry.registerItem(crude_circuit, crude_circuit.getUnlocalizedName());
-		GameRegistry.registerItem(crude_cap,crude_cap.getUnlocalizedName());
-		GameRegistry.registerItem(crude_pcb,crude_pcb.getUnlocalizedName());
-		GameRegistry.registerItem(tungsten_hammer,tungsten_hammer.getUnlocalizedName());
-		GameRegistry.registerItem(calcium_carbide, calcium_carbide.getUnlocalizedName());
 	}
 
 	public static void addRemap(String unloc, Item item, Enum sub) {

@@ -1818,6 +1818,7 @@ item.crude_cap.name=Lead-Based Capacitor
 item.crude_pcb.name=Low-Cost Circuit Board
 item.tungsten_hammer.name=Tungsten Hammer
 item.calcium_carbide.name=Calcium Carbide
+item.assembly_ident.name=Assembly Identifier
 
 
 item.ingot_molybdemium.name=Molybdenum ingot
