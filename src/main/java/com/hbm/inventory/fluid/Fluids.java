@@ -23,7 +23,6 @@ import com.hbm.main.MainRegistry;
 import com.hbm.potion.HbmPotion;
 import com.hbm.inventory.fluid.trait.FT_Combustible.FuelGrade;
 import com.hbm.inventory.fluid.trait.FT_Coolable.CoolingType;
-import com.hbm.inventory.fluid.trait.FT_Gaseous;
 import com.hbm.inventory.fluid.trait.FT_Heatable.HeatingType;
 import com.hbm.inventory.fluid.trait.FT_Toxin.*;
 import com.hbm.render.util.EnumSymbol;
@@ -297,6 +296,7 @@ public class Fluids {
 	public static FluidType BAUXITE_SOLUTION;
 	public static FluidType ALUMINA;
 	public static FluidType AQUEOUS_NICKEL;
+	public static FluidType CONCRETE;
 
 	/* Lagacy names for compatibility purposes */
 	@Deprecated public static FluidType ACID;	//JAOPCA uses this, apparently
@@ -594,6 +594,7 @@ public class Fluids {
 		// ^ ^ ^ ^ ^ ^ ^ ^
 		//ADD NEW FLUIDS HERE
 		AQUEOUS_NICKEL =		new FluidType("AQUEOUS_NICKEL",		0xDACEBA, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID);
+		CONCRETE =				new FluidType("CONCRETE",		0xA2A2A2, 0, 0, 0, EnumSymbol.NONE).addTraits(LIQUID);
 
 		File folder = MainRegistry.configHbmDir;
 		File customTypes = new File(folder.getAbsolutePath() + File.separatorChar + "hbmFluidTypes.json");
@@ -778,6 +779,8 @@ public class Fluids {
 		metaOrder.add(SODIUM_ALUMINATE);
 		metaOrder.add(BAUXITE_SOLUTION);
 		metaOrder.add(ALUMINA);
+		metaOrder.add(AQUEOUS_NICKEL);
+		metaOrder.add(CONCRETE);
 		//solutions and working fluids
 		metaOrder.add(FRACKSOL);
 		metaOrder.add(LYE);

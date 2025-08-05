@@ -83,6 +83,8 @@ public class SpaceConfig {
 
 	public static boolean crashOnBiomeConflict = true;
 
+	public static boolean showOreLocations = true;
+
 	public static int maxProbeDistance = 32_000;
 	public static int maxStationDistance = 32_000;
 
@@ -107,6 +109,7 @@ public class SpaceConfig {
 		maxStationDistance = CommonConfig.createConfigInt(config, CATEGORY_GENERAL, "1.93_maxStationDistance", "How far from the center of the dimension can orbital stations be generated", maxStationDistance);
 		enableVolcanoGen = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.91_enableVolcanoGen", "Should volcanoes be active when spawning, disabling will prevent natural volcanoes from spewing lava and growing", enableVolcanoGen);
 		crashOnBiomeConflict = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.92_crashOnBiomeConflict", "To avoid biome ID collisions, the game will crash if one occurs, and give instructions on how to fix. Only disable this if you know what you're doing!", crashOnBiomeConflict);
+		showOreLocations = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.93_showOreLocations", "Should ores indicate which planets they can be found on.", showOreLocations);
 
 		// Move defaults into unused ranges if EndlessIDs is installed
 		int defaultBiomeOffset = Loader.isModLoaded(Compat.MOD_EIDS) ? 12_000 : 0;

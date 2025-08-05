@@ -4,6 +4,7 @@ import com.hbm.blocks.ILookOverlay;
 import com.hbm.blocks.ModBlocks;
 import com.hbm.blocks.generic.BlockAshes;
 import com.hbm.blocks.generic.BlockOre;
+import com.hbm.blocks.generic.BlockRebar;
 import com.hbm.config.ClientConfig;
 import com.hbm.config.GeneralConfig;
 import com.hbm.config.SpaceConfig;
@@ -828,15 +829,17 @@ public class ModEventHandlerClient {
 		}*/
 
 		/// ORES ///
-		Block block = stack != null ? Block.getBlockFromItem(stack.getItem()) : null;
-		if(block instanceof net.minecraft.block.BlockOre || block instanceof BlockRedstoneOre) {
-			BlockOre ore = BlockOre.vanillaMap.get(block);
-			if(ore != null) {
-				ore.addInformation(stack, event.entityPlayer, list, event.showAdvancedItemTooltips);
-			} else if(block == Blocks.coal_ore) {
-				// we don't have any celestial coal, special case
-				list.add(EnumChatFormatting.GOLD + "Can be found on:");
-				list.add(EnumChatFormatting.AQUA + " - " + I18nUtil.resolveKey("body.kerbin"));
+		if(SpaceConfig.showOreLocations) {
+			Block block = stack != null ? Block.getBlockFromItem(stack.getItem()) : null;
+			if(block instanceof net.minecraft.block.BlockOre || block instanceof BlockRedstoneOre) {
+				BlockOre ore = BlockOre.vanillaMap.get(block);
+				if(ore != null) {
+					ore.addInformation(stack, event.entityPlayer, list, event.showAdvancedItemTooltips);
+				} else if(block == Blocks.coal_ore) {
+					// we don't have any celestial coal, special case
+					list.add(EnumChatFormatting.GOLD + "Can be found on:");
+					list.add(EnumChatFormatting.AQUA + " - " + I18nUtil.resolveKey("body.kerbin"));
+				}
 			}
 		}
 	}
@@ -1009,9 +1012,9 @@ public class ModEventHandlerClient {
 				);
 
 				String prefix = "Gun ";
-				int gunScale = 16;
-				int defaultScale = 1;
-				int slotScale = gunScale;
+				//int gunScale = 16;
+				//int defaultScale = 1;
+				int slotScale = 16;
 				boolean ignoreNonNTM = true;
 				boolean onlyGuns = true;
 
@@ -1136,7 +1139,7 @@ public class ModEventHandlerClient {
 		Minecraft mc = Minecraft.getMinecraft();
 		long millis = Clock.get_ms();
 		if(millis == 0) millis = System.currentTimeMillis();
-		
+
 		if(GeneralConfig.enableLoadScreenReplacement && loadingScreenReplacementRetry < 25 && !(mc.loadingScreen instanceof LoadingScreenRendererNT) && millis > lastLoadScreenReplacement + 5_000) {
 			mc.loadingScreen = new LoadingScreenRendererNT(mc);
 			lastLoadScreenReplacement = millis;
@@ -1213,6 +1216,8 @@ public class ModEventHandlerClient {
 	public void onRenderWorldLastEvent(RenderWorldLastEvent event) {
 
 		Clock.update();
+
+		BlockRebar.renderRebar(Minecraft.getMinecraft().theWorld.loadedTileEntityList, event.partialTicks);
 
 		GL11.glPushMatrix();
 

@@ -11,6 +11,7 @@ import com.hbm.blocks.IBlockMulti;
 import com.hbm.blocks.IBlockMultiPass;
 import com.hbm.blocks.ITooltipProvider;
 import com.hbm.blocks.ModBlocks;
+import com.hbm.config.SpaceConfig;
 import com.hbm.dim.SolarSystem;
 import com.hbm.items.ItemEnums.EnumChunkType;
 import com.hbm.items.ModItems;
@@ -232,6 +233,7 @@ public class BlockOre extends Block implements IBlockMultiPass, IBlockMulti, ITo
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean ext) {
+		if(!SpaceConfig.showOreLocations) return;
 		if(spawnsOn.isEmpty()) return;
 
 		if(spawnsOn.size() == SolarSystem.Body.values().length) {

@@ -329,4 +329,8 @@ public class TileEntityMachineStardar extends TileEntityMachineBase implements I
 		return 1;
 	}
 
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer player) {
+		return true;
+	}
 }
