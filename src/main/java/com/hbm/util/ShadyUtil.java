@@ -3,6 +3,7 @@ package com.hbm.util;
 import com.google.common.collect.Sets;
 import com.hbm.config.GeneralConfig;
 import com.hbm.main.MainRegistry;
+import com.hbm.main.ModEventHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
 import java.lang.reflect.Field;

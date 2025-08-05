@@ -14,7 +14,6 @@ import com.hbm.entity.logic.IChunkLoader;
 import com.hbm.entity.mob.siege.SiegeTier;
 import com.hbm.handler.*;
 import com.hbm.handler.atmosphere.ChunkAtmosphereManager;
-import com.hbm.handler.ae2.AE2CompatHandler;
 import com.hbm.handler.DecayConversions;
 import com.hbm.handler.imc.IMCBlastFurnace;
 import com.hbm.handler.imc.IMCCentrifuge;
@@ -941,9 +940,6 @@ public class MainRegistry {
 
 		// Load compatibility for OC.
 		CompatHandler.init();
-
-		// Load compatibility for AE2.
-		AE2CompatHandler.init();
 
 		//expand for the largest entity we have (currently Quackos who is 17.5m in diameter, that's one fat duck)
 		World.MAX_ENTITY_RADIUS = Math.max(World.MAX_ENTITY_RADIUS, 8.75);

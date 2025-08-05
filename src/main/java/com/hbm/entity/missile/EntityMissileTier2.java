@@ -75,14 +75,15 @@ public abstract class EntityMissileTier2 extends EntityMissileBaseNT {
 	public static class EntityMissileBusterStrong extends EntityMissileTier2 {
 		public EntityMissileBusterStrong(World world) { super(world); }
 		public EntityMissileBusterStrong(World world, float x, float y, float z, int a, int b) { super(world, x, y, z, a, b); }
-		@Override public void onImpact() {
+		@Override public ItemStack getDebrisRareDrop() { return new ItemStack(ModItems.warhead_buster_medium); }
+		@Override public ItemStack getMissileItemForInfo() { return new ItemStack(ModItems.missile_buster_strong); }
+		@Override
+		public void onMissileImpact(MovingObjectPosition mop) {
 			for(int i = 0; i < 10; i++) this.worldObj.createExplosion(this, this.posX, this.posY - i, this.posZ, i >= 6 ? 7.5F : 2F, true);
 			ExplosionLarge.spawnParticles(worldObj, this.posX, this.posY, this.posZ, 8);
 			ExplosionLarge.spawnShrapnels(worldObj, this.posX, this.posY, this.posZ, 8);
 			ExplosionLarge.spawnRubble(worldObj, this.posX, this.posY, this.posZ, 8);
 		}
-		@Override public ItemStack getDebrisRareDrop() { return new ItemStack(ModItems.warhead_buster_medium); }
-		@Override public ItemStack getMissileItemForInfo() { return new ItemStack(ModItems.missile_buster_strong); }
 	}
 
 	public static class EntityMissileEMPStrong extends EntityMissileTier2 {
