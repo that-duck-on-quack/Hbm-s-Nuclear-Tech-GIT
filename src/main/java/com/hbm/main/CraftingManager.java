@@ -795,6 +795,7 @@ public class CraftingManager {
 		addRecipeAuto(new ItemStack(ModItems.briquette,1,1), " # ","# #"," # ", '#', ModItems.powder_lignite);
 		addRecipeAuto(new ItemStack(ModItems.briquette,1,2), " # ","# #"," # ", '#', ModItems.powder_sawdust);
 		addRecipeAuto(new ItemStack(ModItems.biomass_compressed), " # ","# #"," # ", '#', ModItems.biomass);
+		addRecipeAuto(new ItemStack(ModItems.assembly_ident), "P#P","PDP","P#P", '#', "dye", 'P', Items.paper, 'D', ModItems.ducttape);
 
 		//Book pages
 		addShapelessAuto(new ItemStack(ModItems.page_of_), ModItems.resin_paper, "dye", new ItemStack(ModItems.stamp_book));
