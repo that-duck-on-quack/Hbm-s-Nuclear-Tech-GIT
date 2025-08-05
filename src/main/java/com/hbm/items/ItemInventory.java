@@ -41,6 +41,9 @@ public abstract class ItemInventory implements IInventory {
 		}
 	}
 
+	protected ItemInventory() {
+	}
+
 	@Override
 	public void markDirty() {
 		if (player.getEntityWorld().isRemote || !toMarkDirty) {
