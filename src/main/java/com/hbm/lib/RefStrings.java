@@ -3,7 +3,7 @@ package com.hbm.lib;
 public class RefStrings {
 	public static final String MODID = "hbm";
 	public static final String NAME = "NTM: Speck";
-	public static final String VERSION = "1.0.27H1.11.5 BETA (1802)";
+	public static final String VERSION = "1.0.27H1.28.2 BETA (2000)";
 	//HBM's Beta Naming Convention:
 	//V T (X)
 	//V -> next release version
