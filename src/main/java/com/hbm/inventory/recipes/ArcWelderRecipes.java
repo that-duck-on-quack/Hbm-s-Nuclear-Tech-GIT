@@ -22,6 +22,7 @@ import com.hbm.inventory.material.Mats;
 import com.hbm.inventory.recipes.loader.SerializableRecipe;
 import com.hbm.items.ItemGenericPart.EnumPartType;
 import com.hbm.items.ModItems;
+import com.hbm.items.machine.ItemComps.EnumComptype;
 import com.hbm.items.machine.ItemCircuit.EnumCircuitType;
 import com.hbm.items.machine.ItemFluidIcon;
 import com.hbm.items.machine.ItemArcElectrode.EnumElectrodeType;
@@ -103,9 +104,9 @@ public class ArcWelderRecipes extends SerializableRecipe {
 				new OreDictStack(OSMIRIDIUM.plateCast(), 2)));
 
 		//Missile Parts
-		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.thruster_small), 60, 1_000L, new OreDictStack(STEEL.plate(), 4), new OreDictStack(AL.wireFine(), 4), new OreDictStack(CU.plate(), 4)));
-		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.thruster_medium), 100, 2_000L, new OreDictStack(STEEL.plate(), 8), new ComparableStack(ModItems.motor, 1), new OreDictStack(GRAPHITE.ingot(), 8)));
-		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.thruster_large), 200, 5_000L, new OreDictStack(DURA.ingot(), 10), new ComparableStack(ModItems.motor, 1), new OreDictStack(OreDictManager.getReflector(), 12)));
+		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.thruster_small), 60, 1_000L, new OreDictStack(STEEL.ingot(), 4), new OreDictStack(AL.wireFine(), 4), new OreDictStack(CU.plate(), 4)));
+		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.thruster_medium), 100, 2_000L, new OreDictStack(HASTELLOY.ingot(), 8), new ComparableStack(ModItems.motor, 1), new OreDictStack(GRAPHITE.ingot(), 8)));
+		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.thruster_large), 200, 5_000L, new OreDictStack(RTM.ingot(), 10), new ComparableStack(ModItems.motor, 1), new OreDictStack(OreDictManager.getReflector(), 12)));
 
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.fuel_tank_small), 60, 1_000L, new OreDictStack(AL.plate(), 6), new OreDictStack(CU.plate(), 4), new ComparableStack(ModBlocks.steel_scaffold, 4)));
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.fuel_tank_medium), 100, 2_000L, new OreDictStack(AL.plateCast(), 4), new OreDictStack(TI.plate(), 8), new ComparableStack(ModBlocks.steel_scaffold, 12)));
@@ -122,13 +123,13 @@ public class ArcWelderRecipes extends SerializableRecipe {
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.missile_strong), 200, 10_000L, new ComparableStack(ModItems.warhead_generic_medium), new ComparableStack(ModItems.fuel_tank_medium), new ComparableStack(ModItems.thruster_medium)));
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.missile_incendiary_strong), 200, 10_000L, new ComparableStack(ModItems.warhead_incendiary_medium), new ComparableStack(ModItems.fuel_tank_medium), new ComparableStack(ModItems.thruster_medium)));
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.missile_cluster_strong), 200, 10_000L, new ComparableStack(ModItems.warhead_cluster_medium), new ComparableStack(ModItems.fuel_tank_medium), new ComparableStack(ModItems.thruster_medium)));
-		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.missile_buster_strong), 200, 10_000L, new ComparableStack(ModItems.warhead_buster_medium), new ComparableStack(ModItems.fuel_tank_medium), new ComparableStack(ModItems.thruster_medium)));
+		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.missile_buster_strong), 200, 10_000L, new ComparableStack(ModItems.warhead_buster_medium), new ComparableStack(ModItems.comp, 1, EnumComptype.BARREL), new ComparableStack(ModItems.thruster_medium)));
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.missile_emp_strong), 200, 10_000L, new ComparableStack(ModBlocks.emp_bomb, 3), new ComparableStack(ModItems.fuel_tank_medium), new ComparableStack(ModItems.thruster_medium)));
 
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.missile_burst), 300, 25_000L, new ComparableStack(ModItems.warhead_generic_large), new ComparableStack(ModItems.fuel_tank_medium, 2), new ComparableStack(ModItems.thruster_medium, 4)));
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.missile_inferno), 300, 25_000L, new ComparableStack(ModItems.warhead_incendiary_large), new ComparableStack(ModItems.fuel_tank_medium, 2), new ComparableStack(ModItems.thruster_medium, 4)));
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.missile_rain), 300, 25_000L, new ComparableStack(ModItems.warhead_cluster_large), new ComparableStack(ModItems.fuel_tank_medium, 2), new ComparableStack(ModItems.thruster_medium, 4)));
-		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.missile_drill), 300, 25_000L, new ComparableStack(ModItems.warhead_buster_large), new ComparableStack(ModItems.fuel_tank_medium, 2), new ComparableStack(ModItems.thruster_medium, 4)));
+		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.missile_drill), 300, 25_000L, new ComparableStack(ModItems.warhead_buster_large), new ComparableStack(ModItems.comp, 1, EnumComptype.BARREL), new ComparableStack(ModItems.thruster_medium, 4)));
 
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.missile_nuclear), 600, 50_000L, new ComparableStack(ModItems.warhead_nuclear), new ComparableStack(ModItems.fuel_tank_large), new ComparableStack(ModItems.thruster_large, 3)));
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.missile_nuclear_cluster), 600, 50_000L, new ComparableStack(ModItems.warhead_mirv), new ComparableStack(ModItems.fuel_tank_large), new ComparableStack(ModItems.thruster_large, 3)));
@@ -153,6 +154,9 @@ public class ArcWelderRecipes extends SerializableRecipe {
 
 		//Speck "Automation n Suffering" Stuff
 		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.motor), 150, 25_000L, new FluidStack(Fluids.ACETYLENE, 1_000), new OreDictStack(STEEL.plate(), 2), new ComparableStack(ModItems.coil_copper_torus), new ComparableStack(ModItems.coil_copper)));
+
+		//Speck "Suffering n Suffering" stuff
+		recipes.add(new ArcWelderRecipe(new ItemStack(ModItems.comp,1, EnumComptype.BARREL.ordinal()),1200,50_000L, new OreDictStack(HASTELLOY.plateCast(),3), new OreDictStack(STEEL.plateCast(),5)));
 	}
 
 	public static HashMap getRecipes() {
